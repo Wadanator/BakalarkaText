@@ -1,0 +1,37 @@
+﻿Pro prelozeni textu je nutne pouzit babel minimalne s datem 2008/07/08 aby jiz obsahoval korektni implementaci cestiny.
+Preklad byl otestovan na TeXLive z TeX Collection 2016, pouzity byl LuaLaTeX.
+
+
+   Formulare vysokoskolske kvalifikacni prace VSKP pro LaTeX
+
+	VSKP.sty - stylovy soubor pro generovani sablony
+	VSKP.tex - sablona titulniho listu a abstraktu, vyplnenou stahnete ze Studisu
+    fonty - slozka s fontem Vafle (pro vysazeni titulni strany)
+	logo - slozka s logy VUT v Brne
+    pdf - slozka s nakopirovanymi PDF soubory, napr. pro vlozeni titulni strany stazene 
+          ze Studisu (namisto sazeni LuaLaTeXem)
+	diplomka.tex - hlavni soubor zaverecne prace
+
+Pouziti: 
+1) soubory VSKP.sty a VSKP.tex a slozku logo vcetne obsahu nakopirovat do adresare s hlavnim dokumentem
+2) do preambule hlavniho dokumentu pridat sablonu a data pro její naplnění:
+
+	\usepackage{VSKP}  % Sablona dle smernice rektora
+	\input{VSKP}       % Nacte data pro vyplneni sablony 
+
+3) na zacatek hlavniho dokumentu pridat příkazy pro vysázení desek:
+
+	\titul             % Vytiskne titul prace
+	\abstrakty         % Vytiskne stranku s abstrakty
+
+Pozn.:
+Pro spravne vytvoreni titulni stranky je treba vyuzit LuaLaTeX (pro vlozeni fontu) a balicky: 
+	\usepackage{fontspec}  % Pro vkladani OTF fontu (titulni list) - nefunguje v pdfLaTeXu
+Pro pripadne vlozeni titulni strany vygenerovane Studisem (ze slozky pdf, nazev souboru bez mezer) je treba pouzit balicek:
+	\usepackage{pdfpages} % Pro vkladani PDF souboru (s titulnim listem apod.)
+
+Ukazka pouziti ve vzorove praci je v souboru VSKP_ukazka.zip.
+
+Pokud ve vysazene titulni strance preteka misto a rok na dalsi stranu (napr. kvuli dvouradkovemu nazvu ustavu), pak ve stylu VSKP.sty pouzijte druhou sadu (uzsich) mezer, mezi texty na titulni strane.
+
+V ukázce je použito kódování UTF-8.

@@ -1,0 +1,286 @@
+﻿%%
+%% Styl pro psani Vysokoskolskych kvalifikacnich praci
+%% VUT v Brně
+%%
+%% Pavel Micek, micek@fme.vutbr.cz
+%% Jakub Zlamal, zlamal@fme.vutbr.cz
+%%
+%%
+%% Testováno na LuaLaTeX, TeXLive, 2016
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{VSKP}[2017/04/26 v3.0 VSKP VUT v Brně]
+\RequirePackage{fontspec}
+
+
+%\def\fakultazkr#1{\edef\fakultazkrtxt{#1}}%fakulta - zkratka fakulty uz neni potreba
+\def\fakulta#1{\edef\fakultatxt{#1}\edef\Fakultatxt{\uppercase{#1}}}%fakulta
+\def\enfakulta#1{\edef\enfakultatxt{#1}\edef\Enfakultatxt{\uppercase{#1}}}%fakulta
+\def\ustav#1{\edef\ustavtxt{#1}\edef\Ustavtxt{\uppercase{#1}}}%ustav
+\def\enustav#1{\edef\enustavtxt{#1}\edef\Enustavtxt{\uppercase{#1}}}%ustav
+\def\adresafakulta#1{\edef\adresafakultatxt{#1}\edef\Adresafakultatxt{\uppercase{#1}}}%fakulta
+\def\logo#1{\def\logotxt{#1}}
+\def\logocompletetxt{logo/VUT}
+
+\def\nic{}
+\def\nazev#1{
+		\edef\NAZEVtxt{\uppercase{#1}}
+    \def\nazevtxt{\let\break\nic\let\hfil\nic#1}
+    \def\Nazevtxt{\let\break\nic\let\hfil\nic\NAZEVtxt}
+    \def\nazevbrtxt{#1}\def\Nazevbrtxt{\NAZEVtxt}}% nazev
+\def\ennazev#1{
+		\edef\ENNAZEVtxt{\uppercase{#1}}
+    \def\ennazevtxt{\let\break\nic\let\hfil\nic#1}
+    \def\Ennazevtxt{\let\break\nic\let\hfil\nic\ENNAZEVtxt}
+    \def\ennazevbrtxt{#1}\def\Ennazevbrtxt{\ENNAZEVtxt}}% nazev
+\def\autor#1#2#3{\edef\autortxt{#1 #2#3}\edef\Autortxt{#1 \uppercase{#2}#3 }}% autor
+\def\autorzkr#1{\edef\autorzkrtxt{#1} \edef\Autorzkrtxt{\uppercase{#1}} }% autor zkracene
+\def\vedouci#1#2#3{\edef\vedoucitxt{#1 #2#3}\edef\Vedoucitxt{#1 \uppercase{#2}#3 }}% vedouci
+\def\ustav#1{\edef\ustavtxt{#1}\edef\Ustavtxt{\uppercase{#1}}}%
+\def\datumobhajoby#1{\edef\datumobhajobytxt{#1}}% datum obhajoby
+\def\adresa#1{\edef\adresatxt{#1}}% adresa
+\def\narozeni#1{\edef\narozenitxt{#1}}% narozeni
+\def\muzzena#1{\edef\muzzenatxt{#1}}% muž žena
+%%% \def\typprace#1{\edef\typpracetxt{#1}\edef\Typpracetxt{\uppercase{#1}}}% typprace
+\long\def\abstrakt#1{\edef\abstrakttxt{#1}}%
+\long\def\enabstrakt#1{\edef\enabstrakttxt{#1}}%
+\def\klicovaslova#1{\edef\klicovaslovatxt{#1}}%
+\def\enklicovaslova#1{\edef\enklicovaslovatxt{#1}}%
+\def\citacevedouci#1{\edef\citacevedoucitxt{#1}}% Vedouci dipl. prace do citace
+% Fonty VUT pro titulní stranu jsou nakopírované v adresáři ./fonty/
+\def\vafle{\fontspec[
+	Path			=  fonty/,
+	BoldFont 		= Vafle_VUT_Bold.otf ]{Vafle_VUT_Regular.otf}} % Font uložený v adr. fonty
+% Velikosti fontů pro titulní stranu
+\def\Vutbig{\fontsize{25pt}{30pt}\selectfont} % VUT, 25pt
+\def\Vutlar{\fontsize{20pt}{24pt}\selectfont} % Název práce, 20pt
+\def\Vutmid{\fontsize{18pt}{22pt}\selectfont} % Fakulta, ustav, 18pt
+\def\Vutsmall{\fontsize{13pt}{22pt}\selectfont} % Typ práce, autor, místo, 13pt
+\def\Vutsub{\fontsize{11pt}{13pt}\selectfont\textcolor{gray}} % Podtituly, 11pt
+\def\Vutsubs{\fontsize{10pt}{12pt}\selectfont\textcolor{gray}} % Podtituly mensi, 10pt
+% Mezery mezi texty na titulní straně - standardní
+\def\Vutska{\vskip13mm} % Nad VUT
+\def\Vutskb{\vskip21mm} % Nad nazvem
+\def\Vutskc{\vskip8mm} % Nad fakultou, nad ústavem
+\def\Vutskd{\vskip11mm} % Nad typem práce
+\def\Vutske{\vskip7mm} % Nad autorem a vedoucím
+\def\Vutskf{\vskip13mm} % Nad místem/rokem
+% Mezery mezi texty na titulní straně - zúženo, pokud místo a rok přetékají na druhou stranu
+%\def\Vutska{\vskip11mm} % Nad VUT
+%\def\Vutskb{\vskip21mm} % Nad nazvem
+%\def\Vutskc{\vskip8mm} % Nad fakultou, nad ústavem
+%\def\Vutskd{\vskip11mm} % Nad typem práce
+%\def\Vutske{\vskip7mm} % Nad autorem a vedoucím
+%\def\Vutskf{\vskip13mm} % Nad místem/rokem
+
+% Prevod typu studia -> typ prace,
+% v ciselniku se lisi en nazev u M a N typu studia
+\def\typstudia#1{%
+    \def\tstudia{#1}
+    \def\vzortypu{N}
+    \ifx\tstudia\vzortypu
+        \edef\typpracetxt{BAKALÁŘSKÁ PRÁCE}
+        \edef\entyppracetxt{BACHELOR'S THESIS}
+    \else
+        \edef\typpracetxt{neznámý typ studia: \tstudia}
+        \edef\entyppracetxt{unknown studium type: \tstudia}
+    \fi
+    \def\vzortypu{B}
+    \ifx\tstudia\vzortypu
+        \edef\typpracetxt{bakalářská práce}
+        \edef\entyppracetxt{bachelor's thesis}
+    \fi
+    \def\vzortypu{D}
+    \ifx\tstudia\vzortypu
+        \edef\typpracetxt{dizertační práce}
+        \edef\entyppracetxt{doctoral thesis}
+    \fi
+    \def\vzortypu{M}
+    \ifx\tstudia\vzortypu
+        \edef\typpracetxt{diplomová práce}
+        \edef\entyppracetxt{diploma thesis}
+    \fi
+    \edef\Typpracetxt{\uppercase{\typpracetxt}}
+    \edef\Entyppracetxt{\uppercase{\entyppracetxt}}
+}
+
+
+%
+%  vytvoreni titulni strany
+%
+\def\titul{%
+\setcounter{page}{1}
+\thispagestyle{empty}
+
+\long\def\obrbeztextu##1{%
+   \setbox1=\hbox{\includegraphics*[width=41mm,height=41mm,keepaspectratio]{##1}}
+   \dimen0=\pagewidth
+   \advance\dimen0 by -\oddsidemargin
+   \advance\dimen0 by -\wd1
+   \advance\dimen0 by -0.5em
+   \setbox2=\vbox to \ht1{\hsize=\dimen0%
+   \vss
+   }
+   \wd2=\dimen0
+   \noindent\hbox to \hsize{\box1\hskip0.5em\box2\hss}
+}
+
+{\flushleft
+
+\obrbeztextu{\logocompletetxt}
+% Mezery níže možno upravit - tyto jsou nastaveny tak, aby se i při třířádkovém názvu 
+% práce a dvouřádkovém názvu ústavu vysázel poslední řádek na správnou stranu
+\Vutska
+\vafle
+\noindent{\Vutbig VYSOKÉ UČENÍ TECHNICKÉ V BRNĚ\hfil}\par
+\smallskip
+\noindent{\Vutsub{BRNO UNIVERSITY OF TECHNOLOGY}}
+\bgroup
+\Vutskc
+   \noindent{\Vutmid\Fakultatxt}\par
+   \smallskip
+   \noindent{\Vutsub\Enfakultatxt}
+
+   \Vutskc
+
+   \noindent{\Vutmid\Ustavtxt}\par
+   \smallskip
+   \noindent{\Vutsub\Enustavtxt}
+
+\Vutskb
+{\advance\baselineskip by 6pt
+\noindent{\Vutlar\Nazevbrtxt }
+
+}
+
+\noindent{\Vutsub\Ennazevbrtxt }
+
+\Vutskd
+\noindent{\Vutsmall\Typpracetxt}
+
+\noindent{\Vutsubs\Entyppracetxt}
+
+\Vutske
+% troska rozhodovani jak vytisknout autora a suprevizora
+\setbox1=\hbox{\Vutsmall\Autortxt}
+\setbox2=\hbox{\Vutsmall\Vedoucitxt}
+\dimen0=\textwidth
+\advance\dimen0 by -7cm%  5+2cm
+\ifdim\wd1>\wd2
+   \dimen1=\wd1
+\else
+   \dimen1=\wd2
+\fi
+\ifdim\dimen0<\dimen1
+   % nevejde se mi tam jmeno autora nebo vedouciho protoze je moc dlouhe
+   \noindent\Vutsmall{AUTOR PRÁCE\hfill\hbox to \dimen1{\Autortxt\hss}}
+
+\noindent\Vutsubs{AUTHOR}
+
+\Vutske
+\noindent\Vutsmall{VEDOUCÍ PRÁCE\hfill\hbox to \dimen1{\Vedoucitxt\hss}}
+
+\noindent{\Vutsubs{SUPERVISOR}}
+\else
+   \noindent{\hbox to 5cm{AUTOR PRÁCE\hss}\hskip2cm\Autortxt}
+
+   \noindent{\Vutsubs{AUTHOR}}
+
+   \Vutske
+   \noindent{\hbox to 5cm{VEDOUCÍ PRÁCE\hss}\hskip2cm\Vedoucitxt}
+
+   \noindent{\Vutsubs{SUPERVISOR}}
+\fi
+
+\Vutskf
+\noindent{\Vutsmall BRNO \the\year}
+}
+\egroup % End of flushleft
+\eject
+}
+
+%
+% abstrakty a klicova slova
+%
+\def\abstrakty{%
+   \newpage
+   \thispagestyle{empty}
+
+\noindent{\bf Abstrakt}
+
+\abstrakttxt
+\bigskip
+
+\noindent{\bf Summary}
+
+\enabstrakttxt
+
+\bigskip
+\bigskip
+%\goodbreak
+\vbox{
+\noindent{\bf Klíčová slova}
+
+\klicovaslovatxt
+
+\bigskip
+\noindent{\bf Keywords}
+
+\enklicovaslovatxt
+}
+\nobreak
+\vfill 
+% Nasleduje ukazkova citace diplomove prace
+\def\prvnivelke##1##2{\uppercase{##1}##2}
+\noindent \Autorzkrtxt {\it \nazevtxt}. Brno: Vysoké učení technické v Brně, \fakultatxt, \the\year. %
+\ifx\pocetstran\undefined
+   ??
+\else
+   \pocetstran{}
+\fi s. \citacevedoucitxt
+\vskip3cm
+\eject
+}
+
+\long\def\prohlaseni#1{
+\bgroup
+\pagestyle{empty}
+\cleardoublepage
+\egroup
+\thispagestyle{empty}
+\hbox{}
+\vfill
+#1
+\bigskip
+\bigskip
+
+\hfill\autortxt\hskip3cm
+\vskip2cm
+\eject
+}
+
+\long\def\podekovani#1{
+\bgroup
+\pagestyle{empty}
+\cleardoublepage
+\egroup
+\thispagestyle{empty}
+\hbox{}
+\vfill
+#1
+\bigskip
+\bigskip
+
+\hfill\autortxt\hskip3cm
+\vskip2cm
+\eject
+}
+
+\def\obsah{\setcounter{page}{1}\tableofcontents\vfill\eject}
+\makeatletter
+\def\spocitejstranky{
+\protected@write\@auxout{}{\string\gdef\string\pocetstran{\thepage}}%
+}
+\makeatother
+
+\AtEndDocument{\spocitejstranky}

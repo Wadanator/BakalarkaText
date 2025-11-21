@@ -1,0 +1,68 @@
+﻿\documentclass[a4paper,twoside,12pt]{report}% dvoustranný tisk
+%\documentclass[12pt]{report}% jednostranný tisk
+% všechny soubory jsou v utf-8
+	\usepackage{ucs}% pro kódování UTF-8
+	\PrerenderUnicode{} % předkreslení diakritiky, možno přidat/ubrat znaky podle potřeby
+							                  
+
+\usepackage[czech]{babel}% čeština
+%\usepackage[slovak]{babel}% slovenština
+\usepackage[IL2]{fontenc}% csr fonty (pokud jsou nainstalovány česká postscriptová mísma)
+%\usepackage[T1]{fontenc}% EC fonty - háčky a čárky jsou k písmenkům připojovány - nehezké
+
+
+\usepackage[]{diplomka}
+\usepackage[]{VSKP} % Sablona dle smernice rektora
+\input{VSKP} % Uvodni desky atd dle smernice rektora
+\splithyphens% při rozdělování slov se spojovníkem opakuj spojovník
+\usepackage[pdftitle={\typpracetxt},
+            pdfauthor={\autortxt},
+            bookmarks=true,
+            pdfencoding=unicode,
+            linkcolor=blue,
+            colorlinks=true,
+            breaklinks=true]{hyperref}
+%\usepackage[pdftex]{graphicx}
+% Pro vytvoření titulního listu je potreba další balíček
+\usepackage{fontspec}  % Pro vkládání OTF fontů (vyžaduje titulní list) - nefunguje v pdfLaTeXu
+% Pro vložení titulního listu staženého ze Studisu stačí jen vkládáni PDF
+\usepackage{pdfpages} % Pro vkladání PDF souborů (s titulním listem apod.)
+\DeclareGraphicsExtensions{.png,.pdf}
+
+
+
+
+\begin{document}
+
+%% Vložení titulního listu staženého ze Studisu, soubor vložte do složky pdf
+%\includepdf[pages=1,offset=15.4mm -1in]%
+%  {pdf/titulnilist.pdf}% název souboru nesmí obsahovat mezery!
+% Alternativně vysázet titulní list LuaLaTeXem
+\titul% vytiskne titul práce
+
+\abstrakty% vytiskne stránku s abstrakty
+
+
+\prohlaseni{Týmto čestne vyhlasujem, že som bakalársku prácu vypracovala samostatne na základe
+citovanej literatúry a konzultácií s vedúcim práce, a že som v zozname literatúry uviedla
+všetky použité informačné zdroje}% prohlášení,
+\podekovani{Poďakovanie tu pridaj}% poděkování, nepovinné
+
+% vlastní práce
+\obsah% vytiskne obsah
+
+%
+%  vlastni text
+%
+\input{Uvod}% nutné
+%
+% sem vlastni opsany text, možno vložit více souborů (nejlépe pro každou kapitolu zvláštní soubor)
+\input{Resers}
+\input{Architektura}
+
+%
+%\input{Zaver}% nutné
+\input{Literatura}% nutné
+\input{SeznamZkratek}% nutné
+\input{SeznamPriloh}% není povinné
+\end{document}

@@ -1,0 +1,60 @@
+﻿%%%
+%%% Vytvoří náležitosti dle směrnice rektora
+%%%    Soubor VSKP.tex
+%%%
+%% Do preambule hlavního souboru vložte následující příkazy:
+%%    \usepackage{VSKP}  % Načte styl šablony dle směrnice rektora
+%%    \input{VSKP}       % Načte data pro vyplnění šablony
+%%
+%% Na začátek hlavního souboru (za \begin{document} ) vložte příkazy pro vysázení desek
+%%   \titul% vytiskne titul práce
+%%   \licence% vytiskne licenční ujednání
+%%   \abstrakty% vytiskne stránku s abstrakty
+%%
+%% Použité kódování UTF-8
+
+
+%% Generování údajů
+\fakulta{Fakulta strojního inženýrství}
+\enfakulta{Faculty of Mechanical Engineering}
+\adresafakulta{Technická 2896/2, Královo Pole, 61669, Brno}
+\ustav{Ústav mechaniky těles, mechatroniky a biomechaniky} % Dlouhý název ústavu zalomte ručně příkazem \break
+\enustav{Institute of Solid Mechanics, Mechatronics \break and Biomechanics} % Dlouhý název ústavu zalomte ručně příkazem \break
+
+% udaje o autorovi
+\autor{}{Andrej Žabka}{} % Autor, formát: {tituly před jménem} {jméno a příjmení} {tituly za jménem včetně čárky}
+            % Priklad: {Doc. RNDr.}{Miloš Novák}{, Ph.D.}
+\autorzkr{Žabka, A.}% bibliografické jméno
+
+\typstudia{N}% M, N, B, D
+            % M - Magisterské, N - Navazující magisterské, B - Bakalářské, D-Doktorské
+            % U typu studia M a N se liší anglický název
+
+\nazev{Vliv dlouhého názvu závěrečné práce na zlom řádku, popis problému a návrh jednoduchého použitelného řešení} % Ručně můžete dlouhý název zalomit pomocí " \break "
+\ennazev{The Influence of Isothermal Transformation Conditions on the Microstructure of Isothermaly Heat Treated Nodular Cast Iron} % Ručně můžete dlouhý název zalomit pomocí " \break "
+
+%vedouci prace
+\vedouci{doc. Ing.}{Rastafarián Brťka}{, DrSc.}
+\citacevedouci{Vedoucí diplomové práce  doc. Ing. Jaroslav Sklenář, CSc..} % Označení vedoucího práce pro citaci záv. práce. Musí být ukončeno tečkou.
+
+\datumobhajoby{neuvedeno}
+\abstrakt{\noindent Práce bude zaměřena na řešení problémů v LaTeXu při psaní, čtení, počítání a dalších operacích. Nenechte se svést příkladem, do abstraktu nepište nesmysly! Nesmyslný abstrakt může způsobit velké problémy při obhajobě práce.
+
+Předpokládá se vyřešení hlavních problémů, zbytek si doplní autor ručně.} % Před "\n" vložit další "\n"
+\enabstrakt{\noindent This work will zaměřena na řešení problémů v LaTeXu při psaní.
+
+Předpokládá se vyřešení hlavních problémů, zbytek si doplní autor ručně..} % Před "\n" vložit další "\n"
+\klicovaslova{\noindent Šablona, LaTeX, závěrečná práce, VUT v Brně.} % Před "\n" vložit " \break"
+\enklicovaslova{\noindent LaTex, master thesis, BUT Brno} % Před "\n" vložit " \break"
+%%
+%%   Konec generování údajů
+%%
+
+
+
+%%
+%%   Vlastní vysázení desek umístnit na začátek práce
+%%
+%\titul% vytiskne titul práce
+%\abstrakty% vytiskne stránku s abstrakty
+

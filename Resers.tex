@@ -1,0 +1,147 @@
+\chapter{Súčasný stav problematiky}
+\label{SucasnyStav}
+
+Cieľom tejto kapitoly je analyzovať súčasný stav technických prostriedkov používaných v~modernom výstavníctve, multimediálnych inštaláciách a~automatizácii. Kapitola poskytuje kritický prehľad dostupných hardvérových a~softvérových platforiem s~dôrazom na ich vhodnosť pre realizáciu interaktívnych expozícií. Zároveň definuje kľúčové technické požiadavky na komunikačné protokoly v~distribuovaných systémoch.
+
+\section{Existujúce prístupy k~riadeniu expozícií}
+\label{existujuce-pristupy}
+
+Pri návrhu techniky pre interaktívne expozície dnes neexistuje len jedno správne riešenie. V~praxi sa však najčastejšie využívajú tri hlavné spôsoby. Realizátori si zvyčajne vyberajú medzi priemyselnými automatmi (PLC), IoT platformami s~vizuálnym programovaním alebo profesionálnymi komerčnými systémami. Táto kapitola popisuje tieto tri kategórie a~hodnotí, či sú vhodné pre naše potreby -- teda pre menšie a~cenovo dostupné múzejné inštalácie.
+
+\subsection{Priemyselné programovateľné automaty (PLC)}
+\label{plc}
+
+V~oblasti všeobecnej automatizácie sú dlhoročným štandardom programovateľné logické automaty (PLC -- Programmable Logic Controllers). Tieto systémy, pôvodne vyvinuté pre potreby výrobného priemyslu, sa vyznačujú extrémnou spoľahlivosťou, robustnosťou a~vysokou odolnosťou voči elektromagnetickému rušeniu, prachu a~vibráciám, čo ich predurčuje na nasadenie v~náročných podmienkach [ZDROJ]. Programovanie prebieha zvyčajne v~štandardizovaných jazykoch podľa normy IEC 61131-3 (napr. Ladder Diagram alebo Structured Text).
+
+\textbf{Kritické zhodnotenie:} Napriek vysokej spoľahlivosti naráža nasadenie PLC v~kontexte interaktívnych multimediálnych expozícií na zásadné limity, ktoré robia toto riešenie neefektívnym pre menšie a~stredné projekty:
+
+\begin{enumerate}
+\item \textbf{Absencia natívnej podpory multimédií:} PLC sú navrhnuté na spracovanie logických signálov, nedisponujú však rozhraniami pre audiovizuálny výstup (HDMI, Audio Jack). Pre realizáciu požiadaviek, ako je prehrávanie videa, spúšťanie zvukových stôp či zobrazovanie grafického rozhrania, je nevyhnutné PLC doplniť o~externé priemyselné prehrávače (napr. BrightSign) alebo počítače. PLC v~takomto zapojení funguje len ako spúšťač (trigger), čo zvyšuje hardvérovú zložitosť systému.
+
+\item \textbf{Komplexná synchronizácia a~spätná väzba:} Realizácia interaktívnych scenárov, kde systém musí čakať na dokončenie audio stopy pred spustením ďalšej akcie (napr. výber cesty v~príbehu), je pri PLC komplikovaná. Keďže PLC \uv{nevidí} stav prehrávania média, je nutné implementovať obojsmernú komunikáciu (handshaking) cez sériové rozhrania (RS-232) alebo sieťové protokoly (Modbus TCP, UDP). To vyžaduje pokročilé programovanie na strane PLC aj mediálneho servera, pričom akákoľvek zmena v~dĺžke videa vyžaduje preprogramovanie časovačov v~logike automatu.
+
+\item \textbf{Ekonomická a~inštalačná náročnosť:} Okrem vysokej ceny samotných centrálnych jednotiek (CPU) a~licencií, PLC typicky využívajú centralizovanú topológiu typu \uv{hviezda}. To vyžaduje vedenie individuálnej kabeláže od každého senzora a~aktuátora až do centrálneho rozvádzača [ZDROJ]. V~pamiatkovo chránených objektoch alebo pri dynamických výstavách je tento prístup často nerealizovateľný z~estetických a~stavebných dôvodov.
+\end{enumerate}
+
+\subsection{Vizuálne IoT platformy (Node-RED)}
+\label{node-red}
+
+S~nástupom internetu vecí (IoT) sa v~komunite tvorcov a~integrátorov rozšírili nástroje pre vizuálne programovanie, pričom najvýraznejším zástupcom je platforma Node-RED (pôvodne vyvinutá spoločnosťou IBM). Tento nástroj, postavený na technológii Node.js, umožňuje konfigurovať logiku aplikácie pomocou grafického prepájania funkčných blokov (nodes) a~tokov dát (flows) v~prehľadnom webovom rozhraní [ZDROJ]. Vďaka širokej podpore protokolov (vrátane MQTT) a~hardvérových rozhraní (GPIO) je Node-RED často prvou voľbou pre prototypovanie.
+
+\textbf{Kritické zhodnotenie:} Hoci je Node-RED vysoko efektívny pre jednoduché úlohy typu \uv{akcia -- reakcia} (Event-Driven) v~domácej automatizácii, pri návrhu komplexného riadiaceho systému pre múzeá naráža na limity architektúry a~udržiavateľnosti:
+
+\begin{enumerate}
+\item \textbf{Problém pri zložitých scenároch:} Vizuálne programovanie je intuitívne pri lineárnych dejoch. Avšak implementácia komplexného stavového automatu (State Machine), ktorý obsahuje vetvenie deja, cykly, prerušenia (napr. pauza videa) a~spracovanie chýb, vedie v~Node-RED k~vytvoreniu neprehľadnej siete prepojení. Grafická reprezentácia takejto logiky sa stáva vizuálne chaotickou a~ťažko laditeľnou v~porovnaní so štruktúrovaným kódom vo vyššom programovacom jazyku (Python/C++).
+
+\item \textbf{Obmedzená práca s~multimédiami:} Node-RED funguje primárne ako backendová služba a~nemá natívne nástroje na priame renderovanie videa alebo audia na grafický výstup zariadenia (HDMI). Prehrávanie multimédií je nutné riešiť nepriamo -- volaním systémových procesov (napr. exec príkaz pre omxplayer) cez príkazový riadok. Tento prístup sťažuje synchronizáciu a~získavanie spätnej väzby o~stave prehrávania (napr. detekcia konca videa), čo je pre plynulý chod interaktívnej expozície kľúčové.
+
+\item \textbf{Náročná správa konfigurácií:} Logika v~Node-RED je pevne zviazaná s~vizuálnym rozložením toku. Na rozdiel od navrhovaného riešenia, kde je scenár výstavy oddelený do jednoduchého externého konfiguračného súboru (JSON), v~Node-RED by zmena parametrov (napr. dĺžka trvania efektu) vyžadovala zásah priamo do štruktúry programu v~editore. To znemožňuje, aby si scenár upravoval netechnický personál múzea bez rizika poškodenia funkčnosti systému.
+\end{enumerate}
+
+\subsection{Komerčné \uv{Show Control} systémy}
+\label{show-control}
+
+Na vrchole pyramídy existujúcich riešení stoja systémy ako Crestron, AMX alebo Medialon. Tieto platformy predstavujú profesionálny štandard priamo určený na riadenie komplexných audiovizuálnych inštalácií, divadelnej techniky a~inteligentných budov [ZDROJ]. Ponúkajú dedikovaný hardvér aj softvér optimalizovaný pre multimédiá.
+
+\textbf{Kritické zhodnotenie:} Napriek ich technickej vyspelosti sú tieto systémy spravidla založené na uzavretých (proprietary) technológiách. Sú finančne extrémne náročné nielen z~hľadiska hardvéru, ale aj licencií vývojových prostredí a~následného servisu. Uzatvorený ekosystém často neumožňuje jednoduchú integráciu vlastného hardvéru (napr. mikrokontrolérov tretích strán) a~uzamyká používateľa do produktového radu jedného výrobcu. Tento fakt je v~priamom rozpore s~požiadavkou zadania tejto práce na vytvorenie otvoreného, modulárneho a~cenovo dostupného riešenia.
+
+\section{Komunikačné protokoly a~dátové formáty}
+\label{komunikacne-protokoly}
+
+Pre zabezpečenie robustnej, modulárnej a~nízko-latenčnej výmeny dát v~distribuovanom systéme je kľúčová voľba vhodného komunikačného štandardu. Keďže navrhovaná architektúra systému predpokladá komunikáciu centrálnej riadiacej jednotky s~množstvom bezdrôtových periférií v~reálnom čase, výber protokolov musel zohľadňovať obmedzený výpočtový výkon mikrokontrolérov a~požiadavku na minimalizáciu réžie prenosu (overhead).
+
+\subsection{Protokol MQTT}
+\label{mqtt}
+
+Ako chrbticový komunikačný štandard bol zvolený protokol MQTT (Message Queuing Telemetry Transport). Ide o~odľahčený sieťový protokol pracujúci nad vrstvou TCP/IP, ktorý sa stal de facto štandardom v~oblasti Internetu vecí (IoT).
+
+Na rozdiel od tradičného modelu klient-server (napr. HTTP), kde musí klient aktívne a~opakovane dopytovať server o~zmenu stavu (Polling), je MQTT založené na architektúre Publish/Subscribe. Tento model využíva prostredníka -- tzv. Broker. Broker prijíma správy od vysielačov (Publishers) a~okamžite ich distribuuje všetkým klientom, ktorí sú prihlásení na odber danej témy (Subscribers). Táto architektúra zabezpečuje úplné oddelenie (decoupling) odosielateľa od príjemcu, čo je pre modulárny systém kľúčové -- centrálna jednotka nemusí poznať IP adresy jednotlivých svetiel, stačí, ak posiela príkazy do správnej témy.
+
+Pre potreby riadenia expozície boli využité špecifické vlastnosti protokolu:
+
+\begin{itemize}
+\item \textbf{Hierarchia tém (Topics):} Protokol umožňuje organizovať komunikáciu do stromovej štruktúry pomocou lomítok. Pre tento projekt bola navrhnutá schéma miestnosť/typ\_zariadenia/ID/príkaz (napr. room1/lights/spotlight\_main/set). To umožňuje nielen precízne adresovanie jednotlivých uzlov, ale pomocou divokých kariet (wildcards) aj hromadné ovládanie celých skupín zariadení jedným príkazom.
+
+\item \textbf{Minimalizácia dátového toku:} Hlavička MQTT paketu má veľkosť len 2 bajty. Táto extrémna efektivita znižuje zaťaženie lokálnej Wi-Fi siete a~umožňuje rýchle spracovanie správ aj na jednoduchých 8-bitových alebo 32-bitových mikrokontroléroch.
+
+\item \textbf{Kvalita služby (QoS -- Quality of Service):} Protokol definuje tri úrovne potvrdenia doručenia. Pre multimediálne systémy reálneho času sa paradoxne javí ako najvhodnejšia najnižšia úroveň QoS 0 (At most once). V~aplikáciách vyžadujúcich synchronizáciu (napr. blikanie svetla do hudby) je výhodnejšie prípadný oneskorený paket zahodiť a~spracovať až nasledujúci príkaz v~poradí, než blokovať celú komunikačnú zbernicu čakaním na potvrdenie doručenia (ACK) a~opakovaným odosielaním, čo by viedlo k~viditeľnej desynchronizácii (lagu) [ZDROJ].
+\end{itemize}
+
+\subsection{Dátové formáty pre definíciu scén}
+\label{datove-formaty}
+
+Pre štruktúrovanie prenášaných dát (Payload) a~ukladanie konfigurácie scenárov bolo nutné zvoliť vhodný serializačný formát. Z~technického hľadiska je na zvolenom hardvéri (Raspberry Pi a~ESP32) možné implementovať podporu pre ktorýkoľvek z~bežných textových štandardov: XML, YAML aj JSON. Výber preto závisel od porovnania ich efektivity, odolnosti voči chybám a~dostupnosti optimalizovaných knižníc.
+
+\subsubsection{XML (eXtensible Markup Language)}
+\label{xml}
+
+XML bol dlhé roky priemyselným štandardom a~jeho spracovanie je na ESP32 možné pomocou existujúcich parserov.
+
+\textbf{Nevýhoda:} Pre IoT aplikácie bol vyhodnotený ako neefektívny kvôli svojej \uv{verbosnosti} (veľkému objemu dát potrebných na zápis jednoduchej informácie). To zbytočne zaťažuje sieť a~pamäť mikrokontroléra, keďže parsovanie XML je výpočtovo náročnejšie než u~modernejších formátov.
+
+\subsubsection{YAML (YAML Ain't Markup Language)}
+\label{yaml}
+
+Tento formát je vizuálne najčistejší a~je často využívaný v~konfiguráciách serverov. Jeho implementácia na ESP32 je realizovateľná, no prináša prevádzkové riziká.
+
+\textbf{Nevýhoda:} Jeho štruktúra je striktne definovaná odsadením (indentation). To predstavuje kritické riziko pri akejkoľvek manipulácii so súborom -- jediná chýbajúca medzera alebo zámena medzerníka za tabulátor môže znefunkčniť celý konfiguračný súbor. Navyše, knižnice pre parsovanie YAML na platforme ESP32 nie sú tak vysoko optimalizované a~pamäťovo úsporné ako v~prípade formátu JSON.
+
+\subsubsection{JSON (JavaScript Object Notation) -- Zvolené riešenie}
+\label{json}
+
+Formát JSON bol vybraný ako najvhodnejší kompromis medzi čitateľnosťou a~technickou efektivitou. Je natívne podporovaný väčšinou moderných jazykov a~na ohraničenie dát používa zátvorky \{\}.
+
+Hlavné dôvody pre voľbu JSON:
+
+\begin{itemize}
+\item \textbf{Robustnosť:} Na rozdiel od YAML, JSON ignoruje biele znaky (medzery, nové riadky), čo eliminuje chyby spôsobené zlým formátovaním textu.
+
+\item \textbf{Univerzálnosť:} JSON je prirodzeným jazykom pre webové technológie aj Python, čo zjednodušuje prepojenie všetkých vrstiev systému (Backend -- Frontend -- Firmvér) bez nutnosti konverzie dát.
+\end{itemize}
+
+\section{Hardvérové platformy}
+\label{hardverove-platformy}
+
+Realizácia distribuovaného riadiaceho systému vyžaduje rozdelenie hardvérovej architektúry na dve úrovne: centrálnu výpočtovú jednotku (Backend) a~koncové výkonové uzly (Periférie).
+
+\subsection{Centrálna riadiaca jednotka (Raspberry Pi)}
+\label{raspberry-pi}
+
+Pre serverovú časť systému, ktorá zabezpečuje aplikačnú logiku, sieťovú komunikáciu (MQTT Broker) a~prehrávanie multimédií, sú vhodné jednodoskové počítače (SBC -- Single Board Computer). Ako referenčná platforma sa v~tejto kategórii dlhodobo uvádza Raspberry Pi (konkrétne modely 4 a~5).
+
+Vďaka plnohodnotnému operačnému systému na báze Linuxu (Raspberry Pi OS) poskytuje táto platforma dostatočný výkon pre beh viacerých paralelných služieb, interpretáciu skriptovacích jazykov (Python) a~hardvérovo akcelerované prehrávanie videa cez HDMI rozhranie [ZDROJ]. V~porovnaní s~klasickými osobnými počítačmi (x86 PC) ponúka Raspberry Pi výrazne nižšiu spotrebu energie a~kompaktnejšie rozmery, čo uľahčuje fyzickú integráciu priamo do nábytku expozície alebo do malých osobitných krabičiek.
+
+\subsection{Mikrokontroléry pre koncové uzly}
+\label{mikrokontrolery}
+
+Pre realizáciu bezdrôtových koncových bodov, ktoré priamo ovládajú hardvér (motory, svetlá, senzory), je nutné zvoliť vhodný mikrokontrolér. V~oblasti hobby a~poloprofesionálneho IoT sú najčastejšie porovnávané platformy Arduino a~Espressif ESP32.
+
+\begin{itemize}
+\item \textbf{Platforma Arduino (Uno/Nano):} Tieto dosky sú založené na staršej architektúre 8-bitových procesorov (AVR) s~nízkou taktovacou frekvenciou (zvyčajne 16\,MHz) a~veľmi malou pamäťou RAM (rádovo v~kilobajtoch). Ich hlavným nedostatkom pre moderné IoT aplikácie je absencia integrovanej sieťovej konektivity. Použitie externých prídavných modulov (Ethernet alebo Wi-Fi shield) komplikuje hardvérový návrh, zvyšuje cenu a~zavádza ďalší bod možnej poruchy [ZDROJ].
+
+\item \textbf{Platforma ESP32:} Ide o~moderný 32-bitový mikrokontrolér (architektúra Xtensa alebo RISC-V) s~frekvenciou až 240\,MHz. Jeho kľúčovou výhodou je plná integrácia Wi-Fi a~Bluetooth rozhrania priamo na čipe (SoC). Disponuje výrazne vyšším výpočtovým výkonom a~väčšou pamäťou SRAM, čo je nevyhnutné pre spracovanie textových protokolov (JSON parsovanie) a~pre zabezpečenú šifrovanú komunikáciu [ZDROJ]. Vynikajúci pomer ceny a~výkonu robí z~ESP32 ideálneho kandidáta pre inteligentné distribuované uzly navrhovaného systému.
+\end{itemize}
+
+\subsection{Výkonové rozhrania (Aktuátory)}
+\label{aktuatory}
+
+\subsubsection{Ovládanie jednosmerných motorov}
+\label{ovladanie-motorov}
+
+Pre plynulé ovládanie smeru a~rýchlosti jednosmerných motorov sa v~robotike a~automatizácii využíva topológia H-mostíka. Tento obvod umožňuje zmenu polarity napätia na svorkách motora, čím sa mení smer otáčania. Rýchlosť sa následne reguluje pomocou pulzne šírkovej modulácie (PWM). V~praxi sa bežne používajú dve kategórie budičov:
+
+\begin{itemize}
+\item \textbf{Monolitické integrované obvody:} (Napríklad staršie typy rodiny L298). Sú jednoduché na použitie, ale vyznačujú sa vysokým úbytkom napätia na vnútorných tranzistoroch, čo vedie k~výraznému zahrievaniu a~potrebe chladenia aj pri menších výkonoch.
+
+\item \textbf{Moderné polomostíky (Half-Bridge Drivers):} Využívajú technológiu MOSFET s~veľmi nízkym vnútorným odporom. Tieto obvody (často používané v~automotive priemysle) zvládajú rádovo vyššie prúdy s~minimálnymi tepelnými stratami a~často obsahujú integrované ochrany proti skratu a~prehriatiu.
+\end{itemize}
+
+\subsubsection{Spínanie sieťových záťaží (230\,V)}
+\label{spinanie-230v}
+
+Pre ovládanie hlavného osvetlenia sa využívajú relé. Okrem klasických elektromechanických relé sa v~múzejníctve čoraz častejšie uplatňujú polovodičové relé (SSR -- Solid State Relay). Ich zásadnou výhodou oproti mechanickým kontaktom je absencia pohyblivých častí, čo zaručuje absolútne tichú prevádzku a~výrazne dlhšiu životnosť pri častom spínaní efektov.
+
+\section{Zhrnutie rešerše}
+\label{zhrnutie-reserse}
+
+Analýza dostupných technických riešení preukázala, že pre špecifické potreby modulárnej, flexibilnej a~cenovo dostupnej muzeálnej inštalácie nie sú optimálne ani robustné priemyselné PLC (kvôli vysokej cene a~nutnosti centralizovanej kabeláže), ani uzavreté komerčné systémy \uv{Show Control}.

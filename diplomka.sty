@@ -1,0 +1,216 @@
+﻿%%
+%% Styl pro psani Vysokoskolskych kvalifikacnich praci
+%% VUT v Brně
+%% vytvoreno pro interni potrebu Ustavu fyzikalniho inzenyrstvi a Ustavu matematiky, FSI
+%%
+%% Jakub Zlamal, zlamal@fme.vutbr.cz
+%%
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{diplomka}[2012/04/08 v2.0]
+\DeclareOption{linkycerne}{%
+   \def\@linkcolor{black}
+   \def\@anchorcolor{black}
+   \def\@citecolor{black}
+   \def\@filecolor{black}
+   \def\@urlcolor{black}
+   \def\@menucolor{black}
+   \def\@pagecolor{black}
+}
+
+
+
+
+% rozmery strany
+%
+\voffset=-1in
+\hoffset=-1in
+\newdimen\pagewidth
+\newdimen\pageheight
+\pagewidth=210mm
+\pageheight=297mm
+\ifx\pdfcompresslevel\undefined
+\else
+   \pdfpagewidth=\pagewidth     % paper size of the pdf output (letter in this case)
+   \pdfpageheight=\pageheight
+\fi
+
+
+\textwidth 16cm    %167
+\textheight 25cm   %239
+
+
+\topmargin=15mm
+%\headheight 5mm
+\headsep=5mm
+\footskip 1cm
+\advance\textheight by-\footskip
+
+
+\oddsidemargin=30mm
+\evensidemargin=\pagewidth
+\advance\evensidemargin by -\textwidth
+\advance\evensidemargin by -\oddsidemargin
+
+%\oddsidemargin=0mm
+%\evensidemargin=0mm
+
+
+
+
+
+
+
+
+%%
+%% Vlastni sablona prace
+%%
+
+%
+%  defaultni hodnoty
+%
+\def\linkycerne{}%
+\def\opakujoperatory{}% neopakuje +-=
+
+
+\ProcessOptions
+
+\opakujoperatory% zvol co se ma delat s operatory
+
+
+
+%
+%  predefinovani kapitoly
+%
+\renewcommand\chapter{\@startsection{chapter}{0}{0cm}%
+{16.8pt}{10pt}{\newpage\raggedright\noindent\huge\bfseries\textsc}}
+
+\makeatletter
+\renewcommand\@seccntformat[1]{\@nameuse{the#1}.\hspace{.5em}}% ceske cislovani kapitol s teckou na konci
+\makeatother
+
+% aby mohlo byt vice obrazku na strane
+%
+%  nastaveni aby se na stranku veslo hodne obrazku
+%
+% vzdalenost mezi dvema obrazky nad sebou
+\setlength\floatsep{12pt plus 2pt minus 4pt}
+% mezera mezi obrazkem na vrcholu strany a textem pod nim
+\setlength\textfloatsep{10pt plus 2pt minus 4pt}
+% mezera mezi obrazkem a textem (pod i nad obrazkem)
+\setlength\intextsep   {8pt plus 2pt minus 1pt}
+% mezerka nad caption
+\setlength\abovecaptionskip{-10pt}
+% mezerka pod caption
+\setlength\belowcaptionskip{0pt}
+
+
+
+\renewcommand\floatpagefraction{.999}
+\renewcommand\topfraction{.9999}
+\renewcommand\bottomfraction{.9999}
+\renewcommand\textfraction{.001}
+\setcounter{totalnumber}{10}
+\setcounter{topnumber}{10}
+\setcounter{bottomnumber}{10}
+
+
+\hbadness=2000% od kolika ma hlasit spatny box
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000
+
+\makeatletter
+\if@twoside
+   \def\ps@headings{%
+         \def\@evenfoot{\thepage\hfil}%
+         \def\@oddfoot{\hfil\thepage}%
+         \def\@oddhead{\hfil\slshape\leftmark}%
+         \def\@evenhead{{\slshape\rightmark}\hfil}%
+         \let\@mkboth\markboth
+      \def\chaptermark##1{%
+         \markboth {\MakeUppercase{%
+         \ifnum \c@secnumdepth >\m@ne
+   %          \if@mainmatter
+               \thechapter. \ %
+   %          \fi
+         \fi
+         ##1}}{}}%
+      \def\sectionmark##1{%
+         \markright {\MakeUppercase{%
+         \ifnum \c@secnumdepth >\z@
+            \thesection. \ %
+         \fi
+         ##1}}}
+   }
+\else
+   \def\ps@headings{%
+         \def\@evenfoot{\hfill\thepage\hfil}%
+         \def\@oddfoot{\hfil\thepage\hfill}%
+         \def\@oddhead{\hfil\slshape\rightmark}%
+         \def\@evenhead{{\slshape\rightmark}\hfil}%
+         \let\@mkboth\markboth
+      \def\chaptermark##1{%
+         \markboth {\MakeUppercase{%
+         \ifnum \c@secnumdepth >\m@ne
+   %          \if@mainmatter
+               \thechapter. \ %
+   %          \fi
+         \fi
+         ##1}}{}}%
+      \def\sectionmark##1{%
+         \markright {\MakeUppercase{%
+         \ifnum \c@secnumdepth >\z@
+            \thesection. \ %
+         \fi
+         ##1}}}
+   }
+\fi
+\makeatother
+\pagestyle{headings}
+
+
+
+
+%
+%  tabulka symbolu
+%
+\newdimen\symbolsize
+\symbolsize=2cm
+\newenvironment{symboly}
+               {\list{}{\labelwidth0pt \itemindent0pt
+                        \leftmargin=\symbolsize
+                        \let\makelabel\symbolylabel}}
+               {\endlist}
+% label of description
+\newcommand*\symbolylabel[1]{%
+   \setbox0=\hbox{\hspace\labelsep\normalfont{#1}}% this is label and I need to make it long as whole line
+   \ifdim\wd0<\symbolsize
+      \leftmargin=\symbolsize
+      \llap{\hbox to \symbolsize{\box0\hss}}%
+   \else
+      \dimen0=\hsize%
+      \advance\dimen0 by -\symbolsize% this is rest of line to add it to label
+      \llap{\hbox to \symbolsize{\box0\hss}}\hbox to\dimen0{\hss}
+   \fi
+}
+\makeatletter
+% citace
+\def\@citex[#1]#2{%
+  \let\@citea\@empty
+  \@cite{\@for\@citeb:=#2\do
+    {\@citea\def\@citea{,\penalty\@m\ }%
+     \edef\@citeb{\expandafter\@firstofone\@citeb\@empty}%
+     \if@filesw\immediate\write\@auxout{\string\citation{\@citeb}}\fi
+     \@ifundefined{b@\@citeb}{\mbox{\reset@font ?\@citeb?}%
+       \G@refundefinedtrue
+       \@latex@warning
+         {Citation `\@citeb' on page \thepage \space undefined}}%
+       {\hbox{\csname b@\@citeb\endcsname}}}}{#1}}
+
+\makeatother
+
+
+
+\raggedbottom
+
+
+\def\obsah{\setcounter{page}{1}\tableofcontents\vfill\eject}

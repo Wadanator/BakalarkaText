@@ -1,0 +1,272 @@
+\chapter{Návrh a~implementácia riadiaceho systému}
+\label{NavrhImplementacia}
+
+Cieľom praktickej časti bakalárskej práce bol návrh a~následná realizácia modulárnej architektúry, ktorá integruje závery z~teoretickej rešerše do funkčného prototypu. Kapitola je rozdelená do dvoch hlavných celkov: analytickej časti, ktorá definuje požiadavky a~architektúru systému, a~implementačnej časti, ktorá popisuje konkrétnu realizáciu hardvérových a~softvérových komponentov.
+
+\section{Špecifikácia požiadaviek}
+\label{specifikacia-poziadaviek}
+
+Prvým krokom pri návrhu systému bola definícia kľúčových vlastností, ktoré musí výsledné riešenie spĺňať, aby bolo použiteľné v~reálnej muzeálnej praxi.
+
+\subsection{Funkčné požiadavky}
+\label{funkcne-poziadavky}
+
+Funkčné požiadavky definujú konkrétne správanie systému z~pohľadu jeho každodennej prevádzky a~interakcie s~personálom múzea:
+
+\begin{itemize}
+\item \textbf{Automatizovaná orchestrácia scén:} Systém musí byť schopný na základe časovej osi (timeline) v~reálnom čase synchronizovať prehrávanie multimediálneho obsahu (video/audio) s~fyzickými efektmi (svetlá, motory).
+
+\item \textbf{Interaktivita a~vetvenie deja:} Systém musí disponovať logikou pre spracovanie externých vstupov (tlačidlá, senzory pohybu) a~na ich základe dynamicky meniť priebeh expozície (napr. prepnutie na inú vetvu príbehu).
+
+\item \textbf{Prevádzkový monitoring (Dashboard):} Pre potreby netechnickej obsluhy musí systém poskytovať webové rozhranie dostupné v~lokálnej sieti. Toto rozhranie musí zobrazovať aktuálny stav systému (napr. \uv{Prehráva sa scéna XY}, \uv{Nečinný}) a~poskytovať spätnú väzbu o~pripojení periférií.
+
+\item \textbf{Manuálne riadenie a~bezpečnosť:} Systém musí umožňovať operátorovi manuálne vyvolať konkrétnu scénu a, čo je kritické, musí obsahovať funkciu núdzového zastavenia (Emergency Stop). Táto funkcia musí okamžite prerušiť všetky procesy, zastaviť motory a~uviesť miestnosť do bezpečného stavu.
+\end{itemize}
+
+\subsection{Nefunkčné požiadavky}
+\label{nefunkcne-poziadavky}
+
+Nefunkčné požiadavky definujú kvalitatívne atribúty systému:
+
+\begin{itemize}
+\item \textbf{Stabilita a~dostupnosť:} Keďže expozície bežia často v~režime 24/7 bez prítomnosti technika, systém musí byť odolný voči výpadkom a~disponovať mechanizmom automatického reštartu (Watchdog).
+
+\item \textbf{Nízka latencia:} Odozva systému na interakciu návštevníka musí byť okamžitá (pod 100\,ms), aby bol zážitok plynulý.
+
+\item \textbf{Modularita:} Architektúra musí umožňovať jednoduché pridávanie nových zariadení (škálovateľnosť) bez nutnosti meniť jadro systému.
+
+\item \textbf{Cena:} Riešenie musí byť finančne dostupné pre menšie múzeá, postavené na bežne dostupnom hardvéri (COTS -- Commercial Off-The-Shelf).
+\end{itemize}
+
+\section{Návrh architektúry systému}
+\label{navrh-architektury}
+
+Na základe stanovených požiadaviek bola navrhnutá architektúra, ktorá je rozdelená do troch logických vrstiev: hardvérovej, komunikačnej a~softvérovej.
+
+\subsection{Topológia siete (Decentralizovaný model)}
+\label{topologia-siete}
+
+Architektúra systému bola navrhnutá ako plne decentralizovaná. Na rozdiel od tradičných systémov, kde jeden centrálny server riadi celú budovu, je v~tomto návrhu základnou stavebnou jednotkou autonómny riadič pridelený každej expozičnej miestnosti osobitne.
+
+Tento prístup, definovaný ako \uv{jedna miestnosť = jeden systém}, prináša kľúčové prevádzkové výhody:
+
+\begin{itemize}
+\item \textbf{Eliminácia globálneho výpadku (Single Point of Failure):} Ak dôjde k~poruche riadiacej jednotky v~jednej miestnosti, zvyšok múzea pokračuje v~prevádzke bez obmedzení.
+
+\item \textbf{Zjednodušená údržba:} Pri servise v~jednej časti expozície nie je nutné odstavovať celý objekt.
+
+\item \textbf{Opakovateľnosť:} Riešenie funguje ako univerzálny modul, ktorý je možné duplikovať do ľubovoľného počtu miestností.
+\end{itemize}
+
+\subsection{Hardvérová architektúra}
+\label{hardverova-architektura}
+
+Hardvérový návrh rozdeľuje systém na centrálnu logickú jednotku a~distribuované periférie. Na základe teoretickej analýzy v~kapitole~\ref{SucasnyStav} boli pre realizáciu prototypu zvolené konkrétne komponenty:
+
+\textbf{Centrálna jednotka (Master):} Zvolený bol minipočítač Raspberry Pi 4. Táto voľba vychádza z~potreby súbežného behu MQTT brokera, webového servera a~hardvérovo akcelerovaného prehrávania videa, čo mikrokontroléry nezvládnu a~priemyselné PLC by predražili.
+
+\textbf{Výkonové riadenie motorov (Driver):} Pre ovládanie mechanických častí (napr. dverí vitríny) bol na základe porovnania v~časti~\ref{aktuatory} vybraný modul s~čipom BTS7960.
+
+\begin{itemize}
+\item \textbf{Zdôvodnenie výberu:} Oproti bežnému modulu L298N, ktorý bol zvažovaný v~úvode, poskytuje BTS7960 prúdovú zaťažiteľnosť až 43\,A. To systému dodáva potrebnú robustnosť. Kľúčovým faktorom bol masívny chladič a~tepelná odolnosť, ktorá umožňuje inštaláciu aj do stiesnených priestorov múzejného nábytku bez rizika prehriatia.
+\end{itemize}
+
+\textbf{Distribuované uzly (Slaves):} Ako riadiace jednotky pre jednotlivé efekty boli zvolené čipy ESP32, ktoré zabezpečujú bezdrôtovú komunikáciu a~generovanie PWM signálov pre drivery.
+
+\section{Návrh softvérovej logiky}
+\label{navrh-softverovej-logiky}
+
+Softvérové riešenie nie je postavené na pevne zakódovaných sekvenciách, ale využíva abstraktný model riadenia.
+
+\subsection{Koncept stavového automatu (State Machine)}
+\label{stavovy-automat}
+
+Pre riadenie expozície bol zvolený model konečného stavového automatu (FSM). Systém sa v~každom okamihu nachádza v~jednom definovanom stave (napr. \uv{Intro}, \uv{Hra}, \uv{Idle}). Prechod medzi stavmi je riadený udalosťami (uplynutie času videa, stlačenie tlačidla). Tento prístup umožňuje nielen lineárne časovanie, ale aj zložité vetvenie deja.
+
+\subsection{Návrh dátového modelu (JSON štruktúra)}
+\label{datovy-model}
+
+Konfigurácia správania expozície je uložená v~externých súboroch JSON, ktoré definujú kompletnú logiku stavového automatu pre danú scénu. Na rozdiel od jednoduchých lineárnych zoznamov, tento formát umožňuje definovať viacero stavov (States) a~prechody medzi nimi.
+
+Koreňový objekt obsahuje identifikátor scény, počiatočný stav (initialState) a~objekt states, ktorý definuje jednotlivé fázy scenára. Každý stav môže obsahovať tri kľúčové polia:
+
+\begin{itemize}
+\item \texttt{onEnter}: Zoznam akcií, ktoré sa vykonajú okamžite pri vstupe do stavu (napr. zapnutie svetla).
+
+\item \texttt{timeline}: Časová os pre akcie, ktoré sa majú vykonať s~oneskorením (definovaným parametrom \texttt{at}).
+
+\item \texttt{transitions}: Podmienky pre prechod do iného stavu (napr. po uplynutí času \texttt{timeout}).
+\end{itemize}
+
+Ukážka reálnej štruktúry zo súboru \texttt{test.json}:
+
+\begin{verbatim}
+{
+  "sceneId": "test_main",
+  "initialState": "intro",
+  "states": {
+    "intro": {
+      "description": "Začiatok - svetlo, audio, motor1",
+      "onEnter": [
+        {"action": "mqtt", "topic": "room1/light", "message": "ON"},
+        {"action": "audio", "message": "PLAY:welcome.mp3:0.7"},
+        {"action": "mqtt", "topic": "room1/motor1", "message": "ON:50:L"}
+      ],
+      "timeline": [
+        {"at": 3.0, "action": "video", "message": "PLAY_VIDEO:ghost2.mp4"},
+        {"at": 4.0, "action": "mqtt", "topic": "room1/motor1", 
+         "message": "DIR:R"}
+      ],
+      "transitions": [
+        {"type": "timeout", "delay": 6.0, "goto": "middle"}
+      ]
+    },
+    "middle": {
+      "description": "Stredná časť - vypne svetlo, zmení smer",
+      "onEnter": [
+        {"action": "mqtt", "topic": "room1/light", "message": "OFF"}
+      ],
+      "transitions": [
+        {"type": "timeout", "delay": 2.0, "goto": "finale"}
+      ]
+    }
+  }
+}
+\end{verbatim}
+
+Tento model umožňuje flexibilné vetvenie deja, kde sa systém presúva medzi stavmi (intro $\rightarrow$ middle $\rightarrow$ finale) na základe definovaných prechodov.
+
+\subsection{Návrh komunikačného rozhrania (MQTT Topics a~Payload)}
+\label{mqtt-rozhranie}
+
+Pre komunikáciu medzi centrálnou jednotkou a~perifériami bol zvolený jednoduchý textový protokol prenášaný cez MQTT. Namiesto komplexných JSON objektov v~tele správy (Payload) systém využíva reťazce s~parametrami oddelenými dvojbodkou (:). Tento prístup znižuje nároky na parsovanie v~mikrokontroléroch ESP32.
+
+Adresácia zariadení využíva hierarchickú štruktúru tém v~tvare \texttt{miestnosť/zariadenie}.
+
+Príklady použitých tém a~príkazov:
+
+\begin{itemize}
+\item \textbf{Ovládanie motorov:}
+  \begin{itemize}
+  \item Téma: \texttt{room1/motor1} (resp. \texttt{room1/motor2})
+  \item Príkaz \texttt{ON}: Spustenie motora.
+    \begin{itemize}
+    \item Formát: \texttt{ON:Rýchlosť:Smer[:Trvanie]}
+    \item Príklad: \texttt{ON:50:L} (Zapni na 50\,\% výkonu doľava)
+    \item Príklad s~rampou: \texttt{ON:100:L:10000} (Rozbeh na 100\,\% po dobu 10 sekúnd)
+    \end{itemize}
+  \item Príkaz \texttt{DIR}: Zmena smeru za chodu.
+    \begin{itemize}
+    \item Príklad: \texttt{DIR:R} (Zmeň smer doprava)
+    \end{itemize}
+  \item Príkaz \texttt{OFF}: Okamžité zastavenie.
+    \begin{itemize}
+    \item Príklad: \texttt{OFF}
+    \end{itemize}
+  \end{itemize}
+
+\item \textbf{Ovládanie osvetlenia:}
+  \begin{itemize}
+  \item Téma: \texttt{room1/light}
+  \item Príklad: \texttt{ON} (Rozsvietiť)
+  \item Príklad: \texttt{OFF} (Zhasnúť)
+  \end{itemize}
+
+\item \textbf{Multimédiá (Interné správy systému):}
+  \begin{itemize}
+  \item Akcie typu \texttt{audio} alebo \texttt{video} v~JSON scenári nie sú posielané priamo na MQTT, ale spracováva ich centrálna jednotka.
+  \item Príklad audio: \texttt{PLAY:welcome.mp3:0.7} (Prehraj súbor s~hlasitosťou 70\,\%)
+  \item Príklad video: \texttt{PLAY\_VIDEO:ghost2.mp4}
+  \end{itemize}
+\end{itemize}
+
+Táto štruktúra príkazov umožňuje operátorovi alebo testovaciemu skriptu jednoducho ovládať zariadenia aj manuálne pomocou bežného MQTT klienta, keďže príkazy sú ľahko čitateľné a~zapisovateľné (human-readable).
+
+\section{Implementácia centrálnej riadiacej jednotky (Backend)}
+\label{implementacia-backend}
+
+Implementačná časť popisuje realizáciu serverovej časti na platforme Raspberry Pi 4 s~operačným systémom Raspberry Pi OS.
+
+\subsection{MQTT Broker a~služby}
+\label{mqtt-broker}
+
+Pre distribúciu správ bol nakonfigurovaný open-source broker Eclipse Mosquitto, optimalizovaný pre nízku latenciu. Broker prijíma spojenia na štandardnom porte 1883.
+
+\subsection{Aplikačný backend (Python)}
+\label{aplikacny-backend}
+
+Jadrom systému je aplikácia v~jazyku Python, ktorá implementuje logiku stavového automatu. Využíva knižnicu \texttt{paho-mqtt} a~beží v~hlavnej slučke (event loop), ktorá vykonáva:
+
+\begin{enumerate}
+\item Kontrola času: Monitoruje trvanie aktuálneho stavu.
+\item Exekúcia Timeline: Vykonáva naplánované akcie.
+\item Spracovanie vstupov: Reaguje na správy zo senzorov.
+\end{enumerate}
+
+Súčasťou je modul Multimedia Handler, ktorý cez systémové nástroje (\texttt{omxplayer}, \texttt{vlc}) ovláda audio/video výstup a~synchronizuje ho s~MQTT príkazmi.
+
+[SEM VLOŽIŤ: Výpis kódu -- ukážka z~\texttt{state\_machine.py} alebo \texttt{main.py}]
+
+\subsection{Systémová stabilita (Watchdog)}
+\label{watchdog}
+
+Pre zabezpečenie bezobslužnej prevádzky bola implementovaná služba \texttt{museum-watchdog}. Tento nezávislý proces periodicky kontroluje beh aplikácie, dostupnosť brokera a~teplotu CPU. Pri detekcii chyby automaticky reštartuje služby.
+
+\section{Implementácia koncových uzlov (Firmvér)}
+\label{implementacia-firmware}
+
+Pre bezdrôtové ovládanie periférií boli použité mikrokontroléry ESP32. Firmvér bol vyvinutý v~jazyku C++ s~využitím frameworku Arduino.
+
+\subsection{Spracovanie správ a~JSON Parsing}
+\label{json-parsing}
+
+Prichádzajúce správy sú deserializované knižnicou ArduinoJson. Príklad príkazu pre motor:
+
+\begin{verbatim}
+{ "action": "ON", "speed": 50, "direction": "LEFT", "duration": 5000 }
+\end{verbatim}
+
+Firmvér na základe kľúčov v~JSON objekte nastavuje PWM signály na GPIO pinoch.
+
+[SEM VLOŽIŤ: Výpis kódu -- parsovanie JSONu]
+
+\subsection{Bezpečnostné mechanizmy (Fail-Safe)}
+\label{fail-safe}
+
+Firmvér obsahuje funkciu \uv{Fail-Safe}. Ak zariadenie stratí spojenie s~MQTT brokerom na viac ako 5 sekúnd, automaticky prejde do bezpečného stavu (zastavenie motorov), aby sa predišlo poškodeniu exponátov.
+
+\section{Implementácia webového rozhrania}
+\label{webove-rozhranie}
+
+Keďže centrálna jednotka (Raspberry Pi) je v~expozícii často umiestnená v~technickom zázemí bez pripojeného monitora a~klávesnice (tzv. headless režim), bolo nutné vytvoriť nástroj na jej vzdialenú správu. Pre tento účel bola implementovaná ľahká webová aplikácia, ktorá slúži ako ovládací pult (Dashboard).
+
+\subsection{Architektúra aplikácie}
+\label{architektura-aplikacie}
+
+Webové rozhranie je postavené na mikro-frameworku Flask (Python), ktorý beží priamo na centrálnej jednotke. Táto voľba zabezpečuje bezproblémovú integráciu s~backendom riadiaceho systému, keďže oba bežia v~rovnakom jazykovom prostredí.
+
+\begin{itemize}
+\item \textbf{Backend (Flask):} Spracováva HTTP požiadavky z~prehliadača a~komunikuje s~hlavným riadiacim procesom (State Machine) prostredníctvom zdieľaných systémových prostriedkov alebo lokálneho API.
+
+\item \textbf{Frontend (HTML/CSS/JS):} Používateľské rozhranie je navrhnuté minimalisticky s~dôrazom na čitateľnosť na mobilných zariadeniach (tabletoch), ktoré personál múzea používa. Využíva asynchrónne volania (AJAX) na pravidelnú aktualizáciu stavu bez nutnosti obnovovania stránky.
+\end{itemize}
+
+\subsection{Funkcionalita prevádzkového Dashboardu}
+\label{funkcionalita-dashboardu}
+
+Implementovaný Dashboard poskytuje tri kľúčové funkcie nevyhnutné pre dennú prevádzku:
+
+\begin{enumerate}
+\item \textbf{Indikácia stavu v~reálnom čase:} Operátor vidí, či je systém pripravený, alebo či práve prebieha scéna. Aplikácia vizualizuje aj systémové logy, čo umožňuje rýchlu diagnostiku v~prípade problémov (napr. \uv{Chyba pripojenia k~MQTT brokeru}).
+
+\item \textbf{Manuálny spúšťač scén (Scene Selector):} Aplikácia načíta zoznam dostupných konfiguračných súborov (JSON) z~diskovej pamäte a~ponúkne ich operátorovi vo forme tlačidiel. To umožňuje sprievodcom spustiť konkrétny efekt alebo výklad na vyžiadanie návštevníka, mimo automatického cyklu.
+
+\item \textbf{Bezpečnostné zastavenie (STOP ALL):} V~rozhraní je implementované prioritné tlačidlo \uv{STOP}, ktoré odosiela signál na okamžité ukončenie všetkých bežiacich vlákien, vypnutie motorov a~zhasnutie svetiel. Táto funkcia je softvérovou obdobou bezpečnostného hríbu a~slúži na prevenciu škôd v~nepredvídaných situáciách.
+\end{enumerate}
+
+[SEM VLOŽIŤ OBRÁZOK: Screenshot z~webového rozhrania (Dashboardu) bežiaceho v~prehliadači, kde vidno tlačidlá scén a~tlačidlo STOP]
+
+\subsection{Experimentálny generátor scén (SceneGen)}
+\label{scenegen}
+
+Nad rámec základných požiadaviek na prevádzku bol v~rámci práce vyvinutý aj prototyp grafického editora SceneGen (postavený na knižnici React.js). Tento nástroj slúži na vizuálnu tvorbu JSON súborov pomocou časovej osi (Timeline). Hoci nie je určený pre dennú obsluhu návštevníkmi, demonštruje možnosť budúceho rozšírenia systému o~používateľsky prívetivé konfiguračné rozhranie pre kurátorov výstav.
