@@ -1,0 +1,27 @@
+\chapter{Implementácia softvérovej časti}
+\label{ImplementaciaSW}
+
+\section{Firmvér ESP32}
+\label{FirmverESP32}
+
+Tu popíšem firmvér ktorý som napísal pre ESP32 uzly. Vysvetlím ako sa uzol pripája k Wi-Fi a k MQTT brokeru, ako prijíma a parsuje príkazy vo formáte JSON a ako na ich základe ovláda aktuátory. Priložím ukážku kľúčovej časti kódu.
+
+\section{Backend Raspberry Pi}
+\label{BackendRPI}
+
+Tu popíšem backendovú aplikáciu bežiacu na Raspberry Pi. Vysvetlím štruktúru aplikácie -- triedy \texttt{MuseumController}, \texttt{ServiceContainer} a ostatné moduly -- a uvediem aké knižnice som použil. Priložím diagram tried.
+
+\section{Stavový automat a~scene engine}
+\label{StavovyAutomat}
+
+Tu podrobne popíšem ako som implementoval stavový automat a scene engine. Vysvetlím ako sú reprezentované stavy a prechody, ako systém spracováva udalosti od návštevníka a ako scene engine sekvenčne vykonáva akcie definované v JSON konfigurácii.
+
+\section{Webový dashboard}
+\label{WebovyDashboard}
+
+Tu popíšem webové rozhranie ktoré som vytvoril pre monitoring a manuálne ovládanie systému. Uvediem aký framework som použil a aké funkcie dashboard poskytuje. Priložím screenshot rozhrania.
+
+\section{Konfigurácia scén -- JSON formát}
+\label{KonfiguraciaScen}
+
+Tu opíšem formát JSON súborov ktorými sa konfigurujú scény expozície. Na konkrétnom príklade vysvetlím všetky polia -- stavy, prechody, akcie -- a ukážem ako sa táto konfigurácia načítava a interpretuje systémom.

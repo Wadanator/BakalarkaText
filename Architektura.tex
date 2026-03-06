@@ -1,1 +1,77 @@
- 
+\chapter{Návrh architektúry systému}
+\label{NavrhArchitektury}
+
+Táto kapitola popisuje celkovú architektúru navrhovaného riadiaceho systému. Vychádza z~požiadaviek definovaných v~predchádzajúcej kapitole a~z~analýzy dostupných technológií. Popisuje hardvérovú topológiu, softvérovú štruktúru, komunikačnú vrstvu a~formát konfiguračných súborov.
+
+% ------------------------------------------------------------------
+\section{Požiadavky na systém}
+\label{PoziadavkyNaSystem}
+
+TODO: Definujte funkčné a~nefunkčné požiadavky na systém. \\
+Príklady:
+\begin{itemize}
+    \item \textbf{Funkčné požiadavky:} riadenie motorov, osvetlenia, dymostroja, prehávanie médií, vetvenie scén podľa vstupov návštevníka.
+    \item \textbf{Nefunkčné požiadavky:} modularita, bezdrôtová komunikácia, JSON konfigurácia bez zásahu do kódu, nízke náklady.
+\end{itemize}
+
+% ------------------------------------------------------------------
+\section{Celková architektúra}
+\label{CelkovaArchitektura}
+
+TODO: Popis celkovej architektúry systému, blokový diagram. \\
+Sem vložte obrázok blokového diagramu:
+
+%\begin{figure}[h]
+%    \centering
+%    \includegraphics[width=0.9\textwidth]{obr/blokovy_diagram.png}
+%    \caption{Celková architektúra systému}
+%    \label{fig:blokovy-diagram}
+%\end{figure}
+
+TODO: Vysvetlite hlavné komponenty a~ich vzájomné prepojenie.
+
+% ------------------------------------------------------------------
+\section{Hardvérová topológia}
+\label{HardverovaTopoligia}
+
+TODO: Popis fyzického usporiadania komponentov -- Raspberry Pi ako centrálna jednotka, ESP32 uzly ako distribuované periférie, aktuátory (motory, relé, SSR). \\
+
+%\begin{figure}[h]
+%    \centering
+%    \includegraphics[width=0.85\textwidth]{obr/hw_topologia.png}
+%    \caption{Hardvérová topológia systému}
+%    \label{fig:hw-topologia}
+%\end{figure}
+
+TODO: Popis zapojenia a~komunikačných liniek.
+
+% ------------------------------------------------------------------
+\section{Softvérová architektúra}
+\label{SoftverovArchitektura}
+
+TODO: Popis stavového automatu (Finite State Machine) a~scene engine. \\
+Opíšte:
+\begin{itemize}
+    \item Koncept stavového automatu -- stavy, prechody, udalosti.
+    \item Scene engine -- ako systém interpretuje JSON konfiguráciu a~riadi priebeh expozície.
+    \item Diagram stavov.
+\end{itemize}
+
+%\begin{figure}[h]
+%    \centering
+%    \includegraphics[width=0.85\textwidth]{obr/stavovy_automat.png}
+%    \caption{Diagram stavového automatu}
+%    \label{fig:stavovy-automat}
+%\end{figure}
+
+% ------------------------------------------------------------------
+\section{Komunikačná vrstva}
+\label{KomunikacnaVrstva}
+
+TODO: Popis MQTT topikov a~JSON schémy scén. \\
+Uveďte:
+\begin{itemize}
+    \item Štruktúru MQTT topikov (napr. \texttt{expozicia/uzol1/prikaz}, \texttt{expozicia/uzol1/stav}).
+    \item JSON schému pre definíciu scény -- príklad konfiguračného súboru.
+    \item QoS úrovne použité pre jednotlivé typy správ.
+\end{itemize}
