@@ -1,2 +1,17 @@
-﻿\chapter{Seznam příloh}
-Sem napsat přílohy jestli nějaké jsou
+% ============================================================================
+% 1. Automatický zoznam obrázkov
+% ============================================================================
+\clearpage      % Uistí sa, že sme na novej strane
+\phantomsection % Vytvorí neviditeľnú kotvu pre PDF odkaz (aby fungovalo klikanie)
+\addcontentsline{toc}{chapter}{Zoznam obrázkov} % Pridá riadok do Obsahu
+\listoffigures
+
+\newpage
+
+% ============================================================================
+% 2. Automatický zoznam tabuliek
+% ============================================================================
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Zoznam tabuliek} % Pridá riadok do Obsahu
+\listoftables
