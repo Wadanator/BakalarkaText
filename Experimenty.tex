@@ -1,29 +1,51 @@
 \chapter{Experimentálne overenie}
 \label{ExperimentalneOverenie}
 
-\section{Popis demonštračnej úlohy}
+Táto kapitola prezentuje reálne skúšky navrhnutého systému, ktoré overujú splnenie stanovených cieľov zadania v podmienkach reálnej \textit{runtime} prevádzky.
+
+\section{Popis demonštračnej úlohy (Setup)}
 \label{PopisDemonstracie}
 
-Tu opíšem prototypovú miestnosť na ktorej som systém overil. Uvediem rozmiestnenie uzlov, senzorov a aktuátorov a priložím fotografickú dokumentáciu zostaveného prototypu.
+\begin{itemize}
+    \item \textbf{Fyzický prototyp:} Systém bol priamo nainštalovaný a oživený na konkrétnom reálnom exponáte v priestranstve expozície.
+    \item \textbf{Zapojené uzly:}
+    \begin{itemize}
+        \item Raspberry Pi s bežiacim centrálnym procesom \texttt{MuseumController} a pripojenou audiovizuálnou technikou.
+        \item ESP32 Motorový uzol pripojený na lokálny jednosmerný pohon.
+        \item ESP32 Reléový uzol spínajúci scénické osvetlenie miestnosti.
+    \end{itemize}
+\end{itemize}
 
-\section{Testované scenáre}
+\section{Testované scenáre a výsledky}
 \label{TestovaneScenare}
 
-Tu popíšem jednotlivé scenáre ktoré som otestoval.
+Overenie stability systému prebiehalo v troch izolovaných rovinách: prevádzka s hardvérom, softvérová výdrž jadra a odolnosť voči sieťovým výpadkom.
 
-\subsection{Scenár 1 -- Lineárna sekvencia}
+\subsection{Scenár 1 -- Komplexná lineárna scéna s hardvérom}
+\begin{itemize}
+    \item \textbf{Cieľ:} Otestovať plynulosť a asynchrónnu presnosť prechodov definovaných v JSON súbore počas riadenia fyzických aktuátorov priamo v~múzeu.
+    \item \textbf{Priebeh:} Systém musel prehrať multimediálny audiovizuálny obsah súčasne s presne načasovaným pohybom motorov a dynamickým zhasínaním svetiel.
+    \item \textbf{Výsledok (Úspech):} Všetko fungovalo stopercentne spoľahlivo. Akcie sa spúšťali načas podľa zadanej \textit{timeline}, mikrokontroléry reagovali bez sekania či asynchrónneho oneskorenia a video-audio stopa bola zosynchronizovaná so svetelnými efektami bez postrehnuteľnej latencie (tzv. \textit{lagovania}).
+\end{itemize}
 
-Tu popíšem priebeh jednoduchého lineárneho scenára a očakávané správanie systému.
+\subsection{Scenár 2 -- Dlhodobý test stability riadiaceho systému}
+\begin{itemize}
+    \item \textbf{Cieľ:} Overiť odolnosť Raspberry Pi a MQTT brokera proti pretečeniu pamäte a zlyhaniu pri dlhodobom plynulom behu (tzv. \textit{Soak test}).
+    \item \textbf{Priebeh:} Centrálny program systému bežal na stole formou \textit{dry-run} testovania v kuse niekoľko dní v laboratórnych podmienkach. Priebežne dochádzalo k ojedinelému spúšťaniu scén a monitorovaniu odosielaných MQTT príkazov na zbernicu.
+    \item \textbf{Výsledok (Úspech):} Samotný konečný automat (FSM) a \texttt{MuseumController} nespadli. Príkazy boli spoľahlivo generované na MQTT bus počas celej doby trvania experimentu, čo potvrdilo stopercentnú pripravenosť softvéru na 24/7 prevádzku múzea.
+\end{itemize}
 
-\subsection{Scenár 2 -- Vetvenie podľa vstupu návštevníka}
+\subsection{Scenár 3 -- Test sieťovej odolnosti a LWT (Last Will)}
+\begin{itemize}
+    \item \textbf{Cieľ:} Overiť detekčný a oznamovací mechanizmus systému pri neštandardnej strate bezdrôtového spojenia uzlov na Wi-Fi sieti.
+    \item \textbf{Priebeh:} Koncovým ESP32 uzlom (\textit{Controller\_MOTORS} a \textit{Controller\_RELAY}) bolo striedavo fyzicky odpájané a následne vracané napájanie za behu celého systému.
+    \item \textbf{Výsledok (Úspech):} ESP uzly sa pri opätovnom pripojení energie vždy spoľahlivo a autonómne pripojili späť na Wi-Fi sieť a MQTT broker. Webový \textbf{Dashboard} reagoval správne \textit{real-time} prepisom indikátorov vďaka odchytnutiu LWT \texttt{offline} packetov od brokera rovnako aj \texttt{online} hlásení od modulov.
+\end{itemize}
 
-Tu popíšem scenár kde systém vetví priebeh expozície na základe vstupu návštevníka a uvediem oba možné priebehy.
-
-\subsection{Scenár 3 -- Synchronizácia viacerých uzlov}
-
-Tu popíšem scenár kde sú súčasne riadené viaceré uzly -- motor, osvetlenie aj multimediálny obsah -- a zhodnotím presnosť synchronizácie.
-
-\section{Výsledky a~zhodnotenie}
+\section{Zhodnotenie overenia}
 \label{VysledkyZhodnotenie}
 
-Tu zhrnem namerané výsledky -- latenciu MQTT komunikácie, spoľahlivosť systému počas testovania a presnosť synchronizácie. Porovnám výsledky s požiadavkami definovanými v kapitole~\ref{PoziadavkyNaSystem} a uvediem identifikované obmedzenia.
+\begin{itemize}
+    \item \textbf{Záver experimentov:} Architektúra distribuovanej hviezdicovej siete preukázala mimoriadnu stabilitu aj pri plnom fyzickom zaťažení v prevádzke.
+    \item Neobjavila sa nutnosť preklápať systém do káblového riešenia, keďže Wi-Fi s MQTT protkolom vo vrstve preukázalo dostatočnú reaktivitu na hardvérové triggre bez oneskorenia. 
+\end{itemize}

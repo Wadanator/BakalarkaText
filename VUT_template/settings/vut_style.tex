@@ -1,0 +1,89 @@
+%% included paskages
+\usepackage{pdfpages}
+% \usepackage{xifthen}
+\usepackage{fancyhdr}
+\usepackage{lastpage} 
+\usepackage{titlesec} % allows title formating
+\usepackage{lipsum} % some latin text for examples
+\usepackage[nottoc]{tocbibind} % add othe chapters (bibliography) to ToC
+\usepackage[framed]{mcode} % add formated matlab code
+\usepackage{mathtools} % math signs and tools
+\usepackage{multicol} % merge columns in table
+\usepackage{multirow} % merge rows in table
+\usepackage{bm} % bold signs in equations
+\usepackage[font=small,skip=0pt]{caption} % smaller distance between caption and figure/table
+\usepackage{xstring} % string processing
+
+%% Optional
+\usepackage{amssymb} % math signs (check sign)
+\usepackage{epstopdf} % allows esp include
+\usepackage[shortlabels]{enumitem} % allows itemize indent options
+\usepackage{bbding} % special signs (\Checkmark, \XSolidBrush)
+%\def\labelitemi{--} % change itmize default marker
+
+\usepackage{setspace}
+\usepackage[hang,flushmargin]{footmisc} % footnotes without indentation
+
+%% style settings
+
+% symetrical / asymetrical margins
+% a4 size is 210 mm x 297 mm, print size is 170 mm x 250 mm
+% \ifthenelse{\equal{\docmode}{print}} 
+% {\usepackage[top=2.4cm, bottom=2.3cm, left=1.5cm, right=1.5cm, bindingoffset=10mm]{geometry}}
+% {\usepackage[top=2.4cm, bottom=2.3cm, left=2cm, right=2cm, bindingoffset=0mm]{geometry}}
+
+%original VUT print size - 160 mm x 240 mm
+\ifthenelse{\equal{\docmode}{print}} 
+{\usepackage[top=2.9cm, bottom=2.8cm, left=2cm, right=2cm, bindingoffset=10mm]{geometry}}
+{\usepackage[top=2.9cm, bottom=2.8cm, left=2.5cm, right=2.5cm, bindingoffset=0mm]{geometry}}
+
+
+% title formats
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter}{5mm}{\Huge\bfseries}
+\titleformat{\section}[hang]{\Large\bfseries\setstretch{0.6}}{\thesection}{5mm}{\Large\bfseries}
+\titleformat{\subsection}[hang]{\large\bfseries\setstretch{0.6}}{\thesubsection}{5mm}{\normalsize\bfseries}
+
+\titlespacing*{\chapter}{0cm}{0cm}{1.5cm} % {command}{left}{before}{after}
+\titlespacing*{\section}{0cm}{0.5cm}{0.3cm}
+\titlespacing*{\subsection}{0cm}{0.3cm}{0.3cm}
+
+\setlength{\parskip}{0pt} % changes vertical space between paragraphs
+\setlength{\headheight}{16pt}
+
+% coloring format
+\usepackage[pdftitle={Masters Thesis},
+pdfauthor={\theauthor},
+%pdftex=true,
+%bookmarks=true,a4paper]
+linkcolor=black,
+colorlinks=true,
+breaklinks=true,
+urlcolor=black,
+citecolor=black,
+unicode]%,a4paper]
+{hyperref}
+%\usepackage[pdftex]{graphicx}
+\DeclareGraphicsExtensions{.png,.pdf,.eps,.bmp,.jpg,.emf}
+
+
+%% chapter foot/head style
+\ifthenelse{\equal{\docmode}{print}}
+{
+	\fancypagestyle{plain}{%
+		\fancyhead{}
+		\fancyfoot{}
+		\renewcommand{\headrulewidth}{0pt}% Line at the header invisible
+		\renewcommand{\footrulewidth}{0pt}% Line at the footer invisible
+		\fancyfoot[RO]{\thepage}
+		\fancyfoot[LE]{\thepage}
+	}
+}{
+	\fancypagestyle{plain}{%
+		\fancyhead{}
+		\fancyfoot{}
+		\renewcommand{\headrulewidth}{0pt}% Line at the header invisible
+		\renewcommand{\footrulewidth}{0pt}% Line at the footer invisible
+		\fancyfoot[C]{\thepage}
+	}
+}
+

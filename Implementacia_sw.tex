@@ -1,27 +1,78 @@
 \chapter{Implementácia softvérovej časti}
 \label{ImplementaciaSW}
 
+Táto kapitola opisuje programové vybavenie, so zreteľom na využitie systémového prístupu a minimalizáciu čistých výpisov kódu v prospech názorných blokových schém.
+
 \section{Firmvér ESP32}
 \label{FirmverESP32}
 
-Tu popíšem firmvér ktorý som napísal pre ESP32 uzly. Vysvetlím ako sa uzol pripája k Wi-Fi a k MQTT brokeru, ako prijíma a parsuje príkazy vo formáte JSON a ako na ich základe ovláda aktuátory. Priložím ukážku kľúčovej časti kódu.
+Kód na koncových uzloch je písaný v jazyku C++ s využitím frameworku Arduino.
+\begin{itemize}
+    \item \textbf{Inicializácia:} 
+    \begin{itemize}
+        \item Uzol sa prebúdza pripojením na pevnú lokálnu Wi-Fi sieť.
+        \item Nasleduje autorizácia a pripojenie na centrálny MQTT Broker.
+        \item Publikovanie LWT \textit{online} stavu na diagnostický topik.
+    \end{itemize}
+    \item \textbf{Vykonávacia slučka (Loop):}
+    \begin{itemize}
+        \item Prijímanie payload správ odoberaných z topiku (napr. \texttt{SPEED:120}).
+        \item Rozparsovanie textového príkazu a jeho mapovanie na fyzickú inštrukciu (nastavenie PWM striedy pre riadiaci pin alebo \texttt{digitalWrite} na piny relé).
+        \item Po úspešnom vykonaní odoslanie potvrdzujúcej \texttt{feedback} správy pre odomknutie stavového automatu.
+    \end{itemize}
+\end{itemize}
 
 \section{Backend Raspberry Pi}
 \label{BackendRPI}
 
-Tu popíšem backendovú aplikáciu bežiacu na Raspberry Pi. Vysvetlím štruktúru aplikácie -- triedy \texttt{MuseumController}, \texttt{ServiceContainer} a ostatné moduly -- a uvediem aké knižnice som použil. Priložím diagram tried.
+Hlavný proces je naprogramovaný v jazyku Python a využíva asynchrónne programovanie.
+\begin{itemize}
+    \item \textbf{Hlavná trieda (\texttt{MuseumController}):} Koordinuje beh iných vlákien a drží inštanciu MQTT klienta.
+    \item \textbf{Inverzia závislostí (\texttt{ServiceContainer}):} 
+    \begin{itemize}
+        \item Namiesto tvrdého prepájania tried využíva architektúra kontajner služieb.
+        \item Pri štarte dynamicky načítava handlery pre audio, video a parser scén, čím zabezpečuje maximálnu softvérovú modularitu zadania.
+    \end{itemize}
+\end{itemize}
 
 \section{Stavový automat a~scene engine}
 \label{StavovyAutomat}
 
-Tu podrobne popíšem ako som implementoval stavový automat a scene engine. Vysvetlím ako sú reprezentované stavy a prechody, ako systém spracováva udalosti od návštevníka a ako scene engine sekvenčne vykonáva akcie definované v JSON konfigurácii.
+Riadiaca logika expozície nahrádza tradičné procedurálne podmieňovanie konečným automatom.
+\begin{itemize}
+    \item \textbf{Reprezentácia stavov:} Každá logická časť výstavy je jedným objektom obsahujúcim zásobníky úloh (\texttt{onEnter}, \texttt{timeline}, \texttt{transitions}).
+    \item \textbf{Asynchrónny prechod udalosťami:}
+    \begin{itemize}
+        \item Engine nie je zablokovaný čakaním v slučke (`delay`).
+        \item Prechody sú vyhodnocované reaktívne vo forme tzv. \textit{Eventov} (udalostí) prijímaných z frontend dashboardu alebo od senzorických ESP32 uzlov cez MQTT správu.
+        \item Ak je podmienka triggra splnená, \texttt{TransitionManager} zruší bežiace asynchrónne časovače v súčasnom stave a prepne automat do stavu nového.
+    \end{itemize}
+\end{itemize}
 
 \section{Webový dashboard}
 \label{WebovyDashboard}
 
-Tu popíšem webové rozhranie ktoré som vytvoril pre monitoring a manuálne ovládanie systému. Uvediem aký framework som použil a aké funkcie dashboard poskytuje. Priložím screenshot rozhrania.
+Riadiace centrum pre personál múzea, prístupné z tabletu alebo mobilu vizuálnou formou.
+\begin{itemize}
+    \item \textbf{Tech stack:} Využitie Python mikroframeworku \textbf{Flask} a asynchrónnej obojsmernej komunikácie cez \textbf{Socket.IO}.
+    \item \textbf{Funkcionality operátora:}
+    \begin{itemize}
+        \item \textbf{Monitoring:} Živé zobrazenie pripojených ESP32 uzlov a aktuálne prebiehajúceho stavu FSM.
+        \item \textbf{Manuálne zásahy:} Možnosť interaktívne spustiť/zastaviť scénu (\textit{Master Override}) a núdzovo zablokovať prúdy do motorov.
+        \item Čítanie serverových chybových logov prichádzajúcich v reálnom čase zo \texttt{ServiceContainer}-a.
+    \end{itemize}
+\end{itemize}
 
 \section{Konfigurácia scén -- JSON formát}
 \label{KonfiguraciaScen}
 
-Tu opíšem formát JSON súborov ktorými sa konfigurujú scény expozície. Na konkrétnom príklade vysvetlím všetky polia -- stavy, prechody, akcie -- a ukážem ako sa táto konfigurácia načítava a interpretuje systémom.
+Umožňuje editáciu scén bez nutnosti rekompilácie jadra.
+\begin{itemize}
+    \item \textbf{Formát uzlov:} Koreň s atribútom \texttt{initialState} a poľom \texttt{states}, ktoré obsahuje abstraktné definície choreografie.
+    \item \textbf{Polia vnútri stavu:}
+    \begin{itemize}
+        \item \texttt{onEnter:} Priame pole akcií (napr. mqtt príkazy alebo spustenie zvuku s \texttt{audio: "file.wav"}).
+        \item \texttt{timeline:} Pole objektov \texttt{delay} s \texttt{action}.
+        \item \textbf{Vetvenie:} Ukážka poľa \texttt{transitions}, kde uzol \texttt{goto} definuje ďalší stav na základe prijatia asynchrónnej zhody typu \texttt{message} od konkretného aktéra.
+    \end{itemize}
+\end{itemize}

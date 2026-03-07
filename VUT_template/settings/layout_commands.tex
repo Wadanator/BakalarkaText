@@ -1,0 +1,149 @@
+%%% work %%%
+
+\usepackage{xifthen}
+
+
+% definice promenne docmode - print or screen mode
+\newcommand{\visualmode}[1]{
+	\def\docmode{#1}
+	} 
+
+% definice promenne langmode - czech or english mode
+\newcommand{\thesislanguage}[1]{
+	\def\thelanguage{#1} %czech/english
+	
+	\ifthenelse{\equal{#1}{czech}}{
+	    \usepackage[czech]{babel}
+	    \usepackage[utf8]{inputenc}
+	    \usepackage[T1]{fontenc}
+	    \usepackage{lmodern}
+    }{
+	    \usepackage[english,czech]{babel}
+    }
+}
+
+
+% autor prace
+\newcommand{\thesisauthor}[1]{
+	\def\theauthor{#1}
+	\def\theciteauthor{\StrBehind{#1}{ }[\temp]\uppercase\expandafter{\temp}, \StrLeft{#1}{1}.}
+}
+
+% vedouci prace
+\newcommand{\thesissupervisor}[1]{
+	\def\thethesissupervisor{#1}
+}
+
+% nazev prace
+\newcommand{\thesistitle}[1]{
+	\def\thethesistitle{#1}
+}
+
+
+% vlozi titulni list a zadani
+\newcommand{\VUTtitle}[2]{
+	\pagestyle{empty}
+	\includepdf[pages={1}]{#1}
+	\ifthenelse{\equal{\docmode}{print}}{\newpage\phantom{blabla}}
+	 
+	\ifthenelse{\equal{#2}{blank}}
+	{
+	\newpage\phantom{blabla}
+	\newpage\phantom{blabla}
+	}{
+	\includepdf[pages={1,2}]{#2}}
+	} 
+
+% abstrakt + klicova slova + citace
+\newcommand{\abstract}[4]{
+	\pagestyle{empty}
+	\newpage
+	\section*{Abstrakt}
+	#1
+	\section*{Summary}
+	#2
+	\vspace{20mm}\\
+	\section*{Kl\'{i}\v{c}ov\'{a} slova}
+	#3
+	\section*{Keywords}
+	#4
+	\vfill
+	\ifthenelse{\equal{\thelanguage}{czech}}{
+	\section*{Bibliografick\'{a} Citace}
+	\theciteauthor \textit{ \thethesistitle}. Brno: Vysok\'{e} u\v{c}en\'{i} technick\'{e} v Brn\v{e}, Fakulta strojn\'{i}ho in\v{z}en\'{y}rstv\'{i}, \the\year. \pageref{LastPage} s., Vedouc\'{i} diplomov\'{e} pr\'{a}ce: \thethesissupervisor.	
+	}{
+	\section*{Bibliographic citation}
+	\theciteauthor \textit{ \thethesistitle}. Brno: Brno University of Technology, Faculty of Mechanical Engineering, \the\year. \pageref{LastPage} pages, Master's thesis supervisor: \thethesissupervisor.
+	}
+    \ifthenelse{\equal{\docmode}{print}}{\newpage\phantom{}} % blank page
+	}
+	
+	
+%	BRABLC, M. \textit{Control of Nonlinear Systems using Local Approximation Methods}. Brno, the Czech Republic: Brno University of Technology, Faculty of mechanical engineering, 2016. \pageref{LastPage} pages. Master's thesis, supervisor: doc. Ing. Robert Grepl, PhD..
+
+% prohlaseni + podekovani
+\newcommand{\acknowledgements}[2]{
+	\pagestyle{empty}
+	\newpage\phantom{blabla}
+	\vfill
+	#1
+	\begin{flushright}
+		\textbf{\theauthor}\\
+		\vspace{1.5cm}
+		\large{Brno} . . . . . . . . . . . . . \hfill . . . . . . . . . . . . . . . . .
+	\end{flushright}
+
+	\newpage\phantom{blabla}
+	\ifthenelse{\equal{\docmode}{print}}{\newpage\phantom{blabla}}\phantom{}
+	\vfill
+	#2
+	\begin{flushright}
+		\textbf{\theauthor}
+	\end{flushright}
+	\ifthenelse{\equal{\docmode}{print}}{\newpage\phantom{blabla}\newpage}
+	\newpage
+	}
+
+% nastaveni stylu stranky	
+\newcommand{\vutpagestyle}{%[1]{
+	
+	\ifthenelse{\equal{\thelanguage}{czech}}{
+		\selectlanguage{czech}
+	}{
+		\selectlanguage{english}
+	}
+	
+	
+	\setcounter{page}{7}
+	\pagestyle{plain}
+	\renewcommand{\baselinestretch}{1.5}
+	\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\thechapter\ ##1}}{}}
+	\renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{\thesection\ ##1}}{}}
+	\setlength{\abovedisplayskip}{0cm} % skip between equation and text
+	\setlength{\belowdisplayskip}{0.5cm} % skip between equation and text
+	\setlength{\abovedisplayshortskip}{0cm} % skip between equation and text
+	\setlength{\belowdisplayshortskip}{0.5cm} % skip between equation and text
+	\setlength{\textfloatsep}{0.5cm} % step between text and figure/table on top of the page
+	\setlength{\intextsep}{0.5cm} % step between text and figure/table in text
+	\tableofcontents
+	\newpage
+	\fancyhead{}
+	\fancyfoot{}
+	\ifthenelse{\equal{\docmode}{print}}
+	{
+	\fancyhead[LE,RO]{\leftmark}
+	\fancyhead[LO,RE]{\rightmark}
+	\fancyfoot[RO]{\thepage}
+	\fancyfoot[LE]{\thepage}
+	}{
+	\fancyhead[L]{\leftmark}
+	\fancyhead[R]{\rightmark}
+	\fancyfoot[C]{\thepage}
+	}
+}
+
+%\newcommand*{\fullref}[1]{\hyperref[{#1}]{Appendix \nameref*{#1}}} % named refference - no number
+%\newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \nameref*{#1}}} % nambed reference - number
+
+	
+	

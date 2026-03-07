@@ -1,32 +1,55 @@
 \chapter{Implementácia hardvérovej časti}
 \label{ImplementaciaHW}
 
+Táto kapitola je venovaná praktickej elektronickej a fyzickej inštalácii celého riadiaceho systému so zreteľom na inžiniersku spoľahlivosť a bezpečnosť.
+
 \section{Centrálna jednotka -- Raspberry Pi}
 \label{CentralnaJednotka}
 
-Tu opíšem konkrétny model Raspberry Pi ktorý som použil, prečo som zvolil práve tento model a ako som ho nakonfiguroval. Popíšem inštaláciu operačného systému, nastavenie siete a inštaláciu MQTT brokera Mosquitto. Uvediem aj to, čo konkrétne na Raspberry Pi beží počas prevádzky systému.
+Na prepojenie softvéru a lokálnej reálnej vrstvy bol zvolený nasledujúci hardvér:
+\begin{itemize}
+    \item \textbf{Výber hardvéru:} Využitie Raspberry Pi (SBC) z dôvodu dostatku operačnej pamäte a natívnej podpory HDMI výstupov, čo je kľúčové pre synchrónne prehrávanie videa bez lagovania.
+    \item \textbf{Setup OS:} Nasadenie "headless" operačného systému Raspberry Pi OS Lite (bez grafického prostredia) pre ušetrenie systémových prostriedkov a dedikovanie výkonu čisto pre MQTT broker \texttt{Mosquitto} a Python jadro.
+    \item \textbf{Prístupové práva:} Úprava Linuxových užívateľských oprávnení tak, aby aplikácie bežiace na pozadí (\texttt{systemd} služby) mali priamy prístup k sériovej linke a audio kompozítoru bez nutnosti "sudo" potvrdzovania.
+\end{itemize}
 
 \section{Distribuované uzly -- ESP32}
 \label{DistribuovaneUzly}
 
-Tu popíšem konkrétny vývojový modul ESP32 ktorý som použil. Pre každý uzol uvediem čo je na ňom fyzicky zapojené -- aké senzory a aké aktuátory -- a doplním schému zapojenia.
+\begin{itemize}
+    \item \textbf{Analýza modulu:} Využitie mikrokontroléra ESP32 ESP-WROOM-32. Arduino Uno nezodpovedalo požiadavkám kvôli absencii natívnych bezdrôtových modulov.
+    \item \textbf{Nasadenie:} ESP32 uzly nevyžadujú žiadnu Ethernet prípojku, postačuje iba prístup k napájacej sieti 5\,V čím redukujú fyzickú komplexnosť kabeláže v expozícii.
+    \item \textbf{Úloha uzlov:} Sú naprogramované na jediný účel -- prekladať digitálne inštrukcie typu \texttt{SPEED:120} z témy MQTT brokera na fyzický analógový prejav PWM (impulzná šírková modulácia) pre reálny pin, resp. preklápať \texttt{HIGH/LOW} stavy GPIO.
+\end{itemize}
 
 \section{Výkonové prvky}
-\label{VykonoveFirstky}
+\label{VykonovePrvky}
+
+Súbor elektronických komponentov zabezpečujúcich fyzický prejav asynchrónnych inštrukcií.
 
 \subsection{Riadenie DC motorov}
+\begin{itemize}
+    \item \textbf{Inžiniersky prístup:} Namiesto tradičných, ale starších bipolárnych vodičov typu L298N boli nasadené moderné komerčné H-mostíky založené na technológii \textbf{MOSFET}.
+    \item \textbf{Výhody:} Tieto moduly zabezpečujú podstatne menší tepelný úbytok napätia, dovoľujú vyššie špičkové straty prúdu a umožňujú plynulejšie reverzovanie pohybu DC motora.
+    \item \textbf{Ochrana a napájanie:} Popis riešenia oddelených napäťových rovín (logic vs. motor supply) kvôli induktívnym prúdovým špičkám (\textit{flyback diode}).
+\end{itemize}
 
-Tu popíšem H-mostík ktorý som použil na riadenie motorov, uvediem schému zapojenia k ESP32 a základné parametre použitého motora.
-
-\subsection{Spínanie sieťového napätia (relé, SSR)}
-
-Tu popíšem ako som riešil spínanie 230\,V záťaže. Vysvetlím prečo som zvolil SSR namiesto mechanického relé a priložím schému zapojenia.
-
-\subsection{Dymogenerátor}
-
-Tu popíšem ako je dymogenerátor zapojený do systému a akým spôsobom ho riadim.
+\subsection{Spínanie sieťového napätia (230\,V)}
+\begin{itemize}
+    \item \textbf{Výber riešenia:} Využitie hotového, otestovaného \textbf{mechanického relé modulu od spoločnosti Waveshare}. 
+    \item \textbf{Zdôvodnenie:} Namiesto vlastnoručného vývoja obvodov polovodičových relé (SSR) systém preferuje integráciu certifikovaného modulárneho riešenia, čím sa neporovnateľne zvyšuje spoľahlivosť, prevádzková životnosť a protipožiarna bezpečnosť v priestoroch múzea.
+    \item \textbf{Obsluha:} Reléový blok disponuje zabudovanými optočlenmi, čím zabezpečuje úplné priestorové a galvanické oddelenie nízkonapäťovej riadiacej logiky MCU (3,3\,V) od životavynebezpečného napätia 230\,V prítomného na spínaných kontaktoch pre reflektory a dymostroje.
+\end{itemize}
 
 \section{Napájanie a~zapojenie prototypu}
 \label{NapajanieZapojenie}
 
-Tu opíšem všetky napäťové úrovne ktoré som v prototypu použil, aké napájacie zdroje som zvolil a priložím celkovú schému zapojenia prípadne fotodokumentáciu zostaveného prototypu.
+Prehľadná sumarizácia energetiky demonštračného modelu.
+\begin{itemize}
+    \item \textbf{Napäťové hladiny:} Architektúra musí bezpečne kooperovať naprieč tromi hladinami:
+    \begin{itemize}
+        \item \textbf{3.3\,V:} Signálová prevádzková logika (ESP32).
+        \item \textbf{5.0\,V:} Napájanie Raspberry Pi a riadiace signály Waveshare modulu.
+        \item \textbf{12\,V / 24\,V / 230\,V:} Koncové výkonové bloky napájané robustnými priemyselnými stabilizovanými zdrojmi s dostatočným prúdovým dimenzovaním pre chod DC motorov.
+    \end{itemize}
+\end{itemize}

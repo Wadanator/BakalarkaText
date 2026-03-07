@@ -1,13 +1,35 @@
-﻿\chapter{Záver}
+\chapter{Záver}
 \label{Zaver}
 
-TODO: Záver musí byť výrazne dlhší ako jeden riadok.
+Záverečné zhrnutie práce posudzujúce, či a ako sa podarilo naplniť pôvodné ciele zadania.
 
-Uveďte:
 \begin{itemize}
-    \item Stručné zhrnutie cieľov práce a~toho, čo bolo dosiahnuté.
-    \item Hlavné prínosy navrhnutého systému v~porovnaní s~existujúcimi riešeniami.
-    \item Výsledky experimentálneho overenia -- nakoľko systém splnil definované požiadavky.
-    \item Identifikované obmedzenia a~nedostatky súčasnej implementácie.
-    \item Návrhy na ďalší rozvoj -- čo by bolo vhodné doplniť alebo vylepšiť v~budúcej práci.
+    \item \textbf{Ciele a dosiahnutý stav:} 
+    \begin{itemize}
+        \item Hlavným cieľom práce bolo navrhnúť stopercentne modulárny pamäťový systém pre múzejné inštalácie, ktorý umožní riadenie 230\,V efektov a synchrónnych multimédií z jediného lokálneho centra. 
+        \item Realizácia potvrdila úspešnú fúziu výpočtovo silného Raspberry Pi a distribuovaných ESP32 sieťových uzlov do jednej funkčnej virtuálnej hviezdy.
+    \end{itemize}
+    
+    \item \textbf{Hlavné prínosy riešenia:}
+    \begin{itemize}
+        \item Najväčším prínosom je odstrihnutie tvrdej programátorskej aplikačnej logiky (Python/C++) od samotného chodu výstavy. Vďaka aplikácii inžinierskeho konečného automatu (FSM) a používaniu textového kontraktu v \texttt{.json} formáte dokáže muzeálny personál upravovať časy, kroky a audiovizuálny obsah výstavy bez nutnosti vedieť programovať či využívať drahé licencie priemyselných PLC.
+    \end{itemize}
+    
+    \item \textbf{Výsledky overenia technológie:}
+    \begin{itemize}
+        \item Reálne záťažové testy na exponáte deklarovali, že Publish/Subscribe model (MQTT nad lokálnou LAN/Wi-Fi sieťou) netrpí pre výstavu vnímateľnými reaktančnými oneskoreniami.
+        \item Architektúra bez problémov prechádzala dlhodobými \textit{Soak} testami a vďaka LWT packetom úspešne ošetrila fyzické odpájanie uzlov.
+    \end{itemize}
+
+    \item \textbf{Nedostatky a obmedzenia:}
+    \begin{itemize}
+        \item Bezpečnostná vrstva Wi-Fi siete v reálnom múzeu musí byť prevádzkovo dedikovaná len pre exponát, inak hrozí rušenie spôsobené návšteníkmi (kolízie frekvenčného pásma).
+        \item Nutnosť ručného hardcodovania \texttt{BASE\_TOPIC\_PREFIX} v C++ firmvéri pre každý nový fyzický kus ESP32 mikročipu pri úvodnom \textit{flashovaní}.
+    \end{itemize}
+
+    \item \textbf{Návrhy na budúci rozvoj:}
+    \begin{itemize}
+        \item Prechod do plne lokalizovanej webovej administrácie (React Dashboard), odkiaľ si bude asistent môcť tvoriť JSON scény vizuálnym presúvaním blokov (tzv. "Node-Based Editor").
+        \item Možnosť plnohodnotnej over-the-air (OTA) aktualizácie firmvéru priamo prostredníctvom odoslania binárneho príkazu cez \texttt{Mosquitto} hub na konkrétny MQTT \texttt{device id} uzol.
+    \end{itemize}
 \end{itemize}

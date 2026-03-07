@@ -1,0 +1,74 @@
+\documentclass[12pt,a4paper,twoside,openany]{book}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% DULEZITE PRIKAZY, PRECTETE SI KOMENTARE A DOPLNTE JMENA %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\input{settings/layout_commands.tex} % nacteni novych prikazu
+\thesislanguage{czech} % prace bude v cestine, (diakritiku v nazvech sekci, kapitol, jmenu autora, nazvu prace atp. doporucuju psat pomoci specialnich znaku)
+%\thesislanguage{english} % prace bude v anglictine
+
+%\visualmode{print} % print mode - vhodne pro tisk, prazdne stranky na zacatku aby dulezite casti byly na liche strane, asymetricke okraje pro vazbu, cisla stranek v rozich
+\visualmode{screen} % screen mode - vhodne pro elektronickou verzi, zadne prazdne stranky, symetricke okraje, cisla stranek uprostred
+
+
+
+\thesisauthor{Jaroslav Cimrman} % jmeno autora prace, l
+\thesissupervisor{prof. doc. Ing. Jméno Příjmení, PhD.} % jmeno vedouciho
+\thesistitle{Název práce} % nazev prace
+
+
+\input{settings/vut_style.tex} % nastaveni stylu dokumentu
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{csquotes}
+\usepackage[style=iso-numeric,sorting=none]{biblatex} % https://github.com/michal-h21/biblatex-iso690
+\DeclareFieldFormat{labelnumberwidth}{\mkbibbrackets{#1}}
+\addbibresource{chapters/bibtex_references.bib}
+
+
+
+\begin{document}
+	
+%% titulni list + zadani - oba dokumenty lze stahnout ve studisu, zadani muzete naskenovat a prilozit podepsane (v PDF)
+\VUTtitle{pages/titulni_color.pdf}{pages/zadani_color.pdf} % vlozi pdf do dokumentu
+%\VUTtitle{pages/titulni_color.pdf}{blank} % vlozi prazdne misto pro originalni zadani a podepsanou kopii pri tisku (pouzit ve verzi print)
+
+
+\abstract{ % abstrakt cesky
+	...Abstrakt...
+	}{ % abstrakt anglicky
+	...anglicky...
+	}{ % klicova slova česky
+	...klicova slova...
+	}{ % klicova slova anglicky
+	...anglicky...
+	} % vyrobi i citaci
+
+\acknowledgements{
+	Prohlášení...
+	}{
+	Poděkování..
+	} % vlozi prohlaseni a podekovani
+
+
+\vutpagestyle % prepise styl stranky, vlozi obsah
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%% PROSTOR PRO KAPITOLY PRACE %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{chapters/intro.tex} % vlozi kapitolu 1
+\input{chapters/example.tex} % vlozi kapitolu 2
+\input{chapters/abbreviations.tex} % vlozi zkratky
+% \input{chapters/bibliography.tex} % vlozi zkratky
+
+\cite{Anderson2005OptimalFiltering}
+
+\printbibliography[heading=bibintoc,title={References}]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\end{document}
