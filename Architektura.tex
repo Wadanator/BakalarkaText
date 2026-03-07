@@ -7,71 +7,53 @@ Táto kapitola popisuje celkovú architektúru navrhovaného riadiaceho systému
 \section{Požiadavky na systém}
 \label{PoziadavkyNaSystem}
 
-TODO: Definujte funkčné a~nefunkčné požiadavky na systém. \\
-Príklady:
-\begin{itemize}
-    \item \textbf{Funkčné požiadavky:} riadenie motorov, osvetlenia, dymostroja, prehávanie médií, vetvenie scén podľa vstupov návštevníka.
-    \item \textbf{Nefunkčné požiadavky:} modularita, bezdrôtová komunikácia, JSON konfigurácia bez zásahu do kódu, nízke náklady.
-\end{itemize}
+Na základe formulovaných cieľov práce a analýzy dostupných technológií boli definované primárne požiadavky na riadiaci systém expozície. Tieto požiadavky sú rozdelené do dvoch hlavných kategórií: funkčné a nefunkčné.
+
+Funkčné požiadavky určujú schopnosti systému z hľadiska interakcie a riadenia. Vyžaduje sa spoľahlivé bezdrôtové ovládanie výkonových prvkov, akými sú jednosmerné motory s reguláciou otáčok a spínanie sieťového osvetlenia. Systém musí natívne podporovať synchronizované prehrávanie multimediálneho obsahu (audio stôp a video súborov) bez nutnosti využívať externé prehrávače. Kľúčovou funkčnou podmienkou je interaktivita -- schopnosť systému asynchrónne vetviť priebeh scény na základe hardvérových vstupov od návštevníka (napríklad stlačenie fyzického tlačidla) a podpora presného časovania udalostí prostredníctvom časovej osi (timeline).
+
+Nefunkčné požiadavky kladú dôraz na dlhodobú udržateľnosť a modifikovateľnosť riešenia. Architektúra musí byť striktne modulárna, aby bolo možné kedykoľvek integrovať nové interaktívne uzly do priestoru bez nutnosti zásahu do centrálneho riadiaceho kódu. S ohľadom na historický kontext múzejných budov je dôležitá minimalizácia fyzickej kabeláže využitím bezdrôtového prenosu dát. Taktiež bola stanovená podmienka, že zmena logickej postupnosti expozície (scenára) musí byť oddelená od zdrojového kódu (C++ alebo Python), aby ju vedel upravovať aj technický personál múzea formou textových konfiguračných súborov.
 
 % ------------------------------------------------------------------
-\section{Celková architektúra}
+\section{Celková architektúra a koncepcia}
 \label{CelkovaArchitektura}
 
-TODO: Popis celkovej architektúry systému, blokový diagram. \\
-Sem vložte obrázok blokového diagramu:
+Na základe definovaných požiadaviek bol zvolený koncept plne distribuovanej doménovej architektúry na báze Internetu vecí (IoT). Táto koncepcia fyzicky oddeľuje výpočtové a multimediálne procesy (mozog systému) od samotného vykonávania signálov v priestore (svaly systému). Z topologického hľadiska systém tvorí distribuovanú hviezdicovú sieť (Star topology), avšak na rozdiel od klasických priemyselných PLC nie sú komponenty spojené masívnou zväzkovou kabelážou, ale komunikujú virtuálne prostedníctvom lokálnej bezdrôtovej siete Wi-Fi.
 
-%\begin{figure}[h]
-%    \centering
-%    \includegraphics[width=0.9\textwidth]{obr/blokovy_diagram.png}
-%    \caption{Celková architektúra systému}
-%    \label{fig:blokovy-diagram}
-%\end{figure}
+V optickom strede tejto topológie je umiestnená centrálna výpočtová jednotka typu Single-board computer (SBC). Tu je nasadený kompletný riadiaci proces, označovaný ako \texttt{MuseumController}, ktorý nepretržite sleduje stavy a koordinuje celú inštaláciu. Okolo tohto centrálneho bodu sú dedikované koncové vykonávacie uzly postavené na 32-bitových mikrokontroléroch, ktorých úlohou je lokálna obsluha špecifických hardvérových prvkov (relé na spínanie 230\,V, PWM riadiace moduly pre motory) alebo zaznamenávanie hmatových vstupov (senzory). Celistvosť systému je zabezpečená vrstvou zasielania správ (Message Broker), ktorá preposiela asynchrónne inštrukcie medzi centrom a uzlami.
 
-TODO: Vysvetlite hlavné komponenty a~ich vzájomné prepojenie.
 
 % ------------------------------------------------------------------
 \section{Hardvérová topológia}
 \label{HardverovaTopoligia}
 
-TODO: Popis fyzického usporiadania komponentov -- Raspberry Pi ako centrálna jednotka, ESP32 uzly ako distribuované periférie, aktuátory (motory, relé, SSR). \\
+Fyzické usporiadanie hardvéru reflektuje snahu o minimálnu invázivnosť v inštalačnom prostredí. Funkciu spomínanej centrálnej jednotky plní minipočítač Raspberry Pi, ktorý je umiestnený mimo dosahu publika, napríklad v rozvodnej krabici alebo serverovni inštitúcie. Toto zariadenie spracováva riadiaci softvér a súčasne poskytuje rozhrania na priame pripojenie projektorov (HDMI) či audio zosilňovačov, pre ktoré by bol prenos cez mikrokontroléry dátovo neefektívny. 
 
-%\begin{figure}[h]
-%    \centering
-%    \includegraphics[width=0.85\textwidth]{obr/hw_topologia.png}
-%    \caption{Hardvérová topológia systému}
-%    \label{fig:hw-topologia}
-%\end{figure}
+Distribuovanú sieť periférií v miestnosti tvoria čipy z rodiny ESP32. Pre prototypovú demonštráciu boli špecifikované tri základné uzly: 
+1. Prijímací senzorický uzol (Trigger Button) snímajúci štartovacie udalosti od expozície, 
+2. Aktuačný uzol kontroléru motorov (\texttt{controller\_MOTORS})
+3. Aktuačný uzol pre reléové výstupy (\texttt{controller\_RELAY}). 
 
-TODO: Popis zapojenia a~komunikačných liniek.
+Zapojenie tak nevyžaduje ťahanie nízkonapäťových liniek zo všetkých strán miestnosti do jedného stredového PLC. Každý ESP32 uzol je pripojený iba k lokálnemu napájaciemu zdroju a má okolo seba krátku štruktúrovanú kabeláž priamo k obsluhovanému senzoru alebo spínaču, s Raspberry Pi komunikuje výhradne vzduchom. Detaily tohto elektronického dizajnu a fyziky obvodov sú predmetom implementačnej kapitoly č. 4.
+
 
 % ------------------------------------------------------------------
-\section{Softvérová architektúra}
+\section{Princíp softvérového jadra (Scene Engine)}
 \label{SoftverovArchitektura}
 
-TODO: Popis stavového automatu (Finite State Machine) a~scene engine. \\
-Opíšte:
-\begin{itemize}
-    \item Koncept stavového automatu -- stavy, prechody, udalosti.
-    \item Scene engine -- ako systém interpretuje JSON konfiguráciu a~riadi priebeh expozície.
-    \item Diagram stavov.
-\end{itemize}
+Namiesto sekvenčného (zhora-nadol) vykonávania kódu charakteristického pre lineárne automatizované systémy, využíva navrhnuté riešenie model konečného stavového automatu (FSM, Finite State Machine). Tento prístup rozdeľuje logiku prebiehajúcej výstavy (tzv. "scény") do samostatných, diskrétnych fáz. 
 
-%\begin{figure}[h]
-%    \centering
-%    \includegraphics[width=0.85\textwidth]{obr/stavovy_automat.png}
-%    \caption{Diagram stavového automatu}
-%    \label{fig:stavovy-automat}
-%\end{figure}
+Jadro celého systému tak tvorí softvérový \texttt{SceneParser}. Životný cyklus scény je riadený predvídateľne a asynchrónne. Po spustení systému, program prechádza do počiatočného definovaného stavu (\texttt{initialState}). 
+Akonáhle sa stav inicializuje, okamžite odpáli úvodný zásobník akcií (\texttt{onEnter}) – sem zaradzujeme najmä okamžité zapnutie svetelného vizuálu. 
+Následne sa softvér presunie do vyhodnocovania časovej osi (\texttt{timeline}), kedy odrátava milisekundy a postupne prebúdza naplánované akcie (napríklad o päť sekúnd neskôr odošle signál na otáčanie motora, o desať sekúnd neskôr ho vypne). 
+Zároveň s prehrávaním časovej osi prechádza systém do pozorovacieho režimu, kedy inštancia \texttt{TransitionManager} sleduje podmienky na prechod preč zo súčasného stavu (\texttt{transitions}). Systém na prechody využíva takzvané udalosti prostredia ako je \texttt{timeout} (ubehol konštantný čas), \texttt{audioEnd}/\texttt{videoEnd} (multimediálny blok dokončil prehrávanie) či \texttt{mqttMessage} (ESP32 snímač nahlásil zmenu fyzickej hodnoty). Splnenie prvej prechodovej podmienky automaticky ukončí stávajúci kód a prehodí inštanciu do nového stavu s vlastnou časovou postupnosťou akcií.
+
 
 % ------------------------------------------------------------------
-\section{Komunikačná vrstva}
+\section{Architektúra komunikačnej vrstvy}
 \label{KomunikacnaVrstva}
 
-TODO: Popis MQTT topikov a~JSON schémy scén. \\
-Uveďte:
-\begin{itemize}
-    \item Štruktúru MQTT topikov (napr. \texttt{expozicia/uzol1/prikaz}, \texttt{expozicia/uzol1/stav}).
-    \item JSON schému pre definíciu scény -- príklad konfiguračného súboru.
-    \item QoS úrovne použité pre jednotlivé typy správ.
-\end{itemize}
+Na výmenu správ medzi abstraktným stavovým automatom v jadre Raspberry Pi a reálnou elektronikou na stenách múzea sa využíva protokol MQTT pracujúci na princípe Publish/Subscribe (Zverejnuj/Predplať). Distribučné rozhranie komunikácie zaisťuje lokálny TCP/IP broker, ku ktorému sú všetky komponenty počas \textit{runtime\-(u)} trvalo pripojené. ESP32 uzly nevyužívajú požiadavkový princíp, ale tzv. odoberajú (subscribe) špeciálne definované témy so spoločným korienkom miestnosti (napr. \texttt{room1/motor1}). Vždy keď stavový automat dosiahne blok s akciou \texttt{mqtt}, Raspberry zverejní správu s inštrukciou (payloadom) do tejto témy a vzápätí sa prepne na čakanie definovanej cesty so sufixom \texttt{/feedback}.
+
+Architektúra rieši aj problematiku diagnostiky a offline stavu bezdrôtových modulov. Každý ESP32 modul je povinný pri pripojení ohlásiť na dedikovanú cestu \texttt{devices/.../status} svoju aktívnu prítomnosť ako \texttt{online} retain správu. Výpadok napájania a stratu spojenia zaeviduje broker a prostredníctvom LWT (Last Will and Testament) mechanizmu túto stopu zmení na \texttt{offline}, čo je indikované v Game Master dashboarde pre personál.
+
+Dôležitým nefunkčným architektonickým vzorom je forma štruktúrovania inštrukcií. Ako bolo spomenuté na začiatku, softvérový \texttt{SceneParser} nesmie obsahovať natvrdo (hardcoded) vpísané reakcie na konkrétne dvere alebo tlačidlá. Všetka choreografia bola preto abstrahovaná do podoby externých súborov s koncovkou \texttt{.json}. Konfiguračné súbory tvoria textový slovníkový kontrakt, v ktorom si nadesignuje operátor uzly pre \texttt{states}, zoznamy asynchrónnych volaní, požiadaviek na audio/video handlery i presné cesty ku MQTT topikám. Po modifikácii tohto \texttt{.json} súboru asistenom expozície je pre zmenu choreografie v celej miestnosti nutné iba softvér reštartovať. Plné formátovanie tohto uzla rovnako ako aj demonštrácia konkrétneho priebehu zdrojového softvéru je bližšie opísaná v Kapitole 5.
