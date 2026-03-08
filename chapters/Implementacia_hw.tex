@@ -1,0 +1,82 @@
+\chapter{Implementácia hardvérovej časti}
+\label{ImplementaciaHW}
+
+Táto kapitola je venovaná praktickej elektronickej a fyzickej inštalácii celého riadiaceho systému so zreteľom na inžiniersku spoľahlivosť a bezpečnosť.
+
+\section{Centrálna jednotka -- Raspberry Pi}
+\label{CentralnaJednotka}
+
+Na prepojenie softvéru a lokálnej reálnej vrstvy bol zvolený nasledujúci hardvér:
+\begin{itemize}
+    \item \textbf{Umiestnenie a konektivita:} Centrálny minipočítač Raspberry Pi je fyzicky umiestnený v tesnej blízkosti audiovizuálnej techniky (napríklad priamo za monitorom/televízorom). Toto riešenie minimalizuje dĺžku káblov, keďže priamo zabezpečuje natívne prehrávanie videa cez HDMI a distribúciu zvuku do reproduktorov, pričom stačí prístup do rovnakej lokálnej siete.
+    \item \textbf{Konfigurácia operačného systému:} Nasadenie \uv{headless} distribúcie Raspberry Pi OS Lite (bez grafického prostredia) pre ušetrenie systémových prostriedkov. Výpočtový výkon je tak striktne dedikovaný pre chod MQTT brokera \texttt{Mosquitto} a~riadiaceho softvérového jadra.
+    \item \textbf{Správa prístupových práv:} Systémové aplikácie bežiace na pozadí (\texttt{systemd} služby) majú voči jadru upravené užívateľské oprávnenia pre priamy prístup k~sériovým portom a~audio subsystému bez nutnosti dodatočných bezpečnostných \uv{sudo} potvrdzovaní obsulohy.
+\end{itemize}
+
+\vspace{1cm}
+\begin{center}
+    \textit{[MIESTO PRE OBRÁZOK: Fotografia zapojeného Raspberry Pi v~rozvádzači s~HDMI a~LAN káblovou konektivitou]}
+\end{center}
+\vspace{1cm}
+
+\section{Distribuované uzly -- ESP32}
+\label{DistribuovaneUzly}
+
+\begin{itemize}
+    \item \textbf{Fyzický variant modulu (ESP32 DevKit V1):} Využitá je štandardná 30-pinová vývojová doska ESP32 DevKit V1, ktorá spája čip ESP-WROOM-32 s~potrebnými LDO regulátormi a~USB prevodníkom. Je nasadená najmä pre aplikácie presného časovania, typicky pre generovanie PWM signálov ovládajúcich \textbf{jednosmerné motory}.
+    \item \textbf{Modul RP2350 (Waveshare Relay):} Pre uzly určené na silové spínanie svetiel a~dymostrojov sa nevyužíva klasické zapojenie s relé modulmi, ale integrovaná priemyselná doska od firmy Waveshare, osadená priamo mikrokontrolérom architektúry \textbf{RP2350}. Tieto uzly sa špecializujú na oddelené 230\,V okruhy.
+    \item \textbf{Spôsob plošnej strediskovej montáže:} Tieto samostatné bloky sa osadzujú lokálne v~múzeu priamo k~zariadeniam (blízko motorov či senzorov). Moduly sa spoliehajú na samostatné napäťové zdroje, dôležité je len pripojenie na jednotnú lokálnu Wi-Fi/LAN sieť, čím odpadá potreba ťahať zväzky logických vodičov k~centrálnemu Raspberry Pi.
+\end{itemize}
+
+\vspace{1cm}
+\begin{center}
+    \textit{[MIESTO PRE OBRÁZOK: Fotografia modulu ESP32 ESP-WROOM-32 a~jeho GPIO rozloženia]}
+\end{center}
+\vspace{1cm}
+
+\section{Výkonové prvky}
+\label{VykonovePrvky}
+
+Súbor elektronických komponentov zabezpečujúcich fyzický prejav asynchrónnych inštrukcií.
+
+\subsection{Riadenie jednosmerných (DC) motorov}
+Aplikácie asynchrónneho otáčania koncových fyzických prvkov (napr. otvárania mechanických zámkov a~dvier inštalácie) sú realizované \textit{DC motormi}. Zariadenie prekladajúce signálovú logiku mikrokontroléra na výkonovú prúdovú linku z~motorového zdroja napätia využíva technológiu H-mostíka.
+
+Implementačné detaily motorických obvodov:
+\begin{itemize}
+    \item \textbf{Voľba výkonového budiča BTS7960:} Pre spoľahlivé ovládanie 12\,V a~24\,V jednosmerných motorov sme z~dôvodu nevyhovujúcej tepelnej únosnosti bežne dostupných starších obvodov (napr. L298N) aplikovali robustný vysokoprúdový H-mostík \textbf{BTS7960}. Tento dvojitý modulárny menič s~priamym riadením logikou dosahuje špičkovú prúdovú zatažiteľnosť \textbf{až 43\,A}, čím hravo znáša drsné kinetické rázy veľkých inštalačných motorov (napr. stacionárne motory navijákov a~pák v~únikových miestnostiach). Zapojenie vyžaduje iba 4 komunikačné vodiče (\texttt{GND}, \texttt{5V}, \texttt{PWM1}, \texttt{PWM2}).
+    \item \textbf{Progresívne ovládanie PWM (Impulzná šírková modulácia):} Uzol zabezpečujúci pohyb (\texttt{controller\_MOTORS}) nevykonáva len binárne zapnutie a~vypnutie (On/Off logiku). Systém využíva technológiu hardvérového PWM regulovania otáčok pomocou premenlivej striedy signálu. Hardvérový časovač v~ESP32 beží na prednastavenej vysokej pracovnej frekvencii $20\,\text{kHz}$, čím sa eliminuje nežiaduce počuteľné pískanie cievok motora.
+    \item \textbf{Prevencia proti trhaniu (\textit{Smooth ramping}):} Pre eliminovanie prúdových nárazov na mechanické prevodovky rekvizít a samotné H-mostíky má systém vo firmvéri zakomponovaný plynulý nábeh a~výbeh hodnoty PWM. Tieto prechody sú definované krokmi (\texttt{SMOOTH\_STEP}) a~časovými oneskoreniami (\texttt{SMOOTH\_DELAY}), čo rapídne predlžuje servisné cykly muzeálnych rekvizít namáhaných dennou prevádzkou.
+\end{itemize}
+
+\vspace{1cm}
+\begin{center}
+    \textit{[MIESTO PRE OBRÁZOK: Použitý výkonový H-mostík BTS7960 s~dimenzovaným chladičom pripojený k~motoru a~ESP32]}
+\end{center}
+\vspace{1cm}
+
+\subsection{Spínanie sieťového napätia (230\,V) a senzorika}
+Pre riadenie spotrebičov, ktoré nepracujú s~plynulým jednosmerným chodom, ale spúšťajú vizuálne efekty či scénické nasvietenie s~veľkým prúdovým odberom zo sieťového napätia, bola zvolená reléová spínacia stratégia. Paralelne je doriešený záchyt senzorických vstupov od účastníkov.
+
+\begin{itemize}
+    \item \textbf{Priemyselný reléový modul:} Okamžité zapnutie bodových \textit{halogen} reflektorov alebo 230\,V hmlových dymostrojov si vyžiadalo inštaláciu skompletizovaného a~bezpečného riešenia. Využitý bol \textbf{8-kanálový priemyselný relé modul (od spoločnosti Waveshare)}. Zaujímavosťou tohto uzla je, že na rozdiel od klasických modulov neriadených priamo ESP32 čipom, tento špecifický modul stavia na integrovanom dvojjadrovom mikrokontroléri \textbf{RP2350} (architektúra Raspberry Pi). Okrem 8 nezávislých relé (každý s~kontaktným zaťažením do 10\,A / 250\,V AC) modul plne podporuje káblovú sieť Ethernet prostredníctvom zbernice W5500 a štandard PoE (\textit{Power over Ethernet}), čím sa pre túto kritickú silovú vetvu úplne eliminuje závislosť na lokálnom Wi-Fi pokrytí.
+    \item \textbf{Optické oddelenie obvodov:} Z~dôvodu najvyššej možnej galvanickej bezpečnosti sa vybraný reléový blok do riadiacej cesty pripája výlučne cez zapuzdrené \textbf{optočleny (\textit{optocouplers})}. Pomocou vstavaného generátora infračerveného žiarenia v~čipe prebieha úplné fyzické oddelenie malonapäťovej riadiacej logiky od životu nebezpečného potenciálu 230\,V na spínacích kontaktoch, čím sa absolútne zamedzuje zničeniu mikrokontroléra pri prerazení izolácie na záťaži.
+    \item \textbf{Senzorický prístup obsluhy s~filtrom:} Na získavanie asynchrónnych vstupov (\uv{zmysly}) sa využívajú záchytné tlačidlá (napr. \texttt{Trigger Button} na pine GPIO 32). Každý signál z~fyzického dotyku je firmvérom ESP32 hmatateľne prefiltrovaný. Aplikovaný je hardvérový \textbf{debounce časovač} v~trvaní typicky $60\,\text{ms}$, ktorý eliminuje elektromagnetické mechanické zákmity kontaktov na prečítaných pinoch. Dodatočne je zavedený aj aplikačný \textbf{cooldown} filter (napríklad $4000\,\text{ms}$) zabraňujúci cyklenému odosielaniu stoviek MQTT správ pri opakovanom nekontrolovateľnom stláčaní tlačidla používateľom expozície.
+\end{itemize}
+
+\section{Napájanie a~zapojenie prototypu}
+\label{NapajanieZapojenie}
+
+Prevádzka komplexnej mechatronickej sústavy pozostávajúcej z~desiatok distribuovaných modulov vyžaduje dodržiavanie prísnej vrstvenej izolácie napätí. Kvôli masívnym rozdielom vo výkone by akékoľvek zlúčenie signálových hladín s~vysokoodberovým napájaním z~jedného nekontrolovaného meniča viedlo k~nestabilitám a~resetom riadiacej logiky. Vzorový distribuovaný uzol musí pre spoľahlivú prevádzku využívať nasledujúce tri fundamentálne kategórie odberov napätí:
+
+\begin{itemize}
+    \item \textbf{Hladina logiky a riadiacich signálov (3.3\,V):} Hladina predstavujúca výhradne bezodberový referenčný tok signálov. Primárne napájanie čipov z~radu \textit{ESP32} vrátane generovaného PWM signálu na pinoch či komunikácie na zbernici štandardu \textit{I2C}. Na tomto potenciáli je absolútne vylúčené prevádzkovať napájanie akéhokoľvek vonkajšieho pohybu (okrem interných diód v~optickom člene). Na napájanie vnútorného LDO regulátora vývojovej dosky sa pristupuje klasickým 5\,V prívodom s~využitím oddelených prepojovacích \uv{ground} zemných prekovov pre uzavretie uzlov a~tolerancií s~rozširujúcimi perifériami.
+    \item \textbf{Pracovná hladina snímačov a~zosilňovačov (5.0\,V):} Predstavuje ideálny zlaďovací napäťový uzol vhodný pre chod centrálneho mikropočítača Raspberry Pi a~napájanie primárnej cievkovej dosky modulov od \textit{Waveshare}. Do izieb sa spravidla dodáva zo značkových sieťových adaptérov s~USB-C konektivitou eliminujúcou prepúšťanie napäťového šumu. Rovnako prislúcha a~funguje aj pre terminály ESP32 pomocou pinov \texttt{VIN}.
+    \item \textbf{Silová prúdová rovina pre aktuátory (12\,V / 24\,V / 230\,V):} Na rovine fyzických inštalácií v~modeloch sú aktívne silové toky koncového výkonu pre chod komutátorov (cez svorkovnicu na drivere L298N priamo do statora), výkonného audia či halogénových svetiel. Tieto prúdy pochádzajú z~hrubo dimenzovaných dedikovaných a~stabilizovaných priemyselných spínaných zdrojov umiestnených v~rozvodnej skrini (v rozvádzacej vrstve) s~dostatočným rezervným prúdovým dimenzovaním pre rozbehové javy motorov. 
+\end{itemize}
+
+\vspace{1cm}
+\begin{center}
+    \textit{[MIESTO PRE OBRÁZOK: Elektrotechnická schéma zapojenia prototypu (napäťové úrovne 3.3V, 5V, 12V/230V, optické oddelenie relé a mosfety)]}
+\end{center}
+\vspace{1cm}

@@ -12,7 +12,7 @@ Systém v reálnom čase orchesteruje zvuky, videá a hardvérové zariadenia v 
 Základný priečinok obsahuje 4 rôzne úplne nezávislé sub-projekty, ktoré sa prepájajú pomocou sieťových protokolov:
 
 ### A) Raspberry Pi Backend (`/raspberry_pi`)
-**Technológie**: Python 3.10+, PyGame (audio engine), `mpv` (video engine), Paho MQTT (komunikácia s HW), Pydantic & Transitions (stavové automaty), Flask & Socket.IO (rest/websocket API).
+**Technológie**: Python 3.10+, PyGame (audio engine), `mpv` (video engine), Paho MQTT (komunikácia s HW), jsonschema \& Transitions (stavové automaty a validácia scén), Flask \& Socket.IO (rest/websocket API).
 **Zodpovednosť**: Centrálny mozog systému s názvom `MuseumController`. Beží nonstop. Načítava scény, spúšťa `StateMachine` pre každú prebiehajúcu izbu. Zabezpečuje, že sa na základe času a senzorov prehráva hudba a spúšťajú sa MQTT príkazy na ovládanie svetiel/relé/motorov.
 
 ### B) ESP32 Firmware/Hardware (`/esp32`)
@@ -39,6 +39,9 @@ Ak budete mať vy, alebo vaša AI pochybnosti o do-hĺbkových detailoch konkré
 
 * `docs/architecture.md` (Topológia v reálnom čase, vrstvy pi kódu a podrobné vnútornosti)
 * `docs/mqtt_topics.md` (Štruktúra vašich komunikačných kanálov medzi Python serverom a ESP32 HW nodes)
+* `docs/esp32_hardware_reference.md` (Kompletné zhrnutie PWM nastavení a mapovania hardvérových pinov pre každý ESP32 modul)
+* `docs/file_structure.md` (Kompletná adresárová štruktúra repozitára)
+* `docs/dashboard_api.md` (Zoznam všetkých REST a WebSocket endpointov pre komunikáciu medzi Pi a Reactom)
 * `docs/museum_setup_guide.md` & `/docs/audio_playing_tutorial.md` atď.
 
 ---

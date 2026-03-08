@@ -76,24 +76,26 @@ Zasadzuje prácu do kontextu už uskutočneného výskumu.
 
 ---
 
-### 3.3 METÓDY A NÁVRH (Methods / Návrh HW a SW)
+### 3.3 METÓDY A NÁVRH (Kapitoly 3, 4 a 5: Architektúra, HW a SW návrh)
 
-Popisuje materiály a postupy tak, aby bol experiment/vývoj  **replikovateľný** .
+Popisuje materiály a postupy tak, aby bol vývoj a implementácia celého systému **replikovateľná**. 
+V tvojej práci je táto časť logicky rozdelená do troch špecifických kapitol:
+* **Kapitola 3 (Architektúra)** - Logické usporiadanie, komunikácia a výber topológie.
+* **Kapitola 4 (Implementácia HW)** - Zapojenie prúdových rovín, relé modulov, senzoriky a motorických budičov.
+* **Kapitola 5 (Implementácia SW)** - Princíp stavových automatov, JSON scén a validačného enginu.
 
 Podáva odpovede na:
-
-* Ako bol experiment poňatý?
-* Aké premenné sa merali?
 * Aký hardvér a softvér bol použitý?
-* Ako sa dáta analyzovali?
+* Ako sú distribuované uzly prepojené s centrálnou logikou?
+* Aké pravidlá riadia správanie expozície?
 
 > **Časy:** Na popis vlastných vykonaných postupov a konštrukcie používaj výhradne **minulý čas a trpný rod** — „Súčiastka bola pripojená", „Kód bol implementovaný".
 
 ---
 
-### 3.4 VÝSLEDKY A DISKUSIA (Results and Discussion)
+### 3.4 VÝSLEDKY A DISKUSIA (Kapitola 6: Experimenty a overenie)
 
-**Odkazovanie na obrázky/grafy:** Nikdy nevenuj celé vety popisu toho, čo je na obrázku. Choď rovno k interpretácii a na obrázok len odkáž v zátvorke.
+**Odkazovanie na obrázky/grafy:** Nikdy nevenuj celé vety popisu toho, čo je na grafickom výstupe (napríklad pri meraní latencie MQTT správ). Choď rovno k interpretácii a na obrázok len odkáž v zátvorke.
 
 | ❌ Nesprávne                                                                | ✅ Správne                                                   |
 | ---------------------------------------------------------------------------- | ------------------------------------------------------------- |

@@ -10,7 +10,7 @@
 
 % definice promenne langmode - czech or english mode
 \newcommand{\thesislanguage}[1]{
-	\def\thelanguage{#1} %czech/english
+	\def\thelanguage{#1} %czech/english/slovak
 	
 	\ifthenelse{\equal{#1}{czech}}{
 	    \usepackage[czech]{babel}
@@ -18,7 +18,14 @@
 	    \usepackage[T1]{fontenc}
 	    \usepackage{lmodern}
     }{
-	    \usepackage[english,czech]{babel}
+		\ifthenelse{\equal{#1}{slovak}}{
+			\usepackage[slovak]{babel}
+			\usepackage[utf8]{inputenc}
+			\usepackage[T1]{fontenc}
+			\usepackage{lmodern}
+		}{
+	    	\usepackage[english,czech]{babel}
+		}
     }
 }
 
@@ -68,13 +75,14 @@
 	\section*{Keywords}
 	#4
 	\vfill
-	\ifthenelse{\equal{\thelanguage}{czech}}{
-	\section*{Bibliografick\'{a} Citace}
-	\theciteauthor \textit{ \thethesistitle}. Brno: Vysok\'{e} u\v{c}en\'{i} technick\'{e} v Brn\v{e}, Fakulta strojn\'{i}ho in\v{z}en\'{y}rstv\'{i}, \the\year. \pageref{LastPage} s., Vedouc\'{i} diplomov\'{e} pr\'{a}ce: \thethesissupervisor.	
-	}{
-	\section*{Bibliographic citation}
-	\theciteauthor \textit{ \thethesistitle}. Brno: Brno University of Technology, Faculty of Mechanical Engineering, \the\year. \pageref{LastPage} pages, Master's thesis supervisor: \thethesissupervisor.
-	}
+	\section*{Bibliografická citace}
+	\textbf{Citace tištěné práce:}\\
+	\theciteauthor~ \textit{\thethesistitle}. Bakalářská práce. \thethesissupervisor~ (vedoucí práce). Brno: Vysoké učení technické v Brně, Fakulta strojního inženýrství, \the\year.
+	
+	\vspace{1em}
+	\noindent\textbf{Citace elektronického zdroje:}\\
+	\theciteauthor~ \textit{\thethesistitle}. Online, bakalářská práce. \thethesissupervisor~ (vedoucí práce). Brno: Vysoké učení technické v Brně, Fakulta strojního inženýrství, \the\year. Dostupné z: https://www.vut.cz/studenti/zav-prace/detail/174036. [cit. \the\year-03-07].
+	
     \ifthenelse{\equal{\docmode}{print}}{\newpage\phantom{}} % blank page
 	}
 	
@@ -110,7 +118,15 @@
 	\ifthenelse{\equal{\thelanguage}{czech}}{
 		\selectlanguage{czech}
 	}{
-		\selectlanguage{english}
+		\ifthenelse{\equal{\thelanguage}{slovak}}{
+			\selectlanguage{slovak}
+			\renewcommand{\figurename}{Obrázok}
+			\renewcommand{\tablename}{Tabuľka}
+			\renewcommand{\listfigurename}{Zoznam obrázkov}
+			\renewcommand{\listtablename}{Zoznam tabuliek}
+		}{
+			\selectlanguage{english}
+		}
 	}
 	
 	
