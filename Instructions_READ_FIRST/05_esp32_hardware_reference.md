@@ -5,7 +5,6 @@ Tento dokument je kritický pre AI a vývojárov, pretože obsahuje presné hard
 ---
 
 ## 1. ESP32 Motors (`esp32_mqtt_controller_MOTORS`)
-**Hardvér:** Štandardná vývojová doska ESP32 DevKit V1 (30-pin).
 Riadi 2 jednosmerné (DC) motory. 
 Modul používa hardvérové PWM so smooth nábehom (postupné zvyšovanie/znižovanie rýchlosti).
 
@@ -15,21 +14,20 @@ Modul používa hardvérové PWM so smooth nábehom (postupné zvyšovanie/zniž
   - `SMOOTH_STEP = 2`
   - `SMOOTH_DELAY = 100` (ms)
 
-- **Mapovanie Pinov (H-mostík BTS7960 43A):**
+- **Mapovanie Pinov (L298N alebo podobný motor driver):**
   - **MOTOR1:**
-    - `MOTOR1_PWM1_PIN = 18` (Pôvodne LEFT)
-    - `MOTOR1_PWM2_PIN = 19` (Pôvodne RIGHT)
-    - `MOTOR1_ENABLE_PIN = 21` (Voliteľné L_EN/R_EN spojenie)
+    - `MOTOR1_LEFT_PIN = 18`
+    - `MOTOR1_RIGHT_PIN = 19`
+    - `MOTOR1_ENABLE_PIN = 21`
   - **MOTOR2:**
-    - `MOTOR2_PWM1_PIN = 27`
-    - `MOTOR2_PWM2_PIN = 26`
+    - `MOTOR2_LEFT_PIN = 27`
+    - `MOTOR2_RIGHT_PIN = 26`
     - `MOTOR2_ENABLE_PIN = 25`
 
 ---
 
 ## 2. ESP32 Relays (`esp32_mqtt_controller_RELAY`)
-**Hardvér:** Priemyselný modul Waveshare s integrovaným čipom RP2350 (architektúra Raspberry Pi) a 8 nezávislými relé.
-Ovláda 230V prúdové okruhy (osvetlenie, dymostroje) a voliteľné doplnky (napr. vizuálna stavová kontrolka - RGB LED, aj keď aktuálne kód mapuje len jeden pin `RGB_LED_PIN`).
+Ovláda relé modul a voliteľné doplnky (napr. vizuálna stavová kontrolka - RGB LED, aj keď aktuálne kód mapuje len jeden pin `RGB_LED_PIN`).
 Podporuje priame GPIO alebo I2C Expander (napr. PCF8574).
 
 - **I2C Konfigurácia (ak `USE_RELAY_MODULE = true`):**

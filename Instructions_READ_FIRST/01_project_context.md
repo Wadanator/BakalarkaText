@@ -28,8 +28,8 @@ Základný priečinok obsahuje 4 rôzne úplne nezávislé sub-projekty, ktoré 
 ## 3. Ako systém žije? (Runtime a Komunikácia)
 
 1. Centralizovaná event-driven komunikácia: Celý systém si vymieňa veľmi malé a rýchle správy cez **Sieťový protokol MQTT** (broker).
-    - Raspberry Pi zverejní (Publish): `room1/motor1` s payloadom `ON`.
-    - ESP32 počúva na tom topicu a pustí silu do domáceho motora. Následne odvetí spätne úspechom na `room1/motor1/feedback`.
+    - Raspberry Pi zverejní (Publish): `room1/motor1` s payloadom `ON:100:L` (alebo `room1/relay1` s payloadom `ON`).
+    - ESP32 počúva na tom topicu a pustí silu do domáceho motora (alebo relé). Následne odvetí spätne úspechom na `room1/motor1/feedback`.
 2. Architektonické detaily MQTT topicov: Všetky detaily sú už rozpísané v `/docs/mqtt_topics.md`.
 3. Akčná postupnosť scény: Mozog v Pythone spracuje vstup podľa daného bodu vo vývojovom strome json súboru scény a aplikuje akcie, ktorými sú: prehratie hudby cez reproduktory (`action: audio`), vyžiadanie motorického pohybu dverí (`action: mqtt`), prehratie video slučky puzla na monitore v miestnosti (`action: video`). Pričom logické prechody medzi jednotlivými stavmi môžu byť vynútené operátorom, časovým uplynutím (timeout) alebo dohraním nejakého media klipu.
 
