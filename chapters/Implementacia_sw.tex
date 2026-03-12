@@ -6,21 +6,28 @@ Táto kapitola opisuje programové vybavenie, so zreteľom na využitie systémo
 \section{Firmvér ESP32}
 \label{FirmverESP32}
 
-Kód na koncových uzloch je písaný v jazyku C++ s využitím frameworku Arduino.
+Všetky tri firmvérové varianty sú implementované v~jazyku C++ využívajúc framework Arduino a~zdieľajú spoločný inicializačný základ. Pri štarte sa každý uzol pripojí na nakonfigurovanú Wi-Fi sieť, autorizuje sa voči centrálnemu MQTT brokeru, zverejní zostatkovú (\textit{retained}) správu \texttt{online} na diagnostický topik a~nastaví LWT správu \texttt{offline} pre prípad výpadku spojenia. Konfigurácia (SSID, heslo, adresa brokera, názov topiku) je vyčlenená do samostatného súboru \texttt{config.cpp}, čo umožňuje nasadiť rovnaký kód na viacero fyzických kusov bez úpravy hlavného zdrojového súboru.
+
+Jednotlivé varianty sa od seba líšia predplatenými topikmi a~spôsobom mapovania prijatých príkazov na fyzické výstupy:
+
 \begin{itemize}
-    \item \textbf{Inicializácia:} 
-    \begin{itemize}
-        \item Uzol sa prebúdza pripojením na pevnú lokálnu Wi-Fi sieť.
-        \item Nasleduje autorizácia a pripojenie na centrálny MQTT Broker.
-        \item Publikovanie LWT \textit{online} stavu na diagnostický topik.
-    \end{itemize}
-    \item \textbf{Vykonávacia slučka (Loop):}
-    \begin{itemize}
-        \item Prijímanie payload správ odoberaných z topiku (napr. \texttt{SPEED:120}).
-        \item Rozparsovanie textového príkazu a jeho mapovanie na fyzickú inštrukciu (nastavenie PWM striedy pre riadiaci pin alebo \texttt{digitalWrite} na piny relé).
-        \item Po úspešnom vykonaní odoslanie potvrdzujúcej \texttt{feedback} správy pre odomknutie stavového automatu.
-    \end{itemize}
+
+    \item \textbf{Motorický uzol (\texttt{esp32\_mqtt\_controller\_MOTORS}):}
+    Uzol sa prihlasuje na topiky \texttt{room1/motor1}, \texttt{room1/motor2} a~\texttt{room1/STOP}. Prijatý textový príkaz (napr. \texttt{ON:120:L} alebo \texttt{SPEED:80}) je rozparsovaný a~preložený na hardvérové PWM signály generované na frekvencii $20\,\text{kHz}$ s~8-bitovým rozlíšením (0–255). Pre elimináciu prúdových rázov pri pohybe mechaniky je implementovaný plynulý nábeh a~dobeh otáčok (\textit{smooth ramping}) s~konfigurovateľným krokom a~oneskorením. Po vykonaní príkazu uzol odošle potvrdenie na topik s~príponou \texttt{/feedback}.
+
+    \item \textbf{Reléový uzol (\texttt{esp32\_mqtt\_controller\_RELAY}):}
+    Uzol ovláda až 8 samostatných reléových kanálov (osvetlenie, dymostoj a~ďalšie spotrebiče). Zariadenia sú adresované topikmi v~tvare \texttt{room1/<meno>} (napr. \texttt{room1/light/1}) alebo skupinovo cez \texttt{room1/effects/\#}. Fyzické výstupy sú riadené buď priamo cez GPIO piny, alebo cez I2C expandér (adresa \texttt{0x20}, piny SDA/SCL: \texttt{42}/\texttt{41}), čo umožňuje rozšíriť počet kanálov bez zmeny základného kódu. Pridanie nového zariadenia si vyžaduje iba doplnenie záznamu do konfiguračného poľa \texttt{DEVICES[]}.
+
+    \item \textbf{Tlačidlový uzol (\texttt{esp32\_mqtt\_button}):}
+    Najjednoduchší variant slúži výhradne ako senzorický vstup. Pri stlačení tlačidla (GPIO pin~32) uzol zverejní správu \texttt{START} na topik \texttt{room1/scene}, čím spustí predvolenú scénu na centrále. Firmware obsahuje hardvérový debounce filter ($60\,\text{ms}$) a~aplikačný cooldown ($4000\,\text{ms}$) zabraňujúci opakovanému odosielaniu triggra pri dlhšom stlačení.
+
 \end{itemize}
+
+\vspace{1cm}
+\begin{center}
+    \textit{[MIESTO PRE OBRÁZOK: Bloková schéma spoločného firmvérového základu a~rozvetvenej špecializácie troch ESP32 variantov]}
+\end{center}
+\vspace{1cm}
 
 \section{Backend Raspberry Pi}
 \label{BackendRPI}

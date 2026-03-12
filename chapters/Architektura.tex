@@ -7,19 +7,19 @@ Táto kapitola popisuje celkovú architektúru navrhovaného riadiaceho systému
 \section{Požiadavky na systém}
 \label{PoziadavkyNaSystem}
 
-Táto kapitola definuje hranice projektu a~podmienky, ktoré musí výsledný riadiaci systém spĺňať pre zabezpečenie spoľahlivej prevádzky v~prostredí interaktívnej expozície.
+Táto kapitola definuje hranice projektu a~podmienky, ktoré musí výsledný riadiaci systém spĺňať pre zabezpečenie spoľahlivej prevádzky v prostredí expozície.
 
 Z~hľadiska \textbf{funkčných požiadaviek} sa očakáva najmä bezproblémová integrácia a~synchronizácia rôznorodých hardvérových prvkov:
 \begin{itemize}
-    \item \textbf{Riadenie motora a~výkonu:} Primárnou úlohou je bezdrôtové riadenie výkonových prvkov, špecificky jednosmerných motorov s~asynchrónnym riadením ich rýchlosti a~smeru otáčania. Ďalšou kľúčovou funkciou je priame spínanie záťaží pracujúcich na sieťovom napätí \textbf{230\,V} (osvetlenie, dymostroje) a \textbf{12\,V}.
-    \item \textbf{Multimediálna synchronizácia:} Keďže moderné expozície silne stavajú na audiovizuálnych vnemoch, systém musí zabezpečiť natívne a~synchronizované prehrávanie zvuku a~videa priamo z~vlastného úložiska.
-    \item \textbf{Interaktivita a~časová os (\textit{timeline}):} Systém musí vedieť na základe hardvérových vstupov lokačne asynchrónne zmeniť vetvenie prebiehajúceho deja, no zároveň podporovať striktné chronologické časovanie sekvencií.
+    \item \textbf{Riadenie motora a~výkonu:} Primárnou úlohou je riadenie výkonových prvkov, špecificky jednosmerných motorov s riadením ich rýchlosti a smeru otáčania. Ďalšou kľúčovou funkciou je priame spínanie záťaží pracujúcich na sieťovom napätí \textbf{230\,V} (osvetlenie, dymostroje) a taktiež \textbf{12\,V}.
+    \item \textbf{Multimediálna synchronizácia:} Keďže moderné expozície silne stavajú na audiovizuálnych vnemoch, systém musí zabezpečiť synchronizované prehrávanie zvuku a videa priamo z vlastného úložiska.
+    \item \textbf{Interaktivita a~časová os (\textit{timeline}):} Systém musí vedieť na základe hardvérových vstupov zmeniť vetvenie prebiehajúcej scény, no zároveň podporovať chronologické časovanie sekvencií.
 \end{itemize}
 
-Medzi \textbf{nefunkčné požiadavky} s~ohľadom na udržateľnosť patria:
+Medzi \textbf{nefunkčné požiadavky} s ohľadom na udržateľnosť patria:
 \begin{itemize}
-    \item \textbf{Modularita a~softvérové oddelenie:} Pre zachovanie oddelenia softvérového inžinierstva od obsahovej tvorby sa úprava logiky (scenára) musí dať vykonať výhradne modifikáciou \textbf{textových konfiguračných súborov}. Tým sa odstraňuje nutnosť rekompilácie C++ firmware-u alebo zásahu do zdrojových kódov Pythonu.
-    \item \textbf{Dostupnosť (Cost-effectiveness):} Vzhľadom na finančné limity inštalácií musí byť systém postavený na komerčne dostupných, cenovo výhodných mikrokontroléroch a~\textbf{Internet of Things (IoT)} platformách namiesto extrémne drahých dedikovaných priemyselných automatov (PLC).
+    \item \textbf{Modularita a~softvérové oddelenie:} Pre zachovanie oddelenia softvérového inžinierstva od obsahovej tvorby sa úprava logiky (scenára) musí dať vykonať výhradne modifikáciou \textbf{textových konfiguračných súborov}. Tým sa odstraňuje nutnosť zásahu do zdrojových kódov Pythonu.
+    \item \textbf{Dostupnosť (Cost-effectiveness):} Vzhľadom na finančné limity inštalácií musí byť systém postavený na komerčne dostupných, cenovo výhodných mikrokontroléroch a \textbf{Internet of Things (IoT)} platformách namiesto drahých priemyselných automatov (PLC).
 \end{itemize}
 
 % ------------------------------------------------------------------
@@ -28,9 +28,9 @@ Medzi \textbf{nefunkčné požiadavky} s~ohľadom na udržateľnosť patria:
 
 Na architektúru navrhovaného systému je nevyhnutné nazerať z~dvoch odlišných, no vzájomne sa dopĺňajúcich hľadísk: z~\textbf{logického (výpočtového)} a~z~\textbf{fyzického (sieťového)}. 
 
-Z~logického hľadiska ide o~\textbf{distribuovanú architektúru}. Výpočtový výkon a~inteligencia nie sú sústredené výhradne v~jednom centrálnom procesore (ako je bežné pri starších centralizovaných PLC automatoch), ale sú rozložené do priestoru priamo k~výkonovým prvkom. Koncové periférie postavené na mikrokontroléroch neslúžia len ako pasívne spínače. Naopak, aktívne a~autonómne dekódujú prichádzajúce textové správy (parsovanie reťazcov MQTT payloadu), prekladajú ich na strojové požiadavky a~priamo generujú špecifické signály (napr. pulzno-šírkovú moduláciu pre plynulé riadenie otáčok motorov).
+Z~logického hľadiska ide o \textbf{distribuovanú architektúru}. Výpočtový výkon a~inteligencia nie sú sústredené výhradne v jednom centrálnom procesore, ale sú rozložené do priestoru priamo k~výkonovým prvkom. Koncové periférie postavené na mikrokontroléroch neslúžia len ako pasívne spínače. Naopak, aktívne dekódujú prichádzajúce textové správy (parsovanie reťazcov MQTT payloadu) a priamo generujú špecifické signály (napr. pulzno-šírkovú moduláciu pre plynulé riadenie otáčok motorov či jednoduché zapnutie/vypnutie spotrebičov pomocou relé.).
 
-Z~fyzického a~sieťového hľadiska však systém prísne dodržiava \textbf{hviezdicovú topológiu (\textit{Star topology})}. Hoci sú distribuované uzly plne inteligentné, z~dôvodu udržania kontroly a~eliminácie cyklenia na sieti nekomunikujú vzájomne medzi sebou (netvoria \textit{Mesh} sieť). Akýkoľvek dátový tok na sieti vedie striktne obojsmerne len cez centrálny uzol, ktorým je Wi-Fi prístupový bod so sprevádzkovaným MQTT sprostredkovateľom.
+Z~fyzického a~sieťového hľadiska však systém prísne dodržiava \textbf{hviezdicovú topológiu (\textit{Star topology})}. Hoci sú distribuované uzly plne inteligentné, nekomunikujú vzájomne medzi sebou (netvoria \textit{Mesh} sieť). Akýkoľvek dátový tok na sieti vedie striktne obojsmerne len cez centrálny uzol, ktorým je Wi-Fi prístupový bod so sprevádzkovaným MQTT sprostredkovateľom.
 
 \vspace{1cm}
 \begin{center}
@@ -42,16 +42,16 @@ Z~fyzického a~sieťového hľadiska však systém prísne dodržiava \textbf{hv
 \section{Hardvérová voľba a~sieťový prenos}
 \label{HardverovaTopoligia}
 
-Systém si z~titulu svojej distribuovanej logiky s~hviezdicovou topológiou vyžiadal rozdelenie hardvéru do dvoch samostatných kategórií: na jeden centrálny uzol a~na sieť výkonných periférií. Z~hľadiska spoľahlivosti a~rýchlosti prenosu medzi nimi by bolo ideálne zabezpečiť komunikáciu výhradne plne káblovým (drôtovým) spojením. V~praxi však v~expozíciách či \textit{escape room} inštaláciách často nie je technologicky alebo esteticky možné naťahovať dodatočné káblové zväzky naprieč miestnosťou. Z~tohto dôvodu bolo na plošnú distribúciu dátových príkazov z~centrály zvolené bezdrôtové Wi-Fi pripojenie.
+Systém je rozdelený do dvoch samostatných kategórií: na jeden centrálny uzol a na sieť výkonných periférií. Z~hľadiska spoľahlivosti a~rýchlosti prenosu medzi nimi by bolo ideálne zabezpečiť komunikáciu výhradne plne drôtovým spojením. V praxi však v~expozíciách či \textit{escape room} inštaláciách často nie je technologicky alebo esteticky možné naťahovať dodatočné káblové zväzky naprieč miestnosťou. Z~tohto dôvodu bolo na plošnú distribúciu dátových príkazov z~centrály zvolené bezdrôtové Wi-Fi pripojenie.
 
 Dvojúrovňová architektúra bola fyzicky obsadená nasledovným hardvérom:
 \begin{itemize}
-    \item \textbf{Centrálny uzol (\uv{Mozog}):} O~zastávanie funkcie hlavného režiséra inštalácie sa stará jednodoskový počítač \textbf{Raspberry Pi}. Tento model bol zvolený z~niekoľkých praktických dôvodov. Okrem toho, že je tu sprevádzkovaný hlavný logický automat, zachovanie si celkového prehľadu nad výstavou kombinuje  s~priamym vyhradením výkonu na prehrávanie pamäťovo náročných médií vďaka natívnym HDMI a~analógovým audio výstupom. Zároveň dokáže súbežne hostovať ovládací webový \textit{dashboard} pre obsluhujúci personál, čím je riadenie fyzicky separované od exponátov.
-    \item \textbf{Distribuované uzly (\uv{Svaly a zmysly}):} Na plnenie lokálnych fyzických úkonov slúži modulárna sieť bezdrôtových mikrokontrolérov \textbf{ESP32}, ktoré sú implementované a~napájané priamo pri interaktívnych objektoch. Tieto uzly sa na základe svojho zamerania softvérovo profilujú na:
+    \item \textbf{Centrálny uzol (\uv{Mozog}):} Hlavnú riadiacu jednotku systému tvorí jednodoskový počítač \textbf{Raspberry Pi}. Tento počítač plní úlohu centrálneho uzla, v ktorom je implementovaná hlavná logika riadenia celej miestnosti. Zvolený bol najmä pre svoj dostatočný výpočtový výkon a pamäť, ktoré umožňujú spoľahlivú prevádzku riadiaceho softvéru aj prehrávanie multimediálneho obsahu. Zariadenie zároveň poskytuje natívne rozhrania pre výstup obrazu (HDMI) a zvuku, čo umožňuje priamu obsluhu audio-vizuálnych prvkov expozície. Výhodou je aj dostupnosť sieťových rozhraní (\textit{Wi-Fi} aj \textit{Ethernet}), vďaka ktorým môže systém komunikovať s ostatnými zariadeniami a súčasne hostovať webový ovládací \textit{dashboard} určený pre obsluhu.
+    \item \textbf{Distribuované uzly (\uv{Svaly a zmysly}):} Na plnenie lokálnych fyzických úkonov slúži modulárna sieť bezdrôtových mikrokontrolérov \textbf{ESP32}, ktoré sú implementované a~napájané priamo pri interaktívnych objektoch. Tieto uzly sa na základe svojho zamerania softvérovo rozdeľujú na:
     \begin{itemize}
-        \item \textbf{Senzorický uzol} (tzv. \textit{Trigger Button}) pre hardvérovú detekciu vstupov od používateľov.
-        \item \textbf{Motorický uzol} (\texttt{controller\_MOTORS}) pre obsluhu fyzického pohybu exponátov (jednosmerné motory).
-        \item \textbf{Reléový uzol} (\texttt{controller\_RELAY}) pre spínanie efektov a~osvetlenia či iných zariadení pracujúcich na sieťovom napätí 230\,V.
+        \item \textbf{Senzorický uzol} pre hardvérovú detekciu vstupov od používateľov.
+        \item \textbf{Motorický uzol} pre obsluhu fyzického pohybu exponátov (jednosmerné motory).
+        \item \textbf{Reléový uzol} pre spínanie efektov a osvetlenia či iných zariadení pracujúcich na 12 V a sieťovom napätí 230\,V.
     \end{itemize}
 \end{itemize}
 
@@ -59,11 +59,9 @@ Dvojúrovňová architektúra bola fyzicky obsadená nasledovným hardvérom:
 \section{Princíp softvérového jadra (Scene Engine)}
 \label{SoftverovArchitektura}
 
-Návrh riadiacej softvérovej logiky si vyžiadal zásadný odklon od bežného sekvenčného (zhora-nadol) programovania. Lineárne vykonanie bloku so zaradením vyčkávacích prvkov (napr. umelé uspatie vlákna) spôsobuje stratu kontroly nad asynchrónnymi udalosťami (napríklad ojedinelé stlačenie dekompresného tlačidla návštevníkom počas prehrávania zvuku). Z~tohto dôvodu bolo softvérové jadro architektované ako neblokujúci \textbf{Konečný stavový automat (FSM -- \textit{Finite State Machine})}.
+Ústrednou požiadavkou na softvérové jadro bola schopnosť \textbf{vetviť priebeh expozície} na základe reálnych podnetov od návštevníka. Scenár preto nesmel byť pevnou lineárnou sekvenciou akcií — systém musel v~ľubovoľnom momente vedieť čakať na vonkajší vstup (napr. stlačenie tlačidla) a~podľa jeho výsledku dynamicky zvoliť ďalší smer deja. Klasický prístup blokujúceho vykonávania kódu je na takúto úlohu nevhodný, keďže vlákno čakajúce na jednu udalosť nie je schopné súčasne reagovať na iné podnety z~prostredia.
 
-Priebeh expozície je z~architektonického hľadiska logicky rozdelený na \textbf{samostatné oddelené stavy}. Životný cyklus každého stavu je riadený vlastnými inicializačnými, bežiacimi a~ukončovacími blokmi, ktoré na seba nečakajú v~zmysle funkčného blokovania, ale asynchrónne reagujú na časové značky a~vonkajšie udalosti. 
-
-Systém neustále na pozadí vyhodnocuje \textit{udalosti z~prostredia} (napr. vypršanie maximálneho času v~stave, koniec prehrávania média, alebo príchod konkrétnej hardvérovej správy). Akonáhle je splnená prechodová podmienka, \textbf{mechanizmus dynamických prechodov} bezpečne preruší bežiaci stav a~stroj sa plynulo pretransponuje do nového cieľového stavu, čím vo výsledku vzniká interaktívne vetvenie výstavy na základe vôle návštevníka. Konkrétna softvérová implementácia týchto blokov v~jazyku Python a formáte JSON bude detailne rozobraná v~Kapitole \ref{ImplementaciaSW}.
+Z~tohto dôvodu bolo softvérové jadro navrhnuté ako neblokujúci \textbf{Konečný stavový automat (FSM~— \textit{Finite State Machine})}. Priebeh expozície je rozdelený do samostatných \textbf{stavov}, pričom systém nepretržite sleduje podmienky prechodu — vypršanie časovača, dokončenie prehrávania média, alebo príchod správy od hardvérovej periférie — a~podľa nich plynulo presúva chod scenára do ďalšieho stavu. Podrobná softvérová implementácia tejto architektúry je rozpracovaná v~Kapitole~\ref{ImplementaciaSW}.
 
 \vspace{1cm}
 \begin{center}
@@ -75,17 +73,17 @@ Systém neustále na pozadí vyhodnocuje \textit{udalosti z~prostredia} (napr. v
 \section{Architektúra komunikačnej vrstvy}
 \label{KomunikacnaVrstva}
 
-Pre okamžitú asynchrónnu výmenu dát medzi centrálnym automatom (v~jazyku Python) a~distribuovanými perifériami (ESP32) bez nadbytočnej réžie bol na komunikáciu zvolený \textbf{protokol MQTT} (\textit{Message Queuing Telemetry Transport}). Prenos informácií prebieha na osvedčenom koncepte \textit{Publish/Subscribe} cez konštantné TCP/IP pripojenie na centrálny sieťový sprostredkovateľ (\textit{broker}).
+Pre výmenu dát medzi centrálnym automatom (v~jazyku Python) a~distribuovanými perifériami (ESP32) bol zvolený \textbf{protokol MQTT} (\textit{Message Queuing Telemetry Transport}). Prenos správ prebieha na koncepte \textit{Publish/Subscribe} cez trvalé TCP/IP spojenie s~centrálnym sieťovým sprostredkovateľom (\textit{brokerom}) — čo zaručuje nízku réžiu a~spoľahlivé doručenie v~rámci lokálnej siete.
 
 Navrhnutý model siete implementuje niekoľko kľúčových komunikačných štandardov:
 \begin{itemize}
-    \item \textbf{Štruktúra zverejňovania (\textit{topic} mriežka):} Architektúra prísne hierarchicky oddeľuje výstavy a~koncové prvky. Koncové ESP32 mikrokontroléry odoberajú výhradne svoj priradený topik (napríklad \texttt{room1/motor1}). 
-    \item \textbf{Spätná väzba (\textit{feedback}):} Pri aktivácii príkazu centrálny systém zverejní povel (\textit{payload}) a~následne sa prepína do režimu vyčkávania. Periférny uzol potvrdí reálne fyzické vykonanie príkazu odpovedaním na identický topik obohatený o~príponu \texttt{/feedback}.
-    \item \textbf{Detekcia dostupnosti cez LWT (\textit{Last Will and Testament}):} Sledovanie \textit{online/offline} stavu uzlov úmyselne nerieši aktívne dotazovanie siete (\textit{pingovanie}). Opiera sa o~zdieľanú zostatkovú (\textit{retained}) správu udržiavanú \textit{brokerom}, ktorej okamžitý prepis pri strate spojenia s uzlom efektívne zalarmuje centrálu o~poruche.
-    \item \textbf{Dôsledná separácia dát z~kódu (JSON formát):} Vrcholom systémovej architektúry je abstrahovanie logiky. Kompletná choreografia udalostí \textit{timeline}, počiatočných akcií \textit{onEnter} i~dynamických prechodov je vyčlenená mimo tvrdý kód. Tieto dáta sú načítavané priamo z~externých konfiguračných súborov \texttt{.json}.
+    \item \textbf{Hierarchické adresovanie zariadení:} Každé zariadenie je adresované vlastným topikom v~hierarchickom formáte (napr. \texttt{room1/motor1}). Raspberry Pi zverejní príkaz na daný topik; ESP32 mikrokontrolér, ktorý má tento topik odoberaný, správu prijme a~vykoná požadovanú akciu.
+    \item \textbf{Spätná väzba (\textit{feedback}):} Po vykonaní príkazu periférny uzol odošle potvrdzovaciu správu späť na topik s~príponou \texttt{/feedback} (napr.~\texttt{room1/motor1/feedback}). Centrála tak vie, že príkaz bol skutočne doručený a~fyzicky vykonaný.
+    \item \textbf{Detekcia dostupnosti (status~+~LWT):} Každý ESP32 uzol pri pripojení aktívne zverejní stav \texttt{online} na topiku \texttt{devices/<id>/status} ako zostatkovú (\textit{retained}) správu — centrála tak vždy pozná aktuálny stav siete. Súčasne je nastavená správa \textit{Last Will and Testament} (LWT), ktorú broker automaticky zverejní ako \texttt{offline} na rovnakom topiku v~prípade neočakávaného výpadku spojenia.
+    \item \textbf{Konfigurácia scény ako externý JSON súbor:} Celá logika scenára — čo má každý exponát vykonať, v~akom poradí a~za akých podmienok — je definovaná výhradne v~externom súbore \texttt{.json}, nie priamo v~kóde enginu. Obsluha môže scenár upravovať alebo vymeniť za behu programu bez akéhokoľvek zásahu do zdrojového kódu.
 \end{itemize}
 
-Vďaka textovému kontraktu JSON sa editorom podoby a logiky výstavy môže stať priamo samotný používateľ vo svojom textovom editore, a~to v~režime chodu programu bez najmenšej potreby zasahovania či rekompilácie jadra aplikácie.
+Vďaka tomuto oddeleniu scenára od enginu sa konfigurácia výstavy stáva samostatným textovým dokumentom zrozumiteľným aj pre netechnický personál.
 
 \vspace{1cm}
 \begin{center}

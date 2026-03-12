@@ -25,27 +25,27 @@ Overenie stability systému prebiehalo v troch izolovaných rovinách: prevádzk
 \begin{itemize}
     \item \textbf{Cieľ:} Otestovať plynulosť a asynchrónnu presnosť prechodov definovaných v JSON súbore počas riadenia fyzických aktuátorov priamo v~múzeu.
     \item \textbf{Priebeh:} Systém musel prehrať multimediálny audiovizuálny obsah súčasne s presne načasovaným pohybom motorov a dynamickým zhasínaním svetiel.
-    \item \textbf{Výsledok (Úspech):} Všetko fungovalo stopercentne spoľahlivo. Akcie sa spúšťali načas podľa zadanej \textit{timeline}, mikrokontroléry reagovali bez sekania či asynchrónneho oneskorenia a video-audio stopa bola zosynchronizovaná so svetelnými efektami bez postrehnuteľnej latencie (tzv. \textit{lagovania}).
+    \item \textbf{Výsledok:} Všetky akcie boli spustené v~časoch definovaných v~\textit{timeline}. Komunikácia s~mikrokontrolérmi prebehla bez zaznamenaného oneskorenia a~synchronizácia audio-video stopy so svetelnými efektmi bola vizuálne konzistentná počas celého trvania testu.
 \end{itemize}
 
 \subsection{Scenár 2 -- Dlhodobý test stability riadiaceho systému}
 \begin{itemize}
     \item \textbf{Cieľ:} Overiť odolnosť Raspberry Pi a MQTT brokera proti pretečeniu pamäte a zlyhaniu pri dlhodobom plynulom behu (tzv. \textit{Soak test}).
     \item \textbf{Priebeh:} Centrálny program systému bežal na stole formou \textit{dry-run} testovania v kuse niekoľko dní v laboratórnych podmienkach. Priebežne dochádzalo k ojedinelému spúšťaniu scén a monitorovaniu odosielaných MQTT príkazov na zbernicu.
-    \item \textbf{Výsledok (Úspech):} Samotný konečný automat (FSM) a \texttt{MuseumController} nespadli. Príkazy boli spoľahlivo generované na MQTT bus počas celej doby trvania experimentu, čo potvrdilo stopercentnú pripravenosť softvéru na 24/7 prevádzku múzea.
+    \item \textbf{Výsledok:} Proces \texttt{MuseumController} zostal počas celej doby testu bez reštartu. Príkazy boli generované na MQTT zbernicu priebežne bez výpadku, čo preukázalo dostatočnú stabilitu softvéru pre nepretržitú prevádzku.
 \end{itemize}
 
 \subsection{Scenár 3 -- Test sieťovej odolnosti a LWT (Last Will)}
 \begin{itemize}
     \item \textbf{Cieľ:} Overiť detekčný a oznamovací mechanizmus systému pri neštandardnej strate bezdrôtového spojenia uzlov na Wi-Fi sieti.
     \item \textbf{Priebeh:} Koncovým ESP32 uzlom (\textit{Controller\_MOTORS} a \textit{Controller\_RELAY}) bolo striedavo fyzicky odpájané a následne vracané napájanie za behu celého systému.
-    \item \textbf{Výsledok (Úspech):} ESP uzly sa pri opätovnom pripojení energie vždy spoľahlivo a autonómne pripojili späť na Wi-Fi sieť a MQTT broker. Webový \textbf{Dashboard} reagoval správne \textit{real-time} prepisom indikátorov vďaka odchytnutiu LWT \texttt{offline} packetov od brokera rovnako aj \texttt{online} hlásení od modulov.
+    \item \textbf{Výsledok:} Po obnovení napájania sa uzly autonómne pripojili späť na Wi-Fi sieť a~MQTT brokera. Dashboard správne zaznamenal zmenu stavu — prepis indikátora z~\texttt{offline} na \texttt{online} prebehol na základe LWT správy od brokera a~následného \texttt{online} hlásenia od uzla.
 \end{itemize}
 
 \section{Zhodnotenie overenia}
 \label{VysledkyZhodnotenie}
 
 \begin{itemize}
-    \item \textbf{Záver experimentov:} Architektúra distribuovanej hviezdicovej siete preukázala mimoriadnu stabilitu aj pri plnom fyzickom zaťažení v prevádzke.
-    \item Neobjavila sa nutnosť preklápať systém do káblového riešenia, keďže Wi-Fi s MQTT protkolom vo vrstve preukázalo dostatočnú reaktivitu na hardvérové triggre bez oneskorenia. 
+    \item \textbf{Záver experimentov:} Všetky tri testované scenáre boli úspešne overené. Architektúra distribuovanej hviezdicovej siete sa ukázala ako dostatočne stabilná pre podmienky plného fyzického zaťaženia v~prostredí expozície.
+    \item Bezdrôtová komunikácia cez protokol MQTT preukázala reaktivitu postačujúcu na spracovanie hardvérových triggerov bez merateľného oneskorenia, čo vylúčilo potrebu prechodu na drôtové prepojenie.
 \end{itemize}
