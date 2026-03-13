@@ -42,12 +42,12 @@ Z~fyzického a~sieťového hľadiska však systém prísne dodržiava \textbf{hv
 \section{Hardvérová voľba a~sieťový prenos}
 \label{HardverovaTopoligia}
 
-Systém je rozdelený do dvoch samostatných kategórií: na jeden centrálny uzol a na sieť výkonných periférií. Z~hľadiska spoľahlivosti a~rýchlosti prenosu medzi nimi by bolo ideálne zabezpečiť komunikáciu výhradne plne drôtovým spojením. V praxi však v~expozíciách či \textit{escape room} inštaláciách často nie je technologicky alebo esteticky možné naťahovať dodatočné káblové zväzky naprieč miestnosťou. Z~tohto dôvodu bolo na plošnú distribúciu dátových príkazov z~centrály zvolené bezdrôtové Wi-Fi pripojenie.
+Systém je rozdelený do dvoch samostatných kategórií: na jeden centrálny uzol a na sieť výkonných periférií. Z~hľadiska spoľahlivosti a~rýchlosti prenosu medzi nimi by bolo ideálne zabezpečiť komunikáciu výhradne plne drôtovým spojením. V praxi však v~expozíciách či \textit{escape room} inštaláciách často nie je technologicky alebo esteticky možné naťahovať dodatočné káblové zväzky naprieč miestnosťou. Z tohto dôvodu bolo na distribúciu dátových príkazov z centrály zvolené bezdrôtové Wi-Fi pripojenie.
 
 Dvojúrovňová architektúra bola fyzicky obsadená nasledovným hardvérom:
 \begin{itemize}
-    \item \textbf{Centrálny uzol (\uv{Mozog}):} Hlavnú riadiacu jednotku systému tvorí jednodoskový počítač \textbf{Raspberry Pi}. Tento počítač plní úlohu centrálneho uzla, v ktorom je implementovaná hlavná logika riadenia celej miestnosti. Zvolený bol najmä pre svoj dostatočný výpočtový výkon a pamäť, ktoré umožňujú spoľahlivú prevádzku riadiaceho softvéru aj prehrávanie multimediálneho obsahu. Zariadenie zároveň poskytuje natívne rozhrania pre výstup obrazu (HDMI) a zvuku, čo umožňuje priamu obsluhu audio-vizuálnych prvkov expozície. Výhodou je aj dostupnosť sieťových rozhraní (\textit{Wi-Fi} aj \textit{Ethernet}), vďaka ktorým môže systém komunikovať s ostatnými zariadeniami a súčasne hostovať webový ovládací \textit{dashboard} určený pre obsluhu.
-    \item \textbf{Distribuované uzly (\uv{Svaly a zmysly}):} Na plnenie lokálnych fyzických úkonov slúži modulárna sieť bezdrôtových mikrokontrolérov \textbf{ESP32}, ktoré sú implementované a~napájané priamo pri interaktívnych objektoch. Tieto uzly sa na základe svojho zamerania softvérovo rozdeľujú na:
+    \item \textbf{Centrálny uzol (\uv{Mozog}):} Hlavnú riadiacu jednotku systému tvorí jednodoskový počítač \textbf{Raspberry Pi}. Tento počítač plní úlohu centrálneho uzla, v ktorom je implementovaná hlavná logika riadenia celej miestnosti. Zvolený bol najmä pre svoj dostatočný výpočtový výkon a pamäť, ktoré umožňujú spoľahlivú prevádzku riadiaceho softvéru aj prehrávanie multimediálneho obsahu. Zariadenie zároveň poskytuje natívne rozhrania pre výstup obrazu (HDMI) a zvuku, čo umožňuje priamu obsluhu displeju a reproduktorov. Výhodou je aj dostupnosť sieťových rozhraní (\textit{Wi-Fi} aj \textit{Ethernet}), vďaka ktorým môže systém komunikovať s ostatnými zariadeniami a súčasne hostovať webový ovládací \textit{dashboard} určený pre obsluhu.
+    \item \textbf{Distribuované uzly (\uv{Svaly a zmysly}):} Na plnenie fyzických úkonov slúži modulárna sieť bezdrôtových mikrokontrolérov \textbf{ESP32}, ktoré sú implementované a~napájané priamo pri interaktívnych objektoch. Tieto uzly sa na základe svojho zamerania softvérovo rozdeľujú na:
     \begin{itemize}
         \item \textbf{Senzorický uzol} pre hardvérovú detekciu vstupov od používateľov.
         \item \textbf{Motorický uzol} pre obsluhu fyzického pohybu exponátov (jednosmerné motory).
@@ -59,9 +59,9 @@ Dvojúrovňová architektúra bola fyzicky obsadená nasledovným hardvérom:
 \section{Princíp softvérového jadra (Scene Engine)}
 \label{SoftverovArchitektura}
 
-Ústrednou požiadavkou na softvérové jadro bola schopnosť \textbf{vetviť priebeh expozície} na základe reálnych podnetov od návštevníka. Scenár preto nesmel byť pevnou lineárnou sekvenciou akcií — systém musel v~ľubovoľnom momente vedieť čakať na vonkajší vstup (napr. stlačenie tlačidla) a~podľa jeho výsledku dynamicky zvoliť ďalší smer deja. Klasický prístup blokujúceho vykonávania kódu je na takúto úlohu nevhodný, keďže vlákno čakajúce na jednu udalosť nie je schopné súčasne reagovať na iné podnety z~prostredia.
+Ústrednou požiadavkou na softvérové jadro bola schopnosť \textbf{vetviť priebeh expozície} na základe reálnych podnetov od návštevníka. Scenár preto nesmel byť pevnou lineárnou sekvenciou akcií - systém musel v ľubovoľnom momente vedieť čakať na vonkajší vstup (napr. stlačenie tlačidla) a podľa jeho výsledku dynamicky zvoliť ďalší smer deja. Klasický prístup blokujúceho vykonávania kódu je na takúto úlohu nevhodný, keďže vlákno čakajúce na jednu udalosť nie je schopné súčasne reagovať na iné podnety z~prostredia.
 
-Z~tohto dôvodu bolo softvérové jadro navrhnuté ako neblokujúci \textbf{Konečný stavový automat (FSM~— \textit{Finite State Machine})}. Priebeh expozície je rozdelený do samostatných \textbf{stavov}, pričom systém nepretržite sleduje podmienky prechodu — vypršanie časovača, dokončenie prehrávania média, alebo príchod správy od hardvérovej periférie — a~podľa nich plynulo presúva chod scenára do ďalšieho stavu. Podrobná softvérová implementácia tejto architektúry je rozpracovaná v~Kapitole~\ref{ImplementaciaSW}.
+Z~tohto dôvodu bolo softvérové jadro navrhnuté ako neblokujúci \textbf{Konečný stavový automat (FSM - \textit{Finite State Machine})}. Priebeh expozície je rozdelený do samostatných \textbf{stavov}, pričom systém nepretržite sleduje podmienky prechodu - vypršanie časovača, dokončenie prehrávania média, alebo príchod správy od hardvérovej periférie - a~podľa nich plynulo presúva chod scenára do ďalšieho stavu. Podrobná softvérová implementácia tejto architektúry je rozpracovaná v~Kapitole~\ref{ImplementaciaSW}.
 
 \vspace{1cm}
 \begin{center}
@@ -73,14 +73,14 @@ Z~tohto dôvodu bolo softvérové jadro navrhnuté ako neblokujúci \textbf{Kone
 \section{Architektúra komunikačnej vrstvy}
 \label{KomunikacnaVrstva}
 
-Pre výmenu dát medzi centrálnym automatom (v~jazyku Python) a~distribuovanými perifériami (ESP32) bol zvolený \textbf{protokol MQTT} (\textit{Message Queuing Telemetry Transport}). Prenos správ prebieha na koncepte \textit{Publish/Subscribe} cez trvalé TCP/IP spojenie s~centrálnym sieťovým sprostredkovateľom (\textit{brokerom}) — čo zaručuje nízku réžiu a~spoľahlivé doručenie v~rámci lokálnej siete.
+Pre výmenu dát medzi centrálnym automatom (v~jazyku Python) a~distribuovanými perifériami (ESP32) bol zvolený \textbf{protokol MQTT} (\textit{Message Queuing Telemetry Transport}). Prenos správ prebieha na koncepte \textit{Publish/Subscribe} cez trvalé TCP/IP spojenie s~centrálnym sieťovým sprostredkovateľom (\textit{brokerom}).
 
 Navrhnutý model siete implementuje niekoľko kľúčových komunikačných štandardov:
 \begin{itemize}
     \item \textbf{Hierarchické adresovanie zariadení:} Každé zariadenie je adresované vlastným topikom v~hierarchickom formáte (napr. \texttt{room1/motor1}). Raspberry Pi zverejní príkaz na daný topik; ESP32 mikrokontrolér, ktorý má tento topik odoberaný, správu prijme a~vykoná požadovanú akciu.
     \item \textbf{Spätná väzba (\textit{feedback}):} Po vykonaní príkazu periférny uzol odošle potvrdzovaciu správu späť na topik s~príponou \texttt{/feedback} (napr.~\texttt{room1/motor1/feedback}). Centrála tak vie, že príkaz bol skutočne doručený a~fyzicky vykonaný.
-    \item \textbf{Detekcia dostupnosti (status~+~LWT):} Každý ESP32 uzol pri pripojení aktívne zverejní stav \texttt{online} na topiku \texttt{devices/<id>/status} ako zostatkovú (\textit{retained}) správu — centrála tak vždy pozná aktuálny stav siete. Súčasne je nastavená správa \textit{Last Will and Testament} (LWT), ktorú broker automaticky zverejní ako \texttt{offline} na rovnakom topiku v~prípade neočakávaného výpadku spojenia.
-    \item \textbf{Konfigurácia scény ako externý JSON súbor:} Celá logika scenára — čo má každý exponát vykonať, v~akom poradí a~za akých podmienok — je definovaná výhradne v~externom súbore \texttt{.json}, nie priamo v~kóde enginu. Obsluha môže scenár upravovať alebo vymeniť za behu programu bez akéhokoľvek zásahu do zdrojového kódu.
+    \item \textbf{Detekcia dostupnosti (status~+~LWT):} Každý ESP32 uzol pri pripojení aktívne zverejní stav \texttt{online} na topiku \texttt{devices/<id>/status} ako zostatkovú (\textit{retained}) správu - centrála tak vždy pozná aktuálny stav siete. Súčasne je nastavená správa \textit{Last Will and Testament} (LWT), ktorú broker automaticky zverejní ako \texttt{offline} na rovnakom topiku v~prípade neočakávaného výpadku spojenia.
+    \item \textbf{Konfigurácia scény ako externý JSON súbor:} Celá logika scenára - čo má každý exponát vykonať, v~akom poradí a~za akých podmienok - je definovaná výhradne v~externom súbore \texttt{.json}, nie priamo v~kóde enginu. Obsluha môže scenár upravovať alebo vymeniť za behu programu bez akéhokoľvek zásahu do zdrojového kódu.
 \end{itemize}
 
 Vďaka tomuto oddeleniu scenára od enginu sa konfigurácia výstavy stáva samostatným textovým dokumentom zrozumiteľným aj pre netechnický personál.

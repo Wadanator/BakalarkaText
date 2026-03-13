@@ -39,7 +39,7 @@ Overenie stability systému prebiehalo v troch izolovaných rovinách: prevádzk
 \begin{itemize}
     \item \textbf{Cieľ:} Overiť detekčný a oznamovací mechanizmus systému pri neštandardnej strate bezdrôtového spojenia uzlov na Wi-Fi sieti.
     \item \textbf{Priebeh:} Koncovým ESP32 uzlom (\textit{Controller\_MOTORS} a \textit{Controller\_RELAY}) bolo striedavo fyzicky odpájané a následne vracané napájanie za behu celého systému.
-    \item \textbf{Výsledok:} Po obnovení napájania sa uzly autonómne pripojili späť na Wi-Fi sieť a~MQTT brokera. Dashboard správne zaznamenal zmenu stavu — prepis indikátora z~\texttt{offline} na \texttt{online} prebehol na základe LWT správy od brokera a~následného \texttt{online} hlásenia od uzla.
+    \item \textbf{Výsledok:} Po obnovení napájania sa uzly autonómne pripojili späť na Wi-Fi sieť a~MQTT brokera. Dashboard správne zaznamenal zmenu stavu - prepis indikátora z~\texttt{offline} na \texttt{online} prebehol na základe LWT správy od brokera a~následného \texttt{online} hlásenia od uzla.
 \end{itemize}
 
 \section{Zhodnotenie overenia}
