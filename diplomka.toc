@@ -29,25 +29,24 @@
 \contentsline {chapter}{\numberline {4}Implementácia hardvérovej časti}{22}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Centrálna jednotka -- Raspberry Pi}{22}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Distribuované uzly -- ESP32}{22}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Výkonové prvky}{23}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Riadenie jednosmerných (DC) motorov}{23}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Spínanie sieťového napätia (230\,V) a senzorika}{24}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}Napájanie a~zapojenie prototypu}{25}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Implementácia softvérovej časti}{26}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Firmvér ESP32}{26}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Backend Raspberry Pi}{27}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Stavový automat a~scene engine}{27}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Webový dashboard}{28}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Konfigurácia scén -- JSON formát}{28}{section.5.5}%
-\contentsline {chapter}{\numberline {6}Experimentálne overenie}{29}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Popis demonštračnej úlohy (Setup)}{29}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Testované scenáre a výsledky}{29}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Scenár 1 -- Komplexná lineárna scéna s hardvérom}{29}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Scenár 2 -- Dlhodobý test stability riadiaceho systému}{29}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Scenár 3 -- Test sieťovej odolnosti a LWT (Last Will)}{30}{subsection.6.2.3}%
-\contentsline {section}{\numberline {6.3}Zhodnotenie overenia}{30}{section.6.3}%
-\contentsline {chapter}{\numberline {7}Záver}{31}{chapter.7}%
-\contentsline {chapter}{Zoznam obrázkov}{32}{chapter*.4}%
-\contentsline {chapter}{Zoznam tabuliek}{33}{chapter*.5}%
-\contentsline {chapter}{Použitá literatúra}{34}{section*.6}%
-\contentsline {chapter}{Použitá literatúra}{34}{chapter*.7}%
+\contentsline {subsection}{\numberline {4.2.1}Uzol ovládania jednosmerných motorov}{23}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Uzol spínacích relé}{23}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Senzorický tlačidlový uzol}{24}{subsection.4.2.3}%
+\contentsline {chapter}{\numberline {5}Implementácia softvérovej časti}{25}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Firmvér ESP32}{25}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Backend Raspberry Pi}{26}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Stavový automat a~scene engine}{26}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Webový dashboard}{27}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Konfigurácia scén -- JSON formát}{27}{section.5.5}%
+\contentsline {chapter}{\numberline {6}Experimentálne overenie}{28}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Popis demonštračnej úlohy (Setup)}{28}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Testované scenáre a výsledky}{28}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Scenár 1 -- Komplexná lineárna scéna s hardvérom}{28}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Scenár 2 -- Dlhodobý test stability riadiaceho systému}{28}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Scenár 3 -- Test sieťovej odolnosti a LWT (Last Will)}{29}{subsection.6.2.3}%
+\contentsline {section}{\numberline {6.3}Zhodnotenie overenia}{29}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Záver}{30}{chapter.7}%
+\contentsline {chapter}{Zoznam obrázkov}{31}{chapter*.4}%
+\contentsline {chapter}{Zoznam tabuliek}{32}{chapter*.5}%
+\contentsline {chapter}{Použitá literatúra}{33}{section*.6}%
+\contentsline {chapter}{Použitá literatúra}{33}{chapter*.7}%

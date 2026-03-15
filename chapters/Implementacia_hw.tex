@@ -1,18 +1,13 @@
 \chapter{Implementácia hardvérovej časti}
 \label{ImplementaciaHW}
 
-Táto kapitola je venovaná fyzickej inštalácii celého riadiaceho systému.
-
+Táto kapitola sa zaoberá implementáciou hardvérovej časti riadiaceho systému. (DOPLNIT)
 \section{Centrálna jednotka -- Raspberry Pi}
 \label{CentralnaJednotka}
 
-Na prepojenie softvéru a lokálnej reálnej vrstvy bol zvolený nasledujúci hardvér:
-Na prepojenie softvéru a lokálnej reálnej vrstvy bol zvolený nasledujúci hardvér:
-\begin{itemize}
-    \item \textbf{Umiestnenie a konektivita:} Centrálny minipočítač Raspberry Pi bol fyzicky umiestnený v tesnej blízkosti audiovizuálnej techniky (napríklad priamo za monitorom/televízorom). Toto riešenie minimalizuje dĺžku káblov, keďže priamo zabezpečuje natívne prehrávanie videa cez HDMI a distribúciu zvuku do reproduktorov, pričom postačuje bežný prístup do LAN lokálnej siete.
-    \item \textbf{Konfigurácia operačného systému:} Pre ušetrenie systémových prostriedkov bola nasadená \uv{headless} distribúcia Raspberry Pi OS Lite (bez grafického prostredia). Týmto krokom je výpočtový výkon striktne dedikovaný pre chod MQTT brokera \texttt{Mosquitto} a~riadiaceho softvérového jadra steny.
-    \item \textbf{Správa prístupových práv:} Systémovým aplikáciám bežiacim na pozadí (\texttt{systemd} služby) boli prednastavené užívateľské oprávnenia pre priamy prístup k~sériovým portom a~audio subsystému bez nutnosti dodatočných bezpečnostných \uv{sudo} potvrdzovaní obsluhy.
-\end{itemize}
+Úlohu hlavného komunikačného a multimediálneho uzla plní minipočítač Raspberry Pi. Z hľadiska fyzickej inštalácie bol umiestnený v tesnej blízkosti audiovizuálnej techniky (priamo za obrazovkou monitora). Toto riešenie minimalizuje dĺžku káblových zväzkov, keďže Raspberry Pi priamo zabezpečuje natívne prehrávanie videa cez rozhranie HDMI ale aj audio výstup cez 3,5\,mm jack. Pre bezproblémovú plnú integráciu do distribuovaného systému MQTT postačuje systému len bežný Ethernet alebo Wi-Fi prístup do LAN siete.
+
+Na napájanie tohto centrálneho mozgu je využívaný USB-C adaptér - 5,0\,V / 3,0\,A.
 
 \vspace{1cm}
 \begin{center}
@@ -23,63 +18,58 @@ Na prepojenie softvéru a lokálnej reálnej vrstvy bol zvolený nasledujúci ha
 \section{Distribuované uzly -- ESP32}
 \label{DistribuovaneUzly}
 
+Riadiaca logika expozície je decentralizovaná do niekoľkých samostatných uzlov postavených na architektúre mikrokontrolérov rodiny ESP32. Tento prístup fyzicky rozdeľuje zodpovednosť do blokov a znižuje potrebu ťahať káblové zväzky naprieč miestnosťou.
+
+Z hľadiska fyzického rozmiestnenia sú riadiace a silové uzly (pre ovládanie motorov a spínanie relé) umiestnené spoločne vo \textbf{fyzickom kotle}, ktorý neslúži len ako bežný inštalačný rozvádzač, ale tvorí priamo dominantný estetický exponát expozície. Tento dekoratívny valcový prvok, siahajúci do výšky 60\,cm, kombinuje čierny matný povrch s~autentickým nitovaným lemom a~kovovými nožičkami. Pre umocnenie industriálneho dojmu je v~jeho prednej časti integrovaná mriežka prepúšťajúca simulovaný svetelný ráz \uv{ohňa} a~v~spodnej časti ukrýva vývod dymostroja na PVC potrubie. Oproti tomu senzorický \uv{tlačidlový} uzol pre používateľský vstup je namontovaný oddelene pri vstupe do miestnosti.
+
+\subsection{Uzol ovládania jednosmerných motorov}
+\label{UzolMotorov}
+
+Tento riadiaci obvod je vyhradený pre ovládanie jednosmerných (DC) motorov, ktoré animujú dominantné dizajnové prvky celej inštalácie (nazvanej \textbf{CHRONOS}). Hlavným poháňaným exponátom sú:
 \begin{itemize}
-    \item \textbf{Uzol DC Motorov (ESP32 DevKit V1):} Pre precízne riadenie dvoch jednosmerných motorov bola využitá štandardná 30-pinová vývojová doska s~čipom ESP-WROOM-32. Doska je nasadená pre generovanie PWM signálov ovládajúcich inštalačné motory, spája tak vysoký prevádzkový takt (až 240 MHz) s integrovanou rádiofrekvenčnou jednotkou (Wi-Fi).
-    \item \textbf{Uzol Spínacích Relé (RP2350 Waveshare Relay):} Pre uzol určený na silové spínanie svetiel a~dymostrojov sa zvolila integrovaná doska od firmy Waveshare, osadená na architektúre mikrokontroléra \textbf{RP2350}. V systéme kontroluje 8 nezávislých 230\,V okruhov s priamou podporou káblového Ethernet pripojenia.
-    \item \textbf{Uzol Tlačidla a Signalizácie (ESP32 DevKit V1):} Tretí fyzický uzol reprezentuje záchyt asynchrónnych tlačidlových vstupov od osôb obsluhujúcich expozíciu (priamy spúšťač systému). Mikrokontrolér na GPIO pinoch prijíma digitálne pulzy od spínača, pričom je zodpovedný aj za spätnú LED RGB vizualizáciu (podsvietenie samotného tlačidla na základe prijatej MQTT inštrukcie) informujúcu o stave spojenia.
-    \item \textbf{Spôsob plošnej strediskovej montáže:} Všetky tri bloky boli implementované ako samostatné satelity -- osadené lokálne priamo k daným zariadeniam (blízko motorov či obslužného panelu). Tým rapídne odpadá potreba ťahať hrubé signálové zväzky smerom k jedinému riadiacemu bodu (\textit{Single point of failure}); postačuje len pokrytie Wi-Fi signálom a dedikovaný napájací adaptér.
+    \item \textbf{Hlavné hodiny:} Dekoratívne hodiny s~priemerom približne 1,3\,m osadené rímskymi číslicami a kovanými ručičkami. Hodiny neplnia reálnu časomernú funkciu; ich vizuálny pohyb dopĺňajú statické dekoratívne ozubené kolesá rozprestierajúce sa do výšky 1,8\,m, ktoré dotvárajú industriálny ráz diela.
+\end{itemize}
+
+Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov:
+\begin{itemize}
+    \item \textbf{Mikrokontrolér ESP32 DevKit V1:} Funguje ako mozog uzla, ktorý spracováva príkazy z MQTT brokera a tým generuje PWM signál pre ovládanie motorov.
+    \item \textbf{Výkonový budič BTS7960:} Polovodičový H-mostík slúži na riadenie výkonu motorov. Tento masívne dimenzovaný obvod bezpečne odoláva vysokým prúdovým špičkám pri rozbehoch (až do 43\,A).
 \end{itemize}
 
 \vspace{1cm}
 \begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: Fotografia modulu ESP32 ESP-WROOM-32 a~jeho GPIO rozloženia]}
+    \textit{[MIESTO PRE OBRÁZOK: Schéma zapojenia uzla pre DC Motory (ESP32, BTS7960, 12V zdroj)]}
 \end{center}
 \vspace{1cm}
 
-\section{Výkonové prvky}
-\label{VykonovePrvky}
+\subsection{Uzol spínacích relé}
+\label{UzolRele}
 
-Súbor elektronických komponentov zabezpečuje fyzický prejav asynchrónnych softvérových inštrukcií.
-
-\subsection{Riadenie jednosmerných (DC) motorov}
-Aplikácie asynchrónneho otáčania inštalácie (pohyb samotných ručičiek na rozmerných hodinových exponátoch) realizujú bežné jednosmerné komutátorové stroje. Na účely prekladu digitálnej logiky na výkonovú linku z~dedikovaného priemyselného zdroja využíva systém technológiu H-mostíka.
-
-Implementačné detaily motorických obvodov:
+Na jednoduché zapínanie a~vypínanie ostatných prvkov expozície, ako sú svetlá, budíky či dymostroj, slúži vyhradený reléový uzol:
 \begin{itemize}
-    \item \textbf{Voľba výkonového budiča BTS7960:} Pre spoľahlivé ovládanie 12\,V jednosmerných pohonov sme, z~dôvodu nevyhovujúcej tepelnej únosnosti bežných začiatočníckych obvodov (typu L298N), aplikovali robustný vysokoprúdový H-mostík \textbf{BTS7960}. Tento dvojitý modulárny menič s~priamym riadením z logiky dosahuje špičkovú prúdovú zaťažiteľnosť \textbf{až 43\,A}, čím znáša drsné kinetické rázy od rozbehov. Zapojenie vyžaduje iba 4 komunikačné vodiče (\texttt{GND}, \texttt{5V}, \texttt{PWM1}, \texttt{PWM2}).
-    \item \textbf{Progresívne ovládanie PWM (Impulzná šírková modulácia):} Uzol definovaný pre pohyb hodín nevykonáva len binárne zapnutie a~vypnutie. Systém využíva funkciu hardvérového PWM regulovania otáčok pomocou premenlivej striedy signálu. Hardvérový časovač v~ESP32 beží na prednastavenej vysokej pracovnej frekvencii $20\,\text{kHz}$, čím sa úspešne eliminuje nežiaduce počuteľné pískanie cievok statora motora pre tiché operovanie.
-    \item \textbf{Prevencia proti trhaniu (\textit{Smooth ramping}):} Pre tlmenie prúdových nárazov na mechanické upevňovacie prevodovky rekvizít je vo firmvéri priamo zakomponovaný plynulý nábeh a~výbeh hodnoty PWM. Tieto prechody sú definované krokmi (o hodnotu \texttt{SMOOTH\_STEP}) a~časovými periodickými oneskoreniami (\texttt{SMOOTH\_DELAY}), čo v konečnom dôsledku predlžuje servisné cykly muzeálnych rekvizít namáhaných dennou non-stop prevádzkou.
+    \item \textbf{Priemyselný I/O modul Waveshare:} Základom tohto uzla je komerčná hotová doska s~čipom \textbf{ESP32-S3}. Obsahuje integrovanú podporu pre \textit{Power over Ethernet} (PoE) a~zbernicu RS485.
+    \item \textbf{10\,A mechanické relé:} Modul disponuje ôsmimi nezávislými relé, ktoré obsluhujú rozmanité typy napätia. Spínajú priamo striedavých 230\,V na chod dekoratívnej \textbf{Edisonovej žiarovky}, \textbf{výrobníka dymu} (ktorý vháňa paru do rozvedeného potrubia) a~tiež prúd pre \textbf{svetlo simulujúce oheň} v~kotle. Ďalšou vyhradenou sekciou je spínanie jednosmernej 12\,V vetvy určenej na napájanie podsvietenia dvoch oddelených skupín \textbf{industriálnych analógových budíkov} a~skrytých dizajnových LED pásov.
+    \item \textbf{Dôvod nasadenia modulu:} Namiesto lokálne osadených a~letovaných polovodičových relé (SSR) bola na zaistenie požiarnej a~elektrickej bezpečnosti použitá táto certifikovaná hotová doska. V~prípade hardvérového zlyhania v múzejnej prevádzke umožňuje servisným technikom okamžitú, jednoduchú a~bezpečnú výmenu \uv{kus za kus}.
 \end{itemize}
 
 \vspace{1cm}
 \begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: Použitý výkonový H-mostík BTS7960 s~dimenzovaným chladičom pripojený k~motoru a~ESP32]}
+    \textit{[MIESTO PRE OBRÁZOK: Schéma zapojenia relé uzla (Waveshare ESP32-S3, 230V obvody a 12V obvody)]}
 \end{center}
 \vspace{1cm}
 
-\subsection{Spínanie sieťového napätia (230\,V) a senzorika}
-Pre riadenie spotrebičov, ktoré nepracujú s~plynulým pohybom, ale spúšťajú vizuálne efekty a dym s občasným veľkým prúdovým odberom (priamo zo sieťového napätia 230 V), bola zvolená reléová spínacia stratégia. Paralelne s ňou je vyriešený fyzický senzorický vstup od návštevníka.
+\subsection{Senzorický tlačidlový uzol}
+\label{UzolSenzorov}
 
+Fyzický vstup zameraný na interakciu s návštevníkmi je spracovaný samostatným uzlom:
 \begin{itemize}
-\begin{itemize}
-    \item \textbf{Priemyselný reléový modul:} Okamžité nahrievanie a následné spustenie produkcie z hmlových dymostrojov vyžadovalo inštaláciu skompletizovaného riešenia. Využitý je integrálny \textbf{8-kanálový priemyselný relé modul (od výrobcu Waveshare)}. Okrem spomínaných 8 nezávislých relé (zaťaženia relé kontaktov do 10\,A / 250\,V AC pre rôzne LED pruhy a edisonovú žiarovku) modul plne podporuje klasickú káblovú sieť prostredníctvom W5500 zbernice. Vďaka štandardu PoE (\textit{Power over Ethernet}) sa tak eliminuje potreba ďalšieho adaptéra a kritická relé vetva má najvyššiu priepustnosť.
-    \item \textbf{Optické oddelenie obvodov:} Keďže sa spína 230\,V elektrický prúd pre dymostroj a žiarovku, prepájanie reléového bloku a dosky prebieha cez spoľahlivo zapuzdrené optočleny (\textit{optocouplers}). Infračervené svetlo vnútri plastu úplne separuje logický signál 5 V pre uzatváranie tranzistora bez mechanického dotyku - nebezpečenstvo prerazenia izolácie je priamemu spojeniu minimalizované.
-    \item \textbf{Senzorický uzol (Tlačidlo):} Na získavanie asynchrónnych trigggerov expozície slúži fyzické záchytné tlačidlo obsluhy. Signál prijímaný na koncovom ESP32 mikrokontroléri je nízkoúrovňovo filtrovaný viacerými vrstvami: najprv hardvérovým \textbf{debounce časovačom} (typických $60\,\text{ms}$), ktorý ignoruje mechanické poskakovanie (zvonenie) kontaktových spínačov v priestore sekúnd; následne je uplatnený aplikačný zámok \textbf{cooldown} v trvaní zhruba $4000\,\text{ms}$. Pre návštevníka to v praxi znamená, že opakované búchanie do spúšťacieho panelu napriek emóciám neodpáli zbytočné stovky MQTT volaní do siete. Rovnaký uzol ovláda RGB presvetlenie tlačidla.
-\end{itemize}
-
-\section{Napájanie a~zapojenie prototypu}
-\label{NapajanieZapojenie}
-
-Prevádzka komplexnej mechatronickej sústavy desiatok uzlov vyžaduje nutnosť dodržania prísnej vrstvenej izolácie. Zlúčenie odlišných signálových hladín logiky s~vysokoodberovým prúdom z~jedného zdroja vedie v koncových zariadeniach k nežiaducim poklesom a oneskoreným resietom mikrokontrolérov. Správny distribuovaný uzol na výstave preto pracuje v troch elektrických izolovaných sústavách:
-
-\begin{itemize}
-    \item \textbf{Hladina logiky a riadiacich signálov (3.3\,V):} Určená výhradne pre bezodberový prenos informácií. Realizuje primárne čistené napájanie senzorov z~radu \textit{ESP32DevKit}, tvorí koncový generovaný PWM signál bežiaci na motor či komunikáciu na I2C zbernici. Je absolútne neprípustné zapájať ju pre vyživovanie cievok pripojeného relé.
-    \item \textbf{Pracovná hladina snímačov a~zosilňovačov (5.0\,V):} Silovejšia stabilizačná zložka ideálna pre plynulý chod RPi mozgu. Je dotiahnutá pomocou natrvalo osadených masívnych USB-C adaptérov (pre odvod odpadového tepla) s prúdom typicky do 3 ampérov. Na túto stabilnú vetvu prechádzajú vstupné VIN piny jednotlivých senzorických ESP dosiek.
-    \item \textbf{Silová prúdová rovina pre aktuátory (12\,V / 230\,V):} Je v inštalácii prítomná na generovanie finálnej kinematickej zmeny prostredia (pohyb motorov a svit vysoko odberových pásov) z~čisto vyčlenených masívnych priemyselných SMPS meničov ukrytých izolovaných v dekoratívnom kotle. Tlak a rezervy výkonov (krátkodobo až dvojnásobných oproti tabuľke) slúžia pre rozbehové javy statorov a počiatočné špičky dymostroja. 
+    \item \textbf{Samostatný mikrokontrolér:} Na vstupnom mieste pred stenou je fyzicky osadená inštalačná krabička. Aby si zachovala kompaktné vonkajšie zapojenie, disponuje vlastným DC napájacím konektorom pre privedenie 5\,V napätia k vloženej doske \textbf{ESP32 DevKit V1}.
+    \item \textbf{Antivandal tlačidlo:} Kvôli zabezpečeniu odolnosti pred opakovaným a tvrdým návštevníckym stláčaním bol zvolený priemyselný \textbf{19\,mm vodotesný kovový spínač}, ktorý je prepojený s~krabičkou riadiaceho modulu pomocou leteckého konektora typu \textbf{GX12 (4-pin)}. Tento spínač slúži ako prvotný štartovací impulz pre chod interaktívnej scény.
+    \item \textbf{Diagnostika zapojenia:} Masívne tlačidlo je vybavené vizuálnym diódovým LED podsvietením v~tvare zeleného prstenca. Toto svetlo vizuálne potvrdzuje aktuálny status (napr. úspešné prepojenie s~lokálnou Wi-Fi sieťou a~MQTT brokerom), čo slúži na rýchlu diagnostiku..
 \end{itemize}
 
 \vspace{1cm}
 \begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: Elektrotechnická schéma zapojenia prototypu (napäťové úrovne 3.3V, 5V, 12V/230V, optické oddelenie relé a mosfety)]}
+    \textit{[MIESTO PRE OBRÁZOK: Schéma zapojenia vstupného tlačidla (ESP32, Pull-up rezistory, LED prstenec)]}
 \end{center}
 \vspace{1cm}
