@@ -2,20 +2,24 @@
 \babel@toc {slovak}{}\relax 
 \contentsline {chapter}{\numberline {1}Úvod}{9}{chapter.1}%
 \contentsline {chapter}{\numberline {2}Súčasný stav problematiky}{10}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Architektúry riadiacich systémov}{10}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Existujúce prístupy k~riadeniu expozícií}{11}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Priemyselné riadiace systémy (PLC/IPC)}{11}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Profesionálne show-control systémy}{12}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Otvorené IoT a SBC systémy (DIY / Maker / Embedded)}{12}{subsection.2.2.3}%
-\contentsline {section}{\numberline {2.3}Komunikačné rozhrania a protokoly}{13}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Prenosové médiá: drôtové vs. bezdrôtové}{13}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Aplikačné protokoly pre IoT komunikáciu}{14}{subsection.2.3.2}%
-\contentsline {section}{\numberline {2.4}Hardvérové platformy pre IoT}{15}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Jednodoskové počítače (SBC)}{15}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Mikrokontroléry pre koncové uzly}{15}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}Výkonové prvky (aktuátory)}{16}{subsection.2.4.3}%
-\contentsline {section}{\numberline {2.5}Dátové formáty pre konfiguráciu a prenos}{16}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Zhrnutie rešerše}{17}{section.2.6}%
+\contentsline {section}{\numberline {2.1}Vývoj výstavníctva a interaktívne expozície}{10}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Architektúry riadiacich systémov}{10}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Existujúce prístupy k~riadeniu expozícií}{11}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Priemyselné riadiace systémy (PLC)}{11}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Profesionálne show-control systémy}{12}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Otvorené IoT a~SBC systémy}{12}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Komunikačné protokoly}{12}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Prenosové médiá: drôtové vs. bezdrôtové}{13}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Aplikačné protokoly}{13}{subsection.2.4.2}%
+\contentsline {section}{\numberline {2.5}Hardvérové platformy pre IoT}{14}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Jednodoskové počítače (SBC)}{14}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Mikrokontroléry pre koncové uzly}{14}{subsection.2.5.2}%
+\contentsline {section}{\numberline {2.6}Výkonová elektronika a riadenie fyzických efektov}{14}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Riadenie jednosmerných (DC) motorov}{15}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Spínanie záťaží a~reléové spínače}{15}{subsection.2.6.2}%
+\contentsline {section}{\numberline {2.7}Dátové formáty pre konfiguráciu a~prenos}{15}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Prístupy k~riadiacej logike expozície}{16}{section.2.8}%
+\contentsline {section}{\numberline {2.9}Zhrnutie rešerše}{16}{section.2.9}%
 \contentsline {chapter}{\numberline {3}Návrh architektúry systému}{18}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Požiadavky na systém}{18}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Logická a~sieťová koncepcia}{18}{section.3.2}%
@@ -28,12 +32,12 @@
 \contentsline {section}{\numberline {4.3}Výkonové prvky}{23}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Riadenie jednosmerných (DC) motorov}{23}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}Spínanie sieťového napätia (230\,V) a senzorika}{24}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}Napájanie a~zapojenie prototypu}{24}{section.4.4}%
+\contentsline {section}{\numberline {4.4}Napájanie a~zapojenie prototypu}{25}{section.4.4}%
 \contentsline {chapter}{\numberline {5}Implementácia softvérovej časti}{26}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Firmvér ESP32}{26}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Backend Raspberry Pi}{27}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Stavový automat a~scene engine}{27}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Webový dashboard}{27}{section.5.4}%
+\contentsline {section}{\numberline {5.4}Webový dashboard}{28}{section.5.4}%
 \contentsline {section}{\numberline {5.5}Konfigurácia scén -- JSON formát}{28}{section.5.5}%
 \contentsline {chapter}{\numberline {6}Experimentálne overenie}{29}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Popis demonštračnej úlohy (Setup)}{29}{section.6.1}%
