@@ -11,8 +11,6 @@ Interaktívne prvky v~múzeách nie sú novinkou. Prvé mechanické systémy, ty
 
 Výskumy zároveň poukazujú na opakujúci sa prevádzkový problém: hoci návštevníci interaktívne prvky oceňujú, ich dlhodobá prevádzkyschopnosť bez stáleho technického personálu je v~menších inštitúciách problematická \cite{interactive_small_museums}. Systémy postavené na cenovo dostupných IoT platformách tento problém zmierňujú tým, že umožňujú vzdialenú diagnostiku a~jednoduchú rekonfiguráciu bez zásahu špecialistu priamo na mieste \cite{interactive_small_museums}.
 
-Dôležitým aspektom pri návrhu expozície je aj dispozičné riešenie fyzického priestoru. V~lineárnych priestoroch, ako sú chodby, sa uplatňuje skôr sekvenčné radenie interakcií, zatiaľ čo otvorené priestory si vyžadujú epizodické členenie s~voľnejším prechodom medzi uzlami \cite{interactive_exhibition_narrations}. Tieto priestorové požiadavky priamo ovplyvňujú návrh riadiaceho systému: ten musí zvládnuť nielen lineárne prehrávanie obsahu, ale aj vetvenie scenára na základe aktuálnej interakcie návštevníka \cite{computational_frameworks_art}.
-
 % ------------------------------------------------------------------
 \section{Architektúry riadiacich systémov}
 \label{architektury-systemov}
@@ -41,7 +39,7 @@ Voľba sieťovej a~logickej architektúry riadiaceho systému priamo ovplyvňuje
 \end{minipage}
 \end{figure}
 
-V~prostredí distribuovaných interaktívnych systémov sa čoraz viac presadzuje koncept \textit{Cyber-Physical Systems} (CPS), ktoré integrujú výpočtové a~fyzické komponenty do jedného celku. Tieto systémy umožňujú presnú synchronizáciu medzi digitálnym obsahom a~fyzickými efektmi, čo je nevyhnutné pre vytvorenie imerzívneho zážitku \cite{museum_immersive_design}. Výzvou pri návrhu takýchto systémov zostáva predpovedanie priepustnosti a~odozvy siete, čo si vyžaduje využitie formalizovaných metód, ako sú konečné stavové automaty (\textit{Finite State Machine}, FSM) \cite{distributed_control_modeling}.
+V~prostredí distribuovaných systémov sa čoraz viac presadzuje koncept \textit{Cyber-Physical Systems} (CPS), ktoré integrujú výpočtové a~fyzické komponenty do jedného celku. Tieto systémy umožňujú presnú synchronizáciu medzi digitálnym obsahom a~fyzickými efektmi, čo je nevyhnutné pre vytvorenie imerzívneho zážitku \cite{museum_immersive_design}. Výzvou pri návrhu takýchto systémov zostáva predpovedanie priepustnosti a~odozvy siete, čo si vyžaduje využitie formalizovaných metód, ako sú konečné stavové automaty (\textit{Finite State Machine}, FSM) \cite{distributed_control_modeling}.
 
 % ------------------------------------------------------------------
 \section{Existujúce prístupy k~riadeniu expozícií}
@@ -54,7 +52,7 @@ V~súčasnosti neexistuje jedno univerzálne riešenie pre implementáciu intera
 
 V~oblasti klasickej automatizácie sú dlhoročným štandardom Programovateľné logické automaty (PLC) od výrobcov ako \textbf{Siemens, Beckhoff či Mitsubishi} \cite{plc_journal}. Ich hlavnou výhodou je determinizmus, teda zaručená odozva systému na vstup v~presne definovanom čase \cite{plc_journal}. Táto vlastnosť je kritická pre bezpečnostné funkcie, ale pre bežné interaktívne inštalácie v~múzeách je často nadbytočná.
 
-PLC sú však primárne navrhnuté na prácu s~logickými signálmi a~narážajú na výrazné obmedzenia v~oblasti multimédií. Absencia natívnych HDMI portov a~neschopnosť priamo dekódovať video súbory vo vysokom rozlíšení vyžadujú použitie externých mediálnych prehrávačov \cite{rpi_esp32_scada}. Vysoká cena licencií a~hardvéru navyše robí tieto systémy neprístupnými pre menšie kultúrne inštitúcie \cite{interactive_small_museums}.
+PLC sú však primárne navrhnuté na prácu s~logickými signálmi a~narážajú na výrazné obmedzenia v~oblasti multimédií. Absencia natívnych HDMI portov a~neschopnosť priamo dekódovať video súbory vyžadujú použitie externých mediálnych prehrávačov \cite{rpi_esp32_scada}. Vysoká cena licencií a~hardvéru navyše robí tieto systémy neprístupnými pre menšie kultúrne inštitúcie \cite{interactive_small_museums}.
 
 \subsection{Profesionálne show-control systémy}
 \label{show-control}

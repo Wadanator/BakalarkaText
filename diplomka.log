@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  15 MAR 2026 22:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  16 MAR 2026 23:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -861,7 +861,7 @@ Package hyperref Info: Link coloring ON on input line 40.
 
 pdfTeX warning: pdflatex.exe (file ./pages/TitulniList_color.pdf): PDF inclusio
 n: found PDF version <1.7>, but at most version <1.5> allowed
-<pages/TitulniList_color.pdf, id=203, 597.51233pt x 845.0471pt>
+<pages/TitulniList_color.pdf, id=235, 597.51233pt x 845.0471pt>
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf>
 Package pdftex.def Info: pages/TitulniList_color.pdf  used on input line 44.
@@ -874,7 +874,7 @@ n: found PDF version <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./pages/TitulniList_color.pdf): PDF inclusio
 n: found PDF version <1.7>, but at most version <1.5> allowed
-<pages/TitulniList_color.pdf, id=205, page=1, 597.51233pt x 845.0471pt>
+<pages/TitulniList_color.pdf, id=237, page=1, 597.51233pt x 845.0471pt>
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf, page 1>
 Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
@@ -908,7 +908,7 @@ Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
 pdfTeX warning: pdflatex.exe (file ./pages/zav_prace__b6f095a8f97b2441249eadcf3
 ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
  allowed
-<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=220, 597.51233pt x 8
+<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=252, 597.51233pt x 8
 45.0471pt>
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
@@ -926,7 +926,7 @@ ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
 pdfTeX warning: pdflatex.exe (file ./pages/zav_prace__b6f095a8f97b2441249eadcf3
 ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
  allowed
-<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=222, page=1, 597.512
+<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=254, page=1, 597.512
 33pt x 845.0471pt>
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
@@ -965,7 +965,7 @@ Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf
 pdfTeX warning: pdflatex.exe (file ./pages/zav_prace__b6f095a8f97b2441249eadcf3
 ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
  allowed
-<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=243, page=2, 597.512
+<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=275, page=2, 597.512
 33pt x 845.0471pt>
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
@@ -1048,41 +1048,43 @@ Kapitola 1.
 ]
 Kapitola 2.
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
-3.
+1.
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Overfull \hbox (4.92735pt too wide) in paragraph at lines 23--24
+Overfull \hbox (4.92735pt too wide) in paragraph at lines 21--22
 []\T1/lmr/bx/n/12 Centralizovaná to-po-ló-gia: \T1/lmr/m/n/12 Jedna cen-trálna 
 jed-notka priamo ovláda v²etky vstupné
  []
 
-[10
-
-{C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
-<obr/Star_topology.png, id=350, 563.85657pt x 423.08063pt>
+<obr/Star_topology.png, id=377, 563.85657pt x 423.08063pt>
 File: obr/Star_topology.png Graphic file (type png)
 <use obr/Star_topology.png>
-Package pdftex.def Info: obr/Star_topology.png  used on input line 32.
+Package pdftex.def Info: obr/Star_topology.png  used on input line 30.
 (pdftex.def)             Requested size: 207.58878pt x 155.7627pt.
-<obr/Pyramid_topology.png, id=352, 563.85657pt x 381.67593pt>
+<obr/Pyramid_topology.png, id=379, 563.85657pt x 381.67593pt>
 File: obr/Pyramid_topology.png Graphic file (type png)
 <use obr/Pyramid_topology.png>
-Package pdftex.def Info: obr/Pyramid_topology.png  used on input line 38.
+Package pdftex.def Info: obr/Pyramid_topology.png  used on input line 36.
 (pdftex.def)             Requested size: 207.58878pt x 140.51901pt.
 
+Underfull \vbox (badness 1308) has occurred while \output is active []
+
+ [10
+
+{C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package babel Info: 'slovak' activates 'slovak' shorthands.
-(babel)             Reported on input line 63.
- [11 <./obr/Star_topology.png> <./obr/Pyramid_topology.png>] [12]
-Overfull \hbox (4.73131pt too wide) in paragraph at lines 97--98
+(babel)             Reported on input line 65.
+ [11 <./obr/Star_topology.png> <./obr/Pyramid_topology.png>]
+Overfull \hbox (4.73131pt too wide) in paragraph at lines 95--96
 \T1/lmr/m/n/12 razne zvy-²ujú fle-xi-bi-litu sys-tému [[]]. Mik-ro-kon-tro-léry
  ESP32 majú vsta-vané Wi-Fi a priamo
  []
 
-
-Overfull \hbox (10.58269pt too wide) in paragraph at lines 106--107
+[12]
+Overfull \hbox (10.58269pt too wide) in paragraph at lines 104--105
 []\T1/lmr/bx/n/12 MQTT \T1/lmr/m/n/12 (\T1/lmr/m/it/12 Mes-sage Qu-e-uing Te-le
 -metry Tran-s-port\T1/lmr/m/n/12 ), de-fi-no-vaný ako ISO ²tan-dard ISO/IEC
  []
@@ -1099,55 +1101,93 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [15])
-(chapters/Architektura.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [16]
-[17]
+(chapters/Architektura.tex [16]
 Kapitola 3.
-[18
+[17
 
-] [19]
+] [18]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 8
 0.
  (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [20]) (chapters/Implementacia_hw.tex [21]
+) [19]) (chapters/Implementacia_hw.tex [20]
 Kapitola 4.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [22
+ [21
 
 ]
-[23]) (chapters/Implementacia_sw.tex [24]
+[22]) (chapters/Implementacia_sw.tex [23]
 Kapitola 5.
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 15.
-[25
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [24
 
 ]
-Overfull \hbox (2.0008pt too wide) in paragraph at lines 74--75
-[]\T1/lmr/bx/n/12 Manuálne zá-sahy: \T1/lmr/m/n/12 Moº-nos´ in-te-rak-tívne spu
-s-ti´/zastavi´ scénu (\T1/lmr/m/it/12 Mas-ter Over-
+Overfull \hbox (14.78288pt too wide) in paragraph at lines 78--82
+[]\T1/lmr/bx/n/12 Odoslaný prí-kaz: \T1/lmr/m/n/12 Po úspe²-nom pre-chode obi-d
+voma fil-trami bol na to-pik \T1/lmtt/m/n/12 room1/scene
+ []
+
+[25] [26]
+Overfull \hbox (73.07062pt too wide) in paragraph at lines 208--213
+[]\T1/lmr/bx/n/12 Na£ítanie kon-fi-gu-rá-cie: \T1/lmr/m/n/12 Trieda \T1/lmtt/m/
+n/12 ConfigManager \T1/lmr/m/n/12 na-£í-tala hod-noty zo sú-boru \T1/lmtt/m/n/1
+2 config/config.ini
  []
 
 
-Overfull \hbox (62.18108pt too wide) in paragraph at lines 75--76
-[]\T1/lmr/m/n/12 ƒítanie ser-ve-ro-vých chy-bo-vých lo-gov pri-chá-dza-jú-cich 
-v re-ál-nom £ase zo \T1/lmtt/m/n/12 ServiceContainer\T1/lmr/m/n/12 -
+Overfull \hbox (7.66992pt too wide) in paragraph at lines 243--255
+\T1/lmr/m/it/12 vice Con-tai-ner\T1/lmr/m/n/12 ). Na-miesto pria-meho vy-tvá-ra
+-nia in-²tan-cií tried vo vnútri \T1/lmtt/m/n/12 MuseumController
  []
 
 
-Underfull \vbox (badness 2608) has occurred while \output is active []
-
- [26]
-Overfull \hbox (0.45964pt too wide) in paragraph at lines 87--88
-[]\T1/lmtt/m/n/12 onEnter: \T1/lmr/m/n/12 Priame pole ak-cií (napr. mqtt prí-ka
-zy alebo spus-te-nie zvuku s \T1/lmtt/m/n/12 audio:
+Overfull \hbox (5.45947pt too wide) in paragraph at lines 243--255
+\T1/lmr/m/n/12 MQTT pac-kage (\T1/lmtt/m/n/12 MQTTDeviceRegistry \TS1/lmr/m/n/1
+2 ^^Y \T1/lmtt/m/n/12 MQTTFeedbackTracker \TS1/lmr/m/n/12 ^^Y \T1/lmtt/m/n/12 M
+QTTMessageHandler
  []
 
-) (chapters/Experimenty.tex [27]
+[27]
+Overfull \hbox (0.16536pt too wide) in paragraph at lines 292--304
+[]\T1/lmr/bx/n/12 TransitionManager: \T1/lmr/m/n/12 Ucho-vá-val uda-losti v tro
+ch thread-safe fron-tách (de-que) s ma-
+ []
+
+[28]
+Overfull \hbox (17.86891pt too wide) in paragraph at lines 410--417
+[]\T1/lmr/bx/n/12 REST API: \T1/lmr/m/n/12 De-fi-no-va-ných bolo nie-ko©ko sku-
+pín end-po-in-tov: správa scén (\T1/lmtt/m/n/12 /api/scenes\T1/lmr/m/n/12 ,
+ []
+
+
+Overfull \hbox (0.23714pt too wide) in paragraph at lines 410--417
+\T1/lmtt/m/n/12 /api/run_scene\T1/lmr/m/n/12 , \T1/lmtt/m/n/12 /api/stop_scene\
+T1/lmr/m/n/12 ), ma-nu-álne MQTT prí-kazy (\T1/lmtt/m/n/12 /api/mqtt/send\T1/lm
+r/m/n/12 ),
+ []
+
+
+Overfull \hbox (81.8482pt too wide) in paragraph at lines 410--417
+\T1/lmr/m/n/12 správa mé-dií (\T1/lmtt/m/n/12 /api/media/audio\T1/lmr/m/n/12 , 
+\T1/lmtt/m/n/12 /api/media/video\T1/lmr/m/n/12 ) a sys-té-mové ope-rá-cie (\T1/
+lmtt/m/n/12 /api/system/reboot\T1/lmr/m/n/12 ,
+ []
+
+
+Overfull \hbox (31.1922pt too wide) in paragraph at lines 418--424
+\T1/lmr/m/n/12 vy-sie-laný (\T1/lmr/m/it/12 bro-ad-cast\T1/lmr/m/n/12 ) prí-slu
+²ný Soc-ket.IO event (\T1/lmtt/m/n/12 status_update\T1/lmr/m/n/12 , \T1/lmtt/m/
+n/12 device_status_update\T1/lmr/m/n/12 ,
+ []
+
+[29]
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 453.
+) (chapters/Experimenty.tex [30]
 Kapitola 6.
 
 Overfull \hbox (0.85129pt too wide) in paragraph at lines 27--28
@@ -1155,9 +1195,9 @@ Overfull \hbox (0.85129pt too wide) in paragraph at lines 27--28
 lny au-di-ovi-zu-álny ob-sah sú-£asne s presne
  []
 
-[28
+[31
 
-]) (chapters/Zaver.tex [29]
+]) (chapters/Zaver.tex [32]
 Kapitola 7.
 
 Overfull \hbox (0.87048pt too wide) in paragraph at lines 27--28
@@ -1165,20 +1205,20 @@ Overfull \hbox (0.87048pt too wide) in paragraph at lines 27--28
 PREFIX \T1/lmr/m/n/12 v C++ firm-véri pre kaºdý
  []
 
-) [30
+) [33
 
 ] (diplomka.lof)
 \tf@lof=\write6
 \openout6 = `diplomka.lof'.
 
- [31
+ [34
 
 
 ] (diplomka.lot)
 \tf@lot=\write7
 \openout7 = `diplomka.lot'.
 
- [32
+ [35
 
 
 ] (chapters/Literatura.tex
@@ -1193,7 +1233,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 22--25
  % 20technologies .
  []
 
-[33
+[36
 
 
 ]
@@ -1261,7 +1301,7 @@ Underfull \hbox (badness 5667) in paragraph at lines 120--123
  datasheets . raspberrypi . com / rpi4 /
  []
 
-[34]
+[37]
 Underfull \hbox (badness 10000) in paragraph at lines 127--130
 []\T1/lmr/m/n/12 ESP32 vs Ar-du-ino: Key Dif-fe-ren-ces, Speed & IoT Uses. \T1/
 lmr/m/it/12 NORVI
@@ -1368,28 +1408,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 179--182
  celerdata . com / glossary /
  []
 
-[35]) [36] 
+[38]) [39] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (diplomka.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `diplomka.out' has not changed.
-(rerunfilecheck)             Checksum: 6C3AA4DFFDA8B7627C33A4881064F345;10738.
+(rerunfilecheck)             Checksum: 2981E559C6D29E8ED5DBF4B5E4CFE172;12186.
  ) 
 Here is how much of TeX's memory you used:
- 20074 strings out of 467871
- 331142 string characters out of 5418377
- 870891 words of memory out of 5000000
- 48447 multiletter control sequences out of 15000+600000
- 694379 words of font info for 83 fonts, out of 8000000 for 9000
+ 20102 strings out of 467871
+ 331591 string characters out of 5418377
+ 870371 words of memory out of 5000000
+ 48463 multiletter control sequences out of 15000+600000
+ 694794 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,17n,93p,989b,769s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 78i,17n,93p,989b,691s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
 b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.p
 fb><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.p
@@ -1399,9 +1435,9 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (36 pages, 504948 bytes).
+Output written on diplomka.pdf (39 pages, 524041 bytes).
 PDF statistics:
- 716 PDF objects out of 1000 (max. 8388607)
- 126 named destinations out of 1000 (max. 500000)
- 446 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 774 PDF objects out of 1000 (max. 8388607)
+ 137 named destinations out of 1000 (max. 500000)
+ 510 words of extra memory for PDF output out of 10000 (max. 10000000)
 
