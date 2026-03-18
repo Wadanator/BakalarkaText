@@ -62,7 +62,7 @@ Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov:
     \item \textbf{Mikrokontrolér ESP32 DevKit V1:} Funguje ako mozog uzla,
         ktorý spracováva príkazy z MQTT brokera a tým generuje PWM signál
         pre ovládanie motorov.
-    \item \textbf{Výkonový budič BTS7960:} Polovodičový H-mostík slúži na
+    \item \textbf{2x Výkonový budič BTS7960:} Polovodičový H-mostík slúži na
         riadenie výkonu motorov (viď kapitola~\ref{dc-motory}). Tento masívne
         dimenzovaný obvod bezpečne odoláva vysokým prúdovým špičkám pri
         rozbehoch (až do 43\,A).
@@ -110,29 +110,55 @@ svetlá, budíky či dymostroj, slúži vyhradený reléový uzol:
 \subsection{Senzorický tlačidlový uzol}
 \label{UzolSenzorov}
 
-Fyzický vstup zameraný na interakciu s návštevníkmi je spracovaný
+Fyzický vstup zameraný na interakciu s~návštevníkmi je spracovaný
 samostatným uzlom:
 \begin{itemize}
-    \item \textbf{Samostatný mikrokontrolér:} Na vstupnom mieste pred stenou
-        je fyzicky osadená inštalačná krabička. Aby si zachovala kompaktné
-        vonkajšie zapojenie, disponuje vlastným DC napájacím konektorom pre
-        privedenie 5\,V napätia k vloženej doske \textbf{ESP32 DevKit V1}.
-    \item \textbf{Antivandal tlačidlo:} Kvôli zabezpečeniu odolnosti pred
-        opakovaným a tvrdým návštevníckym stláčaním bol zvolený priemyselný
-        \textbf{19\,mm vodotesný kovový spínač}, ktorý je prepojený
-        s~krabičkou riadiaceho modulu pomocou leteckého konektora typu
-        \textbf{GX12 (4-pin)}. Tento spínač slúži ako prvotný štartovací
+    \item \textbf{Samostatný mikrokontrolér:} Na vstupnom mieste pred
+        stenou je fyzicky osadená inštalačná krabička. Aby si
+        zachovala kompaktné vonkajšie zapojenie, disponuje vlastným
+        DC napájacím konektorom pre privedenie 5\,V napätia k~vloženej
+        doske \textbf{ESP32 DevKit V1}.
+    \item \textbf{Antivandal tlačidlo:} Kvôli zabezpečeniu odolnosti
+        pred opakovaným a~tvrdým návštevníckym stláčaním bol zvolený
+        priemyselný \textbf{19\,mm vodotesný kovový spínač}, ktorý je
+        prepojený s~krabičkou riadiaceho modulu pomocou leteckého
+        konektora typu \textbf{GX12 (4-pin)}. Cez tento štvoritý
+        konektor sú súčasne vedené všetky vodiče uzla: signálový
+        vodič tlačidla, napájanie LED prstenca, uzemnenie
+        a~referenčné 5\,V. Spínač slúži ako prvotný štartovací
         impulz pre chod interaktívnej scény.
-    \item \textbf{Diagnostika zapojenia:} Tlačidlo je vybavené
-        vizuálnym diódovým LED podsvietením v~tvare zeleného prstenca. Toto
-        svetlo vizuálne potvrdzuje aktuálny status (napr. úspešné prepojenie
-        s~lokálnou Wi-Fi sieťou a~MQTT brokerom), čo slúži na rýchlu
-        diagnostiku.
+    \item \textbf{Riadenie LED prstenca cez MOSFET spínač:} Tlačidlo
+        je vybavené vizuálnym LED podsvietením v~tvare zeleného
+        prstenca (5\,V), ktoré vizuálne potvrdzuje aktuálny status
+        uzla (úspešné prepojenie s~Wi-Fi sieťou
+        ,~MQTT brokerom a potvrdenie o odoslaní správy). Záťaž LED prstenca však nebola privedená
+        priamo na GPIO pin mikrokontroléra, keďže výstupné GPIO piny
+        ESP32 sú dimenzované pre logické signály, nie pre trvalý
+        napájací prúd záťaže. Namiesto toho bol na riadenie
+        osvetlenia zaradený kompaktný \textbf{MOSFET PWM spínací
+        modul s~tranzistorom F5305S} TO DO TOTO NEMAM V RESERSI ANI NIKDE, DOPLNIT
+        (viď kapitola~\ref{dc-motory}). GPIO výstup ESP32 tak
+        privádza iba riadiaci signál na hradlo (\textit{gate})
+        tranzistora, pričom samotný prúd LED prstenca tečie výhradne
+        cez výkonový kanál modulu napájaný priamo z~5\,V vetvy
+        krabičky. Toto riešenie chráni mikrokontrolér pred prúdovým
+        preťažením a~zároveň umožňuje PWM stmievanie
+        prstenca.
 \end{itemize}
 
 \vspace{1cm}
 \begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: Schéma zapojenia vstupného tlačidla
-    (ESP32, Pull-up rezistory, LED prstenec)]}
+    \textit{[MIESTO PRE OBRÁZOK: Fotografia inštalačnej
+    krabičky tlačidlového uzla s~viditeľným MOSFET modulom, ESP32
+    doskou a~GX12 konektorom]}
+\end{center}
+\vspace{1cm}
+
+\vspace{1cm}
+\begin{center}
+    \textit{[MIESTO PRE OBRÁZOK: Schéma zapojenia vstupného
+    tlačidlového uzla -- ESP32, externý pull-up rezistor na
+    GPIO\,32, MOSFET F5305S pre napájanie LED prstenca
+    a~GX12 konektor]}
 \end{center}
 \vspace{1cm}
