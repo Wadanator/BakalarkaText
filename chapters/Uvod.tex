@@ -1,9 +1,43 @@
 ﻿\chapter{Úvod}
-Moderné výstavníctvo prechádza v posledných rokoch výraznou zmenou. Návštevníci múzeí a galérií už nevyhľadávajú iba pasívne prezeranie exponátov, ale často očakávajú interaktívny prvok alebo príbehovú líniu, do ktorej môžu aktívne vstupovať. Takýto typ expozícií kladie zvýšené nároky na technickú infraštruktúru. Jednoduché prehrávanie videa v slučke a statické osvetlenie už nepostačujú. Riadiaci systém musí byť schopný reagovať na vstupy návštevníka, vetviť scénu podľa zvolených možností a synchronizovať jednotlivé prvky expozície v reálnom čase, vrátane zmeny osvetlenia, pohybu mechanických častí či spúšťania efektových zariadení.
 
-Realizácia takýchto inštalácií však naráža na viacero technologických a finančných obmedzení. Komerčné show-control riešenia ponúkajú vysokú spoľahlivosť a funkcionalitu, avšak ich obstarávacie náklady sú pre menšie expozície často neúnosné. Jednoduché časovače a lokálne ovládače naopak neposkytujú potrebnú úroveň interaktivity a flexibility. Problematická je aj kabeláž – v historických objektoch býva ťažké, prípadne nežiadúce viesť desiatky metrov vodičov k senzorom a aktuátorom.
+Moderné výstavníctvo smeruje od pasívneho vystavovania
+k~automatizácii expozičného priestoru. Namiesto statických
+popisok a~izolovaných exponátov sa priestor stáva aktívnym
+prostredím, ktoré reaguje na prítomnosť návštevníka --
+koordinuje osvetlenie, zvuk, video a~pohyb fyzických prvkov
+do jedného synchronizovaného celku. Takýto prístup je
+uplatniteľný univerzálne: rovnako pre zákaznicky navrhnuté
+interaktívne exponáty, ako aj pre bežné predmety obohatené
+o~automatizované efekty. Riadiaci systém musí pritom
+podporovať nielen pevnú časovú postupnosť udalostí, ale
+podľa potreby aj dynamické vetvenie scenára na základe
+vstupov z~prostredia.
 
-Cieľom tejto bakalárskej práce je návrh a implementácia riadiaceho systému, ktorý uvedené problémy rieši kombináciou IoT technológií a vlastnej softvérovej architektúry. Pôvodný koncept bol založený na jednoduchom lineárnom spúšťači efektov. Analýza požiadaviek však ukázala potrebu komplexnejšieho riešenia, ktoré umožňuje vetvenie scén a reakciu na externé udalosti. Výsledkom je systém postavený na stavovom automate, ktorý umožňuje definovať priebeh expozície presnejšie a flexibilnejšie.
+Realizácia takýchto inštalácií však naráža na viacero
+technologických a~finančných obmedzení. Komerčné show-control
+riešenia ponúkajú vysokú spoľahlivosť a~funkcionalitu, avšak
+ich obstarávacie náklady sú pre menšie expozície často
+neúnosné \cite{interactive_small_museums}. Jednoduché časovače
+a~lokálne ovládače naopak neposkytujú potrebnú úroveň
+interaktivity a~flexibility. Problematická je aj kabeláž
+-- v~historických objektoch býva ťažké, prípadne nežiadúce
+viesť desiatky metrov vodičov k~senzorom
+a~aktuátorom \cite{zonta2010wireless}.
 
-Navrhovaná architektúra využíva bezdrôtový model klient–server, ktorý minimalizuje potrebu rozsiahlej kabeláže. Centrálnu riadiacu logiku zabezpečuje minipočítač Raspberry Pi. Ten komunikuje s distribuovanými uzlami na platforme ESP32 prostredníctvom protokolu MQTT. Správanie systému nie je pevne zakompilované vo firmvéri, ale je konfigurovateľné pomocou JSON súborov. Táto vlastnosť umožňuje jednoducho meniť scenár expozície bez zásahu do zdrojového kódu. Funkčnosť systému je v závere práce demonštrovaná na prototypovej miestnosti, ktorá integruje riadenie motorov, osvetlenia, dymostroja a multimediálneho obsahu.
+Cieľom tejto bakalárskej práce je návrh a~implementácia
+riadiaceho systému, ktorý uvedené problémy rieši kombináciou
+IoT technológií a~vlastnej softvérovej architektúry. Výsledkom
+je systém postavený na stavovom automate, ktorý umožňuje
+definovať priebeh expozície presnejšie a~flexibilnejšie.
 
+Navrhovaná architektúra využíva bezdrôtový model klient--server,
+ktorý minimalizuje potrebu rozsiahlej kabeláže. Centrálnu
+riadiacu logiku zabezpečuje minipočítač Raspberry Pi. Ten
+komunikuje s~distribuovanými uzlami na platforme ESP32
+prostredníctvom protokolu MQTT. Správanie systému nie je pevne
+zakompilované vo firmvéri, ale je konfigurovateľné pomocou
+JSON súborov. Táto vlastnosť umožňuje jednoducho meniť scenár
+expozície bez zásahu do zdrojového kódu. Funkčnosť systému
+je v~závere práce demonštrovaná na prototypovej miestnosti,
+ktorá integruje riadenie motorov, osvetlenia, dymostroja
+a~multimediálneho obsahu.

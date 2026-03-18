@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  17 MAR 2026 18:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  18 MAR 2026 18:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1047,28 +1047,28 @@ Kapitola 1.
 
 ]
 Kapitola 2.
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
-6.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 3
+8.
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Overfull \hbox (4.92735pt too wide) in paragraph at lines 26--28
+Overfull \hbox (4.92735pt too wide) in paragraph at lines 38--46
 []\T1/lmr/bx/n/12 Centralizovaná to-po-ló-gia: \T1/lmr/m/n/12 Jedna cen-trálna 
 jed-notka priamo ovláda v²etky vstupné
  []
 
-<obr/Star_topology.png, id=375, 563.85657pt x 423.08063pt>
+<obr/Star_topology.png, id=378, 563.85657pt x 423.08063pt>
 File: obr/Star_topology.png Graphic file (type png)
 <use obr/Star_topology.png>
-Package pdftex.def Info: obr/Star_topology.png  used on input line 38.
+Package pdftex.def Info: obr/Star_topology.png  used on input line 62.
 (pdftex.def)             Requested size: 207.58878pt x 155.7627pt.
-<obr/Pyramid_topology.png, id=377, 563.85657pt x 381.67593pt>
+<obr/Pyramid_topology.png, id=380, 563.85657pt x 381.67593pt>
 File: obr/Pyramid_topology.png Graphic file (type png)
 <use obr/Pyramid_topology.png>
-Package pdftex.def Info: obr/Pyramid_topology.png  used on input line 44.
+Package pdftex.def Info: obr/Pyramid_topology.png  used on input line 68.
 (pdftex.def)             Requested size: 207.58878pt x 140.51901pt.
 
-Underfull \vbox (badness 1308) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [10
 
@@ -1076,7 +1076,7 @@ Underfull \vbox (badness 1308) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package babel Info: 'slovak' activates 'slovak' shorthands.
-(babel)             Reported on input line 79.
+(babel)             Reported on input line 140.
  [11 <./obr/Star_topology.png> <./obr/Pyramid_topology.png>] [12]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1206,37 +1206,37 @@ PREFIX \T1/lmr/m/n/12 v C++ firm-véri pre kaºdý
 
 
 ] (chapters/Literatura.tex
-Underfull \hbox (badness 1789) in paragraph at lines 12--16
+Underfull \hbox (badness 1789) in paragraph at lines 21--26
 \T1/lmr/m/n/12 stupné z: [][]$\T1/lmtt/m/n/12 https : / / scholarsbank . uorego
 n . edu / server / api / core / bitstreams /
  []
 
 
-Underfull \hbox (badness 1715) in paragraph at lines 23--26
+Underfull \hbox (badness 1715) in paragraph at lines 35--41
 []\T1/lmr/m/n/12 PARTARAKIS, N. a kol. De-sig-ning In-te-rac-tive Exhi-bi-ti-on
 s Ba-sed on In-no-
  []
 
 
-Underfull \hbox (badness 2512) in paragraph at lines 23--26
+Underfull \hbox (badness 2512) in paragraph at lines 35--41
 \T1/lmr/m/n/12 va-tive Nar-ra-ti-ons Gu-ided by Ar-chi-tec-tu-ral Space and Di-
 gi-tal Tech-no-lo-gies.
  []
 
 
-Underfull \hbox (badness 2538) in paragraph at lines 23--26
+Underfull \hbox (badness 2538) in paragraph at lines 35--41
 \T1/lmr/m/n/12 In: \T1/lmr/m/it/12 NO-DEM 2006 Pro-ce-e-dings \T1/lmr/m/n/12 [o
 n-line]. 2006 [cit. 2026-03-15]. Do-stupné z:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 23--26
+Underfull \hbox (badness 10000) in paragraph at lines 35--41
 [][]$\T1/lmtt/m/n/12 http : / / repo . nodem . org / uploads / Designing % 20in
 teractive % 20exhibitions %
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 23--26
+Underfull \hbox (badness 10000) in paragraph at lines 35--41
 \T1/lmtt/m/n/12 20based % 20on % 20innovative % 20narrations % 20guided % 20by 
 % 20architectural %
  []
@@ -1245,174 +1245,162 @@ Underfull \hbox (badness 10000) in paragraph at lines 23--26
 
 
 ]
-Underfull \hbox (badness 4378) in paragraph at lines 60--62
+Underfull \hbox (badness 4378) in paragraph at lines 86--90
 []\T1/lmr/m/n/12 CIOTOLI, G. \T1/lmr/m/it/12 Di-gi-tal trans-for-ma-tion: per-s
 pec-ti-ves from the in-dus-trial and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 60--62
+Underfull \hbox (badness 10000) in paragraph at lines 86--90
 \T1/lmr/m/it/12 cul-tu-ral he-ri-tage stu-dies sec-tors\T1/lmr/m/n/12 . Ca-ta-n
 ia: Uni-ver-sity of Ca-ta-nia, 2022.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 60--62
+Underfull \hbox (badness 10000) in paragraph at lines 86--90
 \T1/lmr/m/n/12 Di-zer-ta£ná práca. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / 
 / www . iris . unict . it / retrieve /
  []
 
 
-Underfull \hbox (badness 1590) in paragraph at lines 74--77
+Underfull \hbox (badness 1590) in paragraph at lines 103--107
 \T1/lmr/m/n/12 line]. 2024 [cit. 2026-03-15]. Do-stupné z: [][]$\T1/lmtt/m/n/12
  https : / / www . inparkmagazine . com /
  []
 
 
-Underfull \hbox (badness 1168) in paragraph at lines 87--90
+Underfull \hbox (badness 1168) in paragraph at lines 120--123
 \T1/lmr/m/n/12 [cit. 2025-02-20]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / /
  www . scribd . com / document / 132762444 /
  []
 
 
-Underfull \hbox (badness 2653) in paragraph at lines 94--97
+Underfull \hbox (badness 2653) in paragraph at lines 127--134
 []\T1/lmr/m/n/12 NOURAL, A., ATI-QUZ-ZA-MAN, M. a GA-EDKE, M. Software-defined 
 ne-
  []
 
 
-Underfull \hbox (badness 1688) in paragraph at lines 94--97
+Underfull \hbox (badness 1688) in paragraph at lines 127--134
 \T1/lmr/m/it/12 Com-mu-ni-ca-tion Tech-no-logy \T1/lmr/m/n/12 [on-line]. 2019, 
 ro£. 15, s. 796--810 [cit. 2026-03-
  []
 
-
-Underfull \hbox (badness 1789) in paragraph at lines 119--122
+[37]
+Underfull \hbox (badness 1789) in paragraph at lines 170--174
 \T1/lmr/m/n/12 stupné z: [][]$\T1/lmtt/m/n/12 https : / / jurnal . kdi . or . i
 d / index . php / bt / article / download / 3223 /
  []
 
-[37]
-Underfull \hbox (badness 1112) in paragraph at lines 135--138
+
+Underfull \hbox (badness 1112) in paragraph at lines 188--191
 \T1/lmr/m/n/12 03-15]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / www . rese
 archgate . net / publication / 373640610 _
  []
 
 
-Underfull \hbox (badness 3895) in paragraph at lines 140--143
+Underfull \hbox (badness 3895) in paragraph at lines 193--196
 []\T1/lmr/m/n/12 Raspberry Pi 4 Mo-del B -- Da-tas-heet. \T1/lmr/m/it/12 Rasp-b
 erry Pi Ltd \T1/lmr/m/n/12 [on-line]. 2024
  []
 
 
-Underfull \hbox (badness 5667) in paragraph at lines 140--143
+Underfull \hbox (badness 5667) in paragraph at lines 193--196
 \T1/lmr/m/n/12 [cit. 2026-03-15]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / /
  datasheets . raspberrypi . com / rpi4 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--150
-[]\T1/lmr/m/n/12 ESP32 vs Ar-du-ino: Key Dif-fe-ren-ces, Speed & IoT Uses. \T1/
-lmr/m/it/12 NORVI
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 147--150
-\T1/lmr/m/it/12 Blog \T1/lmr/m/n/12 [on-line]. 2024 [cit. 2026-03-15]. Do-stupn
-é z: [][]$\T1/lmtt/m/n/12 https : / / norvi . io /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 170--173
+Underfull \hbox (badness 10000) in paragraph at lines 220--224
 []\T1/lmr/m/n/12 Darlington Trans-is-tor vs. MOS-FET: Se-lec-tion Gu-ide-li-nes
 . \T1/lmr/m/it/12 Ca-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 170--173
+Underfull \hbox (badness 10000) in paragraph at lines 220--224
 \T1/lmr/m/it/12 dence PCB De-sign & Ana-ly-sis \T1/lmr/m/n/12 [on-line]. 2023 [
 cit. 2026-03-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 170--173
+Underfull \hbox (badness 10000) in paragraph at lines 220--224
 \T1/lmr/m/n/12 15]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / resources . p
 cb . cadence . com / blog /
  []
 
 
-Underfull \hbox (badness 1286) in paragraph at lines 175--178
+Underfull \hbox (badness 1286) in paragraph at lines 226--229
 []\T1/lmr/m/n/12 MOSFET H-Bridge vs De-di-ca-ted Mo-tor Dri-ver So-lu-ti-ons. \
 T1/lmr/m/it/12 ALLPCB \T1/lmr/m/n/12 [on-line].
  []
 
 
-Underfull \hbox (badness 1014) in paragraph at lines 175--178
+Underfull \hbox (badness 1014) in paragraph at lines 226--229
 \T1/lmr/m/n/12 2024 [cit. 2026-03-15]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https 
 : / / www . allpcb . com / allelectrohub /
  []
 
 
-Underfull \hbox (badness 1097) in paragraph at lines 187--190
+Underfull \hbox (badness 1097) in paragraph at lines 240--243
 []\T1/lmr/m/n/12 Zero-Cross or Ran-dom Re-lay: What are the Dif-fe-ren-ces? \T1
 /lmr/m/it/12 Cel-duc Re-lais \T1/lmr/m/n/12 [on-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--195
+Underfull \hbox (badness 10000) in paragraph at lines 245--249
 []\T1/lmr/m/n/12 Beware of Zero-Crossover Swit-ching of Trans-for-mers. \T1/lmr
 /m/it/12 TE Con-nec-ti-vity
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--195
+Underfull \hbox (badness 10000) in paragraph at lines 245--249
 \T1/lmr/m/n/12 [on-line]. 2024 [cit. 2026-03-15]. Do-stupné z: [][]$\T1/lmtt/m/
 n/12 https : / / www . te . com / en /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--195
+Underfull \hbox (badness 10000) in paragraph at lines 245--249
 \T1/lmtt/m/n/12 products / relays-[]and-[]contactors / electromechanical-[]rela
 ys / intersection /
  []
 
 [38]
-Underfull \hbox (badness 1331) in paragraph at lines 197--200
+Underfull \hbox (badness 1331) in paragraph at lines 253--258
 []\T1/lmr/m/n/12 KAUR, A. a kol. A Li-te-ra-ture Re-view on Device-to-Device Da
 ta Exchange
  []
 
 
-Underfull \hbox (badness 1112) in paragraph at lines 197--200
+Underfull \hbox (badness 1112) in paragraph at lines 253--258
 \T1/lmr/m/n/12 [on-line]. 2020 [cit. 2026-03-15]. Do-stupné z: [][]$\T1/lmtt/m/
 n/12 https : / / www . researchgate . net /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 197--200
+Underfull \hbox (badness 10000) in paragraph at lines 253--258
 \T1/lmtt/m/n/12 publication / 349022302 _ A _ Literature _ Review _ on _ Device
 -[]to-[]Device _ Data _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--211
+Underfull \hbox (badness 10000) in paragraph at lines 265--271
 []\T1/lmr/m/n/12 CELERDATA. YAML, JSON and XML: A Prac-ti-cal Gu-ide
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--211
+Underfull \hbox (badness 10000) in paragraph at lines 265--271
 \T1/lmr/m/n/12 to Cho-osing the Right For-mat. \T1/lmr/m/it/12 Ce-ler-Data Blog
  \T1/lmr/m/n/12 [on-line]. 2024
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--211
+Underfull \hbox (badness 10000) in paragraph at lines 265--271
 \T1/lmr/m/n/12 [cit. 2025-02-20]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / /
  celerdata . com / glossary /
  []
 
 
-Underfull \hbox (badness 3323) in paragraph at lines 213--216
+Underfull \hbox (badness 3323) in paragraph at lines 273--277
 []\T1/lmr/m/n/12 BLANCHON, B. How to Re-duce Me-mory Usage? -- Ar-du-inoJ-son 7
  [on-
  []
@@ -1424,17 +1412,21 @@ enddocument/afterlastpage (AED): lastpage setting LastPage.
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `diplomka.out' has not changed.
 (rerunfilecheck)             Checksum: 2981E559C6D29E8ED5DBF4B5E4CFE172;12186.
  ) 
 Here is how much of TeX's memory you used:
- 20112 strings out of 467871
- 331760 string characters out of 5418377
- 872553 words of memory out of 5000000
- 48468 multiletter control sequences out of 15000+600000
+ 20110 strings out of 467871
+ 331663 string characters out of 5418377
+ 871485 words of memory out of 5000000
+ 48467 multiletter control sequences out of 15000+600000
  694794 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,17n,93p,826b,691s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 78i,17n,93p,552b,691s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
 b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.p
 fb><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.p
@@ -1444,9 +1436,9 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (39 pages, 528862 bytes).
+Output written on diplomka.pdf (39 pages, 526128 bytes).
 PDF statistics:
- 794 PDF objects out of 1000 (max. 8388607)
- 142 named destinations out of 1000 (max. 500000)
+ 790 PDF objects out of 1000 (max. 8388607)
+ 141 named destinations out of 1000 (max. 500000)
  510 words of extra memory for PDF output out of 10000 (max. 10000000)
 
