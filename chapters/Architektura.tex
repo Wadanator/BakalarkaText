@@ -10,9 +10,9 @@ komunikačnú vrstvu a~formát konfiguračných súborov.
 \section{Požiadavky na systém}
 \label{PoziadavkyNaSystem}
 
-Táto kapitola definuje hranice projektu a~podmienky, ktoré musí výsledný
-riadiaci systém spĺňať pre zabezpečenie spoľahlivej prevádzky v prostredí
-expozície.
+Požiadavky vychádzajú priamo z~cieľov definovaných
+v~zadaní práce a~z~potrieb konkrétnej inštalácie,
+pre ktorú bol systém navrhnutý a~implementovaný.
 
 Z~hľadiska \textbf{funkčných požiadaviek} sa očakáva najmä bezproblémová
 integrácia a~synchronizácia rôznorodých hardvérových prvkov:
@@ -67,12 +67,12 @@ uzly plne inteligentné, nekomunikujú vzájomne medzi sebou (netvoria
 len cez centrálny uzol, ktorým je Wi-Fi prístupový bod so sprevádzkovaným
 MQTT sprostredkovateľom.
 
-\vspace{1cm}
-\begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: Bloková schéma fyzickej topológie hviezdicovej
-    siete s~odlíšením centrálneho uzla a okrajových distribuovaných periférií]}
-\end{center}
-\vspace{1cm}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{obr/HW/system_topology}
+\caption{Fyzická topológia riadiaceho systému}
+\label{fig:topologia}
+\end{figure}
 
 % ------------------------------------------------------------------
 \section{Hardvérová voľba a~sieťový prenos}
@@ -115,13 +115,15 @@ Dvojúrovňová architektúra bola fyzicky obsadená nasledovným hardvérom:
 \section{Princíp softvérového jadra (Scene Engine)}
 \label{SoftverovArchitektura}
 
-Ústrednou požiadavkou na softvérové jadro bola schopnosť \textbf{vetviť
-priebeh expozície} na základe reálnych podnetov od návštevníka. Scenár preto
-nesmel byť pevnou lineárnou sekvenciou akcií - systém musel v ľubovoľnom
-momente vedieť čakať na vonkajší vstup (napr. stlačenie tlačidla) a podľa
-jeho výsledku zvoliť ďalší smer deja. Klasický prístup blokujúceho
-vykonávania kódu je na takúto úlohu nevhodný, keďže vlákno čakajúce na jednu
-udalosť nie je schopné súčasne reagovať na iné podnety z~prostredia.
+Ústrednou požiadavkou na softvérové jadro bola schopnosť
+\textbf{vetviť priebeh expozície} na základe reálnych
+podnetov od návštevníka. Scenár preto nesmel byť pevnou
+lineárnou sekvenciou akcií -- systém musel v~ľubovoľnom
+momente vedieť čakať na vonkajší vstup (napr. stlačenie
+tlačidla) a~podľa jeho výsledku zvoliť ďalší smer deja.
+Klasický sekvenčný prístup je na takúto úlohu nevhodný,
+keďže systém čakajúci na jeden podnet nie je schopný
+súčasne vyhodnocovať iné podmienky prechodu.
 
 Z~tohto dôvodu bolo softvérové jadro navrhnuté ako neblokujúci
 \textbf{Konečný stavový automat (FSM -- \textit{Finite State Machine})}
@@ -175,9 +177,8 @@ Navrhnutý model siete implementuje niekoľko kľúčových komunikačných šta
         nie priamo v~kóde enginu. Obsluha môže scenár upravovať alebo vymeniť
         za behu programu bez akéhokoľvek zásahu do zdrojového kódu.
 \end{itemize}
-
-Vďaka tomuto oddeleniu scenára od enginu sa konfigurácia výstavy stáva dostupnou aj pre netechnických používateľov, ktorí môžu pomocou jednoduchého textového editora upravovať logiku a~priebeh expozície bez nutnosti zložitého programovania.
-
+Toto oddelenie konfigurácie od kódu enginu umožňuje upravovať logiku
+a~priebeh expozície bez zásahu do zdrojového kódu systému.
 \vspace{1cm}
 \begin{center}
     \textit{[MIESTO PRE OBRÁZOK: Schéma toku MQTT správ (Publish/Subscribe)
