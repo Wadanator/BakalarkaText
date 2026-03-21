@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  20 MAR 2026 15:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  21 MAR 2026 11:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1097,29 +1097,33 @@ File: obr/HW/system_topology.pdf Graphic file (type pdf)
 <use obr/HW/system_topology.pdf>
 Package pdftex.def Info: obr/HW/system_topology.pdf  used on input line 72.
 (pdftex.def)             Requested size: 409.71692pt x 245.07729pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [18 <./obr/HW/system_topology.pdf>]
+[18 <./obr/HW/system_topology.pdf>]
 
 LaTeX Warning: Reference `ImplementaciaSW' on page 19 undefined on input line 1
-35.
+34.
 
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-59.
+58.
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [19])
+)
+Underfull \vbox (badness 4060) has occurred while \output is active []
+
+ [19])
 (chapters/Implementacia_hw.tex [20]
 Kapitola 4.
+
+LaTeX Warning: Reference `MechanickaKonstrukcia' on page 21 undefined on input 
+line 53.
+
 [21
 
-] [22]) (chapters/Implementacia_sw.tex [23]
+] [22] [23]) (chapters/Implementacia_sw.tex [24]
 Kapitola 5.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [24
+ [25
 
 ]
 Overfull \hbox (0.14989pt too wide) in paragraph at lines 113--118
@@ -1137,7 +1141,7 @@ pic \T1/lmtt/m/n/12 room1/motor<N>/feedback\T1/lmr/m/n/12 ,
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25]
+ [26]
 Overfull \hbox (8.50847pt too wide) in paragraph at lines 207--216
 \T1/lmr/m/n/12 Backend bol na-sa-dený ako sys-té-mová sluºba \T1/lmtt/m/n/12 mu
 seum-system.service \T1/lmr/m/n/12 pod sprá-vou \T1/lmtt/m/n/12 systemd
@@ -1146,7 +1150,7 @@ seum-system.service \T1/lmr/m/n/12 pod sprá-vou \T1/lmtt/m/n/12 systemd
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [26]
+ [27]
 Overfull \hbox (294.24168pt too wide) in paragraph at lines 306--309
 []\T1/lmtt/m/n/12 mqtt \T1/lmr/m/n/12 --- správa je odo-slaná na za-daný to-pic
  MQTT bro-kera, na-prí-klad [][]\T1/lmtt/m/n/12 {"action":"mqtt","topic":"room1
@@ -1176,14 +1180,14 @@ oom1/emergency","message":"STOP","goto":"END"}[]\T1/lmr/m/n/12 ,
 
 Underfull \vbox (badness 8189) has occurred while \output is active []
 
- [27]
+ [28]
 Overfull \hbox (38.22224pt too wide) in paragraph at lines 382--393
 []\T1/lmr/m/n/12 Pre pre-hrá-va-nie vi-dea bol zvo-lený pro-ces \T1/lmtt/m/n/12
  mpv \T1/lmr/m/n/12 ria-dený cez Unix IPC soc-ket (\T1/lmtt/m/n/12 /tmp/mpv_soc
 ket\T1/lmr/m/n/12 ).
  []
 
-[28]) (chapters/Experimenty.tex [29]
+[29]) (chapters/Experimenty.tex [30]
 Kapitola 6.
 
 Overfull \hbox (0.85129pt too wide) in paragraph at lines 27--28
@@ -1191,32 +1195,32 @@ Overfull \hbox (0.85129pt too wide) in paragraph at lines 27--28
 lny au-di-ovi-zu-álny ob-sah sú-£asne s presne
  []
 
-[30
+[31
 
-]) (chapters/Zaver.tex [31]
+]) (chapters/Zaver.tex [32]
 Kapitola 7.
 
-LaTeX Warning: Reference `ImplementaciaSW' on page 32 undefined on input line 3
+LaTeX Warning: Reference `ImplementaciaSW' on page 33 undefined on input line 3
 5.
 
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [32
+ [33
 
 ]
-[33] (diplomka.lof)
+[34] (diplomka.lof)
 \tf@lof=\write6
 \openout6 = `diplomka.lof'.
 
- [34
+ [35
 
 
 ] (diplomka.lot)
 \tf@lot=\write7
 \openout7 = `diplomka.lot'.
 
- [35
+ [36
 
 
 ] (chapters/Literatura.tex
@@ -1255,7 +1259,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--43
 % 20architectural %
  []
 
-[36
+[37
 
 
 ]
@@ -1300,7 +1304,7 @@ Underfull \hbox (badness 1688) in paragraph at lines 142--150
 ro£. 15, s. 796--810 [cit. 2026-03-
  []
 
-[37]
+[38]
 Underfull \hbox (badness 1789) in paragraph at lines 185--190
 \T1/lmr/m/n/12 stupné z: [][]$\T1/lmtt/m/n/12 https : / / jurnal . kdi . or . i
 d / index . php / bt / article / download / 3223 /
@@ -1354,7 +1358,7 @@ Underfull \hbox (badness 1014) in paragraph at lines 241--244
 : / / www . allpcb . com / allelectrohub /
  []
 
-[38]
+[39]
 Underfull \hbox (badness 1097) in paragraph at lines 255--259
 []\T1/lmr/m/n/12 Zero-Cross or Ran-dom Re-lay: What are the Dif-fe-ren-ces? \T1
 /lmr/m/it/12 Cel-duc Re-lais \T1/lmr/m/n/12 [on-
@@ -1419,7 +1423,7 @@ Underfull \hbox (badness 3323) in paragraph at lines 288--293
  [on-
  []
 
-) [39] 
+) [40] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (diplomka.aux)
  ***********
@@ -1430,17 +1434,26 @@ L3 programming layer <2025-12-24>
 
 LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: File `diplomka.out' has not changed.
-(rerunfilecheck)             Checksum: EA3C440EB6774936821B9C699D211F67;12286.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `diplomka.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `diplomka.out':
+(rerunfilecheck)             Before: 15807332F7717829A463BE933B949475;12591
+(rerunfilecheck)             After:  2EA4EBEB2E8629FD578FD96F1A39C9D7;12821.
  ) 
 Here is how much of TeX's memory you used:
- 20123 strings out of 467871
- 332091 string characters out of 5418377
- 870800 words of memory out of 5000000
- 48480 multiletter control sequences out of 15000+600000
+ 20126 strings out of 467871
+ 332132 string characters out of 5418377
+ 870860 words of memory out of 5000000
+ 48481 multiletter control sequences out of 15000+600000
  694061 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,17n,93p,463b,773s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 78i,17n,93p,463b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
 b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.p
 fb><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.p
@@ -1449,9 +1462,9 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (39 pages, 536684 bytes).
+Output written on diplomka.pdf (40 pages, 540139 bytes).
 PDF statistics:
- 814 PDF objects out of 1000 (max. 8388607)
- 143 named destinations out of 1000 (max. 500000)
+ 822 PDF objects out of 1000 (max. 8388607)
+ 145 named destinations out of 1000 (max. 500000)
  507 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -48,14 +48,9 @@ pri vstupe do miestnosti.
 
 Tento riadiaci obvod je vyhradený pre ovládanie jednosmerných (DC) motorov,
 ktoré rozpohybúvajú hlavné dizajnové prvky celej inštalácie (nazvanej
-\textbf{CHRONOS}). Hlavným poháňaným exponátom sú:
-\begin{itemize}
-    \item \textbf{Hlavné hodiny:} Dekoratívne hodiny s~priemerom približne
-        1,3\,m osadené rímskymi číslicami a kovanými ručičkami. Hodiny neplnia
-        reálnu časomernú funkciu; ich vizuálny pohyb dopĺňajú statické
-        dekoratívne ozubené kolesá rozprestierajúce siahajucé do výšky 1,8\,m,
-        ktoré dotvárajú industriálny ráz diela.
-\end{itemize}
+\textbf{CHRONOS}). Pohon je navrhnutý pre ovládanie hlavných hodinových
+mechanizmov a~ozubených kolies inštalácie, ktorých
+konštrukcia je popísaná v~kapitole~\ref{MechanickaKonstrukcia}.
 
 Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov:
 \begin{itemize}
@@ -75,7 +70,7 @@ Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov:
 \end{center}
 \vspace{1cm}
 
-\subsection{Reléový uzol}
+\subsection{Reléový uzol -- spínanie záťaží}
 \label{UzolRele}
 
 Na jednoduché zapínanie a~vypínanie ostatných prvkov expozície, ako sú
@@ -145,6 +140,30 @@ samostatným uzlom:
         preťažením a~zároveň umožňuje PWM stmievanie
         prstenca.
 \end{itemize}
+
+\section{Mechanická konštrukcia exponátov}
+\label{MechanickaKonstrukcia}
+
+Fyzické exponáty inštalácie CHRONOS boli navrhnuté
+v~prostredí \textbf{Fusion 360}. Celková sústava
+obsahuje \textbf{24 ozubených kolies} z~preglejky
+s~jednotným modulom $m = 8$. Pre každé koleso bol
+vytvorený samostatný 3D model; pri menších kolesách
+bol G-kód generovaný a~obrobky boli vyfrézované
+na dostupnej CNC fréze. Väčšie kolesá boli zadané
+externej firme, ktorá disponuje strojom s~väčším
+pracovným priestorom.
+
+Súčasťou návrhu bol aj \textbf{dekoratívny piest}
+pripevnený na sústave kolies, ktorý vykonáva
+pohyb bez mechanického zaťaženia, a~\textbf{hodinový
+mechanizmus} s~priemerom 1{,}3\,m vrátane
+planetového prevodu s~vypočítaným počtom zubov
+pre požadovaný prevodový pomer. Montáž
+a~povrchovú úpravu exponátov zabezpečila
+externá firma. Podrobná konštrukčná dokumentácia
+(výkresy, modely, prevodové výpočty) presahuje
+rámec tejto práce a~nie je jej predmetom.
 
 \vspace{1cm}
 \begin{center}

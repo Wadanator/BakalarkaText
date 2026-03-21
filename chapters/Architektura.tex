@@ -75,7 +75,7 @@ MQTT sprostredkovateľom.
 \end{figure}
 
 % ------------------------------------------------------------------
-\section{Výber hardvérových platforiem a~spôsob komunikácie}
+\section{Výber a~rozdelenie hardvérových uzlov}
 \label{HardverovaTopoligia}
 
 Systém je rozdelený do dvoch samostatných kategórií: na jeden centrálny uzol
@@ -121,9 +121,8 @@ podnetov od návštevníka. Scenár preto nesmel byť pevnou
 lineárnou sekvenciou akcií -- systém musel v~ľubovoľnom
 momente vedieť čakať na vonkajší vstup (napr. stlačenie
 tlačidla) a~podľa jeho výsledku zvoliť ďalší smer deja.
-Klasický sekvenčný prístup je na takúto úlohu nevhodný,
-keďže systém čakajúci na jeden podnet nie je schopný
-súčasne vyhodnocovať iné podmienky prechodu.
+Klasický sekvenčný prístup je na takúto úlohu nevhodný
+z~dôvodov analyzovaných v~kapitole~\ref{riadiaca-logika}.
 
 Z~tohto dôvodu bolo softvérové jadro navrhnuté ako neblokujúci
 \textbf{Konečný stavový automat (FSM -- \textit{Finite State Machine})}
@@ -142,7 +141,7 @@ implementácia tejto architektúry je rozpracovaná v~Kapitole~\ref{Implementaci
 \vspace{1cm}
 
 % ------------------------------------------------------------------
-\section{Architektúra komunikačnej vrstvy}
+\section{Komunikačná vrstva -- MQTT a~formát scén}
 \label{KomunikacnaVrstva}
 
 Pre výmenu dát medzi centrálnym automatom (v~jazyku Python) a~distribuovanými
