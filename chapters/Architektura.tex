@@ -55,12 +55,11 @@ ale je rozdelená medzi viacero častí systému a~presunutá bližšie k~výkon
 Koncové periférie postavené na mikrokontroléroch preto neslúžia len ako pasívne spínače, ale ako aktívne prvky,
 ktoré lokálne spracúvajú prijaté príkazy a~samostatne vykonávajú im pridelené fyzické akcie.
 
-Z~fyzického a~sieťového hľadiska však systém prísne dodržiava
+Z~fyzického a~sieťového hľadiska však systém dodržiava
 \textbf{hviezdicovú topológiu (\textit{Star topology})}. Hoci sú distribuované
 uzly plne inteligentné, nekomunikujú vzájomne medzi sebou (netvoria
 \textit{Mesh} sieť). Akýkoľvek dátový tok na sieti vedie striktne obojsmerne
-len cez centrálny uzol, ktorým je Wi-Fi prístupový bod so sprevádzkovaným
-MQTT sprostredkovateľom.
+len cez centrálny uzol.
 
 \begin{figure}[H]
 \centering
@@ -98,7 +97,7 @@ Dvojúrovňová architektúra bola fyzicky obsadená nasledovným hardvérom:
         \begin{itemize}
             \item \textbf{Senzorický uzol} pre hardvérovú detekciu vstupov
                 od používateľov.
-            \item \textbf{Motorický uzol} pre obsluhu fyzického pohybu
+            \item \textbf{Motorický uzol} pre ovládanie fyzického pohybu
                 exponátov (jednosmerné motory).
             \item \textbf{Reléový uzol} pre spínanie efektov a osvetlenia
                 či iných zariadení pracujúcich na 12 V a sieťovom napätí
@@ -119,7 +118,7 @@ tlačidla) a~podľa jeho výsledku zvoliť ďalší smer deja.
 Klasický sekvenčný prístup je na takúto úlohu nevhodný
 z~dôvodov analyzovaných v~kapitole~\ref{riadiaca-logika}.
 
-Z~tohto dôvodu bolo softvérové jadro navrhnuté ako neblokujúci
+Z~tohto dôvodu bolo softvérové jadro navrhnuté ako
 \textbf{Konečný stavový automat (FSM -- \textit{Finite State Machine})}.
 Priebeh expozície je rozdelený do samostatných \textbf{stavov}, pričom systém
 nepretržite sleduje podmienky prechodu -- vypršanie časovača, dokončenie
@@ -138,7 +137,7 @@ implementácia tejto architektúry je rozpracovaná v~Kapitole~\ref{Implementaci
 \section{Komunikačná vrstva -- MQTT a~formát scén}
 \label{KomunikacnaVrstva}
 
-Pre výmenu dát medzi centrálnym automatom (v~jazyku Python) a~distribuovanými
+Pre výmenu dát medzi centrálnym Raspberry~Pi a~distribuovanými
 perifériami (ESP32) bol zvolený \textbf{protokol MQTT}
 (\textit{Message Queuing Telemetry Transport})
 (viď kapitola~\ref{aplikacne-protokoly}). Prenos správ prebieha na

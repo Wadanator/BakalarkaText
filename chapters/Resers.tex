@@ -411,20 +411,23 @@ neblokujúce čakanie na viacero rôznych podmienok súčasne,
 Pre štruktúrovanie prenášaných dát a~ukladanie konfigurácie
 je nutné zvoliť vhodný formát. V~kontexte IoT a~webových
 technológií sa najčastejšie porovnávajú textové formáty XML,
-YAML a~JSON \cite{iot_data_formats_review}. \textbf{XML}
-(\textit{eXtensible Markup Language}) je dlhoročným
+YAML a~JSON \cite{iot_data_formats_review}.
+
+\textbf{XML}(\textit{eXtensible Markup Language}) je dlhoročným
 priemyselným štandardom pre výmenu dát. V~prostredí embedded
 systémov je však považované za zastarané kvôli extrémnej
 verbosite a~zložitosti parserov, ktoré neúmerne zaťažujú
 pamäť mikrokontroléra \cite{iot_data_formats_review}.
+
 \textbf{YAML} (\textit{YAML Ain't Markup Language}) si získal
 obľubu v~oblasti DevOps vďaka podpore komentárov
 a~maximálnej čitateľnosti pre človeka \cite{yaml_vs_json}.
 Avšak YAML parsery pre C++ sú pamäťovo náročné a~často
 chybové pri spracovávaní neštandardných dát, čo z~neho
 robí rizikovú voľbu pre real-time komunikáciu na
-mikrokontroléroch \cite{json_xml}. \textbf{JSON}
-(\textit{JavaScript Object Notation}) sa stal de facto
+mikrokontroléroch \cite{json_xml}.
+
+\textbf{JSON}(\textit{JavaScript Object Notation}) sa stal de facto
 štandardom pre IoT vďaka optimálnej rovnováhe medzi
 čitateľnosťou a~strojospracovateľnosťou
 \cite{iot_data_formats_review}. Pre mikrokontroléry
@@ -469,5 +472,4 @@ stavového automatu (FSM), ktorý umožňuje neblokujúce
 vetvenie scenára na základe externých udalostí
 \cite{distributed_control_modeling}. Konfigurácia vo
 formáte JSON poskytuje ľahko editovateľné definície stavov
-a~prechodov bez nutnosti zásahu do zdrojového kódu
-\cite{iot_data_formats_review}.
+a~prechodov bez nutnosti zásahu do zdrojového kódu.
