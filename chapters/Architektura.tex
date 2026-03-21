@@ -23,7 +23,7 @@ integrácia a~synchronizácia rôznorodých hardvérových prvkov:
         dymostroje) a taktiež \textbf{12\,V}.
     \item \textbf{Multimediálna synchronizácia:} Keďže moderné expozície
         stavajú aj na audiovizuálnych vnemoch, systém musí zabezpečiť synchronizované
-        prehrávanie zvuku a videa priamo z vlastného úložiska.
+        prehrávanie zvuku a videa.
     \item \textbf{Interaktivita a~časová os (\textit{timeline}):} Systém musí
         vedieť na základe hardvérových vstupov zmeniť vetvenie prebiehajúcej
         scény, no zároveň podporovať chronologické časovanie sekvencií.
@@ -34,8 +34,8 @@ Medzi \textbf{nefunkčné požiadavky} s ohľadom na udržateľnosť patria:
     \item \textbf{Modularita a~softvérové oddelenie:} Pre zachovanie oddelenia
         softvérového inžinierstva od obsahovej tvorby sa úprava logiky (scenára)
         musí dať vykonať výhradne modifikáciou \textbf{textových konfiguračných
-        súborov}. Tým sa odstraňuje nutnosť zásahu do zdrojových kódov Pythonu.
-    \item \textbf{Dostupnosť (Cost-effectiveness):} Vzhľadom na finančné limity
+        súborov}. Tým sa odstraňuje nutnosť zásahu do zdrojového kódu v pythone.
+    \item \textbf{Dostupnosť:} Vzhľadom na finančné limity
         inštalácií musí byť systém postavený na komerčne dostupných, cenovo
         výhodných mikrokontroléroch a \textbf{Internet of Things (IoT)}
         platformách namiesto drahých priemyselných automatov (PLC).
@@ -50,11 +50,10 @@ no vzájomne sa dopĺňajúcich hľadísk: z~\textbf{logického (výpočtového)
 a~z~\textbf{fyzického (sieťového)}.
 
 Z~logického hľadiska ide o \textbf{distribuovanú architektúru}
-(viď kapitola~\ref{architektury-systemov}). Výpočtový
-výkon a~inteligencia nie sú sústredené výhradne v jednom centrálnom procesore,
-ale sú rozložené do priestoru priamo k~výkonovým prvkom. Koncové periférie postavené na mikrokontroléroch neslúžia len ako pasívne
-spínače -- aktívne spracúvajú prijaté príkazy a~samostatne vykonávajú
-im pridelené fyzické akcie.
+(viď kapitola~\ref{architektury-systemov}). Riadiaca logika nie je sústredená výhradne v~jednom centrálnom procesore,
+ale je rozdelená medzi viacero častí systému a~presunutá bližšie k~výkonovým prvkom.
+Koncové periférie postavené na mikrokontroléroch preto neslúžia len ako pasívne spínače, ale ako aktívne prvky,
+ktoré lokálne spracúvajú prijaté príkazy a~samostatne vykonávajú im pridelené fyzické akcie.
 
 Z~fyzického a~sieťového hľadiska však systém prísne dodržiava
 \textbf{hviezdicovú topológiu (\textit{Star topology})}. Hoci sú distribuované

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  21 MAR 2026 14:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  21 MAR 2026 14:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1105,7 +1105,7 @@ pdfTeX warning: pdflatex.exe (file ./obr/HW/system_topology.pdf): PDF inclusion
 <obr/HW/system_topology.pdf, id=535, 442.53331pt x 233.9139pt>
 File: obr/HW/system_topology.pdf Graphic file (type pdf)
 <use obr/HW/system_topology.pdf>
-Package pdftex.def Info: obr/HW/system_topology.pdf  used on input line 68.
+Package pdftex.def Info: obr/HW/system_topology.pdf  used on input line 67.
 (pdftex.def)             Requested size: 409.71692pt x 216.56683pt.
 [18 <./obr/HW/system_topology.pdf>]
 
@@ -1114,10 +1114,10 @@ n: found PDF version <1.7>, but at most version <1.5> allowed
 <obr/HW/FSM_Architektura.pdf, id=560, 436.5108pt x 139.4811pt>
 File: obr/HW/FSM_Architektura.pdf Graphic file (type pdf)
 <use obr/HW/FSM_Architektura.pdf>
-Package pdftex.def Info: obr/HW/FSM_Architektura.pdf  used on input line 133.
+Package pdftex.def Info: obr/HW/FSM_Architektura.pdf  used on input line 132.
 (pdftex.def)             Requested size: 409.71692pt x 130.92068pt.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-53.
+52.
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [19 <./obr/HW/FSM_Architektura.pdf>]
@@ -1127,7 +1127,7 @@ d PDF version <1.7>, but at most version <1.5> allowed
 <obr/HW/Mqtt_Flow.pdf, id=579, 746.79pt x 566.115pt>
 File: obr/HW/Mqtt_Flow.pdf Graphic file (type pdf)
 <use obr/HW/Mqtt_Flow.pdf>
-Package pdftex.def Info: obr/HW/Mqtt_Flow.pdf  used on input line 177.
+Package pdftex.def Info: obr/HW/Mqtt_Flow.pdf  used on input line 176.
 (pdftex.def)             Requested size: 409.71692pt x 310.58678pt.
 ) (chapters/Implementacia_hw.tex [20 <./obr/HW/Mqtt_Flow.pdf>]
 Kapitola 4.
@@ -1406,7 +1406,7 @@ Here is how much of TeX's memory you used:
  48498 multiletter control sequences out of 15000+600000
  694061 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,17n,93p,463b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 78i,17n,93p,463b,805s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
 b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.p
 fb><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.p
@@ -1416,7 +1416,7 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (40 pages, 745931 bytes).
+Output written on diplomka.pdf (40 pages, 745858 bytes).
 PDF statistics:
  862 PDF objects out of 1000 (max. 8388607)
  142 named destinations out of 1000 (max. 500000)
