@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  21 MAR 2026 11:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  21 MAR 2026 14:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -762,6 +762,13 @@ File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 (diplomka.aux
 Package babel Info: 'slovak' activates 'slovak' shorthands.
 (babel)             Reported on input line 11.
+
+
+LaTeX Warning: Label `fig:topologia' multiply defined.
+
+
+LaTeX Warning: Label `fig:topologia' multiply defined.
+
 )
 \openout1 = `diplomka.aux'.
 
@@ -861,7 +868,7 @@ Package hyperref Info: Link coloring ON on input line 40.
 
 pdfTeX warning: pdflatex.exe (file ./pages/TitulniList_color.pdf): PDF inclusio
 n: found PDF version <1.7>, but at most version <1.5> allowed
-<pages/TitulniList_color.pdf, id=231, 597.51233pt x 845.0471pt>
+<pages/TitulniList_color.pdf, id=235, 597.51233pt x 845.0471pt>
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf>
 Package pdftex.def Info: pages/TitulniList_color.pdf  used on input line 44.
@@ -874,7 +881,7 @@ n: found PDF version <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./pages/TitulniList_color.pdf): PDF inclusio
 n: found PDF version <1.7>, but at most version <1.5> allowed
-<pages/TitulniList_color.pdf, id=233, page=1, 597.51233pt x 845.0471pt>
+<pages/TitulniList_color.pdf, id=237, page=1, 597.51233pt x 845.0471pt>
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf, page 1>
 Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
@@ -908,7 +915,7 @@ Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
 pdfTeX warning: pdflatex.exe (file ./pages/zav_prace__b6f095a8f97b2441249eadcf3
 ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
  allowed
-<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=248, 597.51233pt x 8
+<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=252, 597.51233pt x 8
 45.0471pt>
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
@@ -926,7 +933,7 @@ ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
 pdfTeX warning: pdflatex.exe (file ./pages/zav_prace__b6f095a8f97b2441249eadcf3
 ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
  allowed
-<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=250, page=1, 597.512
+<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=254, page=1, 597.512
 33pt x 845.0471pt>
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
@@ -965,7 +972,7 @@ Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf
 pdfTeX warning: pdflatex.exe (file ./pages/zav_prace__b6f095a8f97b2441249eadcf3
 ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
  allowed
-<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=271, page=2, 597.512
+<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=275, page=2, 597.512
 33pt x 845.0471pt>
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
@@ -1035,13 +1042,16 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 5.
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-[7
+Underfull \vbox (badness 1681) has occurred while \output is active []
+
+ [7
 
 ])
 \tf@toc=\write5
 \openout5 = `diplomka.toc'.
 
- [8] (chapters/Uvod.tex
+
+[8] (chapters/Uvod.tex
 Kapitola 1.
 ) (chapters/Resers.tex [9
 
@@ -1060,12 +1070,12 @@ jed-notka priamo ovláda v²etky vstupné
 [10
 
 {C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
-<obr/Star_topology.png, id=384, 563.85657pt x 423.08063pt>
+<obr/Star_topology.png, id=389, 563.85657pt x 423.08063pt>
 File: obr/Star_topology.png Graphic file (type png)
 <use obr/Star_topology.png>
 Package pdftex.def Info: obr/Star_topology.png  used on input line 70.
 (pdftex.def)             Requested size: 207.58878pt x 155.7627pt.
-<obr/Pyramid_topology.png, id=386, 563.85657pt x 381.67593pt>
+<obr/Pyramid_topology.png, id=391, 563.85657pt x 381.67593pt>
 File: obr/Pyramid_topology.png Graphic file (type png)
 <use obr/Pyramid_topology.png>
 Package pdftex.def Info: obr/Pyramid_topology.png  used on input line 76.
@@ -1092,33 +1102,42 @@ Kapitola 3.
 
 pdfTeX warning: pdflatex.exe (file ./obr/HW/system_topology.pdf): PDF inclusion
 : found PDF version <1.7>, but at most version <1.5> allowed
-<obr/HW/system_topology.pdf, id=529, 542.025pt x 324.21124pt>
+<obr/HW/system_topology.pdf, id=535, 442.53331pt x 233.9139pt>
 File: obr/HW/system_topology.pdf Graphic file (type pdf)
 <use obr/HW/system_topology.pdf>
-Package pdftex.def Info: obr/HW/system_topology.pdf  used on input line 72.
-(pdftex.def)             Requested size: 409.71692pt x 245.07729pt.
+Package pdftex.def Info: obr/HW/system_topology.pdf  used on input line 68.
+(pdftex.def)             Requested size: 409.71692pt x 216.56683pt.
 [18 <./obr/HW/system_topology.pdf>]
 
-LaTeX Warning: Reference `ImplementaciaSW' on page 19 undefined on input line 1
-34.
-
+pdfTeX warning: pdflatex.exe (file ./obr/HW/FSM_Architektura.pdf): PDF inclusio
+n: found PDF version <1.7>, but at most version <1.5> allowed
+<obr/HW/FSM_Architektura.pdf, id=560, 436.5108pt x 139.4811pt>
+File: obr/HW/FSM_Architektura.pdf Graphic file (type pdf)
+<use obr/HW/FSM_Architektura.pdf>
+Package pdftex.def Info: obr/HW/FSM_Architektura.pdf  used on input line 133.
+(pdftex.def)             Requested size: 409.71692pt x 130.92068pt.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-58.
+53.
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Underfull \vbox (badness 4060) has occurred while \output is active []
+) [19 <./obr/HW/FSM_Architektura.pdf>]
 
- [19])
-(chapters/Implementacia_hw.tex [20]
+pdfTeX warning: pdflatex.exe (file ./obr/HW/Mqtt_Flow.pdf): PDF inclusion: foun
+d PDF version <1.7>, but at most version <1.5> allowed
+<obr/HW/Mqtt_Flow.pdf, id=579, 746.79pt x 566.115pt>
+File: obr/HW/Mqtt_Flow.pdf Graphic file (type pdf)
+<use obr/HW/Mqtt_Flow.pdf>
+Package pdftex.def Info: obr/HW/Mqtt_Flow.pdf  used on input line 177.
+(pdftex.def)             Requested size: 409.71692pt x 310.58678pt.
+) (chapters/Implementacia_hw.tex [20 <./obr/HW/Mqtt_Flow.pdf>]
 Kapitola 4.
 
-LaTeX Warning: Reference `MechanickaKonstrukcia' on page 21 undefined on input 
-line 53.
+Underfull \vbox (badness 3354) has occurred while \output is active []
 
-[21
+ [21
 
-] [22] [23]) (chapters/Implementacia_sw.tex [24]
+]
+[22] [23]) (chapters/Implementacia_sw.tex [24]
 Kapitola 5.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1190,19 +1209,16 @@ ket\T1/lmr/m/n/12 ).
 [29]) (chapters/Experimenty.tex [30]
 Kapitola 6.
 
-Overfull \hbox (0.85129pt too wide) in paragraph at lines 27--28
+Overfull \hbox (0.85129pt too wide) in paragraph at lines 42--43
 []\T1/lmr/bx/n/12 Priebeh: \T1/lmr/m/n/12 Sys-tém mu-sel pre-hra´ mul-ti-me-diá
 lny au-di-ovi-zu-álny ob-sah sú-£asne s presne
  []
 
 [31
 
+{C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}
 ]) (chapters/Zaver.tex [32]
 Kapitola 7.
-
-LaTeX Warning: Reference `ImplementaciaSW' on page 33 undefined on input line 3
-5.
-
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1229,196 +1245,142 @@ Underfull \hbox (badness 1789) in paragraph at lines 22--28
 n . edu / server / api / core / bitstreams /
  []
 
-
-Underfull \hbox (badness 1715) in paragraph at lines 36--43
-[]\T1/lmr/m/n/12 PARTARAKIS, N. a kol. De-sig-ning In-te-rac-tive Exhi-bi-ti-on
-s Ba-sed on In-no-
- []
-
-
-Underfull \hbox (badness 2512) in paragraph at lines 36--43
-\T1/lmr/m/n/12 va-tive Nar-ra-ti-ons Gu-ided by Ar-chi-tec-tu-ral Space and Di-
-gi-tal Tech-no-lo-gies.
- []
-
-
-Underfull \hbox (badness 2538) in paragraph at lines 36--43
-\T1/lmr/m/n/12 In: \T1/lmr/m/it/12 NO-DEM 2006 Pro-ce-e-dings \T1/lmr/m/n/12 [o
-n-line]. 2006 [cit. 2026-03-15]. Do-stupné z:
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--43
-[][]$\T1/lmtt/m/n/12 http : / / repo . nodem . org / uploads / Designing % 20in
-teractive % 20exhibitions %
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--43
-\T1/lmtt/m/n/12 20based % 20on % 20innovative % 20narrations % 20guided % 20by 
-% 20architectural %
- []
-
 [37
 
 
 ]
-Underfull \hbox (badness 4378) in paragraph at lines 101--106
-[]\T1/lmr/m/n/12 CIOTOLI, G. \T1/lmr/m/it/12 Di-gi-tal trans-for-ma-tion: per-s
-pec-ti-ves from the in-dus-trial and
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 101--106
-\T1/lmr/m/it/12 cul-tu-ral he-ri-tage stu-dies sec-tors\T1/lmr/m/n/12 . Ca-ta-n
-ia: Uni-ver-sity of Ca-ta-nia, 2022.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 101--106
-\T1/lmr/m/n/12 Di-zer-ta£ná práca. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / 
-/ www . iris . unict . it / retrieve /
- []
-
-
-Underfull \hbox (badness 1590) in paragraph at lines 118--123
+Underfull \hbox (badness 1590) in paragraph at lines 104--109
 \T1/lmr/m/n/12 line]. 2024 [cit. 2026-03-15]. Do-stupné z: [][]$\T1/lmtt/m/n/12
  https : / / www . inparkmagazine . com /
  []
 
 
-Underfull \hbox (badness 1168) in paragraph at lines 135--138
-\T1/lmr/m/n/12 [cit. 2025-02-20]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / /
- www . scribd . com / document / 132762444 /
- []
-
-
-Underfull \hbox (badness 2653) in paragraph at lines 142--150
+Underfull \hbox (badness 2653) in paragraph at lines 118--126
 []\T1/lmr/m/n/12 NOURAL, A., ATI-QUZ-ZA-MAN, M. a GA-EDKE, M. Software-defined 
 ne-
  []
 
 
-Underfull \hbox (badness 1688) in paragraph at lines 142--150
+Underfull \hbox (badness 1688) in paragraph at lines 118--126
 \T1/lmr/m/it/12 Com-mu-ni-ca-tion Tech-no-logy \T1/lmr/m/n/12 [on-line]. 2019, 
 ro£. 15, s. 796--810 [cit. 2026-03-
  []
 
-[38]
-Underfull \hbox (badness 1789) in paragraph at lines 185--190
+
+Underfull \hbox (badness 1789) in paragraph at lines 161--166
 \T1/lmr/m/n/12 stupné z: [][]$\T1/lmtt/m/n/12 https : / / jurnal . kdi . or . i
 d / index . php / bt / article / download / 3223 /
  []
 
-
-Underfull \hbox (badness 1112) in paragraph at lines 203--207
+[38]
+Underfull \hbox (badness 1112) in paragraph at lines 179--183
 \T1/lmr/m/n/12 03-15]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / www . rese
 archgate . net / publication / 373640610 _
  []
 
 
-Underfull \hbox (badness 3895) in paragraph at lines 208--211
+Underfull \hbox (badness 3895) in paragraph at lines 184--187
 []\T1/lmr/m/n/12 Raspberry Pi 4 Mo-del B -- Da-tas-heet. \T1/lmr/m/it/12 Rasp-b
 erry Pi Ltd \T1/lmr/m/n/12 [on-line]. 2024
  []
 
 
-Underfull \hbox (badness 5667) in paragraph at lines 208--211
+Underfull \hbox (badness 5667) in paragraph at lines 184--187
 \T1/lmr/m/n/12 [cit. 2026-03-15]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / /
  datasheets . raspberrypi . com / rpi4 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 235--240
+Underfull \hbox (badness 10000) in paragraph at lines 211--216
 []\T1/lmr/m/n/12 Darlington Trans-is-tor vs. MOS-FET: Se-lec-tion Gu-ide-li-nes
 . \T1/lmr/m/it/12 Ca-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 235--240
+Underfull \hbox (badness 10000) in paragraph at lines 211--216
 \T1/lmr/m/it/12 dence PCB De-sign & Ana-ly-sis \T1/lmr/m/n/12 [on-line]. 2023 [
 cit. 2026-03-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 235--240
+Underfull \hbox (badness 10000) in paragraph at lines 211--216
 \T1/lmr/m/n/12 15]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / resources . p
 cb . cadence . com / blog /
  []
 
 
-Underfull \hbox (badness 1286) in paragraph at lines 241--244
+Underfull \hbox (badness 1286) in paragraph at lines 217--220
 []\T1/lmr/m/n/12 MOSFET H-Bridge vs De-di-ca-ted Mo-tor Dri-ver So-lu-ti-ons. \
 T1/lmr/m/it/12 ALLPCB \T1/lmr/m/n/12 [on-line].
  []
 
 
-Underfull \hbox (badness 1014) in paragraph at lines 241--244
+Underfull \hbox (badness 1014) in paragraph at lines 217--220
 \T1/lmr/m/n/12 2024 [cit. 2026-03-15]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https 
 : / / www . allpcb . com / allelectrohub /
  []
 
-[39]
-Underfull \hbox (badness 1097) in paragraph at lines 255--259
+
+Underfull \hbox (badness 1097) in paragraph at lines 231--235
 []\T1/lmr/m/n/12 Zero-Cross or Ran-dom Re-lay: What are the Dif-fe-ren-ces? \T1
 /lmr/m/it/12 Cel-duc Re-lais \T1/lmr/m/n/12 [on-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--264
+Underfull \hbox (badness 10000) in paragraph at lines 236--240
 []\T1/lmr/m/n/12 Beware of Zero-Crossover Swit-ching of Trans-for-mers. \T1/lmr
 /m/it/12 TE Con-nec-ti-vity
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--264
+Underfull \hbox (badness 10000) in paragraph at lines 236--240
 \T1/lmr/m/n/12 [on-line]. 2024 [cit. 2026-03-15]. Do-stupné z: [][]$\T1/lmtt/m/
 n/12 https : / / www . te . com / en /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--264
+Underfull \hbox (badness 10000) in paragraph at lines 236--240
 \T1/lmtt/m/n/12 products / relays-[]and-[]contactors / electromechanical-[]rela
 ys / intersection /
  []
 
 
-Underfull \hbox (badness 1331) in paragraph at lines 268--274
+Underfull \hbox (badness 1331) in paragraph at lines 244--250
 []\T1/lmr/m/n/12 KAUR, A. a kol. A Li-te-ra-ture Re-view on Device-to-Device Da
 ta Exchange
  []
 
 
-Underfull \hbox (badness 1112) in paragraph at lines 268--274
+Underfull \hbox (badness 1112) in paragraph at lines 244--250
 \T1/lmr/m/n/12 [on-line]. 2020 [cit. 2026-03-15]. Do-stupné z: [][]$\T1/lmtt/m/
 n/12 https : / / www . researchgate . net /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 268--274
+Underfull \hbox (badness 10000) in paragraph at lines 244--250
 \T1/lmtt/m/n/12 publication / 349022302 _ A _ Literature _ Review _ on _ Device
 -[]to-[]Device _ Data _
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 280--287
+[39]
+Underfull \hbox (badness 10000) in paragraph at lines 256--263
 []\T1/lmr/m/n/12 CELERDATA. YAML, JSON and XML: A Prac-ti-cal Gu-ide
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 280--287
+Underfull \hbox (badness 10000) in paragraph at lines 256--263
 \T1/lmr/m/n/12 to Cho-osing the Right For-mat. \T1/lmr/m/it/12 Ce-ler-Data Blog
  \T1/lmr/m/n/12 [on-line]. 2024
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 280--287
+Underfull \hbox (badness 10000) in paragraph at lines 256--263
 \T1/lmr/m/n/12 [cit. 2025-02-20]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / /
  celerdata . com / glossary /
  []
 
 
-Underfull \hbox (badness 3323) in paragraph at lines 288--293
+Underfull \hbox (badness 3323) in paragraph at lines 264--268
 []\T1/lmr/m/n/12 BLANCHON, B. How to Re-duce Me-mory Usage? -- Ar-du-inoJ-son 7
  [on-
  []
@@ -1432,25 +1394,16 @@ L3 programming layer <2025-12-24>
  ***********
 
 
-LaTeX Warning: There were undefined references.
+LaTeX Warning: There were multiply-defined labels.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `diplomka.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `diplomka.out':
-(rerunfilecheck)             Before: 15807332F7717829A463BE933B949475;12591
-(rerunfilecheck)             After:  2EA4EBEB2E8629FD578FD96F1A39C9D7;12821.
+Package rerunfilecheck Info: File `diplomka.out' has not changed.
+(rerunfilecheck)             Checksum: B84AB539B702B6B47E28FE97AECAAF39;12822.
  ) 
 Here is how much of TeX's memory you used:
- 20126 strings out of 467871
- 332132 string characters out of 5418377
- 870860 words of memory out of 5000000
- 48481 multiletter control sequences out of 15000+600000
+ 20141 strings out of 467871
+ 332667 string characters out of 5418377
+ 871764 words of memory out of 5000000
+ 48498 multiletter control sequences out of 15000+600000
  694061 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,17n,93p,463b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1460,11 +1413,12 @@ fb><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.p
 fb><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pf
 b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb
+><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (40 pages, 540139 bytes).
+Output written on diplomka.pdf (40 pages, 745931 bytes).
 PDF statistics:
- 822 PDF objects out of 1000 (max. 8388607)
- 145 named destinations out of 1000 (max. 500000)
- 507 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 862 PDF objects out of 1000 (max. 8388607)
+ 142 named destinations out of 1000 (max. 500000)
+ 525 words of extra memory for PDF output out of 10000 (max. 10000000)
 

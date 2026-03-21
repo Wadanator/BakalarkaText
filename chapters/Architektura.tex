@@ -2,9 +2,8 @@
 \label{NavrhArchitektury}
 
 Táto kapitola popisuje celkovú architektúru navrhovaného riadiaceho systému.
-Vychádza z~požiadaviek definovaných v~predchádzajúcej kapitole a~z~analýzy
-dostupných technológií. Popisuje hardvérovú topológiu, softvérovú štruktúru,
-komunikačnú vrstvu a~formát konfiguračných súborov.
+Vychádza z~analýzy dostupných technológií uvedenej v~predchádzajúcej kapitole
+a~z~požiadaviek definovaných v~sekcii~\ref{PoziadavkyNaSystem}.
 
 % ------------------------------------------------------------------
 \section{Požiadavky na systém}
@@ -53,12 +52,9 @@ a~z~\textbf{fyzického (sieťového)}.
 Z~logického hľadiska ide o \textbf{distribuovanú architektúru}
 (viď kapitola~\ref{architektury-systemov}). Výpočtový
 výkon a~inteligencia nie sú sústredené výhradne v jednom centrálnom procesore,
-ale sú rozložené do priestoru priamo k~výkonovým prvkom. Koncové periférie
-postavené na mikrokontroléroch neslúžia len ako pasívne spínače. Naopak,
-aktívne dekódujú prichádzajúce textové správy (parsovanie reťazcov MQTT
-payloadu) a priamo generujú špecifické signály (napr. pulzno-šírkovú moduláciu
-pre plynulé riadenie otáčok motorov či jednoduché zapnutie/vypnutie spotrebičov
-pomocou relé.).
+ale sú rozložené do priestoru priamo k~výkonovým prvkom. Koncové periférie postavené na mikrokontroléroch neslúžia len ako pasívne
+spínače -- aktívne spracúvajú prijaté príkazy a~samostatne vykonávajú
+im pridelené fyzické akcie.
 
 Z~fyzického a~sieťového hľadiska však systém prísne dodržiava
 \textbf{hviezdicovú topológiu (\textit{Star topology})}. Hoci sú distribuované
@@ -125,20 +121,19 @@ Klasický sekvenčný prístup je na takúto úlohu nevhodný
 z~dôvodov analyzovaných v~kapitole~\ref{riadiaca-logika}.
 
 Z~tohto dôvodu bolo softvérové jadro navrhnuté ako neblokujúci
-\textbf{Konečný stavový automat (FSM -- \textit{Finite State Machine})}
-(viď kapitola~\ref{riadiaca-logika}).
+\textbf{Konečný stavový automat (FSM -- \textit{Finite State Machine})}.
 Priebeh expozície je rozdelený do samostatných \textbf{stavov}, pričom systém
 nepretržite sleduje podmienky prechodu -- vypršanie časovača, dokončenie
 prehrávania média, alebo príchod správy od hardvérovej periférie -- a~podľa
 nich plynulo presúva chod scenára do ďalšieho stavu. Podrobná softvérová
 implementácia tejto architektúry je rozpracovaná v~Kapitole~\ref{ImplementaciaSW}.
 
-\vspace{1cm}
-\begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: Diagram konečného stavového automatu (FSM)
-    -- prechody z onEnter do timeline a čakanie na transition eventy]}
-\end{center}
-\vspace{1cm}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{obr/HW/FSM_Architektura}
+\caption{Diagram Konečného stavového automatu}
+\label{fig:topologia}
+\end{figure}
 
 % ------------------------------------------------------------------
 \section{Komunikačná vrstva -- MQTT a~formát scén}
@@ -163,12 +158,11 @@ Navrhnutý model siete implementuje niekoľko kľúčových komunikačných šta
         \texttt{/feedback} (napr.~\texttt{room1/motor1/feedback}). Centrála
         tak vie, že príkaz bol skutočne doručený a~fyzicky vykonaný.
     \item \textbf{Detekcia dostupnosti (status~+~LWT):} Každý ESP32 uzol
-        pri pripojení aktívne zverejní stav \texttt{online} na topiku
-        \texttt{devices/<id>/status} ako zostatkovú (\textit{retained}) správu
-        -- centrála tak vždy pozná aktuálny stav siete. Súčasne je nastavená
-        správa \textit{Last Will and Testament} (LWT), ktorú broker automaticky
-        zverejní ako \texttt{offline} na rovnakom topiku v~prípade neočakávaného
-        výpadku spojenia.
+        pri pripojení zverejní svoj stav na dedikovanom stavovom topiku
+        ako zostatkovú (\textit{retained}) správu -- centrála tak vždy
+        pozná aktuálny stav siete. Súčasne je nastavená správa
+        \textit{Last Will and Testament} (LWT), ktorú broker automaticky
+        zverejní v~prípade neočakávaného výpadku spojenia.
     \item \textbf{Konfigurácia scény ako externý JSON súbor}
         (viď kapitola~\ref{datove-formaty})\textbf{:} Celá logika
         scenára - čo má každý exponát vykonať, v~akom poradí a~za akých
@@ -178,9 +172,9 @@ Navrhnutý model siete implementuje niekoľko kľúčových komunikačných šta
 \end{itemize}
 Toto oddelenie konfigurácie od kódu enginu umožňuje upravovať logiku
 a~priebeh expozície bez zásahu do zdrojového kódu systému.
-\vspace{1cm}
-\begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: Schéma toku MQTT správ (Publish/Subscribe)
-    medzi Raspberry Pi a koncovými ESP32 uzlami so spätnou väzbou]}
-\end{center}
-\vspace{1cm}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{obr/HW/Mqtt_Flow}
+\caption{Sekvenčný diagram toku MQTT správ}
+\label{fig:topologia}
+\end{figure}

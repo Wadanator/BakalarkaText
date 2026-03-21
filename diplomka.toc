@@ -32,7 +32,7 @@
 \contentsline {subsection}{\numberline {4.2.1}Motorický uzol -- riadenie DC motorov}{21}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Reléový uzol -- spínanie záťaží}{22}{subsection.4.2.2}%
 \contentsline {subsection}{\numberline {4.2.3}Vstupný tlačidlový uzol}{23}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Mechanická konštrukcia exponátov}{23}{section.4.3}%
+\contentsline {section}{\numberline {4.3}Mechanická konštrukcia exponátov}{24}{section.4.3}%
 \contentsline {chapter}{\numberline {5}Implementácia softvérovej časti}{25}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Firmvér ESP32}{25}{section.5.1}%
 \contentsline {subsection}{\numberline {5.1.1}Spoločný základ firmvéru}{25}{subsection.5.1.1}%
@@ -50,11 +50,11 @@
 \contentsline {section}{\numberline {6.1}Popis fyzického testovania a~testovacieho prostredia}{31}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Testované scenáre a výsledky}{31}{section.6.2}%
 \contentsline {subsection}{\numberline {6.2.1}Scenár 1 -- Komplexná lineárna scéna s hardvérom}{31}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Scenár 2 -- Dlhodobý test stability riadiaceho systému}{31}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.2}Scenár 2 -- Dlhodobý test stability riadiaceho systému}{32}{subsection.6.2.2}%
 \contentsline {subsection}{\numberline {6.2.3}Scenár 3 -- Test sieťovej odolnosti a LWT (Last Will)}{32}{subsection.6.2.3}%
 \contentsline {section}{\numberline {6.3}Zhodnotenie overenia}{32}{section.6.3}%
 \contentsline {chapter}{\numberline {7}Záver}{33}{chapter.7}%
-\contentsline {chapter}{Zoznam obrázkov}{35}{chapter*.5}%
-\contentsline {chapter}{Zoznam tabuliek}{36}{chapter*.6}%
-\contentsline {chapter}{Použitá literatúra}{37}{section*.7}%
-\contentsline {chapter}{Použitá literatúra}{37}{chapter*.8}%
+\contentsline {chapter}{Zoznam obrázkov}{35}{chapter*.7}%
+\contentsline {chapter}{Zoznam tabuliek}{36}{chapter*.8}%
+\contentsline {chapter}{Použitá literatúra}{37}{section*.9}%
+\contentsline {chapter}{Použitá literatúra}{37}{chapter*.10}%

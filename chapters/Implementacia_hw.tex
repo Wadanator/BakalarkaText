@@ -46,11 +46,9 @@ pri vstupe do miestnosti.
 \subsection{Motorický uzol -- riadenie DC motorov}
 \label{UzolMotorov}
 
-Tento riadiaci obvod je vyhradený pre ovládanie jednosmerných (DC) motorov,
-ktoré rozpohybúvajú hlavné dizajnové prvky celej inštalácie (nazvanej
-\textbf{CHRONOS}). Pohon je navrhnutý pre ovládanie hlavných hodinových
-mechanizmov a~ozubených kolies inštalácie, ktorých
-konštrukcia je popísaná v~kapitole~\ref{MechanickaKonstrukcia}.
+Tento riadiaci obvod je vyhradený pre ovládanie jednosmerných (DC) motorov.
+Konkrétne fyzické exponáty, ktoré tento uzol poháňa, sú popísané
+v~kapitole~\ref{MechanickaKonstrukcia}.
 
 Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov:
 \begin{itemize}
@@ -73,8 +71,7 @@ Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov:
 \subsection{Reléový uzol -- spínanie záťaží}
 \label{UzolRele}
 
-Na jednoduché zapínanie a~vypínanie ostatných prvkov expozície, ako sú
-svetlá, budíky či dymostroj, slúži vyhradený reléový uzol:
+Na spínanie záťaží ostatných prvkov expozície slúži vyhradený reléový uzol:
 \begin{itemize}
     \item \textbf{Priemyselný I/O modul Waveshare:} Základom tohto uzla je
         komerčná hotová doska s~čipom \textbf{ESP32-S3}. Obsahuje integrovanú
@@ -141,6 +138,23 @@ samostatným uzlom:
         prstenca.
 \end{itemize}
 
+\vspace{1cm}
+\begin{center}
+    \textit{[MIESTO PRE OBRÁZOK: Fotografia inštalačnej
+    krabičky tlačidlového uzla s~viditeľným MOSFET modulom, ESP32
+    doskou a~GX12 konektorom]}
+\end{center}
+\vspace{1cm}
+
+\vspace{1cm}
+\begin{center}
+    \textit{[MIESTO PRE OBRÁZOK: Schéma zapojenia vstupného
+    tlačidlového uzla -- ESP32, externý pull-up rezistor na
+    GPIO\,32, MOSFET F5305S pre napájanie LED prstenca
+    a~GX12 konektor]}
+\end{center}
+\vspace{1cm}
+
 \section{Mechanická konštrukcia exponátov}
 \label{MechanickaKonstrukcia}
 
@@ -164,20 +178,3 @@ a~povrchovú úpravu exponátov zabezpečila
 externá firma. Podrobná konštrukčná dokumentácia
 (výkresy, modely, prevodové výpočty) presahuje
 rámec tejto práce a~nie je jej predmetom.
-
-\vspace{1cm}
-\begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: Fotografia inštalačnej
-    krabičky tlačidlového uzla s~viditeľným MOSFET modulom, ESP32
-    doskou a~GX12 konektorom]}
-\end{center}
-\vspace{1cm}
-
-\vspace{1cm}
-\begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: Schéma zapojenia vstupného
-    tlačidlového uzla -- ESP32, externý pull-up rezistor na
-    GPIO\,32, MOSFET F5305S pre napájanie LED prstenca
-    a~GX12 konektor]}
-\end{center}
-\vspace{1cm}
