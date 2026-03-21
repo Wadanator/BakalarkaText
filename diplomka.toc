@@ -4,56 +4,55 @@
 \contentsline {chapter}{\numberline {2}Súčasný stav problematiky}{10}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Vývoj výstavníctva a~interaktívne expozície}{10}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Architektúry riadiacich systémov}{10}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Existujúce prístupy k~riadeniu expozícií}{11}{section.2.3}%
+\contentsline {section}{\numberline {2.3}Porovnanie dostupných riadiacich platforiem}{11}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Priemyselné riadiace systémy (PLC)}{11}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Profesionálne show-control systémy}{11}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Otvorené IoT a~SBC systémy}{12}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.3}Otvorené systémy na báze IoT platforiem}{12}{subsection.2.3.3}%
 \contentsline {section}{\numberline {2.4}Komunikačné protokoly}{12}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}Prenosové médiá: drôtové vs. bezdrôtové}{12}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Aplikačné protokoly}{12}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.2}Aplikačné protokoly}{13}{subsection.2.4.2}%
 \contentsline {section}{\numberline {2.5}Hardvérové platformy pre IoT}{13}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}Jednodoskové počítače (SBC)}{13}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Mikrokontroléry pre koncové uzly}{13}{subsection.2.5.2}%
-\contentsline {section}{\numberline {2.6}Výkonová elektronika a~riadenie fyzických efektov}{14}{section.2.6}%
+\contentsline {subsection}{\numberline {2.5.2}Mikrokontroléry pre koncové uzly}{14}{subsection.2.5.2}%
+\contentsline {section}{\numberline {2.6}Výkonová elektronika pre fyzické efekty}{14}{section.2.6}%
 \contentsline {subsection}{\numberline {2.6.1}Riadenie jednosmerných (DC) motorov}{14}{subsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.6.2}Spínanie záťaží a~reléové spínače}{14}{subsection.2.6.2}%
-\contentsline {section}{\numberline {2.7}Dátové formáty pre konfiguráciu a~prenos}{15}{section.2.7}%
-\contentsline {section}{\numberline {2.8}Prístupy k~riadiacej logike expozície}{15}{section.2.8}%
-\contentsline {section}{\numberline {2.9}Zhrnutie rešerše}{15}{section.2.9}%
+\contentsline {subsection}{\numberline {2.6.2}Spínanie sieťových a~nízkonapäťových záťaží}{14}{subsection.2.6.2}%
+\contentsline {section}{\numberline {2.7}Prístupy k~riadiacej logike expozície}{15}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Dátové formáty pre konfiguráciu a~prenos}{15}{section.2.8}%
+\contentsline {section}{\numberline {2.9}Zhrnutie rešerše}{16}{section.2.9}%
 \contentsline {chapter}{\numberline {3}Návrh architektúry systému}{17}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Požiadavky na systém}{17}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Logická a~sieťová koncepcia}{17}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Hardvérová voľba a~sieťový prenos}{18}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Princíp softvérového jadra (Scene Engine)}{19}{section.3.4}%
+\contentsline {section}{\numberline {3.2}Systémová topológia a~sieťová koncepcia}{17}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Výber hardvérových platforiem a~spôsob komunikácie}{18}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Softvérové jadro systému -- konečný stavový automat}{19}{section.3.4}%
 \contentsline {section}{\numberline {3.5}Architektúra komunikačnej vrstvy}{19}{section.3.5}%
 \contentsline {chapter}{\numberline {4}Implementácia hardvérovej časti}{21}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Centrálna jednotka -- Raspberry Pi}{21}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Distribuované uzly -- ESP32}{21}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Uzol ovládania jednosmerných motorov}{21}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Uzol spínacích relé}{22}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Senzorický tlačidlový uzol}{23}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.1}Motorický uzol -- riadenie DC motorov}{21}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Reléový uzol}{22}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Vstupný tlačidlový uzol}{23}{subsection.4.2.3}%
 \contentsline {chapter}{\numberline {5}Implementácia softvérovej časti}{24}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Firmvér ESP32}{24}{section.5.1}%
 \contentsline {subsection}{\numberline {5.1.1}Spoločný základ firmvéru}{24}{subsection.5.1.1}%
 \contentsline {subsection}{\numberline {5.1.2}Tlačidlový uzol}{25}{subsection.5.1.2}%
 \contentsline {subsection}{\numberline {5.1.3}Motorický uzol}{25}{subsection.5.1.3}%
-\contentsline {subsection}{\numberline {5.1.4}Reléový uzol}{26}{subsection.5.1.4}%
+\contentsline {subsection}{\numberline {5.1.4}Reléový uzol}{25}{subsection.5.1.4}%
 \contentsline {section}{\numberline {5.2}Backend Raspberry Pi}{26}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Vstupný bod a~orchestrácia (MuseumController)}{27}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Kontajner služieb (ServiceContainer)}{27}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Stavový automat a~scene engine}{27}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Vrstva médií}{28}{subsection.5.2.4}%
-\contentsline {subsection}{\numberline {5.2.5}MQTT vrstva}{29}{subsection.5.2.5}%
-\contentsline {subsection}{\numberline {5.2.6}Webový dashboard}{29}{subsection.5.2.6}%
-\contentsline {section}{\numberline {5.3}Konfigurácia scén -- formát JSON}{30}{section.5.3}%
-\contentsline {chapter}{\numberline {6}Experimentálne overenie}{31}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Popis demonštračnej úlohy (Setup)}{31}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Testované scenáre a výsledky}{31}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Scenár 1 -- Komplexná lineárna scéna s hardvérom}{31}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Scenár 2 -- Dlhodobý test stability riadiaceho systému}{31}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Scenár 3 -- Test sieťovej odolnosti a LWT (Last Will)}{32}{subsection.6.2.3}%
-\contentsline {section}{\numberline {6.3}Zhodnotenie overenia}{32}{section.6.3}%
-\contentsline {chapter}{\numberline {7}Záver}{33}{chapter.7}%
+\contentsline {subsection}{\numberline {5.2.1}Vstupný bod a orchestrácia systému}{26}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Stavový automat a engine scén}{27}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Mediálna vrstva -- audio a video}{28}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Komunikačná vrstva MQTT}{28}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}Webový dashboard}{29}{subsection.5.2.5}%
+\contentsline {section}{\numberline {5.3}Konfigurácia scén -- formát JSON}{29}{section.5.3}%
+\contentsline {chapter}{\numberline {6}Experimentálne overenie}{30}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Popis demonštračnej úlohy (Setup)}{30}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Testované scenáre a výsledky}{30}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Scenár 1 -- Komplexná lineárna scéna s hardvérom}{30}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Scenár 2 -- Dlhodobý test stability riadiaceho systému}{30}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Scenár 3 -- Test sieťovej odolnosti a LWT (Last Will)}{31}{subsection.6.2.3}%
+\contentsline {section}{\numberline {6.3}Zhodnotenie overenia}{31}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Záver}{32}{chapter.7}%
 \contentsline {chapter}{Zoznam obrázkov}{34}{chapter*.5}%
 \contentsline {chapter}{Zoznam tabuliek}{35}{chapter*.6}%
 \contentsline {chapter}{Použitá literatúra}{36}{section*.7}%

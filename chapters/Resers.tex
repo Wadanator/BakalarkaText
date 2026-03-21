@@ -3,7 +3,7 @@
 
 Cieľom tejto kapitoly je analyzovať súčasný stav technických
 prostriedkov používaných v~modernom výstavníctve, multimediálnych
-inštaláciách a~automatizácii. Kapitola poskytuje kritický prehľad
+inštaláciách a~automatizácii. Kapitola poskytuje prehľad
 dostupných hardvérových a~softvérových platforiem s~dôrazom na ich
 vhodnosť pre realizáciu interaktívnych expozícií. Zároveň sú
 diskutované kľúčové technické požiadavky na komunikačné protokoly
@@ -20,10 +20,18 @@ systémy s~preklápateľnými odpoveďami sa objavovali už v~70. rokoch
 technológií sa tieto prvky rozvinuli do systémov zahŕňajúcich dotykové
 obrazovky, virtuálnu a~rozšírenú realitu, čím sa zásadne zmenili
 požiadavky na riadiacu infraštruktúru \cite{museum_immersive_design}.
-Systémy postavené na cenovo dostupných IoT platformách zmierňujú
-opakujúci sa prevádzkový problém menších inštitúcií -- umožňujú
-vzdialenú diagnostiku a~rekonfiguráciu bez nutnosti stáleho
-technického personálu \cite{interactive_small_museums}.
+
+Rastúca technologická komplexnosť však so sebou priniesla aj nové
+prevádzkové výzvy. Ako upozorňuje súčasná literatúra, pokročilé
+interaktívne inštalácie si vyžadujú neustálu údržbu a~aktualizáciu,
+čo naráža na finančné a~personálne limity najmä v~menších kultúrnych
+inštitúciách bez vyhradeného IT oddelenia \cite{shehade2020}. Snaha
+o~minimalizáciu prevádzkových výpadkov a~zníženie závislosti od externých
+technikov tak prirodzene vytvorila tlak na zmenu návrhu riadiacich
+systémov. Do popredia sa dostáva požiadavka na modulárne architektúry,
+ktoré namiesto uzavretého jednoúčelového hardvéru umožňujú jednoduchšiu
+škálovateľnosť, vzdialenú diagnostiku a~rekonfiguráciu bez nutnosti
+fyzického zásahu na mieste \cite{bachi2024}.
 
 % ------------------------------------------------------------------
 \section{Architektúry riadiacich systémov}
@@ -49,7 +57,7 @@ V~praxi sa stretávame predovšetkým s~dvoma základnými prístupmi:
         riešia svoju vlastnú časť logiky \cite{distributed_av_platform}.
         Každý periférny uzol disponuje vlastným mikrokontrolérom
         schopným spracovávať lokálne udalosti a~komunikovať
-        s~centrálnym koordinátorom len pri dôležitých stavových
+        s~centrálnou jednotkou len pri dôležitých stavových
         zmenách. Topológia tak umožňuje modulárne rozširovanie
         systému a~redukuje potrebu ťahať kabeláž z~jedného
         riadiaceho bodu \cite{distributed_control_modeling}.
@@ -71,21 +79,25 @@ V~praxi sa stretávame predovšetkým s~dvoma základnými prístupmi:
 \end{minipage}
 \end{figure}
 
-Výzvou pri návrhu distribuovaných systémov pre expozície
+Výzvou pri návrhu riadiacich systémov pre expozície
 zostáva koordinácia viacerých asynchrónnych udalostí
 súčasne, čo si vyžaduje využitie formalizovaných metód,
 ako sú konečné stavové automaty (\textit{Finite State
 Machine}, FSM) \cite{distributed_control_modeling}.
 
 % ------------------------------------------------------------------
-\section{Existujúce prístupy k~riadeniu expozícií}
+\section{Porovnanie dostupných riadiacich platforiem}
 \label{existujuce-pristupy}
 
-V~súčasnosti neexistuje jedno univerzálne riešenie pre implementáciu
-interaktívnych expozícií. Realizátori si spravidla vyberajú medzi
-viacerými kategóriami, z~ktorých každá má svoje špecifiká, výhody
-a~obmedzenia. Výber konkrétnej platformy závisí od požiadaviek na
-spoľahlivosť, synchronizáciu multimédií a~dostupný rozpočet.
+Samotný teoretický návrh topológie a~riadiacej
+logiky je však len prvým krokom k~funkčnej expozícii. Pre fyzickú
+implementáciu týchto konceptov do praxe je kľúčový výber
+vhodných hardvérových a~softvérových prostriedkov. V~súčasnosti
+neexistuje jedno univerzálne riešenie -- realizátori si spravidla
+vyberajú medzi viacerými kategóriami, z~ktorých každá má svoje
+špecifiká, výhody a~obmedzenia. Výber konkrétnej platformy
+závisí od požiadaviek na determinizmus, schopnosť synchronizácie
+multimédií a~v~neposlednom rade od dostupného rozpočtu.
 
 \subsection{Priemyselné riadiace systémy (PLC)}
 \label{plc-systemy}
@@ -124,7 +136,7 @@ hardvér a~proprietárna povaha systému vytvára závislosť na
 dodávateľovi, čo znemožňuje flexibilné rozširovanie o~vlastné
 hardvérové riešenia bez drahých certifikácií \cite{noural2019iot}.
 
-\subsection{Otvorené IoT a~SBC systémy}
+\subsection{Otvorené systémy na báze IoT platforiem}
 \label{otvorene-iot}
 
 Treťou, čoraz populárnejšou kategóriou sú otvorené a~modulárne
@@ -161,11 +173,15 @@ prototypovanie a~iteratívny vývoj riadiacej logiky
 \section{Komunikačné protokoly}
 \label{komunikacne-protokoly}
 
-V~distribuovanom systéme je voľba komunikačného protokolu
-rozhodujúcim faktorom pre plynulosť interakcie
-\cite{rpi_esp32_scada}. Pri výbere sa zvažujú parametre ako
-latencia, réžia protokolu a~spoľahlivosť doručenia v~rámci
-lokálnej siete \cite{mqtt_http_latency}.
+V~prípade využitia otvorenej IoT architektúry, ktorá fyzicky
+oddeľuje centrálnu riadiacu jednotku od distribuovaných periférnych
+uzlov, vzniká kritická potreba ich vzájomnej koordinácie. 
+V~takomto distribuovanom systéme je voľba komunikačného 
+protokolu rozhodujúcim faktorom pre celkovú plynulosť 
+interakcie \cite{rpi_esp32_scada}. Pri výbere vhodného 
+riešenia sa zvažujú parametre ako latencia, réžia 
+protokolu (\textit{overhead}) a~spoľahlivosť doručenia 
+správ v~rámci lokálnej siete \cite{mqtt_http_latency}.
 
 \subsection{Prenosové médiá: drôtové vs. bezdrôtové}
 \label{prenosove-media}
@@ -180,7 +196,7 @@ problematické \cite{zonta2010wireless}. Bezdrôtové technológie
 a~výrazne zvyšujú flexibilitu systému \cite{rpi_esp32_scada}.
 Mikrokontroléry ESP32 majú vstavané Wi-Fi a~priamo sa pripájajú
 do lokálnej siete, čo umožňuje jednoducho premiestňovať
-interaktívne prvky bez nových prípojok \cite{maier2017esp32}.
+interaktívne prvky \cite{maier2017esp32}.
 
 \subsection{Aplikačné protokoly}
 \label{aplikacne-protokoly}
@@ -247,10 +263,11 @@ po výpadku napájania okamžite obnoviť svoj stav
 \section{Hardvérové platformy pre IoT}
 \label{hardverove-platformy}
 
-Realizácia riadiaceho systému vyžaduje výber hardvéru pre dve
-úrovne: centrálnu jednotku určenú na koordináciu systému
-a~multimediálne funkcie, a~koncové uzly obsluhujúce senzory,
-aktuátory a~periférie v~priestore expozície.
+Samotný návrh distribuovanej architektúry a~komunikácie si
+v~praxi vyžaduje nasadenie adekvátnych hardvérových komponentov.
+Realizácia takéhoto riadiaceho systému sa typicky delí na dve špecifické
+úrovne: centrálnu jednotku určenú na orchestráciu systému a~multimediálne
+funkcie, a~distribuované koncové uzly obsluhujúce senzory a~aktuátory priamo v~priestore expozície.
 
 \subsection{Jednodoskové počítače (SBC)}
 \label{sbc-platformy}
@@ -265,8 +282,7 @@ a~priameho hardvérového výstupu obrazu a~zvuku
 \cite{rpi4_datasheet}. Práve táto vlastnosť predstavuje zásadnú
 výhodu oproti priemyselným PLC, ktoré si pre rovnaké funkcie
 vyžadujú externé mediálne prehrávače \cite{huntington2017}.
-Dostupnosť GPIO rozhrania navyše umožňuje priame prepojenie
-so senzormi a~aktuátormi bez nutnosti externých adaptérov
+Dostupnosť GPIO rozhrania navyše umožňuje pripojiť rôzne vstupy a~výstupy.
 \cite{rpi4_datasheet}.
 
 \subsection{Mikrokontroléry pre koncové uzly}
@@ -280,7 +296,7 @@ spracovávať sieťový TCP/IP stack a~súčasne parsovať
 komplexné JSON správy, čo vedie k~nestabilite systému
 pri vyššej sieťovej záťaži \cite{azad2025iot,
 maier2017esp32}. Nástup čipu \textbf{ESP32} od spoločnosti
-Espressif priniesol radikálnu zmenu v~oblasti IoT periférií.
+Espressif priniesol veľkú zmenu v~oblasti IoT periférií.
 Integrácia Wi-Fi konektivity priamo v~čipe eliminuje potrebu
 externých sieťových modulov, čo zjednodušuje hardvérový
 návrh uzlov \cite{maier2017esp32}. Dvojjadrová architektúra
@@ -297,7 +313,7 @@ dvojvodičovú zbernicu sprístupňujú dodatočné výstupy bez
 obsadenia všetkých GPIO pinov.
 
 % ------------------------------------------------------------------
-\section{Výkonová elektronika a~riadenie fyzických efektov}
+\section{Výkonová elektronika pre fyzické efekty}
 \label{vykonova-elektronika}
 
 Riadiaci systém musí byť schopný bezpečne a~efektívne ovládať
@@ -308,39 +324,29 @@ zariadenia pracujúce na sieťovom napätí 230\,V~AC.
 \subsection{Riadenie jednosmerných (DC) motorov}
 \label{dc-motory}
 
-Na zmenu smeru otáčania a~reguláciu rýchlosti DC motorov sa
-využívajú moduly H-mostíkov. Staršie integrované obvody ako
-L293D alebo L298N, založené na Darlingtonových tranzistoroch,
-vykazujú v~moderných aplikáciách značné nedostatky
-\cite{darlington_vs_mosfet}. Ich vysoký saturačný úbytok
-napätia (typicky cez 1{,}5\,V) spôsobuje, že sa pri väčších
-prúdoch výrazne zahrievajú, čo vyžaduje masívne chladenie
-a~znižuje celkovú účinnosť systému \cite{darlington_vs_mosfet}.
-Moderné H-mostíky prešli na MOSFET tranzistory s~veľmi
-malým odporom v~zopnutom stave, čím sa minimalizujú tepelné
-straty a~umožňuje sa riadenie prúdov desiatok ampérov takmer
-bez znateľného zahrievania. Pre menšie prúdy sú vhodné kompaktné
-integrované riešenia ako DRV88xx alebo TB6612FNG, ktoré
-disponujú ochranou proti prehriatiu, prepätiu a~skratu
-\cite{mosfet_h_bridge}. Pre väčšie inštalačné motory
-s~vyššími prúdovými nárokmi sa využívajú vysokoprúdové moduly
-(napr. BTS7960) s~maximálnym trvalým prúdom rádovo desiatky
-ampérov, ktoré sú schopné zvládať prúdové špičky pri rozbehu
-\cite{mosfet_h_bridge}.
+Na obojsmerné riadenie DC motorov sa využívajú H-mostíky. 
+Staršie obvody na báze Darlingtonových tranzistorov (napr. 
+L293D alebo L298N) sú v~súčasnosti pre moderné aplikácie 
+nevhodné pre ich vysoký úbytok napätia (typicky nad 1,5~V), 
+čo spôsobuje tepelné straty a~vyžaduje prídavné chladenie 
+\cite{darlington_vs_mosfet}. Súčasným štandardom sú preto 
+MOSFET H-mostíky, ktoré vďaka minimálnemu odporu v~zopnutom 
+stave takmer úplne eliminujú nežiaduce zahrievanie. Pre 
+nízkoenergetické aplikácie sa využívajú kompaktné čipy 
+s~vstavanými ochranami (napr. DRV88xx), zatiaľ čo pre 
+zvládanie rozbehových špičiek v~rádoch desiatok ampérov 
+slúžia vysokoprúdové moduly typu BTS7960 \cite{mosfet_h_bridge}.
 
-Pre riadenie záťaží, ktorých prúdové nároky presahujú
-možnosti GPIO výstupu mikrokontroléra, sa využívajú kompaktné
-MOSFET spínacie moduly. GPIO piny ESP32 sú dimenzované pre
-logické signály; pre záťaže s~prúdovými nárokmi rádovo
-jednotiek miliampér a~viac je preto nutné zaradiť výkonový
-spínací prvok. Zaradením MOSFET tranzistora medzi GPIO
-a~záťaž GPIO pin riadi výhradne hradlo (\textit{gate})
-tranzistora, pričom samotný prúd záťaže tečie cez výkonový
-kanál napájaný z~externého zdroja. Toto riešenie chráni
-mikrokontrolér pred prúdovým preťažením a~zároveň umožňuje
-PWM reguláciu výkonu záťaže \cite{darlington_vs_mosfet}.
+Pre jednosmerné spínanie a~PWM reguláciu záťaží, ktoré 
+presahujú prúdový limit GPIO pinov (jednotky miliampérov), 
+sa využíva samostatný MOSFET modul. Pri takomto zapojení 
+riadi GPIO pin výhradne hradlo (\textit{gate}) tranzistora. 
+Celý výkonový prúd tak tečie oddelene z~externého zdroja, 
+čím je mikrokontrolér bezpečne chránený pred preťažením 
+\cite{darlington_vs_mosfet}.
 
-\subsection{Spínanie záťaží a~reléové spínače}
+
+\subsection{Spínanie sieťových a~nízkonapäťových záťaží}
 \label{spinanie-sietoveho-napatia}
 
 Pre ovládanie svetelných efektov, dymostrojov alebo iných
@@ -360,14 +366,46 @@ obmedzená univerzálnosť -- rôzne typy SSR (napr.
 optimalizované pre špecifické typy záťaží a~nie všetky
 typy podporujú súčasne AC aj DC obvody
 \cite{zero_cross_ssr, ssr_zero_cross_transformers}.
-Elektromechanické relé naopak poskytujú úplnú galvanickú
+Elektromechanické relé naopak poskytujú galvanickú
 izoláciu a~sú schopné spínať záťaže rôzneho charakteru
 bez obmedzenia, za cenu pohyblivých kontaktov
 s~obmedzenou životnosťou pri vyššej frekvencii spínania
 \cite{ssr_guide}.
 
 % ------------------------------------------------------------------
-latex\section{Dátové formáty pre konfiguráciu a~prenos}
+\section{Prístupy k~riadiacej logike expozície}
+\label{riadiaca-logika}
+
+Softvérová vrstva riadiaceho systému určuje, akým spôsobom
+sa definuje a~vykonáva scenár expozície. V~praxi sa
+využívajú predovšetkým dva základné prístupy, ktoré sa líšia
+schopnosťou reagovať na externé udalosti. Najjednoduchším
+riešením je \textbf{lineárny (sekvenčný) prístup}: scenár
+je pevná séria akcií vykonávaných v~pevnom poradí a~čase,
+bez možnosti vetvenia. Takéto systémy sú jednoduché na
+implementáciu a~postačujú pre pasívne inštalácie, kde sa
+obsah prehráva v~slučke bez závislosti od vstupu návštevníka
+\cite{computational_frameworks_art}. Ich zásadným obmedzením
+je neschopnosť reagovať na externé podnety počas čakania
+na ďalší krok scenára, čo pri komplexnejšom scenári vedie
+k~blokovaniu celého systému \cite{computational_frameworks_art}.
+
+Pre interaktívne expozície, kde scenár musí reagovať na
+vstupy návštevníka (napr. stlačenie tlačidla, dohratý
+mediálny klip), je vhodnejší prístup založený na
+\textbf{konečnom stavovom automate}
+(\textit{Finite State Machine}, FSM). V~tomto modeli je
+správanie systému rozdelené do diskrétnych stavov; prechody
+medzi nimi sú podmienené konkrétnymi udalosťami
+(\textit{events}) -- uplynutím časovača, prijatím MQTT
+správy alebo dokončením prehrávania média
+\cite{distributed_control_modeling}. FSM umožňuje
+neblokujúce čakanie na viacero rôznych podmienok súčasne,
+čo je nevyhnutné pre dynamické vetvenie scenára
+\cite{computational_frameworks_art}.
+
+% ------------------------------------------------------------------
+\section{Dátové formáty pre konfiguráciu a~prenos}
 \label{datove-formaty}
 
 Pre štruktúrovanie prenášaných dát a~ukladanie konfigurácie
@@ -402,37 +440,6 @@ rekompilácie softvéru \cite{iot_data_formats_review}.
 Tento prístup oddeľuje konfiguráciu od kódu aplikácie,
 čo znižuje závislosť na vývojároch pri bežných zmenách
 logiky systému \cite{partarakis2016adaptable}.
-
-% ------------------------------------------------------------------
-\section{Prístupy k~riadiacej logike expozície}
-\label{riadiaca-logika}
-
-Softvérová vrstva riadiaceho systému určuje, akým spôsobom
-sa definuje a~vykonáva scenár expozície. V~praxi sa
-stretávame predovšetkým s~dvoma prístupmi, ktoré sa líšia
-schopnosťou reagovať na externé udalosti. Najjednoduchším
-riešením je \textbf{lineárny (sekvenčný) prístup}: scenár
-je pevná séria akcií vykonávaných v~pevnom poradí a~čase,
-bez možnosti vetvenia. Takéto systémy sú jednoduché na
-implementáciu a~postačujú pre pasívne inštalácie, kde sa
-obsah prehráva v~slučke bez závislosti od vstupu návštevníka
-\cite{computational_frameworks_art}. Ich zásadným obmedzením
-je neschopnosť reagovať na externé podnety počas čakania
-na ďalší krok scenára, čo pri komplexnejšom scenári vedie
-k~blokovaniu celého systému \cite{computational_frameworks_art}.
-Pre interaktívne expozície, kde scenár musí reagovať na
-vstupy návštevníka (napr. stlačenie tlačidla, dohratý
-mediálny klip), je vhodnejší prístup založený na
-\textbf{konečnom stavovom automate}
-(\textit{Finite State Machine}, FSM). V~tomto modeli je
-správanie systému rozdelené do diskrétnych stavov; prechody
-medzi nimi sú podmienené konkrétnymi udalosťami
-(\textit{events}) -- uplynutím časovača, prijatím MQTT
-správy alebo dokončením prehrávania média
-\cite{distributed_control_modeling}. FSM umožňuje
-neblokujúce čakanie na viacero rôznych podmienok súčasne,
-čo je nevyhnutné pre dynamické vetvenie scenára
-\cite{computational_frameworks_art}.
 
 % ------------------------------------------------------------------
 \section{Zhrnutie rešerše}

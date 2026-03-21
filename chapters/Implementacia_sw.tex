@@ -1,476 +1,480 @@
+% ============================================================
+%  Kapitola 5 – Implementácia softvérovej časti
+% ============================================================
+
 \chapter{Implementácia softvérovej časti}
-\label{ImplementaciaSW}
+\label{chap:implementacia_sw}
 
-Táto kapitola opisuje programové vybavenie systému s~dôrazom na 
-systémový prístup a~minimalizáciu čistých výpisov kódu v~prospech 
-názorných blokových schém. Softvér bol rozdelený do dvoch 
-samostatných vrstiev: firmvér mikrokontrolérov ESP32 a~backend 
-bežiaci na Raspberry Pi.
+Softvérová vrstva systému bola rozdelená do dvoch samostatných
+celkov, ktoré spolu komunikujú výhradne prostredníctvom
+protokolu MQTT. Prvý celok tvorí firmvér mikrokontrolérov
+ESP32, ktorý zabezpečuje priame riadenie hardvéru popísaného
+v~kapitole~\ref{ImplementaciaHW}. Druhý celok predstavuje
+backend Raspberry~Pi, ktorý implementuje logiku scén,
+spravuje mediálny obsah a poskytuje webové rozhranie
+pre obsluhu. Celková architektúra oboch celkov a ich
+vzájomná komunikačná vrstva boli navrhnuté
+v~kapitole~\ref{NavrhArchitektury}; táto kapitola sa
+venuje konkrétnej realizácii jednotlivých komponentov.
 
-% ==================================================================
+% ============================================================
 \section{Firmvér ESP32}
-\label{FirmverESP32}
+\label{sec:fw_esp32}
 
-Všetky tri firmvérové varianty boli implementované v~jazyku C++ 
-s~využitím frameworku Arduino. Napriek odlišnej hardvérovej 
-zodpovednosti každého uzla zdieľajú spoločnú modulárnu základňu.
+Všetky tri uzly systému (tlačidlový, motorický a reléový)
+zdieľajú spoločnú infraštruktúrnu vrstvu, ktorá rieši
+sieťovú konektivitu, správu spojenia a bezpečnostnú
+odolnosť zariadenia. Táto vrstva bola zámerme oddelená
+od aplikačnej logiky uzla, čo umožňuje jednoduché
+rozšírenie systému bez nutnosti opakovane implementovať
+tie isté mechanizmy. Fyzické zapojenie a výber
+konkrétnych pinov jednotlivých uzlov sú podrobne
+popísané v~kapitole~\ref{DistribuovaneUzly}.
 
-% ------------------------------------------------------------------
+% - - - - - - - - - - - - - - - - - -
 \subsection{Spoločný základ firmvéru}
-\label{SpolocnyZakladFirmveru}
+\label{subsec:fw_zaklad}
 
-Každý uzol bol pri štarte povinný vykonať rovnakú inicializačnú 
-postupnosť. Najprv bol inicializovaný \textbf{hardvérový watchdog 
-timer (WDT)}, ktorý pri úplnom zamrznutí kódu vyvolá núdzový reštart 
-mikrokontroléra. Pre motorický uzol bola časová hranica nastavená na 
-60 sekúnd, pre tlačidlový a~reléový na 30 sekúnd. Následne prebehlo 
-pripojenie na Wi-Fi sieť a~inicializácia OTA (\textit{Over-The-Air}) 
-modulu, ktorý umožňuje bezdrôtové nahrávanie nového firmvéru bez 
-fyzického prístupu k~zariadeniu.
+\textbf{Správa WiFi a MQTT pripojenia.}
+Pri štarte sa uzol pripojí k sieti pomocou nakonfigurovaného
+SSID a hesla. Pri strate spojenia sa automaticky spustí
+mechanizmus opätovného pripájania s exponenciálnym
+nárastom čakacej doby od 3\,s do maximálne 30\,s,
+aby uzol nezahlcoval sieť zbytočnými pokusmi.
+Po obnovení WiFi sa MQTT klient znova inicializuje
+a uzol sa prihlási na odber svojich topicov.
 
-Po úspešnom nadviazaní Wi-Fi spojenia bol každý uzol prihlásený 
-na MQTT broker. Súčasťou pripojenia bolo nastavenie správy 
-\textit{Last Will and Testament} s~payloadom \texttt{offline} a~aktívne 
-zverejnenie zostatkovej (\textit{retained}) správy \texttt{online} 
-na diagnostický topik \texttt{devices/<CLIENT\_ID>/status}. Broker 
-tak v~prípade výpadku automaticky informuje centrálny systém 
-o~strate spojenia.
+Každý uzol pri prihlásení na MQTT broker publikuje
+správu \texttt{online} na status topic
+\texttt{devices/<clientID>/status} s~príznakom
+\texttt{retain\,=\,true}. Zároveň bola nastavená
+správa Last Will Testament (LWT), ktorú broker
+automaticky odošle (\texttt{offline}) pri
+neočakávanom výpadku spojenia. Tento mechanizmus
+umožňuje backendu sledovať stav každého uzla
+v~reálnom čase, ako je podrobnejšie popísané
+v~kapitole~\ref{KomunikacnaVrstva}.
 
-Konfigurácia siete, MQTT servera a~prefixu topikov bola vyčlenená 
-do dedikovaného súboru \texttt{config.cpp}. Vďaka tomuto oddeleniu 
-môže byť rovnaký firmvér nasadený na viacero fyzických kusov — zmena 
-miestnosti si vyžaduje úpravu výhradne v~tomto súbore.
+\textbf{Watchdog Timer.}
+Aby sa predišlo situácii, kedy uzol zamrzne a prestane
+reagovať na príkazy, bol aktivovaný hardvérový
+Watchdog Timer (WDT). Časový limit je pre každý
+typ uzla nastavený individuálne --- pre tlačidlový
+a~reléový uzol na 30 sekúnd, pre motorický uzol
+na 60 sekúnd z~dôvodu dlhších rampových operácií.
+Hlavná slučka programu pravidelne WDT resetuje.
+Pokiaľ k~resetu nedôjde, napríklad pri zaseknutí
+v~blokujúcej operácii, WDT vyvolá reštart zariadenia.
 
-\vspace{1cm}
-\begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: Bloková schéma spoločného 
-    inicializačného toku (WDT → HW → WiFi → OTA → MQTT → Loop) 
-    zdieľaného všetkými troma ESP32 variantmi]}
-\end{center}
-\vspace{1cm}
+\textbf{OTA aktualizácie.}
+Všetky uzly boli vybavené podporou aktualizácie firmvéru
+cez sieť (Over-the-Air, OTA) bez potreby fyzického
+prístupu k~zariadeniu. Pri spustení OTA procesu sa
+automaticky zastavia všetky aktívne výstupy
+a~deaktivuje sa WDT, aby proces nahrávania nebol
+prerušený. Po úspešnej aktualizácii sa zariadenie
+reštartuje s~novým firmvérom.
 
-% ------------------------------------------------------------------
+\textbf{Feedback mechanizmus.}
+Po prijatí a~vykonaní každého príkazu uzol odošle
+spätnú väzbu na topic \texttt{<príkazový\_topic>/feedback}
+s~hodnotou \texttt{OK} alebo \texttt{ERROR}. Tento
+mechanizmus umožňuje backendu detekovať výpadky
+komunikácie a~overiť, či bol príkaz skutočne vykonaný.
+
+\textbf{Globálny STOP.}
+Každý uzol bol prihlásený na topic \texttt{<room\_id>/STOP}.
+Pri jeho prijatí sú všetky výstupy okamžite deaktivované
+bez ohľadu na aktuálny stav uzla. Tento príkaz
+je kľúčovým bezpečnostným prvkom systému
+a~backend ho odošle automaticky pri ukončení
+každej scény.
+
+% - - - - - - - - - - - - - - - - - -
 \subsection{Tlačidlový uzol}
-\label{TlacidlovyUzol}
+\label{subsec:fw_button}
 
-Senzorický uzol bol implementovaný ako čisto vysielací 
-(\textit{publish-only}) modul — neprijímal žiadne príkazy a~jeho 
-jedinou úlohou bolo detekovať stlačenie fyzického tlačidla 
-a~odoslať trigger scény.
+Tlačidlový uzol slúži ako fyzický vstupný bod
+pre spustenie scény. Hardvérové tlačidlo bolo
+pripojené na GPIO pin 32 cez externý pull-up
+rezistor (3{,}3\,V), pričom uzol bol nakonfigurovaný
+v~režime \texttt{INPUT} bez interného pull-up odporu.
 
-\begin{itemize}
-    \item \textbf{Čítanie vstupu:} Tlačidlo bolo zapojené na 
-    \texttt{GPIO 32} v~režime \texttt{INPUT} s~externým pull-up 
-    rezistorom. Logická úroveň \texttt{LOW} na pine signalizuje 
-    stlačenie (spojenie s~GND).
+Stlačenie tlačidla prechádza dvojstupňovým
+filtrovaním. Prvý stupeň je debounce filter
+s~oknom 60\,ms, ktorý eliminuje mechanické zákmity
+kontaktov. Druhý stupeň je cooldown ochrana
+s~lehotou 4 sekúnd, ktorá zabraňuje viacnásobnému
+spusteniu scény pri rýchlom opakovanom stlačení
+alebo neúmyselnom podržaní tlačidla. Pokiaľ
+stlačenie cooldown filtrom neprejde, udalosť
+sa zaloguje, avšak správa odoslaná nie je.
 
-    \item \textbf{Debounce filter:} Na odstránenie mechanického šumu 
-    pri stlačení bol implementovaný softvérový debounce filter 
-    s~časovou konštantou 60\,ms. Stavová zmena bola akceptovaná 
-    len po uplynutí tejto doby od poslednej detekovanej zmeny.
+Po úspešnom prejdení oboch filtrov je správa
+\texttt{START} publikovaná na topic
+\texttt{room1/scene}. Backend na Raspberry~Pi
+je prihlásený na tento topic a~spustenie
+predvolenej scény je ním okamžite iniciované.
 
-    \item \textbf{Cooldown ochrana:} Po každom platnom odoslaní 
-    triggra bol aktivovaný blokačný interval 4\,000\,ms. Počas 
-    tejto doby boli všetky ďalšie stlačenia ignorované, čím sa 
-    predchádzalo rapidnemu odosielaniu MQTT príkazov pri dlhšom podržaní 
-    tlačidla alebo rýchlom opakovanom stláčaní.
-
-    \item \textbf{Odoslaný príkaz:} Po úspešnom prechode obidvoma 
-    filtrami bol na topik \texttt{room1/scene} odoslaný payload 
-    \texttt{START}, čím bol spustený predvolený scenár na centrálnom 
-    Raspberry Pi.
-\end{itemize}
-
-% ------------------------------------------------------------------
+% - - - - - - - - - - - - - - - - - -
 \subsection{Motorický uzol}
-\label{MotorickyUzol}
+\label{subsec:fw_motor}
 
-Motorický uzol sa prihlásil na príjem príkazov na topiky 
-\texttt{room1/motor1}, \texttt{room1/motor2} a~\texttt{room1/STOP}.
+Motorický uzol bol navrhnutý na riadenie dvoch
+jednosmerných DC motorov prostredníctvom
+H-mostíkových ovládačov. Každý motor má priradené
+dva PWM výstupy (ľavý a pravý smer) a~jeden
+enable pin. PWM signál je generovaný na frekvencii
+20\,kHz pomocou periférie LEDC mikrokontroléra
+ESP32, čo zaručuje tichú prevádzku bez počuteľného
+piskania vinutia.
 
-\begin{itemize}
-    \item \textbf{Parsovanie payloadu:} Prijatý textový reťazec bol 
-    rozparsovaný na súčasti príkazu. Formát 
-    \texttt{ON:<rýchlosť>:<smer>[:<čas\_rozbehu>]} umožňoval 
-    v~jednej správe definovať cieľovú rýchlosť (0--255 pre 8-bitové 
-    PWM), smer otáčania (\texttt{L}/\texttt{R}) a~voliteľný čas 
-    plynulého rozbehu v~milisekundách. Podporované boli aj samostatné 
-    príkazy \texttt{SPEED:<hodnota>}, \texttt{DIR:<smer>} 
-    a~\texttt{OFF}.
+Uzol prijíma príkazy vo formáte
+\texttt{ON:<rýchlosť>:<smer>[:<rampa>]},
+kde rýchlosť je zadaná buď v~percentách (0\,--\,100),
+alebo priamo ako PWM hodnota (0\,--\,255),
+smer hodnotou \texttt{L} alebo \texttt{R}
+a~voliteľný parameter rampy určuje čas rozbehu
+v~milisekundách. Príkazom \texttt{OFF} je motor
+plynulo zastavený.
 
-    \item \textbf{PWM generovanie:} Fyzické riadenie výkonu prebiehalo 
-    cez hardvérové PWM na frekvencii 20\,kHz s~8-bitovým rozlíšením. 
-    Pre motor 1 boli využité piny \texttt{18} (ľavý), \texttt{19} 
-    (pravý) a~\texttt{21} (enable). Pre motor 2 piny \texttt{27}, 
-    \texttt{26} a~\texttt{25}.
+Kľúčovou vlastnosťou implementácie je bezpečná
+zmena smeru za behu. Pokiaľ motor práve beží
+a~je prijatý príkaz na opačný smer, firmvér
+neprepne smer okamžite --- najprv je motor
+plynulo spomalený na nulu a~až potom je smer
+zmenený a~motor rozbehnutý na požadovanú rýchlosť.
+Tento postup chráni mechaniku pohonu pred
+opotrebovaním a~pred nárazovými prúdmi.
+Ak je zadaný parameter rampy, rozbeh prebieha
+lineárnou interpoláciou medzi aktuálnou
+a~cieľovou rýchlosťou v~definovanom čase.
 
-    \item \textbf{Plynulý nábeh (\textit{smooth ramping}):} 
-    Aby sa predchádzalo mechanickým rázom pri náhlom spustení 
-    pohonu, nebola cieľová PWM hodnota nastavená okamžite. 
-    V~každom iteračnom kroku hlavnej slučky (s~oneskorením 
-    100\,ms) sa aktuálna hodnota rýchlosti menila o~krok 2 
-    smerom k~cieľovej hodnote. Pri definovanom čase rozbehu bola 
-    rýchlosť interpolovaná lineárne po dobu zadanú v~príkaze.
+Pre každú zmenu stavu motora je spätná väzba
+odoslaná na topic \texttt{room1/motor<N>/feedback},
+čo umožňuje backendu sledovať reálny stav
+pohonov počas scény.
 
-    \item \textbf{Zmena smeru za behu:} Ak prišiel príkaz na zmenu 
-    smeru počas pohybu, firmware automaticky spustil spomalenie 
-    na nulovú rýchlosť, až potom prepol polaritu H-mostíka 
-    a~naštartoval rozjazd v~novom smere. Tým sa zabránilo vzniku 
-    skratových prúdov v~obvode budiča.
-
-    \item \textbf{Spätná väzba:} Po vykonaní každého príkazu bol 
-    na topik s~príponou \texttt{/feedback} odoslaný payload 
-    \texttt{OK} alebo \texttt{ERROR}.
-\end{itemize}
-
-\vspace{1cm}
-\begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: Vývojový diagram logiky 
-    motorického firmvéru -- parsovanie payloadu, logika 
-    smooth rampingu a~detekcie zmeny smeru]}
-\end{center}
-\vspace{1cm}
-
-% ------------------------------------------------------------------
+% - - - - - - - - - - - - - - - - - -
 \subsection{Reléový uzol}
-\label{RelevovyUzol}
+\label{subsec:fw_relay}
 
-Reléový uzol obsluhoval výstupné zariadenia rozdelené do 
-konfiguračného poľa \texttt{DEVICES[]}, pričom každý záznam 
-obsahoval názov MQTT topiku, index bitu na I2C expandéri, 
-príznak invertovanej logiky a~voliteľný čas automatického 
-vypnutia.
+Na ovládanie ôsmich výstupných kanálov bol zvolený
+rozšiřovač I/O portov PCF8574 pripojený cez zbernicu
+I²C (SDA: GPIO~42, SCL: GPIO~41). Každý kanál
+zodpovedá jednému efektu expozície: napájaniu
+dymového stroja, svetlu ohňa, alarmu, dymovému
+efektu a~štyrom dekoratívnym svetlám.
 
-\begin{itemize}
-    \item \textbf{I2C expandér:} Keďže počet dostupných GPIO pinov 
-    čipu ESP32-S3 nepostačoval pre priame riadenie ôsmich reléových 
-    kanálov, boli fyzické výstupy riadené cez I2C expandér 
-    (adresa \texttt{0x20}, SDA pin \texttt{42}, SCL pin \texttt{41}). 
-    Stav všetkých ôsmich bitov bol do expandéra zapísaný 
-    v~jednej I2C transakcii pri každej zmene.
+Mapovanie MQTT topicov na fyzické piny bolo
+centralizované v~konfiguračnej štruktúre
+\texttt{DEVICES[]}, kde je pre každé zariadenie
+definovaný názov topicu, číslo pinu, príznak
+inverzie výstupu a~voliteľný čas automatického
+vypnutia. Tento prístup umožňuje pridávať
+alebo presúvať zariadenia bez zásahu do riadiacej
+logiky uzla.
 
-    \item \textbf{Auto-off:} Pre kanál \texttt{effect/smoke} 
-    (index 3) bol nastavený automatický časovač 12\,000\,ms. 
-    Po jeho uplynutí bol kanál vypnutý bez nutnosti príkazu 
-    z~centrály, čím sa zabránilo prehriatiu dymostroja.
+Pre zariadenia fyzicky obmedzené v~maximálnej
+dobe prevádzky bol implementovaný AutoOff
+mechanizmus --- po uplynutí definovaného času
+(12\,s pre dymový efekt) sa kanál automaticky
+vypne bez zásahu backendu. Tým sa predchádza
+poškodeniu zariadenia pri prípadnom výpadku
+MQTT komunikácie počas scény.
 
-    \item \textbf{Efektové skupiny:} Okrem priameho ovládania 
-    jednotlivých zariadení bol implementovaný modul 
-    \texttt{effects\_manager}, ktorý umožňoval skupinové blikanie 
-    zariadení s~náhodným časovaním. Skupina \texttt{group1} 
-    (kanály \texttt{light/4} a~\texttt{light/5}) generovala 
-    blesky s~trvaním 75--500\,ms a~pauzami 150--1\,500\,ms. 
-    Skupina \texttt{alone} (kanál \texttt{light/1}) produkovala 
-    kratšie záblesky 60--100\,ms s~dlhšími pauzami 2\,000--5\,000\,ms. 
-    Každé zariadenie v~skupine blikalo nezávisle, so staggerovaným 
-    štartom.
+Uzol ďalej podporuje efektové skupiny
+(\texttt{room1/effects/<skupina>}), v~rámci
+ktorých viacero svetiel bliká asynchrónne
+s~náhodne volenými intervalmi zopnutia
+a~rozopnutia. Táto funkcionalita je riadená
+lokálne na uzle pomocou neblokujúcich časovačov
+(\texttt{millis()}), čím sa minimalizuje závislosť
+od latencie siete pri vizuálnych efektoch.
 
-    \item \textbf{Stavová LED:} Modul \texttt{status\_led} 
-    priebežne signalizoval stav systému prostredníctvom adresovateľnej 
-    NeoPixel diódy na pine \texttt{38}: plynulé \uv{dýchanie} 
-    v~zelenej farbe indikuje plnú prevádzku (Wi-Fi + MQTT), oranžové 
-    blikanie signalizuje výpadok MQTT spojenia a~rýchle červené 
-    blikanie indikuje stratu Wi-Fi siete. Počas OTA aktualizácie 
-    svietila dióda trvalo tyrkysovo.
+Na doske je osadená RGB LED dióda NeoPixel,
+ktorá poskytuje vizuálnu diagnostiku stavu uzla
+bez potreby sériového monitora. Zelené pulzovanie
+(breathing efekt) indikuje plnú prevádzku,
+oranžové blikanie signalizuje výpadok MQTT
+a~červené blikanie indikuje chýbajúce WiFi
+pripojenie.
 
-    \item \textbf{Ochrana pri nečinnosti:} Ak nebol prijatý 
-    žiadny príkaz počas 180\,000\,ms, uzol automaticky vypol 
-    všetky aktívne zariadenia a~zastavil efektové skupiny.
-\end{itemize}
-
-\vspace{1cm}
-\begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: Bloková schéma reléového 
-    firmvéru -- tok spracovania MQTT správy, I2C zápis 
-    a~logika effects\_managera]}
-\end{center}
-\vspace{1cm}
-
-% ==================================================================
+% ============================================================
 \section{Backend Raspberry Pi}
-\label{BackendRPI}
+\label{sec:backend_rpi}
 
-Centrálny riadiaci softvér bol implementovaný v~jazyku Python 3 
-ako viacvláknová aplikácia bežiaca nepretržite ako systémová 
-\texttt{systemd} služba.
+Backend bol nasadený ako systémová
+služba \texttt{museum-system.service} pod správou
+\texttt{systemd} a~bol implementovaný v~jazyku
+Python~3. Architektúra bola rozdelená do piatich
+funkčných vrstiev, ktoré sú od seba zámerme
+oddelené: vstupný bod a~orchestrácia, stavový
+automat, mediálna vrstva, komunikačná vrstva
+MQTT a~webové rozhranie, ako je znázornené
+na obrázku~\ref{fig:backend_arch}.
 
-% ------------------------------------------------------------------
-\subsection{Vstupný bod a~orchestrácia (MuseumController)}
-\label{MuseumController}
-
-Koreňom celej aplikácie bola trieda \textbf{MuseumController} 
-v~súbore \texttt{main.py}. Po štarte vykonala nasledujúce kroky:
-\begin{itemize}
-    \item \textbf{Bootstrap logging:} Pred načítaním konfigurácie 
-    bolo aktivované minimálne protokolovanie do súboru, ktoré 
-    zachytávalo prípadné chyby pri načítaní konfigurácie.
-
-    \item \textbf{Načítanie konfigurácie:} Trieda 
-    \texttt{ConfigManager} načítala hodnoty zo súboru 
-    \texttt{config/config.ini} a~vystavila ich ako štruktúrované 
-    slovníky. Ak súbor chýbal, bol automaticky skopírovaný 
-    zo šablóny \texttt{config.ini.example}.
-
-    \item \textbf{Inicializácia služieb:} Všetky podsystémy boli 
-    vytvorené prostredníctvom triedy \texttt{ServiceContainer} 
-    v~definovanom poradí závislostí.
-
-    \item \textbf{Prepojenie callbackov (\textit{wiring}):} Po 
-    inicializácii boli registrované spätné volania medzi 
-    podsystémami -- napríklad MQTT handler bol napojený na 
-    callback spustenia scény (\texttt{on\_button\_press}) 
-    a~\texttt{SceneParser} bol prepojený s~MQTT message handlerom 
-    pre príjem prechodových udalostí.
-
-    \item \textbf{Správa vlákien:} Spustenie scény prebiehalo 
-    v~samostatnom démonickom vlákne, čím hlavná slučka zostala 
-    responzívna pre systémové signály \texttt{SIGINT} 
-    a~\texttt{SIGTERM}.
-\end{itemize}
-
-\vspace{1cm}
+\vspace{0.8cm}
 \begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: UML diagram tried pre 
-    MuseumController, ServiceContainer a~SceneParser 
-    so znázornením závislostí a~callbackov]}
+    \textit{[MIESTO PRE OBRÁZOK: Architektúra backendu Raspberry Pi ---
+    päť funkčných vrstiev a ich vzájomné prepojenie
+    (orchestrácia, FSM engine, mediálna vrstva, MQTT vrstva, Web)]}
 \end{center}
-\vspace{1cm}
+\label{fig:backend_arch}
+\vspace{0.8cm}
 
-% ------------------------------------------------------------------
-\subsection{Kontajner služieb (ServiceContainer)}
-\label{ServiceContainer}
+% - - - - - - - - - - - - - - - - - -
+\subsection{Vstupný bod a orchestrácia systému}
+\label{subsec:sw_main}
 
-Na zabezpečenie modularity a~testovateľnosti bol zvolený vzor 
-\textbf{kontajnera služieb} (\textit{Service Container}). Namiesto 
-priameho vytvárania inštancií tried vo vnútri \texttt{MuseumController} 
-bola zodpovednosť za inicializáciu delegovaná na triedu 
-\texttt{ServiceContainer}. Tá vytvárala komponenty v~striktnom 
-poradí závislostí: najprv \texttt{AudioHandler} a~\texttt{VideoHandler}, 
-potom MQTT package (\texttt{MQTTDeviceRegistry} → 
-\texttt{MQTTFeedbackTracker} → \texttt{MQTTMessageHandler} → 
-\texttt{MQTTClient}), nakoniec \texttt{SystemMonitor} 
-a~\texttt{ButtonHandler}. V~prípade zlyhania ľubovoľného komponentu 
-bol nastavený na \texttt{None} a~systém pokračoval v~degradovanom 
-režime bez danej funkcionality.
+Trieda \texttt{MuseumController} v~module
+\texttt{main.py} bola navrhnutá ako orchestrátor
+celého systému --- sama neimplementuje doménovú
+logiku, ale inicializuje všetky služby, prepája
+ich callbackmi a~riadi hlavnú slučku programu.
+Štart prebieha v~troch fázach: aktivácia bootstrap
+loggingu, inicializácia komponentov v~definovanom
+poradí pomocou \texttt{ServiceContainer}
+(AudioHandler, VideoHandler, MQTT vrstva,
+SystemMonitor, ButtonHandler) a~wiring callbackov
+medzi nimi --- napríklad \texttt{MQTTMessageHandler}
+dostane referenciu na \texttt{SceneParser},
+aby mohli byť prijaté MQTT správy preposielané
+do fronty udalostí stavového automatu.
+Hlavná slučka následne v~pravidelných intervaloch
+vykonáva health check MQTT spojenia a~obsluhu
+GPIO vstupu. Pri prijatí signálu \texttt{SIGTERM}
+je scéna korektne ukončená, štatistiky sú uložené
+a~všetky výstupy sú zastavené.
 
-% ------------------------------------------------------------------
-\subsection{Stavový automat a~scene engine}
-\label{StavovyAutomat}
+% - - - - - - - - - - - - - - - - - -
+\subsection{Stavový automat a engine scén}
+\label{subsec:sw_fsm}
 
-Jadro riadiacej logiky tvorili štyri spolupracujúce triedy:
+Jadro systému tvorí konečný stavový automat (FSM),
+ktorého návrh bol zdôvodnený
+v~kapitole~\ref{SoftverovArchitektura}.
+Implementácia bola rozdelená do štyroch vzájomne
+spolupracujúcich tried podľa princípu jednej
+zodpovednosti, ako je znázornené
+na obrázku~\ref{fig:fsm_triedy}.
 
-\begin{itemize}
-    \item \textbf{StateMachine:} Načítala a~validovala JSON súbor 
-    scény v~dvoch krokoch. Prvým bol štrukturálny krok 
-    prostredníctvom JSON schémy (knižnica \texttt{jsonschema}), 
-    druhým logická validácia -- overenie, že všetky cieľové stavy 
-    prechodov (\texttt{goto}) sú skutočne definované v~poli 
-    \texttt{states}. Po úspešnej validácii spravovala 
-    \texttt{StateMachine} aktuálny stav, časovač stavu 
-    a~celkový čas scény. Pri každej zmene stavu bol voliteľne 
-    spustený callback \texttt{on\_state\_change}, ktorý 
-    informoval webový dashboard o~prechode.
-
-    \item \textbf{SceneParser:} Koordinoval celý životný cyklus 
-    scény. Pred spustením prehľadal stromovú štruktúru JSON 
-    a~identifikoval všetky audio súbory. Súbory s~prefixom 
-    \texttt{sfx\_} boli predbežne načítané do RAM 
-    (\textit{preloading}), čím sa eliminovalo oneskorenie pri 
-    ich prehrávaní počas scény. V~hlavnej slučke volal metódu 
-    \texttt{process\_scene()} každých 20\,ms 
-    (\texttt{scene\_processing\_sleep}), čím bola zaistená 
-    dostatočná reaktivita na prechodové udalosti.
-
-    \item \textbf{StateExecutor:} Vykonával akcie stavov -- 
-    položky \texttt{onEnter}, \texttt{onExit} a~\texttt{timeline}. 
-    Dispatchovanie jednotlivých typov akcií bolo realizované 
-    pomocou slovníka handlerov (\texttt{action\_handlers}), 
-    čo umožňuje pridanie nového typu akcie bez zmeny 
-    ostatného kódu. Aktuálne registrované typy boli 
-    \texttt{mqtt}, \texttt{audio} a~\texttt{video}.
-
-    \item \textbf{TransitionManager:} Uchovával udalosti 
-    v~troch thread-safe frontách (deque) s~maximálnou kapacitou 
-    50 položiek: MQTT udalosti, ukončenia audia a~ukončenia 
-    videa. V~každom iteračnom kroku vyhodnocoval zoznam 
-    prechodov aktuálneho stavu voči obsahu front. Bolo 
-    podporovaných päť typov prechodov: \texttt{timeout} 
-    (uplynutie časovača), \texttt{audioEnd} (dokončenie 
-    prehrávania zvuku), \texttt{videoEnd} (dokončenie videa), 
-    \texttt{mqttMessage} (príchod definovanej MQTT správy) 
-    a~\texttt{always} (okamžitý prechod). Spotrebovaná udalosť 
-    bola z~fronty odstránená, čím sa predchádzalo jej 
-    opakovanému vyhodnoteniu.
-\end{itemize}
-
-\vspace{1cm}
+\vspace{0.8cm}
 \begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: Vývojový diagram jedného 
-    iteračného kroku scene engine -- od volania 
-    process\_scene() cez check\_transitions() 
-    po execute\_onEnter() nového stavu]}
+    \textit{[MIESTO PRE OBRÁZOK: Diagram tried stavového automatu ---
+    StateMachine, SceneParser, StateExecutor, TransitionManager
+    a tok dát medzi nimi]}
 \end{center}
-\vspace{1cm}
+\label{fig:fsm_triedy}
+\vspace{0.8cm}
 
-% ------------------------------------------------------------------
-\subsection{Vrstva médií}
-\label{VrstvaMedial}
+\textbf{StateMachine} slúži na načítanie scény
+zo súboru JSON a~overenie jej správnosti
+v~dvoch krokoch. Prvým krokom je schémová validácia
+pomocou knižnice \texttt{jsonschema}, ktorá overí,
+že všetky povinné polia sú prítomné a~majú správny
+dátový typ. Druhým krokom je logická validácia ---
+skontroluje sa, že každý cieľový stav uvedený
+v~prechodoch skutočne existuje v~slovníku stavov.
+Táto dvojúrovňová validácia zabraňuje spusteniu
+chybne nakonfigurovanej scény. Po úspešnom načítaní
+trieda udržuje informácie o~aktuálnom stave
+a~čase vstupu do neho.
 
+\textbf{SceneParser} koordinuje celý životný cyklus
+scény od načítania až po ukončenie.
+Pred spustením scény je JSON prehľadaný
+a~identifikované sú všetky zvukové súbory
+s~prefixom \texttt{sfx\_}, ktoré sú následne
+prednahrané do RAM pamäte (\textit{preload}),
+čím je eliminovaná latencia pri prehrávaní
+zvukových efektov počas behu scény.
+V~každej iterácii hlavného cyklu je vykonaný
+nasledovný sled operácií: overenie, či dobehlo
+audio alebo video a~prípadná registrácia udalosti,
+vyhodnotenie globálnych prechodov platných
+pre celú scénu, vykonanie timeline akcií
+aktuálneho stavu s~uplynulým časom
+a~nakoniec vyhodnotenie lokálnych prechodov.
+
+\textbf{StateExecutor} má na starosti vykonávanie
+akcií definovaných v~stavoch scény. Bola
+implementovaná dispatch tabuľka, kde kľúčom
+je typ akcie a~hodnotou príslušná obslužná
+metóda. Systém podporuje tri typy akcií:
 \begin{itemize}
-    \item \textbf{AudioHandler:} Zvukový modul využíval knižnicu 
-    \texttt{pygame.mixer} s~32 mixérovými kanálmi pre súčasné 
-    prehrávanie viacerých zvukových efektov. Implementované boli 
-    dve nezávislé playback cesty: súbory s~prefixom \texttt{sfx\_} 
-    boli pri štarte scény načítané do RAM ako objekty 
-    \texttt{pygame.mixer.Sound} a~prehrávané bez diskového 
-    prístupu. Ostatné súbory boli streamované priebežne z~disku 
-    cez \texttt{pygame.mixer.music}. Na detekciu prirodzeného 
-    konca prehrávania (pre prechod \texttt{audioEnd}) bola 
-    v~každom kroku voliteľná metóda \texttt{check\_if\_ended()}, 
-    ktorá porovnávala aktuálny stav mixéra s~predchádzajúcim 
-    tikom.
+  \item \texttt{mqtt} --- správa je odoslaná
+        na zadaný topic MQTT brokera, napríklad
+        \verb|{"action":"mqtt","topic":"room1/light/fire","message":"ON"}|,
+  \item \texttt{audio} --- príkaz je odoslaný
+        audio handleru, napríklad
+        \verb|{"action":"audio","message":"PLAY:sfx_Odbitie_Hodin.wav:1"}|,
+  \item \texttt{video} --- príkaz je odoslaný
+        video handleru, napríklad
+        \verb|{"action":"video","message":"PLAY_VIDEO:intro.mp4"}|.
+\end{itemize}
+Dispatch tabuľka umožňuje pridávanie nových typov
+akcií bez modifikácie existujúceho kódu.
+Zároveň je sledované, ktoré timeline akcie
+boli v~rámci aktuálneho stavu už vykonané,
+aby nedochádzalo k~ich opakovanému spusteniu
+pri každej iterácii cyklu.
 
-    \item \textbf{VideoHandler:} Video bolo prehrávané cez 
-    externý proces \texttt{mpv} spustený v~celoobrazovkovom 
-    režime s~hardvérovým dekódovaním (\texttt{hwdec=rpi4-mmal}). 
-    Komunikácia s~procesom prebiehala výhradne cez UNIX IPC 
-    socket (\texttt{/tmp/mpv\_socket}) formátom JSON príkazov. 
-    Zdravie procesu bolo overované každých 60 sekúnd zaslaním 
-    testovacieho príkazu; pri neodpovedi alebo páde procesu 
-    bol vykonaný automatický reštart (maximálne 3 pokusy). 
-    Keď nebolo prehrávané žiadne video, bol zobrazený čierny 
-    idle obrázok (\texttt{black.png}).
+\textbf{TransitionManager} má na starosti
+vyhodnocovanie podmienok prechodov medzi stavmi.
+Spravuje tri thread-safe fronty udalostí:
+pre MQTT správy, pre ukončenie audio súborov
+a~pre ukončenie videa. Bolo implementovaných
+päť typov prechodov:
+\begin{itemize}
+  \item \texttt{timeout} --- prechod nastane
+        po uplynutí definovaného počtu sekúnd
+        od vstupu do stavu, napríklad
+        \verb|{"type":"timeout","delay":4,"goto":"HODINY_TIKANIE_1"}|,
+  \item \texttt{audioEnd} --- prechod nastane
+        po prirodzenom ukončení prehrávania
+        zadaného audio súboru,
+  \item \texttt{videoEnd} --- prechod nastane
+        po prirodzenom ukončení prehrávania videa,
+  \item \texttt{mqttMessage} --- prechod nastane
+        pri príchode konkrétnej správy
+        na konkrétny topic, napríklad
+        \verb|{"type":"mqttMessage","topic":"room1/emergency","message":"STOP","goto":"END"}|,
+  \item \texttt{always} --- okamžitý nepodmienený
+        prechod, typicky používaný na reťazenie
+        stavov bez čakacej podmienky.
 \end{itemize}
 
-% ------------------------------------------------------------------
-\subsection{MQTT vrstva}
-\label{MQTTVrstva}
+Okrem lokálnych prechodov jednotlivých stavov
+môže scéna definovať \textbf{globálne udalosti}
+(\texttt{globalEvents}), ktoré sú vyhodnocované
+v~každej iterácii bez ohľadu na to, v~ktorom
+stave sa scéna práve nachádza. Typicky boli
+definované dva globálne prechody: núdzové
+zastavenie scény pri prijatí správy \texttt{STOP}
+na topic \texttt{room1/emergency}
+a~maximálny časový limit scény ako ochrana
+pred nekonečným čakaním pri prípadnom výpadku
+hardvérového zariadenia.
+V~nasadenej scéne \texttt{SceneV01.json} bol
+globálny timeout nastavený na 600\,s.
 
-MQTT package bol rozdelený do štyroch tried so striktne 
-oddelenou zodpovednosťou:
+% - - - - - - - - - - - - - - - - - -
+\subsection{Mediálna vrstva -- audio a video}
+\label{subsec:sw_media}
 
-\begin{itemize}
-    \item \textbf{MQTTClient:} Wrapper nad knižnicou 
-    \texttt{paho-mqtt} zabezpečujúci pripojenie, opakované 
-    pokusy o~reconnect a~publikovanie správ. Po úspešnom 
-    pripojení sa automaticky prihlásil na štyri skupiny 
-    topikov: \texttt{devices/+/status}, 
-    \texttt{room1/+/feedback}, \texttt{room1/scene} 
-    a~\texttt{room1/\#}.
+Pre prehrávanie zvuku bola implementovaná trieda
+\texttt{AudioHandler}, ktorá obaľuje knižnicu
+\texttt{pygame.mixer} a~implementuje dve paralelné
+cesty prehrávania. Zvukové efekty (prefix
+\texttt{sfx\_}) boli vopred načítané do RAM ako
+objekty \texttt{Sound} a~prehrávajú sa priamo
+z~pamäte na jednom z~32 mixérových kanálov,
+čo umožňuje polyfóniu --- súčasné prehrávanie
+viacerých zvukov bez vzájomného blokovania.
+Dlhšie nahrávky (atmosféra, hudba na pozadí)
+sú streamované z~disku cez
+\texttt{pygame.mixer.music}, čím sa šetrí RAM.
+Po prirodzenom ukončení prehrávania je
+\texttt{TransitionManager} notifikovaný, čím
+sú umožnené prechody typu \texttt{audioEnd}.
 
-    \item \textbf{MQTTMessageHandler:} Smerovací modul, 
-    ktorý každú príchodziu správu vyhodnotil podľa 
-    prioritného poradia: správy \texttt{devices/.../status} 
-    boli odovzdané registru zariadení, správy s~príponou 
-    \texttt{/feedback} trackeru spätnej väzby, payload 
-    \texttt{START} na topiku \texttt{room1/scene} spustil 
-    callback scény, payload s~názvom JSON súboru na topiku 
-    \texttt{room1/start\_scene} spustil pomenovanú scénu, 
-    a~všetky ostatné správy boli odovzdané \texttt{TransitionManager}-u 
-    ako potenciálne prechodové udalosti.
+Pre prehrávanie videa bol zvolený proces
+\texttt{mpv} riadený cez Unix IPC socket
+(\texttt{/tmp/mpv\_socket}).
+V~kľudovom stave je zobrazovaný čierny obrázok
+(\texttt{black.png}), čím je eliminované
+blikanie obrazovky pri prechodoch medzi videom
+a~stavom bez videa. V~pravidelných intervaloch
+je overované zdravie procesu a~IPC odozva;
+pri zlyhaní je vykonaný pokus o~automatický
+reštart s~konfigurovateľným počtom opakovaní
+a~čakacou dobou.
 
-    \item \textbf{MQTTFeedbackTracker:} Pre každý odoslaný 
-    príkaz bol spustený jednovláknový časovač s~timeoutom 
-    1\,s. Ak počas tejto doby neprišla zodpovedajúca správa 
-    na topik \texttt{<pôvodný\_topik>/feedback}, bol 
-    zaznamenaný timeout. Sledovanie bolo aktívne výhradne 
-    počas behu scény.
+% - - - - - - - - - - - - - - - - - -
+\subsection{Komunikačná vrstva MQTT}
+\label{subsec:sw_mqtt}
 
-    \item \textbf{MQTTDeviceRegistry:} Uchovával posledný 
-    známy stav každého ESP32 uzla. Zostatková 
-    (\textit{retained}) správa \texttt{online} pri pripojení 
-    bola zámerene ignorovaná, aby sa predišlo falošne 
-    pozitívnemu stavu pri štarte. Zariadenia bez aktualizácie 
-    stavu dlhšej ako 25 sekúnd boli automaticky označené 
-    ako \texttt{offline}.
-\end{itemize}
+MQTT vrstva bola rozdelená do štyroch tried,
+ktorých úlohy nadväzujú na komunikačný model
+navrhnutý v~kapitole~\ref{KomunikacnaVrstva}.
+\texttt{MQTTClient} obaľuje knižnicu
+\texttt{paho-mqtt} a~zabezpečuje retry logiku
+pri prvotnom pripájaní a~automatické obnovenie
+odberu topicov po reconnecte.
+\texttt{MQTTMessageHandler} smeruje prichádzajúce
+správy v~prioritnom poradí: stav zariadenia,
+spätná väzba, štart scény a~nakoniec udalosti
+pre FSM.
+\texttt{MQTTFeedbackTracker} sleduje každý
+odoslaný príkaz a~pri vypršaní časového limitu
+(1\,s) zaloguje chybu s~identifikáciou zariadenia
+bez blokovania behu scény.
+\texttt{MQTTDeviceRegistry} udržuje zoznam
+aktívnych zariadení; tie, od ktorých neprišla
+správa dlhšie ako 25\,s, sú automaticky
+označené ako offline.
 
-\vspace{1cm}
-\begin{center}
-    \textit{[MIESTO PRE OBRÁZOK: Diagram toku príchodziej 
-    MQTT správy cez MQTTMessageHandler -- prioritné 
-    smerovanie do štyroch vetiev]}
-\end{center}
-\vspace{1cm}
-
-% ------------------------------------------------------------------
+% - - - - - - - - - - - - - - - - - -
 \subsection{Webový dashboard}
-\label{WebovyDashboard}
+\label{subsec:sw_web}
 
-Riadiace rozhranie pre obsluhu múzea bolo implementované ako 
-webová aplikácia dostupná na porte 5000. Backend tvorilo 
-microframework \textbf{Flask} s~rozšírením \textbf{Socket.IO} 
-pre asynchrónny obojsmerný prenos udalostí.
+Webové rozhranie bolo implementované pomocou
+frameworkov Flask a~Flask-SocketIO
+s~architektúrou Blueprintov a~prístupom
+chráneným HTTP Basic Authentication.
+Kľúčovou vlastnosťou je live streaming logov
+cez SocketIO --- každý záznam je okamžite
+doručený všetkým pripojeným klientom
+bez nutnosti obnovovania stránky.
+Rozhranie umožňuje spúšťanie a~zastavovanie
+scén, manuálne odosielanie MQTT správ,
+správu mediálnych súborov a~vzdialený
+reštart služby alebo celého Raspberry~Pi.
 
-\begin{itemize}
-    \item \textbf{Autentifikácia:} Všetky HTTP endpointy 
-    aj WebSocket spojenia boli chránené \textit{HTTP Basic 
-    Authentication}.
-
-    \item \textbf{REST API:} Definovaných bolo niekoľko skupín 
-    endpointov: správa scén (\texttt{/api/scenes}, 
-    \texttt{/api/run\_scene}, \texttt{/api/stop\_scene}), 
-    manuálne MQTT príkazy (\texttt{/api/mqtt/send}), 
-    správa médií (\texttt{/api/media/audio}, 
-    \texttt{/api/media/video}) a~systémové operácie 
-    (\texttt{/api/system/reboot}, \texttt{/api/system/shutdown}).
-
-    \item \textbf{WebSocket eventy:} Pri každej zmene stavu 
-    scény alebo pripojenia zariadenia bol vysielaný 
-    (\textit{broadcast}) príslušný Socket.IO event 
-    (\texttt{status\_update}, \texttt{device\_status\_update}, 
-    \texttt{scene\_progress}) všetkým pripojeným klientom 
-    v~reálnom čase.
-
-    \item \textbf{Logovanie:} Vlastný handler \texttt{WebLogHandler} 
-    zachytával záznamy zo všetkých logerov systému 
-    a~prenášal ich cez Socket.IO event \texttt{new\_log} 
-    priamo do prehliadača obsluhy. História posledných 
-    1\,000 záznamov bola udržiavaná v~pamäti.
-\end{itemize}
-
-% ==================================================================
+% ============================================================
 \section{Konfigurácia scén -- formát JSON}
-\label{KonfiguraciaScen}
+\label{sec:json_format}
 
-Celá choreografia expozície bola definovaná v~externom súbore 
-\texttt{.json}, čím bolo scenárové obsahu oddelené od kódu 
-enginu. Obsluhujúci personál bol schopný upravovať časovanie 
-a~poradie efektov bez zásahu do zdrojového kódu Pythonu 
-či firmvéru.
+Scény boli definované v~súboroch JSON uložených
+v~adresári \texttt{scenes/<room\_id>/}.
+Každý súbor obsahuje identifikátor scény,
+počiatočný stav, voliteľné globálne udalosti
+a~slovník stavov. Každý stav môže definovať
+akcie pri vstupe (\texttt{onEnter}),
+pri odchode (\texttt{onExit}), časovo
+naplánované akcie (\texttt{timeline})
+a~podmienky prechodov (\texttt{transitions}).
+Voľba tohto formátu bola odôvodnená
+v~kapitole~\ref{KomunikacnaVrstva}, kde bola
+editovateľnosť konfigurácie bez zásahu do kódu
+definovaná ako kľúčová požiadavka systému.
 
-Koreňová úroveň súboru obsahovala povinné polia 
-\texttt{sceneId}, \texttt{initialState} a~\texttt{states}, 
-voliteľne aj \texttt{globalEvents}. Globálne udalosti boli 
-vyhodnocované v~každom iteračnom kroku bez ohľadu na aktuálny 
-stav - v~nasadenej scéne (\texttt{fire\_story\_hw\_sequence}) 
-boli definované dve: núdzový stop na MQTT správu 
-\texttt{room1/emergency = STOP} a~globálny timeout 600 sekúnd 
-ako poistka proti zaseknutiu.
+Ako príklad slúži scéna \texttt{SceneV01.json}
+(\textit{Príbeh Oheň}) nasadená v~pilotnej
+expozícii. Scéna obsahuje 11 stavov
+a~realizuje nasledovnú dramaturgiu:
+atmosférický zvuk s~predohrevom dymového stroja,
+vzplanutie ohňa so svetelným efektom,
+alarmové blikanie, vypustenie dymu,
+zvuk vlaku, klikanie a~tikanie hodín
+s~odbitím a~finálny pohyb hodinového
+mechanizmu DC motorom. Maximálna dĺžka scény
+bola ohraničená globálnym timeoutom 600\,s.
+Diagram stavov scény je znázornený
+na obrázku~\ref{fig:scene_diagram}.
 
-Každý stav mohol obsahovať tri funkčné bloky:
-\begin{itemize}
-    \item \textbf{\texttt{onEnter}:} Pole akcií vykonaných 
-    okamžite po vstupe do stavu (spustenie zvuku, odoslanie 
-    MQTT príkazu, spustenie videa).
-
-    \item \textbf{\texttt{timeline}:} Pole časovaných akcií 
-    s~atribútom \texttt{at} určujúcim čas v~sekundách od 
-    vstupu do stavu. Umožňovalo orchestráciu efektov 
-    v~rámci jedného stavu bez nutnosti zavádzať ďalší stav 
-    len pre časové oddelenie.
-
-    \item \textbf{\texttt{transitions}:} Pole podmienok 
-    prechodu do nasledujúceho stavu. Každý prechod obsahoval 
-    povinný typ a~cieľový stav (\texttt{goto}), špeciálne 
-    vyhradenú hodnotu \texttt{END} signalizovala ukončenie 
-    scény.
-\end{itemize}
-
-\vspace{1cm}
+\vspace{0.8cm}
 \begin{center}
-    \textit{[MIESTO PRE VÝPIS/SCHÉMU: Zjednodušená vizualizácia 
-    štruktúry jedného stavu JSON scény so znázornením 
-    onEnter, timeline a~transitions blokov]}
+    \textit{[MIESTO PRE OBRÁZOK: Diagram stavov scény Príbeh Oheň
+    (SceneV01.json) --- 11 stavov so šípkami prechodov
+    a typom každého prechodu (timeout / audioEnd / mqttMessage)]}
 \end{center}
-\vspace{1cm}
+\label{fig:scene_diagram}
+\vspace{0.8cm}
+
+Formát JSON sa ukázal ako dostatočne expresívny
+pre zložité multimediálne scénáre s~kombináciou
+audio, video, svetelných a~pohybových efektov,
+pričom zostáva editovateľný priamo cez webové
+rozhranie systému bez potreby znalosti programovania.

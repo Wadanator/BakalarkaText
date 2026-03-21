@@ -1,35 +1,67 @@
 \chapter{Záver}
 \label{Zaver}
 
-Záverečné zhrnutie práce posudzujúce, či a ako sa podarilo naplniť pôvodné ciele zadania.
+Cieľom práce bol návrh a~realizácia modulárneho riadiaceho systému
+pre interaktívne múzejné expozície, ktorý by umožnil synchrónne
+ovládanie fyzických efektov a~multimediálneho obsahu z~jediného
+centrálneho uzla, pričom priebeh expozície mal byť konfigurovateľný
+bez zásahu do zdrojového kódu. Všetky štyri ciele zadania boli
+naplnené a~systém bol úspešne nasadený a~overený v~podmienkach
+reálnej fyzickej inštalácie.
 
-\begin{itemize}
-    \item \textbf{Ciele a dosiahnutý stav:} 
-    \begin{itemize}
-        \item Hlavným cieľom práce bolo navrhnúť modulárny riadiaci systém pre múzejné expozície, ktorý umožní synchrónne ovládanie fyzických efektov (motory, 230\,V spotrebiče, osvetlenie) a~multimediálneho obsahu z~jediného centrálneho uzla.
-        \item Realizácia potvrdila úspešnú fúziu výpočtovo silného Raspberry Pi a distribuovaných ESP32 sieťových uzlov do jednej funkčnej virtuálnej hviezdy.
-    \end{itemize}
-    
-    \item \textbf{Hlavné prínosy riešenia:}
-    \begin{itemize}
-        \item Najväčším prínosom je odstrihnutie tvrdej programátorskej aplikačnej logiky (Python/C++) od samotného chodu výstavy. Vďaka aplikácii inžinierskeho konečného automatu (FSM) a používaniu textového kontraktu v \texttt{.json} formáte dokáže muzeálny personál upravovať časy, kroky a audiovizuálny obsah výstavy bez nutnosti vedieť programovať či využívať drahé licencie priemyselných PLC.
-    \end{itemize}
-    
-    \item \textbf{Výsledky overenia technológie:}
-    \begin{itemize}
-        \item Reálne záťažové testy na exponáte deklarovali, že Publish/Subscribe model (MQTT nad lokálnou LAN/Wi-Fi sieťou) netrpí pre výstavu vnímateľnými reaktančnými oneskoreniami.
-        \item Architektúra bez problémov prechádzala dlhodobými \textit{Soak} testami a vďaka LWT packetom úspešne ošetrila fyzické odpájanie uzlov.
-    \end{itemize}
+Hlavným inžinierskym prínosom práce je preukázanie, že kombinácia
+dostupných IoT platforiem s~architektúrou konečného stavového
+automatu (FSM) a~textovou konfiguráciou scenárov predstavuje
+funkčnú alternatívu ku komerčným show-control riešeniam
+(viď kapitola~\ref{show-control}) aj priemyselným PLC systémom
+(viď kapitola~\ref{plc-systemy}). Navrhnutý systém poskytuje
+porovnateľnú funkcionalitu pri výrazne nižšej vstupnej bariére
+-- nelineárne vetvenie scenára, synchronizáciu médií a~riadenie
+výkonových prvkov je možné dosiahnuť na otvorených platformách
+bez proprietárneho softvéru. Oproti jednoduchým sekvenčným
+riešeniam je kľúčovým rozdielom schopnosť systému čakať na vstup
+od návštevníka a~podľa neho dynamicky rozvetvovať priebeh
+expozície, pričom ostatné podmienky prechodu sú vyhodnocované
+súčasne a~neblokujúco.
 
-    \item \textbf{Nedostatky a obmedzenia:}
-    \begin{itemize}
-        \item Bezpečnostná vrstva Wi-Fi siete v reálnom múzeu musí byť prevádzkovo dedikovaná len pre exponát, inak hrozí rušenie spôsobené návšteníkmi (kolízie frekvenčného pásma).
-        \item Nutnosť ručného hardcodovania \texttt{BASE\_TOPIC\_PREFIX} v C++ firmvéri pre každý nový fyzický kus ESP32 mikročipu pri úvodnom \textit{flashovaní}.
-    \end{itemize}
+Z~hardvérového hľadiska (kapitola~\ref{ImplementaciaHW}) bola
+architektonická voľba postavená na uprednostnení hotových,
+preverených priemyselných modulov pred návrhom vlastných
+výkonových obvodov. Tento prístup sa v~prevádzke osvedčil:
+systém pri fyzickom testovaní nevykázal žiadne výpadky
+spôsobené hardvérovým zlyhaním a~prípadná výmena komponentu
+pri poruche nevyžaduje špeciálne znalosti elektroniky.
 
-    \item \textbf{Návrhy na budúci rozvoj:}
-    \begin{itemize}
-        \item Prechod do plne lokalizovanej webovej administrácie (React Dashboard), odkiaľ bude možné tvoriť JSON scény vizuálnym presúvaním blokov (tzv. \uv{Node-Based Editor}).
-        \item Možnosť plnohodnotnej over-the-air (OTA) aktualizácie firmvéru priamo prostredníctvom odoslania binárneho príkazu cez \texttt{Mosquitto} hub na konkrétny MQTT \texttt{device id} uzol.
-    \end{itemize}
-\end{itemize}
+Softvérová architektúra (kapitola~\ref{ImplementaciaSW})
+dosiahla kľúčovú vlastnosť, ktorá priamo napĺňa požiadavku
+na modularitu definovanú v~kapitole~\ref{PoziadavkyNaSystem}:
+celá choreografia expozície je uložená výhradne v~externých
+konfiguračných súboroch, oddelených od kódu enginu. Obsluha
+múzea tak môže meniť časovanie, poradie efektov aj priebeh
+scenára bez akéhokoľvek zásahu do zdrojového kódu -- čo je
+z~pohľadu dlhodobej prevádzkovateľnosti inštalácie zásadná
+vlastnosť.
+
+Experimentálne overenie (kapitola~\ref{ExperimentalneOverenie})
+potvrdilo stabilitu systému v~troch rovinách: presnosť
+časovania efektov počas reálnej scény s~fyzickým hardvérom,
+odolnosť centrálneho procesu pri viacdňovom záťažovom teste
+bez reštartu a~správne automatické zotavenie siete po výpadku
+napájania uzlov bez zásahu obsluhy.
+
+Systém má dve identifikované prevádzkové obmedzenia. Bezdrôtová
+komunikácia kladie na múzejnú prevádzku požiadavku oddelenej
+siete; ak je tá istá sieť zdieľaná s~verejnosťou, môže to
+negatívne ovplyvniť reaktivitu systému. Druhým obmedzením je
+počiatočná konfigurácia každého nového uzla, ktorá si pred
+prvým nasadením vyžaduje fyzický prístup k~zariadeniu.
+Po nasadení sú však všetky následné aktualizácie firmvéru
+riešiteľné bezdrôtovo na diaľku.
+
+Do budúcna sa systém prirodzene otvára dvom smerom rozvoja.
+Prvým je rozšírenie webového dashboardu o~vizuálny editor
+scenárov, ktorý by obsluhe umožnil skladať priebeh expozície
+grafickým presúvaním stavov bez manuálneho editovania
+textových súborov. Druhým je podpora väčšieho počtu miestností,
+keďže architektúra systému bola od začiatku navrhovaná
+s~ohľadom na toto rozšírenie (viď kapitola~\ref{NavrhArchitektury}).

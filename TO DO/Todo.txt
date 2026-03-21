@@ -1,0 +1,7 @@
+porovnateľnú funkcionalitu - nerobil som porovnania ani nič... proprietárneho softvéru - to je zas take umele..
+
+Z hardvérového hľadiska (kapitola 4) bola architektonická voľba postavená na upred-nostnení hotových, preverených priemyselných modulov pred návrhom vlastných výko-nových obvodov. Tento prístup sa v prevádzke osvedčil: systém pri fyzickom testovanínevykázal žiadne výpadky spôsobené hardvérovým zlyhaním a prípadná výmena kompo-nentu pri poruche nevyžaduje špeciálne znalosti elektroniky.
+
+
+
+toto tiež kľudne prepísať. Ako môžeš spomenut že AHA použil som RPI. atď... a k tomu tým obvodom. robil som vlastné aj na tlačidla a na motory... ale pridal som tam driver. na rele veci som sa ale rozhodol dať ten modul, lebo netrebalo robiť viac relé, atď... čiže ta povodna veta čo si i tam dal, nieje vhodná... Experimentalne testy, to daj placeholder len. ta nieje hotova.. Spomenutie že chcem robiť vizualny editor je super!!  dalej že podpora viac miestnosti... to tam už je. každe RPI riadi jednu miestnosť, sú vlasstne oddelené. keby vypadne jedna, ostatne idu dalej.. len treba viac RPI

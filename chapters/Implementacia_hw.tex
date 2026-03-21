@@ -43,7 +43,7 @@ integrovaného priamo do fyzického exponátu expozície. Senzorický
 tlačidlový uzol pre používateľský vstup bol namontovaný oddelene
 pri vstupe do miestnosti.
 
-\subsection{Uzol ovládania jednosmerných motorov}
+\subsection{Motorický uzol -- riadenie DC motorov}
 \label{UzolMotorov}
 
 Tento riadiaci obvod je vyhradený pre ovládanie jednosmerných (DC) motorov,
@@ -75,7 +75,7 @@ Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov:
 \end{center}
 \vspace{1cm}
 
-\subsection{Uzol spínacích relé}
+\subsection{Reléový uzol}
 \label{UzolRele}
 
 Na jednoduché zapínanie a~vypínanie ostatných prvkov expozície, ako sú
@@ -107,7 +107,7 @@ svetlá, budíky či dymostroj, slúži vyhradený reléový uzol:
 \end{center}
 \vspace{1cm}
 
-\subsection{Senzorický tlačidlový uzol}
+\subsection{Vstupný tlačidlový uzol}
 \label{UzolSenzorov}
 
 Fyzický vstup zameraný na interakciu s~návštevníkmi je spracovaný
@@ -136,11 +136,11 @@ samostatným uzlom:
         ESP32 sú dimenzované pre logické signály, nie pre trvalý
         napájací prúd záťaže. Namiesto toho bol na riadenie
         osvetlenia zaradený kompaktný \textbf{MOSFET PWM spínací
-        modul s~tranzistorom F5305S} TO DO TOTO NEMAM V RESERSI ANI NIKDE, DOPLNIT
+        modul s~tranzistorom F5305S}
         (viď kapitola~\ref{dc-motory}). GPIO výstup ESP32 tak
         privádza iba riadiaci signál na hradlo (\textit{gate})
         tranzistora, pričom samotný prúd LED prstenca tečie výhradne
-        cez výkonový kanál modulu napájaný priamo z~5\,V vetvy
+        cez výkonový kanál modulu napájaného priamo z~5\,V vetvy
         krabičky. Toto riešenie chráni mikrokontrolér pred prúdovým
         preťažením a~zároveň umožňuje PWM stmievanie
         prstenca.
