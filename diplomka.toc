@@ -31,7 +31,7 @@
 \contentsline {section}{\numberline {4.2}Distribuované uzly -- ESP32}{21}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Motorický uzol -- riadenie DC motorov}{21}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Reléový uzol -- spínanie záťaží}{22}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Vstupný tlačidlový uzol}{22}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.3}Vstupný tlačidlový uzol}{23}{subsection.4.2.3}%
 \contentsline {section}{\numberline {4.3}Mechanická konštrukcia exponátov}{23}{section.4.3}%
 \contentsline {chapter}{\numberline {5}Implementácia softvérovej časti}{25}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Firmvér ESP32}{25}{section.5.1}%

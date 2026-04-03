@@ -44,9 +44,11 @@ pri vstupe do miestnosti.
 \subsection{Motorický uzol -- riadenie DC motorov}
 \label{UzolMotorov}
 
-Tento riadiaci obvod je vyhradený pre ovládanie jednosmerných (DC) motorov.
-Konkrétne fyzické exponáty, ktoré tento uzol poháňa, sú popísané
-v~kapitole~\ref{MechanickaKonstrukcia}.
+Pre ovládanie pohonov exponátov bola zvolená dvojica komponentov
+ESP32 DevKit V1 a~výkonový budič BTS7960, ktorých kombinácia
+pokrýva celý rozsah požiadaviek od riadiacej logiky až po silové
+prúdové špičky pri rozbehoch. Konkrétne fyzické exponáty, ktoré
+tento uzol poháňa, sú popísané v~kapitole~\ref{MechanickaKonstrukcia}.
 
 Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov:
 \begin{itemize}
@@ -117,21 +119,13 @@ samostatným uzlom:
         vodič tlačidla, napájanie LED prstenca, uzemnenie
         a~referenčné 5\,V. Spínač slúži ako prvotný štartovací
         impulz pre chod interaktívnej scény.
-    \item \textbf{Riadenie LED prstenca cez MOSFET spínač:} Tlačidlo
-        je vybavené vizuálnym LED podsvietením v~tvare zeleného
-        prstenca (5\,V), ktoré vizuálne potvrdzuje aktuálny status
-        uzla (úspešné prepojenie s~Wi-Fi sieťou
-        ,~MQTT brokerom a potvrdenie o odoslaní správy). Záťaž LED prstenca však nebola privedená
-        priamo na GPIO pin mikrokontroléra, keďže výstupné GPIO piny
-        ESP32 sú dimenzované pre logické signály, nie pre trvalý
-        napájací prúd záťaže. Namiesto toho bol na riadenie
-        osvetlenia zaradený kompaktný \textbf{MOSFET PWM spínací
-        modul s~tranzistorom F5305S}
-        (viď kapitola~\ref{dc-motory}). GPIO výstup ESP32 tak
-        privádza iba riadiaci PWM signál na hradlo (\textit{gate})
-        tranzistora, pričom samotný prúd LED prstenca tečie výhradne
-        cez výkonový kanál modulu napájaného priamo z~5\,V vetvy
-        krabičky.
+    \item \textbf{Riadenie LED prstenca cez MOSFET spínač:} Záťaž
+        LED prstenca bola namiesto priameho napájania z~GPIO pinu
+        riadená cez kompaktný MOSFET PWM spínací modul
+        s~tranzistorom F5305S (viď kapitola~\ref{dc-motory}), čím
+        bola výstupná periféria mikrokontroléra ochránená pred
+        prúdovým preťažením a~zároveň bolo umožnené PWM stmievanie
+        prstenca.
 \end{itemize}
 
 \vspace{1cm}

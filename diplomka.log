@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  29 MAR 2026 15:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  3 APR 2026 18:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1141,7 +1141,7 @@ Kapitola 4.
 [21
 
 ]
-Overfull \hbox (3.05252pt too wide) in paragraph at lines 85--91
+Overfull \hbox (3.05252pt too wide) in paragraph at lines 87--93
 []\T1/lmr/bx/n/12 Dôvod na-sa-de-nia mo-dulu: \T1/lmr/m/n/12 Na-miesto lo-kálne
  osa-de-ných po-lo-vo-di-£o-vých relé (SSR)
  []
@@ -1430,7 +1430,7 @@ Package rerunfilecheck Info: File `diplomka.out' has not changed.
 Here is how much of TeX's memory you used:
  20164 strings out of 467871
  333158 string characters out of 5418377
- 872078 words of memory out of 5000000
+ 872075 words of memory out of 5000000
  48517 multiletter control sequences out of 15000+600000
  694061 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1444,7 +1444,7 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (41 pages, 752416 bytes).
+Output written on diplomka.pdf (41 pages, 752103 bytes).
 PDF statistics:
  878 PDF objects out of 1000 (max. 8388607)
  146 named destinations out of 1000 (max. 500000)
