@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  21 MAR 2026 15:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  29 MAR 2026 15:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -868,7 +868,7 @@ Package hyperref Info: Link coloring ON on input line 40.
 
 pdfTeX warning: pdflatex.exe (file ./pages/TitulniList_color.pdf): PDF inclusio
 n: found PDF version <1.7>, but at most version <1.5> allowed
-<pages/TitulniList_color.pdf, id=235, 597.51233pt x 845.0471pt>
+<pages/TitulniList_color.pdf, id=239, 597.51233pt x 845.0471pt>
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf>
 Package pdftex.def Info: pages/TitulniList_color.pdf  used on input line 44.
@@ -881,7 +881,7 @@ n: found PDF version <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./pages/TitulniList_color.pdf): PDF inclusio
 n: found PDF version <1.7>, but at most version <1.5> allowed
-<pages/TitulniList_color.pdf, id=237, page=1, 597.51233pt x 845.0471pt>
+<pages/TitulniList_color.pdf, id=241, page=1, 597.51233pt x 845.0471pt>
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf, page 1>
 Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
@@ -915,7 +915,7 @@ Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
 pdfTeX warning: pdflatex.exe (file ./pages/zav_prace__b6f095a8f97b2441249eadcf3
 ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
  allowed
-<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=252, 597.51233pt x 8
+<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=256, 597.51233pt x 8
 45.0471pt>
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
@@ -933,7 +933,7 @@ ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
 pdfTeX warning: pdflatex.exe (file ./pages/zav_prace__b6f095a8f97b2441249eadcf3
 ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
  allowed
-<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=254, page=1, 597.512
+<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=258, page=1, 597.512
 33pt x 845.0471pt>
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
@@ -972,7 +972,7 @@ Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf
 pdfTeX warning: pdflatex.exe (file ./pages/zav_prace__b6f095a8f97b2441249eadcf3
 ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
  allowed
-<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=275, page=2, 597.512
+<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=279, page=2, 597.512
 33pt x 845.0471pt>
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
@@ -1070,12 +1070,12 @@ jed-notka priamo ovláda v²etky vstupné
 [10
 
 {C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
-<obr/Star_topology.png, id=389, 563.85657pt x 423.08063pt>
+<obr/Star_topology.png, id=394, 563.85657pt x 423.08063pt>
 File: obr/Star_topology.png Graphic file (type png)
 <use obr/Star_topology.png>
 Package pdftex.def Info: obr/Star_topology.png  used on input line 70.
 (pdftex.def)             Requested size: 207.58878pt x 155.7627pt.
-<obr/Pyramid_topology.png, id=391, 563.85657pt x 381.67593pt>
+<obr/Pyramid_topology.png, id=396, 563.85657pt x 381.67593pt>
 File: obr/Pyramid_topology.png Graphic file (type png)
 <use obr/Pyramid_topology.png>
 Package pdftex.def Info: obr/Pyramid_topology.png  used on input line 76.
@@ -1102,7 +1102,7 @@ Kapitola 3.
 
 pdfTeX warning: pdflatex.exe (file ./obr/HW/system_topology.pdf): PDF inclusion
 : found PDF version <1.7>, but at most version <1.5> allowed
-<obr/HW/system_topology.pdf, id=534, 442.53331pt x 233.9139pt>
+<obr/HW/system_topology.pdf, id=539, 442.53331pt x 233.9139pt>
 File: obr/HW/system_topology.pdf Graphic file (type pdf)
 <use obr/HW/system_topology.pdf>
 Package pdftex.def Info: obr/HW/system_topology.pdf  used on input line 66.
@@ -1111,7 +1111,7 @@ Package pdftex.def Info: obr/HW/system_topology.pdf  used on input line 66.
 
 pdfTeX warning: pdflatex.exe (file ./obr/HW/FSM_Architektura.pdf): PDF inclusio
 n: found PDF version <1.7>, but at most version <1.5> allowed
-<obr/HW/FSM_Architektura.pdf, id=559, 436.5108pt x 139.4811pt>
+<obr/HW/FSM_Architektura.pdf, id=564, 436.5108pt x 139.4811pt>
 File: obr/HW/FSM_Architektura.pdf Graphic file (type pdf)
 <use obr/HW/FSM_Architektura.pdf>
 Package pdftex.def Info: obr/HW/FSM_Architektura.pdf  used on input line 131.
@@ -1131,20 +1131,22 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 
 pdfTeX warning: pdflatex.exe (file ./obr/HW/Mqtt_Flow.pdf): PDF inclusion: foun
 d PDF version <1.7>, but at most version <1.5> allowed
-<obr/HW/Mqtt_Flow.pdf, id=578, 746.79pt x 566.115pt>
+<obr/HW/Mqtt_Flow.pdf, id=583, 746.79pt x 566.115pt>
 File: obr/HW/Mqtt_Flow.pdf Graphic file (type pdf)
 <use obr/HW/Mqtt_Flow.pdf>
 Package pdftex.def Info: obr/HW/Mqtt_Flow.pdf  used on input line 175.
 (pdftex.def)             Requested size: 409.71692pt x 310.58678pt.
 ) (chapters/Implementacia_hw.tex [20 <./obr/HW/Mqtt_Flow.pdf>]
 Kapitola 4.
-
-Underfull \vbox (badness 3354) has occurred while \output is active []
-
- [21
+[21
 
 ]
-[22] [23]) (chapters/Implementacia_sw.tex [24]
+Overfull \hbox (3.05252pt too wide) in paragraph at lines 85--91
+[]\T1/lmr/bx/n/12 Dôvod na-sa-de-nia mo-dulu: \T1/lmr/m/n/12 Na-miesto lo-kálne
+ osa-de-ných po-lo-vo-di-£o-vých relé (SSR)
+ []
+
+[22]) (chapters/Implementacia_sw.tex [23] [24]
 Kapitola 5.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1224,26 +1226,45 @@ lny au-di-ovi-zu-álny ob-sah sú-£asne s presne
 [31
 
 {C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}
-]) (chapters/Zaver.tex [32]
+]
+Overfull \hbox (33.70978pt too wide) in paragraph at lines 95--109
+ [][] 
+ []
+
+
+chapters/Experimenty.tex:113: LaTeX Error: File `obr/mqtt_latency' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.113 ...cs[width=0.9\linewidth]{obr/mqtt_latency}
+                                                  
+I could not locate the file with any of these extensions:
+.png,.pdf,.eps,.bmp,.jpg,.emf,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[32]) (chapters/Zaver.tex [33]
 Kapitola 7.
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [33
+ [34
 
 ]
-[34] (diplomka.lof)
+[35] (diplomka.lof)
 \tf@lof=\write6
 \openout6 = `diplomka.lof'.
 
- [35
+ [36
 
 
 ] (diplomka.lot)
 \tf@lot=\write7
 \openout7 = `diplomka.lot'.
 
- [36
+ [37
 
 
 ] (chapters/Literatura.tex
@@ -1252,7 +1273,7 @@ Underfull \hbox (badness 1789) in paragraph at lines 22--28
 n . edu / server / api / core / bitstreams /
  []
 
-[37
+[38
 
 
 ]
@@ -1279,7 +1300,7 @@ Underfull \hbox (badness 1789) in paragraph at lines 161--166
 d / index . php / bt / article / download / 3223 /
  []
 
-[38]
+[39]
 Underfull \hbox (badness 1112) in paragraph at lines 179--183
 \T1/lmr/m/n/12 03-15]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / www . rese
 archgate . net / publication / 373640610 _
@@ -1369,7 +1390,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 244--250
 -[]to-[]Device _ Data _
  []
 
-[39]
+[40]
 Underfull \hbox (badness 10000) in paragraph at lines 256--263
 []\T1/lmr/m/n/12 CELERDATA. YAML, JSON and XML: A Prac-ti-cal Gu-ide
  []
@@ -1392,7 +1413,7 @@ Underfull \hbox (badness 3323) in paragraph at lines 264--268
  [on-
  []
 
-) [40] 
+) [41] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (diplomka.aux)
  ***********
@@ -1404,13 +1425,13 @@ L3 programming layer <2025-12-24>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `diplomka.out' has not changed.
-(rerunfilecheck)             Checksum: 979212722AC38D5D4731F2FA3B73BFC8;12972.
+(rerunfilecheck)             Checksum: E5CBFF90AA3FCDE325B624A52B70CEC2;13299.
  ) 
 Here is how much of TeX's memory you used:
- 20141 strings out of 467871
- 332667 string characters out of 5418377
- 871793 words of memory out of 5000000
- 48498 multiletter control sequences out of 15000+600000
+ 20164 strings out of 467871
+ 333158 string characters out of 5418377
+ 872078 words of memory out of 5000000
+ 48517 multiletter control sequences out of 15000+600000
  694061 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,17n,93p,463b,805s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1423,9 +1444,9 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (40 pages, 745767 bytes).
+Output written on diplomka.pdf (41 pages, 752416 bytes).
 PDF statistics:
- 861 PDF objects out of 1000 (max. 8388607)
- 142 named destinations out of 1000 (max. 500000)
- 525 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 878 PDF objects out of 1000 (max. 8388607)
+ 146 named destinations out of 1000 (max. 500000)
+ 533 words of extra memory for PDF output out of 10000 (max. 10000000)
 

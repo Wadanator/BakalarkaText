@@ -57,6 +57,65 @@ Overenie stability systému prebiehalo v troch izolovaných rovinách: prevádzk
     \item \textbf{Výsledok:} Po obnovení napájania sa uzly autonómne pripojili späť na Wi-Fi sieť a~MQTT brokera. Dashboard správne zaznamenal zmenu stavu - prepis indikátora z~\texttt{offline} na \texttt{online} prebehol na základe LWT správy od brokera a~následného \texttt{online} hlásenia od uzla.
 \end{itemize}
 
+% ---------------------------------------------------------------
+% Vložiť za \subsection{Scenár 3 -- Test sieťovej odolnosti...}
+% a PRED \section{Zhodnotenie overenia}
+% ---------------------------------------------------------------
+ 
+\subsection{Scenár 4 -- Meranie latencie MQTT spätnej väzby}
+\label{LatenciaMQTT}
+\begin{itemize}
+    \item \textbf{Cieľ:} Kvantitatívne overiť latenciu cyklu
+        príkaz\,--\,spätná väzba medzi backendom Raspberry~Pi
+        a~motorickým uzlom ESP32 pri vysokofrekvenčnom zaťažení
+        (10 príkazov za sekundu, stres-test TC-08).
+    \item \textbf{Priebeh:} Počas behu stres-testovej scény bolo
+        z~databázového záznamu modulu \texttt{mqtt\_feedback}
+        extrahovaných 128 hodnôt doby odozvy -- po 64 pre každý
+        motorický kanál. Meranie pokrývalo súvislý časový úsek
+        40 sekúnd.
+    \item \textbf{Výsledok:} Priemerná latencia celého cyklu
+        dosiahla 88{,}7\,ms pri mediáne 90\,ms. Žiadna
+        zo 128 meraných hodnôt neprekročila hranicu 200\,ms --
+        59{,}4\,\% meraní spadalo do pásma pod 100\,ms
+        a~zvyšných 40{,}6\,\% do pásma 100\,--\,200\,ms
+        (Tab.~\ref{tab:mqtt_latency}, Obr.~\ref{fig:mqtt_latency}).
+        Hodnota P99 dosiahla 166\,ms, čo potvrdzuje absenciu
+        extrémnych odchýlok. Kanál \texttt{motor2} vykazoval
+        v~priemere o~17{,}9\,ms vyššiu latenciu ako
+        \texttt{motor1}; rozdiel je zhodný s~typickým
+        variabilným oneskorením domácej Wi-Fi siete
+        a~nemá vplyv na pozorovateľnosť efektov.
+\end{itemize}
+ 
+\begin{table}[H]
+\centering
+\caption{Štatistika latencie MQTT cyklu príkaz\,--\,spätná väzba}
+\label{tab:mqtt_latency}
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\textbf{Zariadenie} & \textbf{n} & \textbf{Priemer (ms)}
+    & \textbf{Medián (ms)} & \textbf{Min (ms)}
+    & \textbf{Max (ms)} & \textbf{P95 (ms)} \\
+\hline
+motor1 & 64 & 79{,}7 & 81{,}0 & 19 & 143 & 136 \\
+motor2 & 64 & 97{,}6 & 102{,}0 & 17 & 167 & 164 \\
+\hline
+\textbf{Celkovo} & \textbf{128} & \textbf{88{,}7}
+    & \textbf{90{,}0} & \textbf{17} & \textbf{167}
+    & \textbf{156} \\
+\hline
+\end{tabular}
+\end{table}
+ 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{obr/mqtt_latency}
+\caption{Distribúcia latencie MQTT spätnej väzby (n = 128,
+    stres-test TC-08, 10\,Hz)}
+\label{fig:mqtt_latency}
+\end{figure}
+
 \section{Zhodnotenie overenia}
 \label{VysledkyZhodnotenie}
 
