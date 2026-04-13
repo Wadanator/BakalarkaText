@@ -14,12 +14,12 @@ Modul používa hardvérové PWM so smooth nábehom (postupné zvyšovanie/zniž
   - `SMOOTH_STEP = 2`
   - `SMOOTH_DELAY = 100` (ms)
 
-- **Mapovanie Pinov (L298N alebo podobný motor driver):**
-  - **MOTOR1:**
+- **Mapovanie pinov (výkonový H-mostík BTS7960B):**
+  - **MOTOR1 (BTS7960B):**
     - `MOTOR1_LEFT_PIN = 18`
     - `MOTOR1_RIGHT_PIN = 19`
     - `MOTOR1_ENABLE_PIN = 21`
-  - **MOTOR2:**
+  - **MOTOR2 (BTS7960B):**
     - `MOTOR2_LEFT_PIN = 27`
     - `MOTOR2_RIGHT_PIN = 26`
     - `MOTOR2_ENABLE_PIN = 25`

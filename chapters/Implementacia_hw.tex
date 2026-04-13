@@ -2,21 +2,21 @@
 \label{ImplementaciaHW}
 
 Táto kapitola popisuje hardvérovú realizáciu navrhnutého riadiaceho
-systému. Jednotlivé uzly sú rozdelené podľa svojej funkčnej
-zodpovednosti — centrálna jednotka zabezpečuje riadiacu logiku
-a~multimediálny výstup, distribuované uzly na báze ESP32 zabezpečujú
+systému pre jeden konkrétny exponát s názvom "Chronos". Jednotlivé uzly sú rozdelené podľa svojej funkčnej
+zodpovednosti — centrálna jednotka (Raspberry Pi) zabezpečuje riadiacu logiku
+a~audio~výstup, distribuované uzly na báze ESP32 zabezpečujú
 ovládanie motorov, relé a~senzorickú detekciu vstupu návštevníka.
 
 \section{Centrálna jednotka -- Raspberry Pi}
 \label{CentralnaJednotka}
 
 Úlohu hlavného komunikačného a multimediálneho uzla plní
-Raspberry Pi (viď kapitola~\ref{sbc-platformy}). Z hľadiska fyzickej
+Raspberry Pi (viď kapitola~\ref{sbc-platformy}). Z~hľadiska fyzickej
 inštalácie bol umiestnený v tesnej blízkosti audiovizuálnej techniky
 (priamo za LCD displejom). Toto riešenie minimalizuje dĺžku
 káblových zväzkov, keďže Raspberry Pi disponuje HDMI portom, ale aj audio výstupom cez 3,5\,mm
 jack. Pre integráciu do systému postačuje len bežný Ethernet kábel pre prístup do LAN siete.
-Na napájanie Raspberry Pi je využívaný USB-C adaptér - 5,0\,V / 3,0\,A.
+Na napájanie Raspberry Pi bol použitý USB-C adaptér -- 5,0\,V / 3,0\,A.
 
 \begin{figure}[htbp]
     \centering
@@ -30,21 +30,20 @@ Na napájanie Raspberry Pi je využívaný USB-C adaptér - 5,0\,V / 3,0\,A.
 
 Riadiaca logika expozície bola decentralizovaná do niekoľkých
 samostatných uzlov postavených na architektúre mikrokontrolérov
-rodiny ESP32 (viď kapitola~\ref{mikrokontrolery}). Tento prístup
-fyzicky rozdeľuje zodpovednosť do funkčných blokov a~znižuje potrebu
-viesť káble naprieč miestnosťou. Všetky uzly komunikujú s~Raspberry Pi cez Wi-Fi sieť.
+rodiny ESP32 (viď kapitola~\ref{mikrokontrolery}). Všetky uzly komunikujú s~Raspberry Pi cez Wi-Fi sieť.
 
 Hlavná riadiaca elektronika (uzly pre ovládanie motorov a~spínanie relé) 
 bola umiestnená spoločne vo vnútri inštalačného rozvádzača (Obr.~\ref{fig:main_control_box}), ktorý je fyzicky 
 ukrytý v~dekoratívnom exponáte -- \textbf{parnom kotle}. 
 Do tohto rozvádzača je privedené sieťové napätie 230\,V. Z~neho je napájaný 
 hlavný jednosmerný spínaný zdroj (menič 230\,V\,AC na 12\,V\,DC s~výkonom 180\,W). 
-Tento 12\,V zdroj priamo napája reléový modul Waveshare. K~12\,V vetve je taktiež pripojený znižujúci DC/DC menič (step-down z~12\,V na 5\,V), 
-ktorý bezpečne napája mikrokontrolér ESP32 v~motorickom uzle.
+Táto 12\,V vetva napájala reléový modul Waveshare s~integrovaným ESP32-S3. 
+Z~rovnakej 12\,V vetvy bol cez znižujúci DC/DC menič (step-down z~12\,V na 5\,V) 
+napájaný mikrokontrolér ESP32 v~motorickom uzle, zatiaľ čo výkonové H-mostíky
+pre motory boli napájané priamo z~12\,V. V~rozvodnej skrini boli zároveň osadené napájacie zásuvky 230\,V a~konektory na pripojenie jednotlivých zariadení a~motorov.
 
 \begin{figure}[htbp]
     \centering
-    % Nahraď main_box_photo.jpg skutočným názvom tvojej fotky rozvádzača
     \includegraphics[width=0.85\textwidth]{obr/HW/main_box_photo.jpeg}
     \caption{Vnútorné usporiadanie hlavného inštalačného rozvádzača}
     \label{fig:main_control_box}
@@ -55,8 +54,8 @@ Tlačidlový uzol pre používateľský vstup bol namontovaný oddelene pri vstu
 \subsection{Motorický uzol -- riadenie DC motorov}
 \label{UzolMotorov}
 
-Pre ovládanie pohonov exponátov bol navrhnutý vyhradený motorický uzol. 
-Jeho hardvérová architektúra pokrýva celý rozsah požiadaviek od príjmu 
+Pre ovládanie pohonov exponátov bol navrhnutý motorický uzol. 
+Jeho hardvérová architektúra bola navrhnutá tak, aby pokrývala celý rozsah požiadaviek od príjmu 
 riadiacej logiky až po silové spínanie a~generovanie výkonového PWM signálu 
 pre dva nezávislé jednosmerné (DC) motory. Konkrétne fyzické exponáty, ktoré 
 tento uzol poháňa, sú popísané v~kapitole~\ref{MechanickaKonstrukcia}.
@@ -66,7 +65,7 @@ Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov (Obr.~\
     \item \textbf{Mikrokontrolér ESP32 DevKit V1:} Slúži ako hlavná riadiaca jednotka uzla, 
         ktorá spracováva príkazy z~MQTT brokera a~následne generuje hardvérový PWM 
         signál s~frekvenciou 20\,kHz, čo umožňuje plynulé ovládanie rýchlosti motorov.
-    \item \textbf{2x Výkonový budič BTS7960:} Polovodičový H-mostík slúži na 
+    \item \textbf{2x Výkonový budič BTS7960B:} Polovodičový H-mostík slúži na 
         riadenie výkonu motorov (viď kapitola~\ref{dc-motory}). Tento masívne 
         dimenzovaný obvod bezpečne odoláva vysokým prúdovým špičkám pri 
         rozbehoch (až do 43\,A).
@@ -75,7 +74,7 @@ Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov (Obr.~\
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{obr/HW/motor_schema.pdf}
-    \caption{Schéma zapojenia uzla pre DC motory (ESP32, BTS7960, 12\,V zdroj)}
+    \caption{Schéma zapojenia uzla pre DC motory (ESP32, BTS7960B, 12\,V zdroj)}
     \label{fig:motor_schema}
 \end{figure}
 
@@ -84,21 +83,22 @@ Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov (Obr.~\
 
 Na spínanie záťaží ostatných prvkov expozície slúži reléový uzol (Obr.~\ref{fig:relay_schema}):
 \begin{itemize}
-    \item \textbf{Priemyselný I/O modul Waveshare:} Základom tohto uzla je
-        komerčný hotový modul s~čipom \textbf{ESP32-S3} (viď Obr.~\ref{fig:main_control_box}). Obsahuje integrovanú
+    \item \textbf{Priemyselný I/O modul Waveshare:} Základom tohto uzla bol
+        komerčný hotový modul s~čipom \textbf{ESP32-S3} a~integrovanými relé
+        (viď Obr.~\ref{fig:main_control_box}). Obsahuje integrovanú
         podporu pre \textit{Power over Ethernet} (PoE) a~zbernicu RS485. 
-        Namiesto lokálne osadených polovodičových relé (SSR) (viď kapitola~\ref{spinanie-sietoveho-napatia})
-        bola táto certifikovaná doska zvolená primárne na zaistenie požiarnej a~elektrickej bezpečnosti. 
+        Namiesto lokálne osadených polovodičových relé (SSR), ktoré by boli lepšie (viď kapitola~\ref{spinanie-sietoveho-napatia})
+        bola táto certifikovaná doska zvolená primárne kvôli vyššej spoľahlivosti a bezpečnosti. 
         V~prípade hardvérového zlyhania v~múzejnej prevádzke umožňuje technikom 
         okamžitú a~bezpečnú výmenu \uv{kus za kus}.
     \item \textbf{10\,A mechanické relé:} Modul disponuje ôsmimi nezávislými
         relé. Spínajú priamo striedavých
         230\,V na chod dekoratívnej \textbf{Edisonovej žiarovky},
         \textbf{výrobníka dymu} (ktorý vháňa paru do potrubia)
-        a~tiež \textbf{svetlo simulujúce oheň} v~kotle. Ďalšou
-        vyhradenou sekciou je spínanie jednosmernej 12\,V vetvy určenej na
+        a~tiež \textbf{svetlo simulujúce oheň} v~kotle.
+        Ďalšou sekciou je spínanie jednosmernej 12\,V vetvy určenej na
         napájanie podsvietenia dvoch oddelených skupín \textbf{industriálnych
-        analógových budíkov} a~skrytých dizajnových LED pásov.
+        analógových budíkov} a~ LED pásov na podsvietenie exponátu.
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -117,21 +117,22 @@ samostatným uzlom (Obr.~\ref{fig:button_photo}, Obr.~\ref{fig:button_schema}):
     \item \textbf{Samostatný mikrokontrolér:} Na vstupnom mieste pred
         stenou je fyzicky osadená inštalačná krabička. Táto disponuje vlastným
         mikrokontrolérom ESP32, ktorý je napájaný z 5\,V sieťového adaptéra.
+        V~tej istej krabičke je osadený aj MOSFET spínací modul pre riadenie
+        LED prstenca tlačidla.
 
-    \item \textbf{Antivandal tlačidlo:} Kvôli zabezpečeniu odolnosti
-        pred opakovaným a~tvrdým návštevníckym stláčaním bol zvolený
+    \item \textbf{Antivandal tlačidlo:} Kvôli zabezpečeniu odolnosti bol zvolený
         priemyselný \textbf{19\,mm vodotesný kovový spínač}, ktorý je
         prepojený s~krabičkou riadiaceho modulu pomocou leteckého
-        konektora typu \textbf{GX12 (4-pin)}. Spínač slúži ako prvotný štartovací
-        impulz pre chod interaktívnej scény. Na pinoch \textbf{GPIO\,32} je využitý 
+        konektora typu \textbf{GX12 (4-pin)}. Dva piny konektora sú využité
+        ako kontakt spínača a~ďalšie dva piny zabezpečujú napájanie LED
+        prstenca tlačidla. Spínač slúži ako prvotný štartovací
+        impulz pre chod scény. Na pinoch \textbf{GPIO\,32} je využitý 
         \textbf{externý pull-up rezistor}.
-    \item \textbf{Riadenie LED prstenca cez MOSFET spínač:} Záťaž
-        LED prstenca bola namiesto priameho napájania z~GPIO pinu
-        riadená cez kompaktný MOSFET PWM spínací modul
-        s~tranzistorom F5305S (viď kapitola~\ref{dc-motory}), čím
-        bola výstupná periféria mikrokontroléra ochránená pred
-        prúdovým preťažením a~zároveň bolo umožnené PWM stmievanie
-        prstenca, čo umožnuje rôzne typy signalizácie.
+    \item \textbf{Riadenie LED prstenca cez MOSFET spínač:} LED prstenec
+        bol riadený cez kompaktný MOSFET PWM modul s~tranzistorom F5305S
+        (viď kapitola~\ref{dc-motory}), čím bola GPIO periféria
+        mikrokontroléra chránená pred prúdovým preťažením a~zároveň bolo
+        umožnené PWM stmievanie pre rôzne signalizačné režimy.
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -156,7 +157,7 @@ samostatným uzlom (Obr.~\ref{fig:button_photo}, Obr.~\ref{fig:button_schema}):
 
 Fyzický exponát inštalácie CHRONOS bol navrhnutý
 v~prostredí \textbf{Fusion 360}. Celková sústava
-obsahuje \textbf{približne 10 dekoratívnych ozubených kolies rôznych veľkostí} z~preglejky
+obsahuje \textbf{25 dekoratívnych ozubených kolies rôznych veľkostí} z~preglejky
 s~jednotným modulom $m = 8$. Pre každé koleso bol
 vytvorený samostatný 3D model; pri menších kolesách
 bol G-kód generovaný a~obrobky boli vyfrézované
@@ -168,7 +169,10 @@ Súčasťou návrhu bol aj \textbf{dekoratívny piest}
 pripevnený na sústave kolies, ktorý vykonáva
 pohyb bez mechanického zaťaženia, a~\textbf{hodinový
 mechanizmus} s~priemerom 1{,}3\,m vrátane
-planetového prevodu. Montáž
+planetového prevodu. V~mechanickej väzbe pohonov bol jeden motor
+umiestnený pod kolesom, ktoré je prepojené s~ojnicou piestu,
+zatiaľ čo druhý motor bol pripojený na sekundovú ručičku,
+konkrétne na \uv{slnko} planetového prevodu. Montáž
 a~povrchovú úpravu exponátov zabezpečila
 externá firma. Podrobná konštrukčná dokumentácia
 (výkresy, modely, prevodové výpočty) presahuje
@@ -177,7 +181,7 @@ rámec tejto práce a~nie je jej predmetom. Celkový vizuál inštalácie s~iden
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{obr/HW/chronos_celok.jpg}
-    \caption{Inštálácia CHRONOS}
+    \caption{Inštalácia CHRONOS}
     \label{fig:chronos_celok}
 \end{figure}
 

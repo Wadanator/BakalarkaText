@@ -20,7 +20,7 @@ Tento dokument opisuje reálnu fyzickú zostavu expozície, ktorú riadiaci syst
 - Dominantný prvok steny – rozmerné dekoratívne hodiny umiestnené hore na stene.
 - Ciferník má **rímske číslice** a dekoratívne kované ručičky (biele, ornamentálne).
 - **Hodiny sú čisto dekoratívne – neukazujú skutočný čas.** Pohyb ručičiek je riadený systémom ako efekt, nie na základe reálneho času.
-- Pohyb hodinových ručičiek je riadený **jednosmerným (DC) motorom** cez H-mostík BTS7960.
+- Pohyb hodinových ručičiek je riadený **jednosmerným (DC) motorom** cez H-mostík BTS7960B.
 - Motor ovláda uzol `esp32_mqtt_controller_MOTORS` cez topiky `room1/motor1`.
 - Hodiny sú podsvietené **LED pásom** (zapínanie cez reléový uzol).
 
@@ -81,9 +81,9 @@ Tento dokument opisuje reálnu fyzickú zostavu expozície, ktorú riadiaci syst
 
 ### 3.2 Obsah kotla (elektronika)
 - Vo vnútri kotla sa nachádzajú:
-  - **Waveshare RP2350 Relay Module** – 8-kanálový reléový uzol (230 V okruhy: dymostroj, svetlá, budíky, Edisonka, „oheň")
-  - **ESP32 DevKit V1** – motorický uzol (riadenie motorov hodín cez BTS7960)
-  - Napájacie zdroje (5 V pre logiku, 12 V pre motory)
+  - **Waveshare ESP32-S3 Relay Module** – 8-kanálový reléový uzol (230 V okruhy: dymostroj, svetlá, budíky, Edisonka, „oheň")
+  - **ESP32 DevKit V1** – motorický uzol (riadenie motorov hodín cez BTS7960B)
+  - Napájacie vetvy: hlavná 12 V vetva pre reléový modul a výkonové časti, z ktorej je cez DC/DC step-down menič vytvorená 5 V vetva pre ESP32 v motorickom uzle
   - **Dymostroj (fog machine)** – fyzicky umiestnený priamo v kotli; výstupná trubka vedie cez otvor v tele kotla von
 - Kotol je prepojený s ostatnými prvkami steny cez kabeláž vedenú za stenou/konštrukciou.
 
@@ -116,6 +116,6 @@ Tento dokument opisuje reálnu fyzickú zostavu expozície, ktorú riadiaci syst
 
 - Celá zostava je navrhnutá ako **jednorazová**, tematicky uzavretá expozícia – nie modulárny showroom.
 - Napájanie 230 V pre silové prvky (dymostroj, svetlá) prechádza výhradne cez Waveshare reléový modul s optickým oddelením.
-- ESP32 uzly sú napájané z vlastných 5 V USB-C adaptérov vnútri kotla.
+- ESP32 v motorickom uzle je napájané z 12 V vetvy cez DC/DC menič 12 V -> 5 V; vstupný tlačidlový uzol má samostatné 5 V napájanie v inštalačnej krabičke.
 - Wi-Fi pokrytie pre MQTT komunikáciu pokrýva celý priestor expozície z jedného dedikovaného prístupového bodu.
 - **Všetky exponáty sú čisto vizuálne/dizajnové** – žiadny nevykonáva reálnu meraciu ani časovaciu funkciu. Pohyb, svetlo a dym sú riadené ako efekty scénického charakteru.

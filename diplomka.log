@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  11 APR 2026 13:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  13 APR 2026 13:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1151,7 +1151,7 @@ Package pdftex.def Info: obr/HW/RPI_HW.pdf  used on input line 23.
 <obr/HW/main_box_photo.jpeg, id=614, 1541.76pt x 867.24pt>
 File: obr/HW/main_box_photo.jpeg Graphic file (type jpg)
 <use obr/HW/main_box_photo.jpeg>
-Package pdftex.def Info: obr/HW/main_box_photo.jpeg  used on input line 48.
+Package pdftex.def Info: obr/HW/main_box_photo.jpeg  used on input line 47.
 (pdftex.def)             Requested size: 386.96027pt x 217.65637pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1160,17 +1160,17 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  <./obr/HW/RPI_HW.pdf>]
 
-LaTeX Warning: File `obr/HW/motor_schema.pdf' not found on input line 77.
+LaTeX Warning: File `obr/HW/motor_schema.pdf' not found on input line 76.
 
 
-chapters/Implementacia_hw.tex:77: Package pdftex.def Error: File `obr/HW/motor_
+chapters/Implementacia_hw.tex:76: Package pdftex.def Error: File `obr/HW/motor_
 schema.pdf' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.77 ...th=0.9\textwidth]{obr/HW/motor_schema.pdf}
+l.76 ...th=0.9\textwidth]{obr/HW/motor_schema.pdf}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1193,18 +1193,23 @@ Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 [24]
+Overfull \hbox (0.43938pt too wide) in paragraph at lines 123--131
+[]\T1/lmr/bx/n/12 Antivandal tla-£idlo: \T1/lmr/m/n/12 Kvôli za-bez-pe-£e-niu o
+dol-nosti bol zvo-lený prie-my-selný \T1/lmr/bx/n/12 19mm
+ []
 
-LaTeX Warning: File `obr/HW/button_photo.jpg' not found on input line 141.
+
+LaTeX Warning: File `obr/HW/button_photo.jpg' not found on input line 142.
 
 
-chapters/Implementacia_hw.tex:141: Package pdftex.def Error: File `obr/HW/butto
+chapters/Implementacia_hw.tex:142: Package pdftex.def Error: File `obr/HW/butto
 n_photo.jpg' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.141 ...idth=\textwidth]{obr/HW/button_photo.jpg}
+l.142 ...idth=\textwidth]{obr/HW/button_photo.jpg}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1212,42 +1217,42 @@ If that doesn't work, type  X <return>  to quit.
 <obr/HW/Button_Schema.png, id=660, 968.11688pt x 665.48625pt>
 File: obr/HW/Button_Schema.png Graphic file (type png)
 <use obr/HW/Button_Schema.png>
-Package pdftex.def Info: obr/HW/Button_Schema.png  used on input line 148.
+Package pdftex.def Info: obr/HW/Button_Schema.png  used on input line 149.
 (pdftex.def)             Requested size: 218.51521pt x 150.2052pt.
+[25 <./obr/HW/Button_Schema.png>]
 
-LaTeX Warning: File `obr/HW/chronos_celok.jpg' not found on input line 179.
+LaTeX Warning: File `obr/HW/chronos_celok.jpg' not found on input line 183.
 
 
-chapters/Implementacia_hw.tex:179: Package pdftex.def Error: File `obr/HW/chron
+chapters/Implementacia_hw.tex:183: Package pdftex.def Error: File `obr/HW/chron
 os_celok.jpg' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.179 ...=0.9\textwidth]{obr/HW/chronos_celok.jpg}
+l.183 ...=0.9\textwidth]{obr/HW/chronos_celok.jpg}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-LaTeX Warning: File `obr/HW/kotol_exponat.jpg' not found on input line 186.
+LaTeX Warning: File `obr/HW/kotol_exponat.jpg' not found on input line 190.
 
 
-chapters/Implementacia_hw.tex:186: Package pdftex.def Error: File `obr/HW/kotol
+chapters/Implementacia_hw.tex:190: Package pdftex.def Error: File `obr/HW/kotol
 _exponat.jpg' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.186 ...=0.8\textwidth]{obr/HW/kotol_exponat.jpg}
+l.190 ...=0.8\textwidth]{obr/HW/kotol_exponat.jpg}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-) (chapters/Implementacia_sw.tex [25 <./obr/HW/Button_Schema.png>] [26]
-[27]
+) (chapters/Implementacia_sw.tex [26] [27]
 Kapitola 5.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1529,10 +1534,10 @@ Package rerunfilecheck Info: File `diplomka.out' has not changed.
 (rerunfilecheck)             Checksum: 77FE0D8CE85C2FA96571FACDBE04A926;13300.
  ) 
 Here is how much of TeX's memory you used:
- 20273 strings out of 467871
- 336449 string characters out of 5418377
+ 20275 strings out of 467871
+ 336477 string characters out of 5418377
  872765 words of memory out of 5000000
- 48616 multiletter control sequences out of 15000+600000
+ 48618 multiletter control sequences out of 15000+600000
  694061 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,17n,93p,463b,805s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1545,7 +1550,7 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (44 pages, 1293322 bytes).
+Output written on diplomka.pdf (44 pages, 1293847 bytes).
 PDF statistics:
  934 PDF objects out of 1000 (max. 8388607)
  156 named destinations out of 1000 (max. 500000)
