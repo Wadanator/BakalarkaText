@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  3 APR 2026 18:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  11 APR 2026 13:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1139,20 +1139,120 @@ Package pdftex.def Info: obr/ARCH/Mqtt_Flow.pdf  used on input line 175.
 (pdftex.def)             Requested size: 409.71692pt x 310.58678pt.
 ) (chapters/Implementacia_hw.tex [20 <./obr/ARCH/Mqtt_Flow.pdf>]
 Kapitola 4.
-[21
 
-]
-Overfull \hbox (3.05252pt too wide) in paragraph at lines 87--93
-[]\T1/lmr/bx/n/12 Dôvod na-sa-de-nia mo-dulu: \T1/lmr/m/n/12 Na-miesto lo-kálne
- osa-de-ných po-lo-vo-di-£o-vých relé (SSR)
- []
 
-[22]) (chapters/Implementacia_sw.tex [23] [24]
+pdfTeX warning: pdflatex.exe (file ./obr/HW/RPI_HW.pdf): PDF inclusion: found P
+DF version <1.7>, but at most version <1.5> allowed
+<obr/HW/RPI_HW.pdf, id=611, 399.41219pt x 117.3183pt>
+File: obr/HW/RPI_HW.pdf Graphic file (type pdf)
+<use obr/HW/RPI_HW.pdf>
+Package pdftex.def Info: obr/HW/RPI_HW.pdf  used on input line 23.
+(pdftex.def)             Requested size: 432.48051pt x 127.03125pt.
+<obr/HW/main_box_photo.jpeg, id=614, 1541.76pt x 867.24pt>
+File: obr/HW/main_box_photo.jpeg Graphic file (type jpg)
+<use obr/HW/main_box_photo.jpeg>
+Package pdftex.def Info: obr/HW/main_box_photo.jpeg  used on input line 48.
+(pdftex.def)             Requested size: 386.96027pt x 217.65637pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [21
+
+ <./obr/HW/RPI_HW.pdf>]
+
+LaTeX Warning: File `obr/HW/motor_schema.pdf' not found on input line 77.
+
+
+chapters/Implementacia_hw.tex:77: Package pdftex.def Error: File `obr/HW/motor_
+schema.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.77 ...th=0.9\textwidth]{obr/HW/motor_schema.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[22 <./obr/HW/main_box_photo.jpeg>] [23]
+
+LaTeX Warning: File `obr/HW/relay_schema.pdf' not found on input line 106.
+
+
+chapters/Implementacia_hw.tex:106: Package pdftex.def Error: File `obr/HW/relay
+_schema.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.106 ...h=0.9\textwidth]{obr/HW/relay_schema.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[24]
+
+LaTeX Warning: File `obr/HW/button_photo.jpg' not found on input line 141.
+
+
+chapters/Implementacia_hw.tex:141: Package pdftex.def Error: File `obr/HW/butto
+n_photo.jpg' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.141 ...idth=\textwidth]{obr/HW/button_photo.jpg}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+<obr/HW/Button_Schema.png, id=660, 968.11688pt x 665.48625pt>
+File: obr/HW/Button_Schema.png Graphic file (type png)
+<use obr/HW/Button_Schema.png>
+Package pdftex.def Info: obr/HW/Button_Schema.png  used on input line 148.
+(pdftex.def)             Requested size: 218.51521pt x 150.2052pt.
+
+LaTeX Warning: File `obr/HW/chronos_celok.jpg' not found on input line 179.
+
+
+chapters/Implementacia_hw.tex:179: Package pdftex.def Error: File `obr/HW/chron
+os_celok.jpg' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.179 ...=0.9\textwidth]{obr/HW/chronos_celok.jpg}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `obr/HW/kotol_exponat.jpg' not found on input line 186.
+
+
+chapters/Implementacia_hw.tex:186: Package pdftex.def Error: File `obr/HW/kotol
+_exponat.jpg' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.186 ...=0.8\textwidth]{obr/HW/kotol_exponat.jpg}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+) (chapters/Implementacia_sw.tex [25 <./obr/HW/Button_Schema.png>] [26]
+[27]
 Kapitola 5.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25
+ [28
 
 ]
 Overfull \hbox (0.14989pt too wide) in paragraph at lines 113--118
@@ -1170,7 +1270,7 @@ pic \T1/lmtt/m/n/12 room1/motor<N>/feedback\T1/lmr/m/n/12 ,
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [26]
+ [29]
 Overfull \hbox (8.50847pt too wide) in paragraph at lines 207--216
 \T1/lmr/m/n/12 Backend bol na-sa-dený ako sys-té-mová sluºba \T1/lmtt/m/n/12 mu
 seum-system.service \T1/lmr/m/n/12 pod sprá-vou \T1/lmtt/m/n/12 systemd
@@ -1179,7 +1279,7 @@ seum-system.service \T1/lmr/m/n/12 pod sprá-vou \T1/lmtt/m/n/12 systemd
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [27]
+ [30]
 Overfull \hbox (294.24168pt too wide) in paragraph at lines 306--309
 []\T1/lmtt/m/n/12 mqtt \T1/lmr/m/n/12 --- správa je odo-slaná na za-daný to-pic
  MQTT bro-kera, na-prí-klad [][]\T1/lmtt/m/n/12 {"action":"mqtt","topic":"room1
@@ -1209,14 +1309,14 @@ oom1/emergency","message":"STOP","goto":"END"}[]\T1/lmr/m/n/12 ,
 
 Underfull \vbox (badness 8189) has occurred while \output is active []
 
- [28]
+ [31]
 Overfull \hbox (38.22224pt too wide) in paragraph at lines 382--393
 []\T1/lmr/m/n/12 Pre pre-hrá-va-nie vi-dea bol zvo-lený pro-ces \T1/lmtt/m/n/12
  mpv \T1/lmr/m/n/12 ria-dený cez Unix IPC soc-ket (\T1/lmtt/m/n/12 /tmp/mpv_soc
 ket\T1/lmr/m/n/12 ).
  []
 
-[29]) (chapters/Experimenty.tex [30]
+[32]) (chapters/Experimenty.tex [33]
 Kapitola 6.
 
 Overfull \hbox (0.85129pt too wide) in paragraph at lines 42--43
@@ -1224,7 +1324,7 @@ Overfull \hbox (0.85129pt too wide) in paragraph at lines 42--43
 lny au-di-ovi-zu-álny ob-sah sú-£asne s presne
  []
 
-[31
+[34
 
 {C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}
 ]
@@ -1246,26 +1346,26 @@ I could not locate the file with any of these extensions:
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[32]) (chapters/Zaver.tex [33]
+[35]) (chapters/Zaver.tex [36]
 Kapitola 7.
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [34
+ [37
 
 ]
-[35] (diplomka.lof)
+[38] (diplomka.lof)
 \tf@lof=\write6
 \openout6 = `diplomka.lof'.
 
- [36
+ [39
 
 
 ] (diplomka.lot)
 \tf@lot=\write7
 \openout7 = `diplomka.lot'.
 
- [37
+ [40
 
 
 ] (chapters/Literatura.tex
@@ -1274,7 +1374,7 @@ Underfull \hbox (badness 1789) in paragraph at lines 22--28
 n . edu / server / api / core / bitstreams /
  []
 
-[38
+[41
 
 
 ]
@@ -1301,7 +1401,7 @@ Underfull \hbox (badness 1789) in paragraph at lines 161--166
 d / index . php / bt / article / download / 3223 /
  []
 
-[39]
+[42]
 Underfull \hbox (badness 1112) in paragraph at lines 179--183
 \T1/lmr/m/n/12 03-15]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / www . rese
 archgate . net / publication / 373640610 _
@@ -1391,7 +1491,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 244--250
 -[]to-[]Device _ Data _
  []
 
-[40]
+[43]
 Underfull \hbox (badness 10000) in paragraph at lines 256--263
 []\T1/lmr/m/n/12 CELERDATA. YAML, JSON and XML: A Prac-ti-cal Gu-ide
  []
@@ -1414,7 +1514,7 @@ Underfull \hbox (badness 3323) in paragraph at lines 264--268
  [on-
  []
 
-) [41] 
+) [44] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (diplomka.aux)
  ***********
@@ -1426,13 +1526,13 @@ L3 programming layer <2025-12-24>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `diplomka.out' has not changed.
-(rerunfilecheck)             Checksum: E5CBFF90AA3FCDE325B624A52B70CEC2;13299.
+(rerunfilecheck)             Checksum: 77FE0D8CE85C2FA96571FACDBE04A926;13300.
  ) 
 Here is how much of TeX's memory you used:
- 20164 strings out of 467871
- 333224 string characters out of 5418377
- 872078 words of memory out of 5000000
- 48517 multiletter control sequences out of 15000+600000
+ 20273 strings out of 467871
+ 336449 string characters out of 5418377
+ 872765 words of memory out of 5000000
+ 48616 multiletter control sequences out of 15000+600000
  694061 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,17n,93p,463b,805s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1445,9 +1545,9 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (41 pages, 752218 bytes).
+Output written on diplomka.pdf (44 pages, 1293322 bytes).
 PDF statistics:
- 878 PDF objects out of 1000 (max. 8388607)
- 146 named destinations out of 1000 (max. 500000)
- 533 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 934 PDF objects out of 1000 (max. 8388607)
+ 156 named destinations out of 1000 (max. 500000)
+ 548 words of extra memory for PDF output out of 10000 (max. 10000000)
 
