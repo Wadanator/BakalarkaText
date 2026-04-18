@@ -18,6 +18,13 @@
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Inštalácia CHRONOS}}{26}{figure.caption.12}%
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Parný kotol s~integrovanou elektronikou}}{27}{figure.caption.13}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Softvérové vrstvy systému a~ich väzby}}{28}{figure.caption.14}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Životný cyklus backendovej služby}}{29}{figure.caption.16}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Logické spracovanie stavového automatu}}{30}{figure.caption.17}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Štruktúra konfiguračnej scény}}{30}{figure.caption.18}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Sekvenčný tok MQTT správ počas vykonania akcie}}{31}{figure.caption.19}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Prehľad funkčných častí webového dashboardu}}{31}{figure.caption.20}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Spoločná a~špecifická logika uzlov ESP32}}{32}{figure.caption.22}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Distribúcia latencie MQTT spätnej väzby (n = 128, stres-test TC-08, 10\,Hz)}}{36}{figure.caption.15}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Distribúcia latencie MQTT spätnej väzby (n = 128, stres-test TC-08, 10\,Hz)}}{35}{figure.caption.24}%
 \addvspace {10\p@ }

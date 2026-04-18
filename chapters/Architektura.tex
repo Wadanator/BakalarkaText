@@ -1,8 +1,8 @@
 \chapter{Návrh architektúry systému}
 \label{NavrhArchitektury}
 
-Táto kapitola popisuje celkovú architektúru navrhovaného riadiaceho systému.
-Vychádza z~analýzy dostupných technológií uvedenej v~predchádzajúcej kapitole
+Cieľom tejto kapitoly je opísať celkovú architektúru navrhovaného riadiaceho systému.
+Text vychádza z~analýzy dostupných technológií uvedenej v~predchádzajúcej kapitole
 a~z~požiadaviek definovaných v~sekcii~\ref{PoziadavkyNaSystem}.
 
 % ------------------------------------------------------------------
@@ -45,7 +45,7 @@ Medzi \textbf{nefunkčné požiadavky} s ohľadom na udržateľnosť patria:
 \section{Systémová topológia a~sieťová koncepcia}
 \label{CelkovaArchitektura}
 
-Na architektúru navrhovaného systému je nevyhnutné nazerať z~dvoch odlišných,
+Na architektúru navrhovaného systému je vhodné nazerať z~dvoch odlišných,
 no vzájomne sa dopĺňajúcich hľadísk: z~\textbf{logického (výpočtového)}
 a~z~\textbf{fyzického (sieťového)}.
 
@@ -55,7 +55,7 @@ ale je rozdelená medzi viacero častí systému a~presunutá bližšie k~výkon
 Koncové periférie postavené na mikrokontroléroch preto neslúžia len ako pasívne spínače, ale ako aktívne prvky,
 ktoré lokálne spracúvajú prijaté príkazy a~samostatne vykonávajú im pridelené fyzické akcie.
 
-Z~fyzického a~sieťového hľadiska však systém dodržiava
+Z~fyzického a~sieťového hľadiska systém zároveň dodržiava
 \textbf{hviezdicovú topológiu (\textit{Star topology})}. Hoci sú distribuované
 uzly plne inteligentné, nekomunikujú vzájomne medzi sebou (netvoria
 \textit{Mesh} sieť). Akýkoľvek dátový tok na sieti vedie striktne obojsmerne
@@ -65,7 +65,7 @@ len cez centrálny uzol.
 \centering
 \includegraphics[width=0.9\linewidth]{obr/ARCH/system_topology}
 \caption{Fyzická topológia riadiaceho systému}
-\label{fig:topologia}
+\label{fig:topologia_fyzicka}
 \end{figure}
 
 % ------------------------------------------------------------------
@@ -80,7 +80,7 @@ spojením. V praxi však v~expozíciách či \textit{escape room} inštaláciác
 zväzky naprieč miestnosťou. Z tohto dôvodu bolo na distribúciu dátových
 príkazov z centrály zvolené bezdrôtové Wi-Fi pripojenie.
 
-Dvojúrovňová architektúra bola fyzicky obsadená nasledovným hardvérom:
+Dvojúrovňová architektúra bola fyzicky realizovaná nasledovným hardvérom:
 \begin{itemize}
     \item \textbf{Centrálny uzol (\uv{Mozog}):} Hlavnú riadiacu jednotku
         systému tvorí jednodoskový počítač \textbf{Raspberry Pi}. Ako bolo
@@ -130,7 +130,7 @@ implementácia tejto architektúry je rozpracovaná v~Kapitole~\ref{Implementaci
 \centering
 \includegraphics[width=0.9\linewidth]{obr/ARCH/FSM_Architektura}
 \caption{Diagram Konečného stavového automatu}
-\label{fig:topologia}
+\label{fig:fsm_architektura}
 \end{figure}
 
 % ------------------------------------------------------------------
@@ -174,5 +174,5 @@ a~priebeh expozície bez zásahu do zdrojového kódu systému.
 \centering
 \includegraphics[width=0.9\linewidth]{obr/ARCH/Mqtt_Flow}
 \caption{Sekvenčný diagram toku MQTT správ}
-\label{fig:topologia}
+\label{fig:mqtt_flow}
 \end{figure}
