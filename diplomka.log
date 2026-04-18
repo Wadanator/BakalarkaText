@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  14 APR 2026 08:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  18 APR 2026 12:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1152,23 +1152,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [21
 
  <./obr/HW/RPI_HW.pdf>]
-
-LaTeX Warning: File `obr/HW/motor_schema.pdf' not found on input line 70.
-
-
-chapters/Implementacia_hw.tex:70: Package pdftex.def Error: File `obr/HW/motor_
-schema.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.70 ...th=0.9\textwidth]{obr/HW/motor_schema.pdf}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[22 <./obr/HW/main_box_photo.jpeg>] [23]
+<obr/HW/Motor_Schema.png, id=644, 1084.80281pt x 575.90157pt>
+File: obr/HW/Motor_Schema.png Graphic file (type png)
+<use obr/HW/Motor_Schema.png>
+Package pdftex.def Info: obr/HW/Motor_Schema.png  used on input line 70.
+(pdftex.def)             Requested size: 409.71692pt x 217.50916pt.
+ [22 <./obr/HW/main_box_photo.jpeg>]
 
 LaTeX Warning: File `obr/HW/relay_schema.pdf' not found on input line 98.
 
@@ -1185,7 +1174,7 @@ l.98 ...th=0.9\textwidth]{obr/HW/relay_schema.pdf}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[24]
+
 Overfull \hbox (0.43938pt too wide) in paragraph at lines 113--121
 []\T1/lmr/bx/n/12 Antivandal tla-£idlo: \T1/lmr/m/n/12 Kvôli za-bez-pe-£e-niu o
 dol-nosti bol zvo-lený prie-my-selný \T1/lmr/bx/n/12 19mm
@@ -1207,12 +1196,12 @@ l.132 ...idth=\textwidth]{obr/HW/button_photo.jpg}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-<obr/HW/Button_Schema.png, id=665, 968.11688pt x 665.48625pt>
+<obr/HW/Button_Schema.png, id=657, 968.11688pt x 665.48625pt>
 File: obr/HW/Button_Schema.png Graphic file (type png)
 <use obr/HW/Button_Schema.png>
 Package pdftex.def Info: obr/HW/Button_Schema.png  used on input line 138.
 (pdftex.def)             Requested size: 218.51521pt x 150.2052pt.
-[25 <./obr/HW/Button_Schema.png>]
+[23 <./obr/HW/Motor_Schema.png>] [24 <./obr/HW/Button_Schema.png>]
 
 LaTeX Warning: File `obr/HW/chronos_celok.jpg' not found on input line 170.
 
@@ -1245,7 +1234,11 @@ l.176 ...=0.8\textwidth]{obr/HW/kotol_exponat.jpg}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-) (chapters/Implementacia_sw.tex [26] [27]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25])
+(chapters/Implementacia_sw.tex [26]
 Kapitola 5.
 
 Underfull \hbox (badness 1418) in paragraph at lines 57--57
@@ -1271,7 +1264,7 @@ ky run-time sluºby cez \T1/lmtt/m/n/12 ServiceContainer
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [28
+ [27
 
 {C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}
 ]
@@ -1283,8 +1276,8 @@ Overfull \hbox (2.07289pt too wide) in paragraph at lines 110--118
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [29]
-[30]
+ [28]
+[29]
 Overfull \hbox (48.90305pt too wide) in paragraph at lines 233--243
 \T1/lmtt/m/n/12 sfx_ \T1/lmr/m/n/12 boli pred ²tar-tom scény au-to-ma-ticky pre
 d-hraté do ope-ra£-nej pa-mäte ako \T1/lmtt/m/n/12 pygame.mixer.Sound
@@ -1293,8 +1286,8 @@ d-hraté do ope-ra£-nej pa-mäte ako \T1/lmtt/m/n/12 pygame.mixer.Sound
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [31])
-(chapters/Experimenty.tex [32]
+ [30])
+(chapters/Experimenty.tex [31]
 Kapitola 6.
 
 Overfull \hbox (0.85129pt too wide) in paragraph at lines 42--43
@@ -1302,7 +1295,7 @@ Overfull \hbox (0.85129pt too wide) in paragraph at lines 42--43
 lny au-di-ovi-zu-álny ob-sah sú-£asne s presne
  []
 
-[33
+[32
 
 ]
 Overfull \hbox (33.70978pt too wide) in paragraph at lines 95--109
@@ -1323,26 +1316,26 @@ I could not locate the file with any of these extensions:
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[34]) (chapters/Zaver.tex [35]
+[33]) (chapters/Zaver.tex [34]
 Kapitola 7.
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [36
+ [35
 
 ]
-[37] (diplomka.lof)
+[36] (diplomka.lof)
 \tf@lof=\write6
 \openout6 = `diplomka.lof'.
 
- [38
+ [37
 
 
 ] (diplomka.lot)
 \tf@lot=\write7
 \openout7 = `diplomka.lot'.
 
- [39
+ [38
 
 
 ] (chapters/Literatura.tex
@@ -1351,7 +1344,7 @@ Underfull \hbox (badness 1789) in paragraph at lines 22--28
 n . edu / server / api / core / bitstreams /
  []
 
-[40
+[39
 
 
 ]
@@ -1378,7 +1371,7 @@ Underfull \hbox (badness 1789) in paragraph at lines 161--166
 d / index . php / bt / article / download / 3223 /
  []
 
-[41]
+[40]
 Underfull \hbox (badness 1112) in paragraph at lines 179--183
 \T1/lmr/m/n/12 03-15]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / www . rese
 archgate . net / publication / 373640610 _
@@ -1468,7 +1461,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 244--250
 -[]to-[]Device _ Data _
  []
 
-[42]
+[41]
 Underfull \hbox (badness 10000) in paragraph at lines 256--263
 []\T1/lmr/m/n/12 CELERDATA. YAML, JSON and XML: A Prac-ti-cal Gu-ide
  []
@@ -1491,7 +1484,7 @@ Underfull \hbox (badness 3323) in paragraph at lines 264--268
  [on-
  []
 
-) [43] 
+) [42] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (diplomka.aux)
  ***********
@@ -1502,10 +1495,10 @@ Package rerunfilecheck Info: File `diplomka.out' has not changed.
 (rerunfilecheck)             Checksum: 0777078354DD7868F4DDEA6D8B600427;13489.
  ) 
 Here is how much of TeX's memory you used:
- 20289 strings out of 467871
- 336650 string characters out of 5418377
- 872398 words of memory out of 5000000
- 48623 multiletter control sequences out of 15000+600000
+ 20281 strings out of 467871
+ 336398 string characters out of 5418377
+ 873398 words of memory out of 5000000
+ 48616 multiletter control sequences out of 15000+600000
  694061 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,17n,93p,463b,805s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1518,9 +1511,9 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (43 pages, 1292567 bytes).
+Output written on diplomka.pdf (42 pages, 1325059 bytes).
 PDF statistics:
- 948 PDF objects out of 1000 (max. 8388607)
- 165 named destinations out of 1000 (max. 500000)
- 556 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 945 PDF objects out of 1000 (max. 8388607)
+ 164 named destinations out of 1000 (max. 500000)
+ 561 words of extra memory for PDF output out of 10000 (max. 10000000)
 

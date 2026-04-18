@@ -25,8 +25,8 @@ Na napájanie Raspberry Pi bol použitý USB-C adaptér --- 5,0\,V / 3,0\,A.
 \section{Distribuované uzly --- ESP32}\label{DistribuovaneUzly}
 
 Riadiaca logika expozície bola decentralizovaná do niekoľkých
-samostatných uzlov postavených na architektúre mikrokontrolérov
-rodiny ESP32 (viď kapitola~\ref{mikrokontrolery}). Všetky uzly komunikujú s~Raspberry Pi cez Wi-Fi sieť.
+samostatných uzlov postavených na mikrokontroléroch
+rodiny ESP32 (viď kapitola~\ref{mikrokontrolery}). Všetky uzly komunikujú s~Raspberry Pi cez Wi-Fi.
 
 Hlavná riadiaca elektronika (uzly pre ovládanie motorov a~spínanie relé)
 bola umiestnená spoločne vo vnútri inštalačného rozvádzača (Obr.~\ref{fig:main_control_box}), ktorý je fyzicky
@@ -67,7 +67,7 @@ Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov (Obr.~\
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{obr/HW/motor_schema.pdf}
+    \includegraphics[width=0.9\textwidth]{obr/HW/Motor_Schema.png}
     \caption{Schéma zapojenia uzla pre DC motory (ESP32, BTS7960B, 12\,V zdroj)}\label{fig:motor_schema}
 \end{figure}
 

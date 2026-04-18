@@ -163,7 +163,7 @@ Architektúra je typicky rozdelená na dve funkčné úrovne \cite{rpi_esp32_sca
 
 Využitie platforiem, ako sú Raspberry Pi pre centrálnu logiku a~ESP32
 pre distribuované uzly umožňuje budovanie systémov, ktoré kombinujú
-výpočtovú silu potrebnú pre multimédiá s riadením
+výpočtovú silu potrebnú pre multimédiá s~riadením
 hardvéru \cite{rpi_esp32_scada}. Tento prístup je nielen finančne efektívny, ale vďaka
 rozsiahlej komunite a~dostupnosti knižníc umožňuje rýchle
 prototypovanie a~iteratívny vývoj riadiacej logiky
@@ -251,7 +251,7 @@ prispôsobiť komunikáciu podľa požiadaviek
 \end{table}
 
 Okrem QoS poskytuje MQTT mechanizmus \textit{Last Will and
-Testament} (LWT), ktorý umožňuje brokeru automaticky informovať
+Testament} (LWT), ktorý umožňuje brokerovi automaticky informovať
 ostatné časti systému, ak dôjde k~neočakávanému odpojeniu
 zariadenia \cite{mqtt_lwt_review}. Tento mechanizmus je
 v~kombinácii so zostatkovými (\textit{retained}) správami
@@ -412,7 +412,7 @@ je nutné zvoliť vhodný formát. V~kontexte IoT a~webových
 technológií sa najčastejšie porovnávajú textové formáty XML,
 YAML a~JSON \cite{iot_data_formats_review}.
 
-\textbf{XML}(\textit{eXtensible Markup Language}) je dlhoročným
+\textbf{XML} (\textit{eXtensible Markup Language}) je dlhoročným
 priemyselným štandardom pre výmenu dát. V~prostredí embedded
 systémov je však považované za zastarané kvôli extrémnej
 verbosite a~zložitosti parserov, ktoré neúmerne zaťažujú
@@ -422,11 +422,11 @@ pamäť mikrokontroléra \cite{iot_data_formats_review}.
 obľubu v~oblasti DevOps vďaka podpore komentárov
 a~maximálnej čitateľnosti pre človeka \cite{yaml_vs_json}.
 Avšak YAML parsery pre C++ sú pamäťovo náročné a~často
-chybové pri spracovávaní neštandardných dát, čo z~neho
+náchylné na chyby pri spracovaní neštandardných dát, čo z~neho
 robí rizikovú voľbu pre real-time komunikáciu na
 mikrokontroléroch \cite{json_xml}.
 
-\textbf{JSON}(\textit{JavaScript Object Notation}) sa stal de facto
+\textbf{JSON} (\textit{JavaScript Object Notation}) sa stal de facto
 štandardom pre IoT vďaka optimálnej rovnováhe medzi
 čitateľnosťou a~strojospracovateľnosťou
 \cite{iot_data_formats_review}. Pre mikrokontroléry
@@ -448,7 +448,7 @@ logiky systému \cite{partarakis2016adaptable}.
 \label{zhrnutie-reserse}
 
 Analýza dostupných technických riešení preukázala, že pre
-špecifické potreby modulárnej a~cenovo dostupnej muzeálnej
+špecifické potreby modulárnej a~cenovo dostupnej múzejnej
 inštalácie nie sú optimálne ani priemyselné PLC (vysoká
 cena, absencia multimediálnych rozhraní), ani uzavreté
 komerčné show-control systémy (závislosť na dodávateľovi,
