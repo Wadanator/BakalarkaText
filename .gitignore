@@ -1,0 +1,56 @@
+# ==============================
+# LaTeX build artifacts
+# ==============================
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.xdv
+
+# Temporary/editor swap files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# ==============================
+# Diagram generated artifacts
+# Keep sources (.mmd, .dot, .html, diagram_spec.md), ignore renders
+# ==============================
+obr/SW_DIAGRAM_SPECS/**/diagram_*_final.svg
+obr/SW_DIAGRAM_SPECS/**/diagram_*_final.pdf
+obr/SW_DIAGRAM_SPECS/**/diagram_*_final.png
+obr/SW_DIAGRAM_SPECS/**/diagram_*_reexport.pdf
+obr/SW_DIAGRAM_SPECS/**/diagram_*_graphviz.svg
+obr/SW_DIAGRAM_SPECS/**/diagram_*_graphviz.pdf
+obr/SW_DIAGRAM_SPECS/**/diagram_*_html.png
+obr/SW_DIAGRAM_SPECS/**/diagram_*_html.pdf
+
+# Browser/headless temporary profile
+obr/SW_DIAGRAM_SPECS/**/_chrome_headless_profile/
+
+# Node/npm temporary cache in project (if created)
+node_modules/
+.npm/
+
+# ==============================
+# Non-thesis code directories (ignored by request)
+# ==============================
+raspberry_pi/
+src/

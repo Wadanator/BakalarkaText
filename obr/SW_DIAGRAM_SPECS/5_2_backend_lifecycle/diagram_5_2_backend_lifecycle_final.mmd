@@ -1,0 +1,79 @@
+---
+config:
+  layout: elk
+---
+flowchart TD
+
+  subgraph A["1 — štart"]
+    START["Backend štart"]
+    INIT["Konfigurácia, služby, callbacky"]
+    WEB["Web dashboard"]
+  end
+
+  subgraph B["2 — main loop"]
+    CONN["Počiatočné MQTT spojenie\nestablish_initial_connection()"]
+    OFFLINE["Offline režim\nwarning len raz"]
+    LOOP["Hlavná slučka\nperiodic health check + vstupy + cleanup"]
+    SHUT{Ukončenie?}
+    CLEAN["Cleanup systému"]
+  end
+
+  subgraph C["3 — štart scény"]
+    TRIG["Štart scény\nbutton / MQTT / web"]
+    RUNFLAG["running + /tmp/museum_scene_state"]
+    ALREADY["Už beží"]
+    THREAD["Daemon vlákno scény"]
+  end
+
+  subgraph D["4 — beh scény"]
+    LOAD["Load scény + callback"]
+    RUN["feedback tracking + scene loop"]
+    ENDSTOP["Stop výstupov + broadcast stop"]
+  end
+
+  subgraph E["5 — externý stop"]
+    STOP["stop_scene()"]
+    IDLE{Scéna beží?}
+    STOPALL["Scéna/audio/video off"]
+    BROADSTOP["Broadcast stop + status"]
+  end
+
+  subgraph F["6 — watchdog"]
+    FILE["/tmp/museum_scene_state"]
+    WD["watchdog číta stav"]
+  end
+
+  START --> INIT --> WEB --> CONN
+  CONN -- nie --> OFFLINE --> LOOP
+  CONN -- áno --> LOOP
+  LOOP --> SHUT
+  SHUT -- nie --> LOOP
+  SHUT -- áno --> CLEAN
+
+  TRIG --> RUNFLAG
+  RUNFLAG -- už beží --> ALREADY --> LOOP
+  RUNFLAG -- ok --> THREAD --> LOAD --> RUN --> ENDSTOP --> LOOP
+
+  STOP --> IDLE
+  IDLE -- áno --> STOPALL --> BROADSTOP --> LOOP
+  IDLE -- nie --> BROADSTOP --> LOOP
+
+  RUNFLAG -. zapisuje .-> FILE
+  ENDSTOP -. zapisuje .-> FILE
+  FILE -. číta .-> WD
+
+  classDef init fill:#E6F1FB,stroke:#185FA5,color:#0C447C,stroke-width:1.2px,font-size:20px;
+  classDef loop fill:#E1F5EE,stroke:#0F6E56,color:#085041,stroke-width:1.2px,font-size:20px;
+  classDef scene fill:#EEEDFE,stroke:#534AB7,color:#3C3489,stroke-width:1.2px,font-size:20px;
+  classDef stop fill:#FAECE7,stroke:#993C1D,color:#712B13,stroke-width:1.2px,font-size:20px;
+  classDef decision fill:#FAEEDA,stroke:#854F0B,color:#633806,stroke-width:1.2px,font-size:20px;
+  classDef file fill:#F1EFE8,stroke:#5F5E5A,color:#444441,stroke-dasharray:5 5,stroke-width:1.0px,font-size:18px;
+  classDef wd fill:#E1F5EE,stroke:#0F6E56,color:#085041,stroke-width:1.2px,font-size:20px;
+
+  class START,INIT,WEB init;
+  class CONN,OFFLINE,LOOP,CLEAN loop;
+  class TRIG,RUNFLAG,THREAD,LOAD,RUN,ENDSTOP,STOPALL,BROADSTOP scene;
+  class STOP stop;
+  class SHUT,ALREADY,IDLE decision;
+  class FILE file;
+  class WD wd;

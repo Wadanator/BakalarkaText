@@ -1,0 +1,97 @@
+---
+config:
+  layout: elk
+---
+flowchart TB
+ subgraph Z1["1) Vstupy a trigger"]
+        BTN["Fyzicke tlacidlo\n(roomX/scene: START)"]
+        OP["Operator\n(Run/Stop v Dashboarde)"]
+        TSTART["MQTT topic trigger\nroomX/start_scene"]
+  end
+ subgraph Z2["2) Raspberry Pi backend"]
+        ORCH["MuseumController\n(orchestracia)"]
+        SP["SceneParser\n(load/start/process)"]
+        FSM["FSM jadro\n(StateMachine + TransitionManager)"]
+        EXEC["StateExecutor\n(audio/video/mqtt)"]
+        MCLIENT["MQTT client"]
+        TRACK["MQTTFeedbackTracker"]
+        STORE["MQTTActuatorStateStore\n(desired/confirmed)"]
+        WEB["Web backend\n(Flask + SocketIO)"]
+        STATEFILE["/tmp/museum_scene_state\n(running|idle)"]
+        WD["watchdog.py\n(restart decision)"]
+  end
+ subgraph Z3["3) MQTT broker"]
+        BROKER["MQTT Broker"]
+  end
+ subgraph Z4["4) ESP32 vykonavacia vrstva"]
+        COMMON["Spolocne jadro uzlov\nWi-Fi + MQTT + status/LWT + roomX/STOP"]
+        EBTN["Button uzol"]
+        EMOTOR["Motor uzol"]
+        ERELAY["Relay uzol"]
+  end
+ subgraph Z5["5) Dashboard a operator"]
+        UI["Dashboard UI\nstatus/logy/scene progress/runtime states"]
+  end
+    BTN -- 1) start scene --> ORCH
+    OP -- 1) run/stop --> ORCH
+    TSTART -- 1) named scene --> ORCH
+    ORCH -. 2) load + start .-> SP
+    SP -. 3) process tick .-> FSM
+    FSM -. 4) execute actions .-> EXEC
+    EXEC -- 5) publish command --> MCLIENT
+    MCLIENT -- 6) command --> BROKER
+    BROKER -- 6) deliver --> COMMON
+    COMMON --> EBTN & EMOTOR & ERELAY
+      EBTN -- 7) status --> BROKER
+    EMOTOR -- 7) feedback --> BROKER
+    ERELAY -- 7) feedback --> BROKER
+    BROKER -- 7) feedback --> TRACK
+      MCLIENT -- 9) track_published_message --> TRACK
+      TRACK -- 9) update_desired --> STORE
+    TRACK -- 8) update_confirmed (OK) --> STORE
+    STORE -- 10) device_runtime_state_update --> WEB
+    WEB -- 10) SocketIO push --> UI
+    ORCH -- 11) status_update / scene_progress / stats_update --> WEB
+    WEB -- 11) status/scene/stats --> UI
+    WEB -- 11b) new_log --> UI
+    ORCH -- 12) force_all_off --> STORE
+    ORCH -- 12) roomX/STOP --> MCLIENT
+    MCLIENT -- 12) STOP --> BROKER
+    BROKER -- 12) STOP --> COMMON
+    ORCH -. 13) sync running/idle .-> STATEFILE
+    STATEFILE -. 13) watchdog read .-> WD
+    NOTE1["GlobalEvents sa vyhodnocuju pred lokalnymi transitions\n(scene_parser.process_scene)"] -.-> FSM
+    NOTE2["Desired sa meni pri publish, confirmed pri feedback OK\n(mqtt_feedback_tracker + state_store)"] -.-> STORE
+    NOTE3["Feedback timeout sa loguje ako FEEDBACK TIMEOUT"] -.-> TRACK
+    NOTE4["STOP vetva nastavuje bezpecny OFF stav cez force_all_off"] -.-> STORE
+    NOTE5["Dashboard je pushovany eventami (SocketIO), nie pollingom"] -.-> WEB
+
+     BTN:::command
+     OP:::command
+     TSTART:::command
+     ORCH:::command
+     SP:::command
+     FSM:::command
+     EXEC:::command
+     MCLIENT:::command
+     TRACK:::feedback
+     STORE:::feedback
+     WEB:::socket
+     STATEFILE:::internal
+     WD:::internal
+     BROKER:::command
+     COMMON:::command
+     EBTN:::command
+     EMOTOR:::command
+     ERELAY:::command
+     UI:::socket
+     NOTE1:::note
+     NOTE2:::note
+     NOTE3:::note
+     NOTE4:::note
+     NOTE5:::note
+    classDef command fill:#E6F1FB,stroke:#185FA5,color:#0C447C,stroke-width:1.2px,font-size:18px
+    classDef feedback fill:#E1F5EE,stroke:#0F6E56,color:#085041,stroke-width:1.2px,font-size:18px
+    classDef internal fill:#F1EFE8,stroke:#5F5E5A,color:#444441,stroke-dasharray:5 5,stroke-width:1.0px,font-size:17px
+    classDef socket fill:#EEEDFE,stroke:#534AB7,color:#3C3489,stroke-width:1.2px,font-size:18px
+    classDef note fill:#FAEEDA,stroke:#854F0B,color:#633806,stroke-width:1.2px,font-size:17px

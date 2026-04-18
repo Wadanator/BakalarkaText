@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Obrazok 5.4 - Struktura konfiguracnej sceny JSON</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #ffffff;
+      color: #111;
+      padding: 8px;
+    }
+    .canvas {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+    .master {
+      width: min(1500px, 100%);
+      border: 1px solid #cfd4da;
+      border-radius: 16px;
+      background: #fcfcfd;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .d {
+      width: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .row { display: flex; gap: 10px; }
+    .sec { border-radius: 14px; padding: 10px 10px 12px; border: 1px solid; }
+    .lbl { font-size: 38px; font-weight: 600; margin-bottom: 8px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .col { flex-direction: column; }
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .pill {
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 35px;
+      font-weight: 600;
+      border: 1px solid;
+      line-height: 1.15;
+    }
+    .sub {
+      font-weight: 500;
+      font-size: 30px;
+      opacity: 0.82;
+      display: block;
+      margin-top: 4px;
+    }
+    .w2 { flex: 2; }
+    .w1 { flex: 1; }
+
+    .sb { background:#E6F1FB; border-color:#185FA5; }
+    .sb .lbl { color:#0C447C; }
+    .pb { background:#B5D4F4; border-color:#185FA5; color:#0C447C; }
+    .pt { background:#9FE1CB; border-color:#0F6E56; color:#085041; }
+
+    .sp { background:#EEEDFE; border-color:#534AB7; }
+    .sp .lbl { color:#3C3489; }
+    .pp { background:#CECBF6; border-color:#534AB7; color:#3C3489; }
+
+    .sa { background:#FAEEDA; border-color:#854F0B; }
+    .sa .lbl { color:#633806; }
+    .pa { background:#FAC775; border-color:#854F0B; color:#412402; }
+
+    .sc { background:#FAECE7; border-color:#993C1D; }
+    .sc .lbl { color:#712B13; }
+    .pc { background:#F5C4B3; border-color:#993C1D; color:#4A1B0C; }
+
+    .sg { background:#F1EFE8; border-color:#5F5E5A; }
+    .sg .lbl { color:#444441; }
+    .pg { background:#D3D1C7; border-color:#5F5E5A; color:#2C2C2A; }
+
+    @media print {
+      @page {
+        size: A4 landscape;
+        margin: 8mm;
+      }
+      body { padding: 0; }
+      .master {
+        width: 100%;
+        height: 100%;
+      }
+      .d {
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="master">
+      <div class="d">
+    <div class="sec sb">
+      <div class="lbl">Koreň JSON scény</div>
+      <div class="pills">
+        <div class="pill pb">sceneId<span class="sub">identifikátor</span></div>
+        <div class="pill pb">initialState<span class="sub">počiatočný stav</span></div>
+        <div class="pill pb">states { }<span class="sub">zoznam stavov</span></div>
+        <div class="pill pt">globalEvents [ ]<span class="sub">mimo konkrétnych stavov</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="sec sp w2">
+        <div class="lbl">Jeden stav</div>
+        <div class="pills g2">
+          <div class="pill pp">onEnter [ ]<span class="sub">akcie pri vstupe</span></div>
+          <div class="pill pp">timeline [ ]<span class="sub">časové akcie</span></div>
+          <div class="pill pp">onExit [ ]<span class="sub">akcie pri odchode</span></div>
+          <div class="pill pp">transitions [ ]<span class="sub">vyhodnocujú sa v poradí zápisu</span></div>
+        </div>
+      </div>
+
+      <div class="sec sg w1">
+        <div class="lbl">Validácia pri načítaní</div>
+        <div class="pills col">
+          <div class="pill pg">Schémová<span class="sub">povinné polia + typy</span></div>
+          <div class="pill pg">Logická<span class="sub">goto target existuje alebo END</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="sec sa w1">
+        <div class="lbl">Typy akcií</div>
+        <div class="pills col">
+          <div class="pill pa">mqtt — topic + message</div>
+          <div class="pill pa">audio — message</div>
+          <div class="pill pa">video — message</div>
+        </div>
+      </div>
+
+      <div class="sec sc w2">
+        <div class="lbl">Typy prechodov</div>
+        <div class="pills g2">
+          <div class="pill pc">timeout<span class="sub">delay → goto</span></div>
+          <div class="pill pc">audioEnd<span class="sub">target → goto</span></div>
+          <div class="pill pc">videoEnd<span class="sub">target → goto</span></div>
+          <div class="pill pc">mqttMessage<span class="sub">topic + message → goto</span></div>
+          <div class="pill pc">always<span class="sub">→ goto</span></div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

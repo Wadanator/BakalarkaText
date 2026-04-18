@@ -13,18 +13,17 @@
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Vnútorné usporiadanie hlavného inštalačného rozvádzača}}{22}{figure.caption.8}%
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Schéma zapojenia uzla pre DC motory (ESP32, BTS7960B, 12\,V zdroj)}}{23}{figure.caption.9}%
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Schéma zapojenia relé uzla (Waveshare ESP32-S3, 230\,V a~12\,V obvody)}}{24}{figure.caption.10}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Inštalačná krabička tlačidlového uzla s~osadenou elektronikou}}{24}{figure.caption.11}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Schéma zapojenia uzla (ESP32, pull-up, MOSFET, GX12)}}{24}{figure.caption.11}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Inštalácia CHRONOS}}{25}{figure.caption.12}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Parný kotol s~integrovanou elektronikou}}{26}{figure.caption.13}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Inštalačná krabička tlačidlového uzla s~osadenou elektronikou}}{25}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Schéma zapojenia uzla (ESP32, pull-up, MOSFET, GX12)}}{25}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Inštalácia CHRONOS}}{26}{figure.caption.12}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Parný kotol s~integrovanou elektronikou}}{27}{figure.caption.13}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Softvérové vrstvy systému a~ich väzby}}{27}{figure.caption.14}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Životný cyklus backendovej služby}}{28}{figure.caption.16}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Logické spracovanie stavového automatu}}{29}{figure.caption.17}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Štruktúra konfiguračnej scény}}{29}{figure.caption.18}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Sekvenčný tok MQTT správ počas vykonania akcie}}{30}{figure.caption.19}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Prehľad funkčných častí webového dashboardu}}{30}{figure.caption.20}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Spoločná a~špecifická logika uzlov ESP32}}{31}{figure.caption.22}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Softvérové vrstvy systému a~ich väzby}}{29}{figure.caption.14}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Životný cyklus backendovej služby}}{31}{figure.caption.16}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Logické spracovanie stavového automatu}}{33}{figure.caption.17}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Štruktúra konfiguračnej scény}}{35}{figure.caption.18}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Sekvenčný tok MQTT správ počas vykonania akcie}}{36}{figure.caption.19}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Prehľad funkčných častí webového dashboardu}}{37}{figure.caption.20}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Spoločná a~špecifická logika uzlov ESP32}}{38}{figure.caption.22}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Distribúcia latencie MQTT spätnej väzby (n = 128, stres-test TC-08, 10\,Hz)}}{34}{figure.caption.24}%
 \addvspace {10\p@ }

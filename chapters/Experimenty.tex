@@ -1,127 +1,94 @@
 \chapter{Experimentálne overenie}
 \label{ExperimentalneOverenie}
 
-Táto kapitola prezentuje reálne skúšky navrhnutého systému, ktoré overujú splnenie stanovených cieľov zadania v podmienkach reálnej prevádzky.
+Táto kapitola stručne opisuje praktické overenie navrhnutého systému.
 
 \section{Popis fyzického testovania a~testovacieho prostredia}
 \label{PopisDemonstracie}
 
-Systém bol nasadený a~overený na reálnej fyzickej inštalácii
-\textbf{CHRONOS} -- steampunkovej expozičnej stene s~rozmermi
-približne 3\,m\,$\times$\,1{,}5\,m. Inštalácia integruje
-dekoratívne hodinové mechanizmy, sústavu ozubených kolies,
-analógové budíky, dymostroj a~scénické osvetlenie,
-ktorých mechanická konštrukcia je popísaná
-v~kapitole~\ref{MechanickaKonstrukcia}.
+Systém bol overený na reálnej inštalácii \textbf{CHRONOS} --
+steampunkovej expozičnej stene s~rozmermi približne
+3\,m\,$\times$\,1{,}5\,m. Inštalácia obsahuje hodinové
+mechanizmy, ozubené kolieska, analógové budíky, dymostroj,
+osvetlenie a~ovládacie prvky.
 
-Do testovania boli zapojené nasledujúce uzly a~zariadenia:
+Na testovanie boli použité tieto uzly a~zariadenia:
 \begin{itemize}
-    \item \textbf{Raspberry Pi} s~bežiacim centrálnym procesom
-        \texttt{MuseumController}, pripojeným HDMI monitorom
-        a~audio výstupom cez 3{,}5\,mm jack.
-    \item \textbf{ESP32 Motorický uzol} riadiaci dva jednosmerné
-        DC motory cez H-mostíky BTS7960 -- motor hodinového
-        mechanizmu a~motor ozubených kolies.
-    \item \textbf{ESP32 Reléový uzol} (Waveshare ESP32-S3)
-        spínajúci osem kanálov: napájanie dymostroja (230\,V),
-        produkciu dymu (auto-off 12\,s), svetlo ohňa,
-        Edisonovu žiarovku a~štyri kanály podsvietenia
-        LED pásov (12\,V).
-    \item \textbf{ESP32 Tlačidlový uzol} ako fyzický
-        štartovací vstup pre návštevníka.
+    \item \textbf{Raspberry Pi} s~bežiacim centrálnym procesom \texttt{MuseumController}.
+    \item \textbf{ESP32 uzly} pre motory, relé a~tlačidlo.
 \end{itemize}
 
 \section{Testované scenáre a výsledky}
 \label{TestovaneScenare}
 
-Overenie stability systému prebiehalo v troch izolovaných rovinách: prevádzka s hardvérom, softvérová výdrž jadra a odolnosť voči sieťovým výpadkom.
+Overenie bolo založené na opakovanom spúšťaní scény, teste obnovy
+po výpadku napájania a~na skrátenom laboratórnom teste na stole.
 
-\subsection{Scenár 1 -- Komplexná lineárna scéna s hardvérom}
+\subsection{Laboratórny test logiky}
 \begin{itemize}
-    \item \textbf{Cieľ:} Otestovať plynulosť a asynchrónnu presnosť prechodov definovaných v JSON súbore počas riadenia fyzických aktuátorov priamo v~múzeu.
-    \item \textbf{Priebeh:} Systém musel prehrať multimediálny audiovizuálny obsah súčasne s presne načasovaným pohybom motorov a dynamickým zhasínaním svetiel.
-    \item \textbf{Výsledok:} Všetky akcie boli spustené v~časoch definovaných v~\textit{timeline}. Komunikácia s~mikrokontrolérmi prebehla bez zaznamenaného oneskorenia a~synchronizácia audio-video stopy so svetelnými efektmi bola vizuálne konzistentná počas celého trvania testu.
+    \item \textbf{Priebeh:} Systém bežal na stole so zapojenými iba ESP32 uzlami.
+        Motory a~svetlá boli fyzicky odpojené, takže test overoval len logiku a~komunikáciu,
+        nie záťaž na výstupoch. Scéna \texttt{all\_relays\_loop\_test} sa spúšťala niekoľkokrát
+        v~rôznych časoch, aby sa overilo, či sa vždy korektne rozbehne a~doberie do konca.
+    \item \textbf{Výsledok:} Scéna sa spúšťala spoľahlivo a~bez zaseknutia.
+        Všetky príkazy prešli cez Wi-Fi, MQTT aj ESP32 logiku a~feedback sa vracal bez timeoutov.
 \end{itemize}
 
-\subsection{Scenár 2 -- Dlhodobý test stability riadiaceho systému}
+\subsection{Výpadok napájania Raspberry Pi}
 \begin{itemize}
-    \item \textbf{Cieľ:} Overiť odolnosť Raspberry Pi a MQTT brokera proti pretečeniu pamäte a zlyhaniu pri dlhodobom plynulom behu (tzv. \textit{Soak test}).
-    \item \textbf{Priebeh:} Centrálny program systému bežal na stole formou \textit{dry-run} testovania v kuse niekoľko dní v laboratórnych podmienkach. Priebežne dochádzalo k ojedinelému spúšťaniu scén a monitorovaniu odosielaných MQTT príkazov na zbernicu.
-    \item \textbf{Výsledok:} Proces \texttt{MuseumController} zostal počas celej doby testu bez reštartu. Príkazy boli generované na MQTT zbernicu priebežne bez výpadku, čo preukázalo dostatočnú stabilitu softvéru pre nepretržitú prevádzku.
+    \item \textbf{Priebeh:} Raspberry Pi bolo počas behu systému odpojené od napájacieho kábla,
+        po chvíli znovu pripojené a~následne sa čakalo, kým sa všetky uzly nespárujú späť do stavu ready.
+    \item \textbf{Výsledok:} Systém sa po reštarte obnovil do funkčného stavu za menej ako 50 sekúnd.
+        Po opätovnom zapnutí bolo možné scénu znovu spustiť bez zásahu do konfigurácie.
+        Počas týchto testov sa neobjavil stav, že by sa systém po reštarte nespustil správne.
 \end{itemize}
 
-\subsection{Scenár 3 -- Test sieťovej odolnosti a LWT (Last Will)}
+\subsection{Meranie latencie}
 \begin{itemize}
-    \item \textbf{Cieľ:} Overiť detekčný a oznamovací mechanizmus systému pri neštandardnej strate bezdrôtového spojenia uzlov na Wi-Fi sieti.
-    \item \textbf{Priebeh:} Koncovým ESP32 uzlom (\textit{Controller\_MOTORS} a \textit{Controller\_RELAY}) bolo striedavo fyzicky odpájané a následne vracané napájanie za behu celého systému.
-    \item \textbf{Výsledok:} Po obnovení napájania sa uzly autonómne pripojili späť na Wi-Fi sieť a~MQTT brokera. Dashboard správne zaznamenal zmenu stavu - prepis indikátora z~\texttt{offline} na \texttt{online} prebehol na základe LWT správy od brokera a~následného \texttt{online} hlásenia od uzla.
+    \item \textbf{Priebeh:} Bola použitá testovacia scéna, ktorá len periodicky prepínala všetky relé
+        s~intervalom 250\,ms. Za 58{,}3 sekundy systém odoslal 1\,824 príkazov a~rovnaký počet feedbackov
+        sa úspešne vrátil späť do Raspberry Pi.
+    \item \textbf{Výsledok:} Priemerná latencia feedbacku bola 111{,}7\,ms, maximum 219\,ms a~doručiteľnosť
+        dosiahla 100\,\%. Meranie ukázalo, že najrýchlejšie odpovede boli pri \texttt{room1/light/1} a~\texttt{room1/light/2},
+        kým niektoré relé a~výstupy mali vyššiu, ale stále stabilnú odozvu.
 \end{itemize}
 
-% ---------------------------------------------------------------
-% Vložiť za \subsection{Scenár 3 -- Test sieťovej odolnosti...}
-% a PRED \section{Zhodnotenie overenia}
-% ---------------------------------------------------------------
- 
-\subsection{Scenár 4 -- Meranie latencie MQTT spätnej väzby}
-\label{LatenciaMQTT}
-\begin{itemize}
-    \item \textbf{Cieľ:} Kvantitatívne overiť latenciu cyklu
-        príkaz\,--\,spätná väzba medzi backendom Raspberry~Pi
-        a~motorickým uzlom ESP32 pri vysokofrekvenčnom zaťažení
-        (10 príkazov za sekundu, stres-test TC-08).
-    \item \textbf{Priebeh:} Počas behu stres-testovej scény bolo
-        z~databázového záznamu modulu \texttt{mqtt\_feedback}
-        extrahovaných 128 hodnôt doby odozvy -- po 64 pre každý
-        motorický kanál. Meranie pokrývalo súvislý časový úsek
-        40 sekúnd.
-    \item \textbf{Výsledok:} Priemerná latencia celého cyklu
-        dosiahla 88{,}7\,ms pri mediáne 90\,ms. Žiadna
-        zo 128 meraných hodnôt neprekročila hranicu 200\,ms --
-        59{,}4\,\% meraní spadalo do pásma pod 100\,ms
-        a~zvyšných 40{,}6\,\% do pásma 100\,--\,200\,ms
-        (Tab.~\ref{tab:mqtt_latency}, Obr.~\ref{fig:mqtt_latency}).
-        Hodnota P99 dosiahla 166\,ms, čo potvrdzuje absenciu
-        extrémnych odchýlok. Kanál \texttt{motor2} vykazoval
-        v~priemere o~17{,}9\,ms vyššiu latenciu ako
-        \texttt{motor1}; rozdiel je zhodný s~typickým
-        variabilným oneskorením domácej Wi-Fi siete
-        a~nemá vplyv na pozorovateľnosť efektov.
-\end{itemize}
- 
 \begin{table}[H]
 \centering
-\caption{Štatistika latencie MQTT cyklu príkaz\,--\,spätná väzba}
-\label{tab:mqtt_latency}
-\begin{tabular}{|l|c|c|c|c|c|c|}
+\caption{Latencia MQTT feedbacku pri testovacej scéne}
+\label{tab:latencia_feedback}
+\begin{tabular}{|l|c|c|c|c|}
 \hline
-\textbf{Zariadenie} & \textbf{n} & \textbf{Priemer (ms)}
-    & \textbf{Medián (ms)} & \textbf{Min (ms)}
-    & \textbf{Max (ms)} & \textbf{P95 (ms)} \\
+\textbf{Zariadenie} & \textbf{n} & \textbf{min (ms)} & \textbf{mean (ms)} & \textbf{max (ms)} \\
 \hline
-motor1 & 64 & 79{,}7 & 81{,}0 & 19 & 143 & 136 \\
-motor2 & 64 & 97{,}6 & 102{,}0 & 17 & 167 & 164 \\
+\texttt{room1/effect/smoke} & 228 & 52 & 118{,}7 & 216 \\
+\texttt{room1/light/1} & 228 & 11 & 81{,}1 & 137 \\
+\texttt{room1/light/2} & 228 & 23 & 84{,}4 & 149 \\
+\texttt{room1/light/3} & 228 & 30 & 122{,}1 & 217 \\
+\texttt{room1/light/4} & 228 & 57 & 122{,}8 & 218 \\
+\texttt{room1/light/5} & 228 & 56 & 123{,}2 & 219 \\
+\texttt{room1/light/fire} & 228 & 56 & 123{,}1 & 219 \\
+\texttt{room1/power/smoke\_ON} & 228 & 50 & 118{,}4 & 216 \\
 \hline
-\textbf{Celkovo} & \textbf{128} & \textbf{88{,}7}
-    & \textbf{90{,}0} & \textbf{17} & \textbf{167}
-    & \textbf{156} \\
+\textbf{Celkovo} & \textbf{1824} & \textbf{11} & \textbf{111{,}7} & \textbf{219} \\
 \hline
 \end{tabular}
 \end{table}
- 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.9\linewidth]{obr/mqtt_latency}
-\caption{Distribúcia latencie MQTT spätnej väzby (n = 128,
-    stres-test TC-08, 10\,Hz)}
-\label{fig:mqtt_latency}
-\end{figure}
 
-\section{Zhodnotenie overenia}
-\label{VysledkyZhodnotenie}
+\subsection{Presnosť prepínania}
+\begin{itemize}
+    \item \textbf{Priebeh:} Na tej istej testovacej scéne sa sledoval aj interval medzi prepnutiami stavového automatu.
+    \item \textbf{Výsledok:} Namerný priemer bol 255{,}8\,ms pri cieli 250\,ms, teda systém bol mierne pomalší,
+        ale stále sa pohyboval blízko nastavenej hodnoty. V~tolerancii \(\pm 20\,\text{ms}\) bolo 26 z~227 intervalov.
+        Kumulatívny drift oproti ideálnemu času dosiahol 1\,317\,ms.
+\end{itemize}
 
-Všetky tri testované scenáre boli úspešne overené. Architektúra
-distribuovanej hviezdicovej siete sa ukázala ako dostatočne stabilná
-pre podmienky plného fyzického zaťaženia v~prostredí expozície.
-Bezdrôtová komunikácia cez protokol MQTT preukázala reaktivitu
-postačujúcu na spracovanie hardvérových triggerov bez merateľného
-oneskorenia, čo vylúčilo potrebu prechodu na drôtové prepojenie.
+\subsection{Zhodnotenie}
+\begin{itemize}
+    \item Overenie neodhalilo stav, pri ktorom by sa scéna nedala spustiť alebo by niektorý z~výstupov prestal pracovať.
+    \item Čas štartu scény závisí od jej zložitosti, pretože pri spustení sa načítavajú multimediálne dáta vrátane audia do pamäte RAM.
+    \item Kumulatívny drift 1\,317\,ms sa týka dlhšieho behu celej scény a~pre svetelné a~divadelné efekty je táto odchýlka zanedbateľná.
+    \item Pri presnom časovaní v~rámci jedného stavu sa používajú absolútne časové väzby, takže sa drift medzi cyklami nesčítava rovnakým spôsobom.
+\end{itemize}
+
+V~rámci týchto testov sa potvrdilo, že systém je použiteľný pre reálnu prevádzku v~expozícii a~že po výpadku napájania sa dokáže vrátiť do plne funkčného stavu bez ručnej opravy.

@@ -1,67 +1,54 @@
 \chapter{Záver}
 \label{Zaver}
 
-Cieľom práce bol návrh a~realizácia modulárneho riadiaceho systému
-pre interaktívne múzejné expozície, ktorý by umožnil synchrónne
-ovládanie fyzických efektov a~multimediálneho obsahu z~jediného
-centrálneho uzla, pričom priebeh expozície mal byť konfigurovateľný
-bez zásahu do zdrojového kódu. Všetky štyri ciele zadania boli
-naplnené a~systém bol úspešne nasadený a~overený v~podmienkach
-reálnej fyzickej inštalácie.
+Interaktívne múzejné expozície kladú na riadiace systémy požiadavky,
+ktoré komerčné show-control riešenia síce pokrývajú, avšak za cenu
+vysokých licenčných nákladov a~závislosti na dodávateľovi. Cieľom
+práce bol návrh a~realizácia takéhoto systému na otvorených IoT
+platformách, ktorý bol následne nasadený a~overený na reálnej
+inštalácii CHRONOS.
 
-Hlavným inžinierskym prínosom práce je preukázanie, že kombinácia
-dostupných IoT platforiem s~architektúrou konečného stavového
-automatu (FSM) a~textovou konfiguráciou scenárov predstavuje
-funkčnú alternatívu ku komerčným show-control riešeniam
-(viď kapitola~\ref{show-control}) aj priemyselným PLC systémom
-(viď kapitola~\ref{plc-systemy}). Navrhnutý systém poskytuje
-porovnateľnú funkcionalitu pri výrazne nižšej vstupnej bariére
--- nelineárne vetvenie scenára, synchronizáciu médií a~riadenie
-výkonových prvkov je možné dosiahnuť na otvorených platformách
-bez proprietárneho softvéru. Oproti jednoduchým sekvenčným
-riešeniam je kľúčovým rozdielom schopnosť systému čakať na vstup
-od návštevníka a~podľa neho dynamicky rozvetvovať priebeh
-expozície, pričom ostatné podmienky prechodu sú vyhodnocované
-súčasne a~neblokujúco.
+Architektonickým jadrom výsledného riešenia je konečný stavový automat
+s~externou JSON konfiguráciou scenárov --- obsluha múzea tak môže meniť
+časovanie, poradie efektov aj celý priebeh expozície výhradne úpravou
+textového súboru, bez akéhokoľvek zásahu do zdrojového kódu. Toto
+oddelenie obsahovej vrstvy od implementácie enginu predstavuje z~pohľadu
+dlhodobej prevádzkovateľnosti kľúčovú vlastnosť systému.
 
-Z~hardvérového hľadiska (kapitola~\ref{ImplementaciaHW}) bola
-architektonická voľba postavená na uprednostnení hotových,
-preverených priemyselných modulov pred návrhom vlastných
-výkonových obvodov. Tento prístup sa v~prevádzke osvedčil:
-systém pri fyzickom testovaní nevykázal žiadne výpadky
-spôsobené hardvérovým zlyhaním a~prípadná výmena komponentu
-pri poruche nevyžaduje špeciálne znalosti elektroniky.
+Z~hardvérového hľadiska sa voľba priemyselných certifikovaných modulov
+pred návrhom vlastných výkonových obvodov v~prevádzke osvedčila ---
+systém pri fyzickom testovaní nevykázal žiadne výpadky spôsobené
+hardvérovým zlyhaním a~prípadná výmena komponentu nevyžaduje špeciálne
+znalosti elektroniky. Softvérová vrstva dosiahla 100\,\% doručiteľnosť
+MQTT príkazov pri priemernej latencii feedbacku 111{,}7\,ms, pričom
+systém bežal počas viacdenného testovania bez reštartu a~scéna sa
+pri opakovanom spúšťaní v~rôznych časoch vždy korektne rozbehla
+a~dobehla do konca.
 
-Softvérová architektúra (kapitola~\ref{ImplementaciaSW})
-dosiahla kľúčovú vlastnosť, ktorá priamo napĺňa požiadavku
-na modularitu definovanú v~kapitole~\ref{PoziadavkyNaSystem}:
-celá choreografia expozície je uložená výhradne v~externých
-konfiguračných súboroch, oddelených od kódu enginu. Obsluha
-múzea tak môže meniť časovanie, poradie efektov aj priebeh
-scenára bez akéhokoľvek zásahu do zdrojového kódu -- čo je
-z~pohľadu dlhodobej prevádzkovateľnosti inštalácie zásadná
-vlastnosť.
-
-Experimentálne overenie (kapitola~\ref{ExperimentalneOverenie})
-potvrdilo stabilitu systému v~troch rovinách: presnosť
-časovania efektov počas reálnej scény s~fyzickým hardvérom,
-odolnosť centrálneho procesu pri viacdňovom záťažovom teste
-bez reštartu a~správne automatické zotavenie siete po výpadku
-napájania uzlov bez zásahu obsluhy.
+Preukázalo sa, že kombinácia Raspberry~Pi, mikrokontrolérov ESP32
+a~protokolu MQTT predstavuje funkčnú a~cenovo dostupnú alternatívu
+ku komerčným show-control systémom aj priemyselným PLC --- nelineárne
+vetvenie scenára, synchronizáciu médií a~riadenie výkonových prvkov
+vrátane sieťového napätia 230\,V bolo možné dosiahnuť výhradne
+na otvorených platformách. Oproti jednoduchým sekvenčným riešeniam
+je kľúčovým rozdielom schopnosť systému čakať na vstup od návštevníka
+a~podľa neho dynamicky rozvetvovať priebeh expozície, pričom ostatné
+podmienky prechodu sú vyhodnocované súčasne a~neblokujúco.
 
 Systém má dve identifikované prevádzkové obmedzenia. Bezdrôtová
-komunikácia kladie na múzejnú prevádzku požiadavku oddelenej
-siete; ak je tá istá sieť zdieľaná s~verejnosťou, môže to
-negatívne ovplyvniť reaktivitu systému. Druhým obmedzením je
-počiatočná konfigurácia každého nového uzla, ktorá si pred
-prvým nasadením vyžaduje fyzický prístup k~zariadeniu.
-Po nasadení sú však všetky následné aktualizácie firmvéru
-riešiteľné bezdrôtovo na diaľku.
+komunikácia vyžaduje v~múzejnej prevádzke oddelenú sieť ---
+zdieľanie siete s~verejnosťou by mohlo negatívne ovplyvniť
+reaktivitu systému. Druhým obmedzením je počiatočná konfigurácia
+každého nového uzla, ktorá si pred prvým nasadením vyžaduje
+fyzický prístup k~zariadeniu.
 
-Do budúcna sa systém prirodzene otvára dvom smerom rozvoja.
+Do budúcna sa systém prirodzene otvára trom smerom rozvoja.
 Prvým je rozšírenie webového dashboardu o~vizuálny editor
 scenárov, ktorý by obsluhe umožnil skladať priebeh expozície
-grafickým presúvaním stavov bez manuálneho editovania
-textových súborov. Druhým je podpora väčšieho počtu miestností,
-keďže architektúra systému bola od začiatku navrhovaná
-s~ohľadom na toto rozšírenie (viď kapitola~\ref{NavrhArchitektury}).
+grafickým presúvaním stavov bez manuálneho editovania textových
+súborov. Druhým je podpora väčšieho počtu miestností, keďže
+architektúra bola od začiatku navrhovaná s~ohľadom na toto
+rozšírenie. Tretím smerom je zjednodušenie prvotného nasadenia
+uzlov --- aktualizácie firmvéru po nasadení sú už dnes
+riešiteľné bezdrôtovo, avšak prvotná konfigurácia si stále
+vyžaduje fyzický prístup.

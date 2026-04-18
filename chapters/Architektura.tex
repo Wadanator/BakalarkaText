@@ -120,11 +120,11 @@ z~dôvodov analyzovaných v~kapitole~\ref{riadiaca-logika}.
 
 Z~tohto dôvodu bolo softvérové jadro navrhnuté ako
 \textbf{konečný stavový automat (FSM -- \textit{Finite State Machine})}.
-Priebeh expozície je rozdelený do samostatných \textbf{stavov}, pričom systém
-nepretržite sleduje podmienky prechodu: vypršanie časovača, dokončenie
-prehrávania média, alebo príchod správy od hardvérovej periférie -- a~podľa
-nich plynulo presúva chod scenára do ďalšieho stavu. Podrobná softvérová
-implementácia tejto architektúry je rozpracovaná v~kapitole~\ref{ImplementaciaSW}.
+Na úrovni architektúry je podstatné, že priebeh expozície je
+rozdelený do samostatných \textbf{stavov} a~zmeny medzi nimi
+sú riadené udalosťami. Konkrétne implementačné detaily
+spracovania stavov, prechodov a~eventov sú rozpracované
+v~kapitole~\ref{ImplementaciaSW}.
 
 \begin{figure}[H]
 \centering
@@ -147,13 +147,11 @@ sieťovým sprostredkovateľom (\textit{brokerom}).
 Navrhnutý model siete implementuje niekoľko kľúčových komunikačných štandardov:
 \begin{itemize}
     \item \textbf{Hierarchické adresovanie zariadení:} Každé zariadenie je
-        adresované vlastným topikom v~hierarchickom formáte
-        (napr. \texttt{room1/motor1}). Raspberry Pi zverejní príkaz na daný
-        topik; ESP32 mikrokontrolér, ktorý má tento topik odoberaný, správu
-        prijme a~vykoná požadovanú akciu.
+        adresované vlastným topikom v~hierarchickom formáte. Tento princíp
+        umožňuje oddeliť logiku jednotlivých periférií a~udržať komunikáciu
+        rozšíriteľnú pri pridávaní ďalších uzlov.
     \item \textbf{Spätná väzba (\textit{feedback}):} Po vykonaní príkazu
-        periférny uzol odošle potvrdzovaciu správu späť na topik s~príponou
-        \texttt{/feedback} (napr.~\texttt{room1/motor1/feedback}). Centrála
+        periférny uzol odošle potvrdzovaciu správu späť do systému. Centrála
         tak vie, že príkaz bol skutočne doručený a~fyzicky vykonaný.
     \item \textbf{Detekcia dostupnosti (status~+~LWT):} Každý ESP32 uzol
         pri pripojení zverejní svoj stav na dedikovanom stavovom topiku
@@ -163,16 +161,20 @@ Navrhnutý model siete implementuje niekoľko kľúčových komunikačných šta
         zverejní v~prípade neočakávaného výpadku spojenia.
     \item \textbf{Konfigurácia scény ako externý JSON súbor}
         (viď kapitola~\ref{datove-formaty})\textbf{:} Celá logika
-        scenára -- čo má každý exponát vykonať, v~akom poradí a~za akých
-        podmienok -- je definovaná výhradne v~externom súbore \texttt{.json},
-        nie priamo v~kóde enginu. Obsluha môže scenár upravovať alebo vymeniť
-        za behu programu bez akéhokoľvek zásahu do zdrojového kódu.
+        scenára je definovaná výhradne v~externom súbore \texttt{.json},
+        nie priamo v~kóde enginu.
 \end{itemize}
 Toto oddelenie konfigurácie od kódu enginu umožňuje upravovať logiku
-a~priebeh expozície bez zásahu do zdrojového kódu systému.
+a~priebeh expozície bez zásahu do zdrojového kódu systému. Konkrétna
+realizácia topikov, potvrdzovacích správ a~spracovania JSON scén je
+detailne rozpracovaná až v~kapitole~\ref{ImplementaciaSW}.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\linewidth]{obr/ARCH/Mqtt_Flow}
 \caption{Sekvenčný diagram toku MQTT správ}
 \label{fig:mqtt_flow}
 \end{figure}
+
+Navrhnutá dvojúrovňová architektúra je v~nasledujúcej kapitole
+premietnutá do konkrétnej fyzickej realizácie hardvéru a~zapojenia
+jednotlivých uzlov.

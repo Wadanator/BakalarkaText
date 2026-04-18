@@ -27,6 +27,7 @@ Na napájanie Raspberry Pi bol použitý USB-C adaptér --- 5,0\,V / 3,0\,A.
 Riadiaca logika expozície bola decentralizovaná do niekoľkých
 samostatných uzlov postavených na mikrokontroléroch
 rodiny ESP32 (viď kapitola~\ref{mikrokontrolery}). Všetky uzly komunikujú s~Raspberry Pi cez Wi-Fi.
+Motorický aj tlačidlový uzol bežia na ESP32 DevKit V1 a~zdieľajú spoločný firmvérový základ pre Wi-Fi, MQTT, LWT, feedback a~globálny príkaz STOP; líšia sa len perifériami a~rolou v~systéme.
 
 Hlavná riadiaca elektronika (uzly pre ovládanie motorov a~spínanie relé)
 bola umiestnená spoločne vo vnútri inštalačného rozvádzača (Obr.~\ref{fig:main_control_box}), ktorý je fyzicky
@@ -59,17 +60,20 @@ Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov (Obr.~\
     \item \textbf{Mikrokontrolér ESP32 DevKit V1:} Slúži ako hlavná riadiaca jednotka uzla,
         ktorá spracováva príkazy z~MQTT brokera a~následne generuje hardvérový PWM
         signál s~frekvenciou 20\,kHz, čo umožňuje plynulé ovládanie rýchlosti motorov.
+        Frekvencia je zvolená nad počuteľným pásmom.
     \item \textbf{2x Výkonový budič BTS7960B:} Polovodičový H-mostík slúži na
         riadenie výkonu motorov (viď kapitola~\ref{dc-motory}). Tento masívne
         dimenzovaný obvod bezpečne odoláva vysokým prúdovým špičkám pri
         rozbehoch (až do 43\,A).
 \end{itemize}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{obr/HW/Motor_Schema.png}
     \caption{Schéma zapojenia uzla pre DC motory (ESP32, BTS7960B, 12\,V zdroj)}\label{fig:motor_schema}
 \end{figure}
+
+\FloatBarrier%
 
 \subsection{Reléový uzol --- spínanie záťaží}\label{UzolRele}
 
@@ -79,8 +83,8 @@ Na spínanie záťaží ostatných prvkov expozície slúži reléový uzol (Obr
         komerčný hotový modul s~čipom \textbf{ESP32-S3} a~integrovanými relé
         (viď Obr.~\ref{fig:main_control_box}). Obsahuje integrovanú
         podporu pre \textit{Power over Ethernet} (PoE) a~zbernicu RS485.
-        Namiesto lokálne osadených polovodičových relé (SSR), ktoré by boli lepšie (viď kapitola~\ref{spinanie-sietoveho-napatia})
-        bola táto certifikovaná doska zvolená primárne kvôli vyššej spoľahlivosti a bezpečnosti.
+        Napriek výhodám polovodičových relé (SSR) v~oblasti životnosti a~akustického hluku (viď kapitola~\ref{spinanie-sietoveho-napatia})
+        bola zvolená táto certifikovaná doska s~mechanickými relé, a~to primárne z~dôvodu bezpečnosti a~jednoduchej výmeny v~múzejnej prevádzke.
         V~prípade hardvérového zlyhania v~múzejnej prevádzke umožňuje technikom
         okamžitú a~bezpečnú výmenu \uv{kus za kus}.
     \item \textbf{10\,A mechanické relé:} Modul disponuje ôsmimi nezávislými
@@ -93,11 +97,13 @@ Na spínanie záťaží ostatných prvkov expozície slúži reléový uzol (Obr
         analógových budíkov} a~LED pásov na podsvietenie exponátu.
 \end{itemize}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{obr/HW/relay_schema.pdf}
     \caption{Schéma zapojenia relé uzla (Waveshare ESP32-S3, 230\,V a~12\,V obvody)}\label{fig:relay_schema}
 \end{figure}
+
+\FloatBarrier%
 
 \subsection{Vstupný tlačidlový uzol}\label{UzolSenzorov}
 
@@ -106,7 +112,7 @@ samostatným uzlom (Obr.~\ref{fig:button_photo}, Obr.~\ref{fig:button_schema}):
 \begin{itemize}
     \item \textbf{Samostatný mikrokontrolér:} Na vstupnom mieste pred
         stenou je fyzicky osadená inštalačná krabička. Táto disponuje vlastným
-        mikrokontrolérom ESP32, ktorý je napájaný z 5\,V sieťového adaptéra.
+        mikrokontrolérom ESP32 DevKit V1, ktorý je napájaný z 5\,V sieťového adaptéra.
         V~tej istej krabičke je osadený aj MOSFET spínací modul pre riadenie
         LED prstenca tlačidla.
 
@@ -139,6 +145,8 @@ samostatným uzlom (Obr.~\ref{fig:button_photo}, Obr.~\ref{fig:button_schema}):
         \caption{Schéma zapojenia uzla (ESP32, pull-up, MOSFET, GX12)}\label{fig:button_schema}
     \end{minipage}
 \end{figure}
+
+\FloatBarrier%
 
 \section{Mechanická konštrukcia exponátov}\label{MechanickaKonstrukcia}
 
@@ -176,3 +184,8 @@ rámec tejto práce a~nie je jej predmetom. Celkový vizuál inštalácie s~iden
     \includegraphics[width=0.8\textwidth]{obr/HW/kotol_exponat.jpg}
     \caption{Parný kotol s~integrovanou elektronikou}\label{fig:kotol_exponat}
 \end{figure}
+
+V~tejto kapitole bola uzavretá fyzická vrstva riešenia. Na ňu
+bezprostredne nadväzuje implementácia softvérovej vrstvy, ktorá
+zabezpečuje orchestráciu scén, komunikáciu uzlov a~synchronizáciu
+multimédií.
