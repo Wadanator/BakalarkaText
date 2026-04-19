@@ -27,7 +27,7 @@ a~\uv{kedy}, komunikačná vrstva zabezpečuje spoľahlivý
 prenos príkazov a~potvrdení, zatiaľ čo vykonávacia vrstva
 realizuje fyzické akcie priamo na hardvéri.
 
-Dôležitým princípom je separácia zodpovedností:
+Dôležitým princípom je \textbf{separácia zodpovedností}:
 backend neobsahoval hardvérovo špecifickú logiku GPIO výstupov
 a~firmvér uzlov neobsahoval scenárové vetvenie expozície.
 Pri zmenách je tak možné upravovať scenáre, webové rozhranie
@@ -48,38 +48,24 @@ spätnú väzbu do dashboardu aj ďalšieho vyhodnocovania scény.
 \section{Backend Raspberry~Pi}
 \label{SWBackendRPI}
 
-Backendová časť je implementovaná v~jazyku Python a~nasadená
-ako systémová služba. Jej vnútorná štruktúra je členená
-na orchestráciu behu aplikácie, stavový automat, mediálnu vrstvu,
-MQTT komunikačnú vrstvu a~webové rozhranie pre operátora.
-Takéto členenie udržiava funkčné oblasti oddelené
-a~zachováva ich koordináciu počas behu scény.
+Backendová časť je implementovaná v~jazyku \textbf{Python} a~nasadená
+ako systémová služba. Jej vnútorná štruktúra je členená do piatich
+funkčných celkov, ktoré pokrývajú celý životný cyklus behu scény:
 
-Pre orientáciu je rozdelenie backendu zhrnuté v~tabuľke~\ref{tab:sw_backend_components}.
-Stĺpec \uv{Hlavná funkcia} stručne popisuje, čo daná časť backendu robí,
-zatiaľ čo stĺpec \uv{Typický výsledok pre systém} uvádza praktický efekt
-tejto časti počas behu scény.
+\begin{itemize}
+    \item \textbf{Orchestrácia:} Koordinácia štartu všetkých služieb,
+        dohľad nad behom hlavnej slučky a~riadené ukončenie systému.
+    \item \textbf{FSM engine:} Jadro riadiacej logiky --- stavový automat
+        vykonávajúci prechody medzi stavmi scény na základe udalostí.
+    \item \textbf{MQTT vrstva:} Prenos príkazov na uzly ESP32, odber
+        spätnej väzby a~sledovanie stavu aktuátorov.
+    \item \textbf{Mediálna vrstva:} Spúšťanie a~kontrola audio a~video
+        akcií synchronizovaných s~priebehom scény.
+    \item \textbf{Webové rozhranie:} Operátorský dashboard pre ovládanie,
+        monitorovanie stavov zariadení a~zobrazovanie logov v~reálnom čase.
+\end{itemize}
 
-\begin{table}[htbp]
-    \centering
-    \caption{Hlavné časti backendu Raspberry~Pi}
-    \label{tab:sw_backend_components}
-    \begin{tabular}{|>{\raggedright\arraybackslash}p{0.20\linewidth}|>{\raggedright\arraybackslash}p{0.37\linewidth}|>{\raggedright\arraybackslash}p{0.33\linewidth}|}
-        \hline
-        \textbf{Časť backendu} & \textbf{Hlavná funkcia} & \textbf{Typický výsledok pre systém} \\
-        \hline
-        Orchestrácia & Koordinácia štartu služieb, dohľad nad behom a~riadené ukončenie & konzistentný štart systému a~bezpečný cleanup \\
-        \hline
-        FSM engine & Riadenie priebehu scény a~prechodov medzi stavmi & aktuálny stav scény a~logika prechodov \\
-        \hline
-        MQTT vrstva & Prenos príkazov, odber feedbacku a~správa topicov & komunikácia backendu s~ESP32 uzlami \\
-        \hline
-        Mediálna vrstva & Spúšťanie a~kontrola audio/video akcií scény & synchronizované prehrávanie médií počas behu \\
-        \hline
-        Webové rozhranie & Operátorské ovládanie a~online monitoring systému & dashboard so stavom scény, logmi a~stavmi zariadení \\
-        \hline
-    \end{tabular}
-\end{table}
+Jednotlivé celky sú popísané v~nasledujúcich sekciách.
 
 \subsection{Orchestrácia behu systému}
 \label{SWOrchestracia}
@@ -94,15 +80,11 @@ cez \texttt{ServiceContainer} a~prepojí ich callback mechanizmami.
 Po inicializácii sa spustí hlavná slučka, v~ktorej sa
 periodicky vyhodnocuje stav MQTT spojenia, stav dostupnosti
 zariadení a~vstupy fyzického tlačidla. Samotné vykonávanie
-scény prebieha v~separátnom daemon vlákne, takže hlavná slučka
+scény prebieha v~separátnom \textbf{daemon vlákne}, takže hlavná slučka
 nie je blokovaná počas behu scenára a~môže naďalej obsluhovať
 periférne udalosti a~kontrolovať zdravie systému.
 
-Pre konzistentnú spoluprácu s~watchdogom backend pri štarte a~ukončení
-scény atomicky synchronizuje interný príznak behu so súborom
-\texttt{/tmp/museum\_scene\_state} (hodnoty \texttt{running}/\texttt{idle}).
-
-Pri ukončení systému sa vykoná riadený cleanup, ktorý zahŕňa
+Pri ukončení systému sa vykoná \textbf{riadený cleanup}, ktorý zahŕňa
 zastavenie aktívnej scény, vypnutie výstupov a~zaznamenanie
 prevádzkových údajov. Tento postup minimalizuje riziko, že
 po ukončení služby ostane časť zariadení v~neželanom stave.
@@ -117,29 +99,18 @@ po ukončení služby ostane časť zariadení v~neželanom stave.
 \subsection{Watchdog a~odolnosť voči výpadkom}
 \label{SWWatchdog}
 
-Okrem hlavnej služby je nasadená aj samostatná watchdog služba,
-ktorá monitoruje zdravie backendového procesu a~v~prípade poruchy
-ho automaticky reštartuje. Sledované kritériá zahŕňajú dostupnosť
-procesu, využitie pamäte a~zaťaženie CPU. Pre zabránenie zbytočným
-reštartom počas inicializácie audio subsystému je zavedená
-tolerančná lehota pre krátkodobé CPU špičky.
-
-Kľúčovou vlastnosťou watchdoga je \textbf{scénou podmienená reštartovacia
-logika}: pred každým reštartom watchdog overí, či práve prebieha
-scéna, a~ak áno, čaká na jej dokončenie. Stav scény backend
-zapisuje pri prechodoch \texttt{running}/\texttt{idle} do súboru
-\texttt{/tmp/museum\_scene\_state}, z~ktorého watchdog číta.
-Tým sa výrazne znižuje riziko, že živá prezentácia bude
-prerušená automatickým reštartom systému.
-Watchdog taktiež uplatňuje hodinový limit počtu reštartov,
-aby sa predišlo reštartovacím slučkám pri systémovej chybe.
+Okrem hlavnej služby beží samostatná \textbf{watchdog služba}, ktorá
+monitoruje zdravie backendového procesu a~v~prípade poruchy ho
+automaticky reštartuje. Pred každým reštartom overí, či práve
+prebieha scéna, a~ak áno, čaká na jej dokončenie --- čím sa
+minimalizuje riziko prerušenia živej prezentácie.
 
 \subsection{Stavový automat ako jadro logiky}
 \label{SWFSM}
 
 Model konečného stavového automatu je v~runtime implementovaný
-ako spolupráca komponentov \texttt{StateMachine}, \texttt{SceneParser},
-\texttt{StateExecutor} a~\texttt{TransitionManager}.
+ako spolupráca komponentov \textbf{\texttt{StateMachine}}, \textbf{\texttt{SceneParser}},
+\textbf{\texttt{StateExecutor}} a~\textbf{\texttt{TransitionManager}}.
 \texttt{StateMachine} udržiava aktuálny stav a~riadi zmeny stavov,
 \texttt{StateExecutor} vykonáva akcie a~\texttt{TransitionManager}
 vyhodnocuje podmienky prechodov na základe prichádzajúcich udalostí.
@@ -177,21 +148,24 @@ takže zmena priebehu scény nevyžaduje úpravy zdrojového kódu backendu.
 
 Každá scéna obsahuje identifikátor, počiatočný stav
 a~slovník stavov. Na úrovni stavov sa používajú štyri sekcie:
-\texttt{onEnter} pre akcie vykonané pri vstupe do stavu,
-\texttt{onExit} pre akcie pri odchode zo stavu,
-\texttt{transitions} pre definíciu podmienok prechodu
-a~\texttt{timeline} pre časovo viazané akcie počas pobytu
-v~stave. Sekcia \texttt{timeline} umožňuje naplánovať
+\begin{itemize}
+    \item \textbf{\texttt{onEnter}} -- akcie vykonané pri vstupe do stavu,
+    \item \textbf{\texttt{onExit}} -- akcie pri odchode zo stavu,
+    \item \textbf{\texttt{transitions}} -- definícia podmienok prechodu,
+    \item \textbf{\texttt{timeline}} -- časovo viazané akcie počas pobytu v~stave.
+\end{itemize}
+
+Sekcia \texttt{timeline} umožňuje naplánovať
 udalosti relatívne voči času vstupu do stavu bez blokovania
 zvyšku systému --- v~implementácii sú tieto akcie realizované
 ako \texttt{threading.Timer} inštancie plánované pri vstupe
-do stavu. Podporované akcie sú tri: MQTT akcia, audio akcia
-a~video akcia.
+do stavu. Podporované akcie sú tri: \textbf{MQTT akcia}, \textbf{audio akcia}
+a~\textbf{video akcia}.
 
 Pri zmene stavu sa plánovanie časovej osi resetuje, takže akcie
 z~predchádzajúceho stavu nemôžu zasiahnuť do nového stavu.
 
-Pred spustením scény prebieha schémová a~logická validácia.
+Pred spustením scény prebieha \textbf{schémová a~logická validácia}.
 Schémová validácia kontroluje povinné polia a~typy,
 logická validácia overuje existenciu cieľových stavov prechodov.
 Tým sa eliminuje spúšťanie neplatných konfigurácií.
@@ -222,7 +196,7 @@ V~prevádzke sa používajú najmä tieto skupiny topikov:
     \item \texttt{<command\_topic>/feedback} pre potvrdenie vykonania príkazu.
 \end{itemize}
 
-Spoľahlivosť komunikácie je podporená trackerom spätnej väzby,
+Spoľahlivosť komunikácie je podporená \textbf{trackerom spätnej väzby},
 ktorý páruje odoslané príkazy s~odpoveďami zariadení.
 Pri nedoručení potvrdenia v~časovom limite je prípad
 evidovaný ako komunikačný problém (timeout) a~zalogovaný
@@ -232,10 +206,17 @@ Tracker je aktivovaný iba počas aktívneho behu scény a~pri jej
 ukončení sa explicitne vypína, aby mimo scénického cyklu
 nevznikali falošné timeout udalosti.
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_runtime_final.png}
+    \caption{Sekvenčný tok MQTT správ počas vykonania akcie (vrátane timeout a STOP vetvy)}
+    \label{fig:sw_mqtt_flow}
+\end{figure}
+
 \subsection{Sledovanie stavu aktuátorov}
 \label{SWActuatorStore}
 
-Súčasťou MQTT vrstvy je aj komponent \texttt{MQTTActuatorStateStore},
+Súčasťou MQTT vrstvy je aj komponent \textbf{\texttt{MQTTActuatorStateStore}},
 ktorý pre každý príkazový topik udržiava dvojicu stavov:
 \textit{desired} (požadovaný stav po odoslaní príkazu)
 a~\textit{confirmed} (potvrdený stav po prijatí feedback správy
@@ -245,14 +226,7 @@ potvrdenia. Pri zastavení scény sa nad celým store volá
 operácia \texttt{force\_all\_off()}, ktorá nastaví všetky
 sledované výstupy do bezpečného stavu nezávisle od prípadných
 oneskorených feedback správ. Zmeny stavu sú okamžite
-propagované do webového dashboardu cez WebSocket.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.95\linewidth]{obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_runtime_final.png}
-    \caption{Sekvenčný tok MQTT správ počas vykonania akcie (vrátane timeout a STOP vetvy)}
-    \label{fig:sw_mqtt_flow}
-\end{figure}
+propagované do webového dashboardu cez \textbf{WebSocket}.
 
 \section{Mediálna vrstva a~webové rozhranie}
 \label{SWMediaWeb}
@@ -265,16 +239,16 @@ pamäť pre dlhšie nahrávky. Prescan a~preloading prebehne ešte
 pred štartom stavového automatu.
 
 Video vrstva je realizovaná cez externý prehrávač
-riadený IPC rozhraním, pričom počas behu sa periodicky
+riadený \textbf{IPC rozhraním}, pričom počas behu sa periodicky
 kontroluje dostupnosť procesu a~odozva ovládacieho kanála.
 
 Webové rozhranie poskytuje obsluhe prevádzkové funkcie
 bez potreby zásahu do konzoly. Frontend je realizovaný ako
-\texttt{React} SPA (Vite), backend ako \texttt{Flask} služba
-s~vrstvou \texttt{Flask-SocketIO}. Rozhranie zahŕňa
+\textbf{React} SPA (Vite), backend ako \textbf{Flask} služba
+s~vrstvou \textbf{Flask-SocketIO}. Rozhranie zahŕňa
 spúšťanie a~zastavovanie scén, odosielanie príkazov,
 správu médií a~monitorovanie stavov zariadení a~logov.
-Klient po prihlásení nadviaže Socket.IO spojenie,
+Klient po prihlásení nadviaže \textbf{Socket.IO} spojenie,
 server následne pushuje udalosti o~stave systému
 (napr. logy, priebeh scény, runtime stavy), takže
 operátor vidí zmeny priebežne bez periodického pollingu.
@@ -315,9 +289,9 @@ a~zároveň obsahujú uzlovo špecifické funkcionality.
 
 Všetky uzly využívajú jednotné mechanizmy:
 \begin{itemize}
-    \item Wi-Fi a~MQTT pripojenie s~automatickým obnovovaním spojenia,
+    \item \textbf{Wi-Fi a~MQTT pripojenie} s~automatickým obnovovaním spojenia,
     \item publikovanie stavu \texttt{online/offline} cez retained + LWT,
-    \item spätnú väzbu na príkazové topiky,
+    \item \textbf{spätná väzba} na príkazové topiky,
     \item odber globálneho príkazu \texttt{roomX/STOP}.
 \end{itemize}
 
@@ -327,23 +301,25 @@ zjednodušuje diagnostiku a~znižuje duplicitu aplikačného kódu.
 \subsection{Špecifické funkcionality uzlov}
 \label{SWESPSpecific}
 
-\textbf{Tlačidlový uzol.}
-Uzol vykonáva filtráciu stlačenia tlačidla
-(debounce + cooldown) a~po úspešnom vyhodnotení
-publikuje správu \texttt{START} na scénický topic.
+\begin{itemize}
+    \item \textbf{Tlačidlový uzol.}
+        Uzol vykonáva filtráciu stlačenia tlačidla
+        (debounce + cooldown) a~po úspešnom vyhodnotení
+        publikuje správu \texttt{START} na scénický topic.
 
-\textbf{Motorický uzol.}
-Uzol riadi dva DC pohony pomocou PWM, vrátane
-riadenia smeru a~bezpečnej zmeny smeru s~plynulým dobehom.
-Sú podporované príkazy pre zapnutie, vypnutie,
-zmenu rýchlosti a~zmenu smeru.
+    \item \textbf{Motorický uzol.}
+        Uzol riadi dva DC pohony pomocou PWM, vrátane
+        riadenia smeru a~bezpečnej zmeny smeru s~plynulým dobehom.
+        Sú podporované príkazy pre zapnutie, vypnutie,
+        zmenu rýchlosti a~zmenu smeru.
 
-\textbf{Reléový uzol.}
-Uzol vykonáva spínanie zariadení podľa mapovania topicov
-na výstupy, vrátane časovo obmedzených efektov
-a~skupinových efektových režimov. Časovo citlivé
-sekvencie sa vykonávajú lokálne na uzle,
-čím sa znižuje závislosť od momentálnej latencie siete.
+    \item \textbf{Reléový uzol.}
+        Uzol vykonáva spínanie zariadení podľa mapovania topicov
+        na výstupy, vrátane časovo obmedzených efektov
+        a~skupinových efektových režimov. Časovo citlivé
+        sekvencie sa vykonávajú lokálne na uzle,
+        čím sa znižuje závislosť od momentálnej latencie siete.
+\end{itemize}
 
 \begin{figure}[htbp]
     \centering
@@ -360,9 +336,9 @@ sekvencie sa vykonávajú lokálne na uzle,
 
 Softvérová implementácia prepája centrálnu orchestráciu
 na Raspberry~Pi s~lokálnym vykonávaním akcií na uzloch ESP32.
-Jadrom systému je stavový automat s~externou JSON konfiguráciou
-scén a~s~MQTT komunikáciou so spätnou väzbou.
-Produkčnú spoľahlivosť systému zabezpečuje watchdog služba
+Jadrom systému je \textbf{stavový automat} s~externou \textbf{JSON konfiguráciou}
+scén a~s~\textbf{MQTT komunikáciou} so spätnou väzbou.
+Produkčnú spoľahlivosť systému zabezpečuje \textbf{watchdog služba}
 so scénou podmienenou reštartovacou logikou.
 Takto navrhnuté riešenie umožňuje pružné úpravy scenára,
 stabilnú prevádzku a~praktickú obsluhu expozície

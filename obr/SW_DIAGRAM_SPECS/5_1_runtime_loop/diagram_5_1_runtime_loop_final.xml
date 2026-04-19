@@ -1,0 +1,261 @@
+<mxGraphModel dx="1768" dy="929" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="bg1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#2563EB;fontColor=#1E3A8A;fontSize=14;fontStyle=1;verticalAlign=top;opacity=40;strokeWidth=1.5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;Vstupy&lt;/b&gt;" vertex="1">
+      <mxGeometry height="1010" width="225" x="30" y="40" as="geometry" />
+    </mxCell>
+    <mxCell id="bg2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F1FB;strokeColor=#185FA5;fontColor=#0C447C;fontSize=14;fontStyle=1;verticalAlign=top;opacity=20;strokeWidth=1.5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;Backend — Raspberry Pi&lt;/b&gt;" vertex="1">
+      <mxGeometry height="1010" width="680" x="280" y="40" as="geometry" />
+    </mxCell>
+    <mxCell id="bg3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDF3E7;strokeColor=#A0522D;fontColor=#7B3F00;fontSize=14;fontStyle=1;verticalAlign=top;opacity=40;strokeWidth=1.5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;MQTT broker&lt;/b&gt;" vertex="1">
+      <mxGeometry height="1010" width="215" x="975" y="40" as="geometry" />
+    </mxCell>
+    <mxCell id="bg4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF0F0;strokeColor=#B91C1C;fontColor=#7F1D1D;fontSize=14;fontStyle=1;verticalAlign=top;opacity=40;strokeWidth=1.5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;Periférne uzly — ESP32&lt;/b&gt;" vertex="1">
+      <mxGeometry height="1010" width="225" x="1205" y="40" as="geometry" />
+    </mxCell>
+    <mxCell id="bg5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#3C3489;fontSize=14;fontStyle=1;verticalAlign=top;opacity=40;strokeWidth=1.5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;Operátor&lt;/b&gt;" vertex="1">
+      <mxGeometry height="1010" width="225" x="1445" y="40" as="geometry" />
+    </mxCell>
+    <mxCell id="daemon_bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D6E8F8;strokeColor=#185FA5;fontColor=#0C447C;fontSize=12;fontStyle=2;verticalAlign=top;opacity=55;strokeWidth=1.2;" value="&lt;i style=&quot;font-size:12px;&quot;&gt;daemon vlákno — spracovanie scény&lt;/i&gt;" vertex="1">
+      <mxGeometry height="315" width="280" x="660" y="100" as="geometry" />
+    </mxCell>
+    <mxCell id="tracking_bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8F0E0;strokeColor=#0F6E56;fontColor=#085041;fontSize=12;fontStyle=2;verticalAlign=top;opacity=55;strokeWidth=1.2;" value="&lt;i style=&quot;font-size:12px;&quot;&gt;sledovanie výstupov&lt;/i&gt;" vertex="1">
+      <mxGeometry height="225" width="280" x="660" y="550" as="geometry" />
+    </mxCell>
+    <mxCell id="btn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#E6F1FB;strokeColor=#185FA5;fontColor=#0C447C;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Fyzické tlačidlo&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;(GPIO na Raspberry Pi)&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="70" width="185" x="50" y="252.5" as="geometry" />
+    </mxCell>
+    <mxCell id="op" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#E6F1FB;strokeColor=#185FA5;fontColor=#0C447C;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Operátor&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;(webový dashboard)&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="70" width="185" x="50" y="355" as="geometry" />
+    </mxCell>
+    <mxCell id="tmqtt" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#E6F1FB;strokeColor=#185FA5;fontColor=#0C447C;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;MQTT príkaz&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;(roomX/start_scene)&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="70" width="185" x="50" y="455" as="geometry" />
+    </mxCell>
+    <mxCell id="orch" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#E6F1FB;strokeColor=#185FA5;fontColor=#0C447C;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Orchestrácia&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;riadenie životného cyklu scény&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="75" width="215" x="368" y="250" as="geometry" />
+    </mxCell>
+    <mxCell id="statefile" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#F1EFE8;strokeColor=#5F5E5A;fontColor=#444441;strokeWidth=2;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Stav scény&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;running / idle&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="70" width="195" x="340" y="590" as="geometry" />
+    </mxCell>
+    <mxCell id="wd" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#F1EFE8;strokeColor=#5F5E5A;fontColor=#444441;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Watchdog&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;automatický reštart&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="70" width="195" x="340" y="725" as="geometry" />
+    </mxCell>
+    <mxCell id="web" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#3C3489;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Webové rozhranie&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Flask + Socket.IO&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="70" width="215" x="455" y="945" as="geometry" />
+    </mxCell>
+    <mxCell id="sp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#E6F1FB;strokeColor=#185FA5;fontColor=#0C447C;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Koordinátor scény&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;načítanie · štart · tick&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="70" width="255" x="670" y="121" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#E6F1FB;strokeColor=#185FA5;fontColor=#0C447C;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Stavový automat&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;stavy · prechody · udalosti&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="70" width="255" x="670" y="218" as="geometry" />
+    </mxCell>
+    <mxCell id="exec" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#E6F1FB;strokeColor=#185FA5;fontColor=#0C447C;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Vykonávač akcií&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;audio · video · MQTT&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="70" width="255" x="670" y="320" as="geometry" />
+    </mxCell>
+    <mxCell id="mclient" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#E6F1FB;strokeColor=#185FA5;fontColor=#0C447C;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;MQTT klient&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;publikovanie príkazov&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="70" width="255" x="670" y="455" as="geometry" />
+    </mxCell>
+    <mxCell id="fbtrack" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#E1F5EE;strokeColor=#0F6E56;fontColor=#085041;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Sledovanie potvrdení&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;OK · timeout&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="70" width="255" x="670" y="573" as="geometry" />
+    </mxCell>
+    <mxCell id="store" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#E1F5EE;strokeColor=#0F6E56;fontColor=#085041;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Stav výstupov&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;očakávaný · potvrdený&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="70" width="255" x="670" y="673" as="geometry" />
+    </mxCell>
+    <mxCell id="weblog" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#3C3489;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Log handler&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;zachytáva všetky logy systému&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="70" width="255" x="670" y="855" as="geometry" />
+    </mxCell>
+    <mxCell id="broker" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#FDF3E7;strokeColor=#A0522D;fontColor=#7B3F00;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Broker&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;smerovanie správ&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="90" width="185" x="990" y="395" as="geometry" />
+    </mxCell>
+    <mxCell id="ebtn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#FFF0F0;strokeColor=#B91C1C;fontColor=#7F1D1D;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Tlačidlový uzol&lt;/font&gt;" vertex="1">
+      <mxGeometry height="65" width="175" x="1225" y="240" as="geometry" />
+    </mxCell>
+    <mxCell id="emotor" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#FFF0F0;strokeColor=#B91C1C;fontColor=#7F1D1D;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Motorický uzol&lt;/font&gt;" vertex="1">
+      <mxGeometry height="65" width="175" x="1225" y="407.5" as="geometry" />
+    </mxCell>
+    <mxCell id="erelay" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#FFF0F0;strokeColor=#B91C1C;fontColor=#7F1D1D;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Reléový uzol&lt;/font&gt;" vertex="1">
+      <mxGeometry height="65" width="175" x="1225" y="580" as="geometry" />
+    </mxCell>
+    <mxCell id="ui" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=2;shadow=0;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#3C3489;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Dashboard&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;stav scény · logy · zariadenia&lt;/span&gt;&lt;/font&gt;" vertex="1">
+      <mxGeometry height="90" width="185" x="1460" y="403" as="geometry" />
+    </mxCell>
+    <mxCell id="e01" edge="1" parent="1" source="btn" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#185FA5;strokeWidth=1.5;" target="orch" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e02" edge="1" parent="1" source="op" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#185FA5;strokeWidth=1.5;" target="orch" value="">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="450" y="390" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e03" edge="1" parent="1" source="tmqtt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#185FA5;strokeWidth=1.5;" target="orch" value="">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="490" y="490" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e04" edge="1" parent="1" source="orch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#185FA5;strokeWidth=1.5;" target="sp" value="">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="643" y="270" />
+          <mxPoint x="643" y="156" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e05" edge="1" parent="1" source="sp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#185FA5;strokeWidth=1.5;" target="fsm" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e06" edge="1" parent="1" source="fsm" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#185FA5;strokeWidth=1.5;" target="exec" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e07" edge="1" parent="1" source="exec" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#185FA5;strokeWidth=1.5;" target="mclient" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e08" edge="1" parent="1" source="mclient" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#185FA5;strokeWidth=1.5;" target="broker" value="">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="870" y="425" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e10" edge="1" parent="1" source="broker" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#185FA5;strokeWidth=1.5;" target="emotor" value="">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1160" y="535" />
+          <mxPoint x="1300" y="535" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e11" edge="1" parent="1" source="broker" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#185FA5;strokeWidth=1.5;" target="erelay" value="">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1100" y="612" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e12" edge="1" parent="1" source="ebtn" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F6E56;strokeWidth=1.5;dashed=1;" target="broker" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;START · status&lt;/span&gt;">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1320" y="335" />
+          <mxPoint x="1140" y="335" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e13" edge="1" parent="1" source="broker" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F6E56;strokeWidth=1.5;" target="orch" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;spustenie scény&lt;/span&gt;">
+      <mxGeometry relative="1" x="0.1351" as="geometry">
+        <mxPoint as="offset" />
+        <Array as="points">
+          <mxPoint x="1091" y="85" />
+          <mxPoint x="525" y="85" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e14" edge="1" parent="1" source="emotor" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F6E56;strokeWidth=1.5;dashed=1;" target="broker" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;feedback / status&lt;/span&gt;">
+      <mxGeometry relative="1" x="0.1008" as="geometry">
+        <mxPoint as="offset" />
+        <Array as="points">
+          <mxPoint x="1320" y="550" />
+          <mxPoint x="1140" y="550" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e15" edge="1" parent="1" source="erelay" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F6E56;strokeWidth=1.5;dashed=1;" target="broker" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;feedback / status&lt;/span&gt;">
+      <mxGeometry relative="1" x="0.2881" y="50" as="geometry">
+        <mxPoint as="offset" />
+        <Array as="points">
+          <mxPoint x="1080" y="635" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e16" edge="1" parent="1" source="broker" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F6E56;strokeWidth=1.5;" target="fbtrack" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;spätná väzba&lt;/span&gt;">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="953" y="465" />
+          <mxPoint x="953" y="608" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e17" edge="1" parent="1" source="mclient" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#185FA5;strokeWidth=1.5;dashed=1;" target="fbtrack" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;odoslaný príkaz&lt;/span&gt;">
+      <mxGeometry relative="1" x="-0.375" as="geometry">
+        <mxPoint as="offset" />
+        <Array as="points">
+          <mxPoint x="720" y="550" />
+          <mxPoint x="720" y="550" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e18" edge="1" parent="1" source="fbtrack" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F6E56;strokeWidth=1.5;" target="store" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e19" edge="1" parent="1" source="store" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#534AB7;strokeWidth=1.5;" target="web" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;zmena stavu&lt;/span&gt;">
+      <mxGeometry relative="1" x="-0.1726" as="geometry">
+        <mxPoint as="offset" />
+        <Array as="points">
+          <mxPoint x="797" y="805" />
+          <mxPoint x="580" y="805" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e20" edge="1" parent="1" source="orch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#534AB7;strokeWidth=1.5;" target="web" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;stav scény · priebeh&lt;/span&gt;">
+      <mxGeometry relative="1" x="0.1429" y="10" as="geometry">
+        <mxPoint as="offset" />
+        <Array as="points">
+          <mxPoint x="525" y="555" />
+          <mxPoint x="310" y="555" />
+          <mxPoint x="310" y="980" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e21" edge="1" parent="1" source="weblog" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#534AB7;strokeWidth=1.5;dashed=1;" target="web" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;logy (new_log)&lt;/span&gt;">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="797" y="960" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e22" edge="1" parent="1" source="web" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#534AB7;strokeWidth=2;" target="ui" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;Socket.IO push&lt;/span&gt;">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="633" y="1025" />
+          <mxPoint x="1552" y="1025" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e23" edge="1" parent="1" source="orch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#993C1D;strokeWidth=1.5;dashed=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="mclient" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;STOP príkaz&lt;/span&gt;">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="620" y="310" />
+          <mxPoint x="620" y="490" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e24" edge="1" parent="1" source="orch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#993C1D;strokeWidth=1.5;dashed=1;" target="store" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;bezpečný OFF&lt;/span&gt;">
+      <mxGeometry relative="1" x="0.3741" y="20" as="geometry">
+        <mxPoint as="offset" />
+        <Array as="points">
+          <mxPoint x="580" y="708" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e25" edge="1" parent="1" source="orch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#5F5E5A;strokeWidth=1.2;dashed=1;" target="statefile" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;running / idle&lt;/span&gt;">
+      <mxGeometry relative="1" x="0.619" y="-10" as="geometry">
+        <mxPoint as="offset" />
+        <Array as="points">
+          <mxPoint x="550" y="625" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e26" edge="1" parent="1" source="statefile" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#5F5E5A;strokeWidth=1.2;dashed=1;" target="wd" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;rozhodnutie o reštarte&lt;/span&gt;">
+      <mxGeometry relative="1" x="-0.2308" as="geometry">
+        <mxPoint as="offset" />
+        <Array as="points">
+          <mxPoint x="487" y="692" />
+          <mxPoint x="487" y="692" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+  </root>
+</mxGraphModel>

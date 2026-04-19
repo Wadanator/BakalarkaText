@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  19 APR 2026 15:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  19 APR 2026 18:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1257,18 +1257,18 @@ If that doesn't work, type  X <return>  to quit.
 [27]
 Kapitola 5.
 <obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png, id=6
-90, 6989.11125pt x 7163.76375pt>
+90, 1236.0579pt x 761.9667pt>
 File: obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png 
 Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runt
 ime_loop_final.png  used on input line 43.
-(pdftex.def)             Requested size: 432.44594pt x 443.25243pt.
+(pdftex.def)             Requested size: 432.47586pt x 266.59932pt.
 [28
 
 ] [29 <./obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.p
 ng>]
-Overfull \hbox (17.56317pt too wide) in paragraph at lines 92--100
+Overfull \hbox (17.56317pt too wide) in paragraph at lines 78--86
 []\T1/lmr/m/n/12 Po na-£í-taní kon-fi-gu-rá-cie bac-kend ini-cia-li-zuje v²etky
  run-time sluºby cez \T1/lmtt/m/n/12 ServiceContainer
  []
@@ -1280,28 +1280,29 @@ final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_f
 inal.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2
-_backend_lifecycle_final.png  used on input line 112.
+_backend_lifecycle_final.png  used on input line 94.
 (pdftex.def)             Requested size: 432.46643pt x 510.78879pt.
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 112.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [30]
-[31 <./obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle
-_final.png>]
-Overfull \hbox (24.7296pt too wide) in paragraph at lines 140--146
-\T1/lmr/m/n/12 po-nen-tov \T1/lmtt/m/n/12 StateMachine\T1/lmr/m/n/12 , \T1/lmtt
-/m/n/12 SceneParser\T1/lmr/m/n/12 , \T1/lmtt/m/n/12 StateExecutor \T1/lmr/m/n/1
-2 a \T1/lmtt/m/n/12 TransitionManager\T1/lmr/m/n/12 . \T1/lmtt/m/n/12 StateMach
+Overfull \hbox (31.35379pt too wide) in paragraph at lines 111--117
+\T1/lmr/m/n/12 po-nen-tov \T1/lmtt/b/n/12 StateMachine\T1/lmr/m/n/12 , \T1/lmtt
+/b/n/12 SceneParser\T1/lmr/m/n/12 , \T1/lmtt/b/n/12 StateExecutor \T1/lmr/m/n/1
+2 a \T1/lmtt/b/n/12 TransitionManager\T1/lmr/m/n/12 . \T1/lmtt/m/n/12 StateMach
 ine
  []
 
 
-Overfull \hbox (44.27148pt too wide) in paragraph at lines 140--146
+Overfull \hbox (44.27148pt too wide) in paragraph at lines 111--117
 \T1/lmr/m/n/12 udr-ºiava ak-tu-álny stav a riadi zmeny sta-vov, \T1/lmtt/m/n/12
  StateExecutor \T1/lmr/m/n/12 vy-ko-náva ak-cie a \T1/lmtt/m/n/12 TransitionMan
 ager
  []
 
+[30
+
+] [31 <./obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecyc
+le_final.png>]
 <obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick_flow
 _final.png, id=713, 846.16125pt x 806.01125pt>
 File: obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick
@@ -1309,10 +1310,15 @@ _flow_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick_
 flow_final.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_
-5_3_fsm_engine_tick_flow_final.png  used on input line 165.
+5_3_fsm_engine_tick_flow_final.png  used on input line 136.
 (pdftex.def)             Requested size: 432.47906pt x 411.9581pt.
-[32] [33 <./obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engin
-e_tick_flow_final.png>]
+ [32] [33 <./obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engi
+ne_tick_flow_final.png>]
+Overfull \hbox (19.84418pt too wide) in paragraph at lines 158--164
+\T1/lmr/m/n/12 blo-ko-va-nia zvy²ku sys-tému --- v im-ple-men-tá-cii sú tieto a
+k-cie re-a-li-zo-vané ako \T1/lmtt/m/n/12 threading.Timer
+ []
+
 <obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_structure
 _final_html.png, id=725, 1038.12843pt x 677.53125pt>
 File: obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_stru
@@ -1320,10 +1326,10 @@ cture_final_html.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_struc
 ture_final_html.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_
-5_4_json_scene_structure_final_html.png  used on input line 201.
+5_4_json_scene_structure_final_html.png  used on input line 175.
 (pdftex.def)             Requested size: 432.47853pt x 282.25574pt.
- [34] [35 <./obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_sce
-ne_structure_final_html.png>]
+[34] [35 <./obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scen
+e_structure_final_html.png>]
 <obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_runti
 me_final.png, id=736, 11599.335pt x 1662.21pt>
 File: obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_
@@ -1331,7 +1337,7 @@ runtime_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_r
 untime_final.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram
-_5_5_mqtt_sequence_runtime_final.png  used on input line 252.
+_5_5_mqtt_sequence_runtime_final.png  used on input line 211.
 (pdftex.def)             Requested size: 432.48051pt x 61.96242pt.
  [36
 
@@ -1339,10 +1345,10 @@ _5_5_mqtt_sequence_runtime_final.png  used on input line 252.
 ntime_final.png>]
 
 LaTeX Warning: File `obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram
-_5_6_web_dashboard_functional_final.png' not found on input line 284.
+_5_6_web_dashboard_functional_final.png' not found on input line 258.
 
 
-chapters/Implementacia_sw.tex:284: Package pdftex.def Error: File `obr/SW_DIAGR
+chapters/Implementacia_sw.tex:258: Package pdftex.def Error: File `obr/SW_DIAGR
 AM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboard_functional_fin
 al.png' not found: using draft setting.
 
@@ -1350,7 +1356,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.284 ...m_5_6_web_dashboard_functional_final.png}
+l.258 ...m_5_6_web_dashboard_functional_final.png}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1359,7 +1365,7 @@ If that doesn't work, type  X <return>  to quit.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [37])
-(chapters/Experimenty.tex [38]
+(chapters/Experimenty.tex [38] [39]
 Kapitola 6.
 
 Overfull \hbox (28.97551pt too wide) in paragraph at lines 51--54
@@ -1370,26 +1376,26 @@ Overfull \hbox (28.97551pt too wide) in paragraph at lines 51--54
 
 Underfull \vbox (badness 2846) has occurred while \output is active []
 
- [39
+ [40
 
 {C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}
 ])
-(chapters/Zaver.tex [40] [41]
+(chapters/Zaver.tex [41] [42]
 Kapitola 7.
-) [42
+) [43
 
 ] (diplomka.lof)
 \tf@lof=\write6
 \openout6 = `diplomka.lof'.
 
- [43
+ [44
 
 
 ] (diplomka.lot)
 \tf@lot=\write7
 \openout7 = `diplomka.lot'.
 
- [44
+ [45
 
 
 ] (chapters/Literatura.tex
@@ -1398,7 +1404,7 @@ Underfull \hbox (badness 1789) in paragraph at lines 22--28
 n . edu / server / api / core / bitstreams /
  []
 
-[45
+[46
 
 
 ]
@@ -1425,7 +1431,7 @@ Underfull \hbox (badness 1789) in paragraph at lines 161--166
 d / index . php / bt / article / download / 3223 /
  []
 
-[46]
+[47]
 Underfull \hbox (badness 1112) in paragraph at lines 179--183
 \T1/lmr/m/n/12 03-15]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / www . rese
 archgate . net / publication / 373640610 _
@@ -1515,7 +1521,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 244--250
 -[]to-[]Device _ Data _
  []
 
-[47]
+[48]
 Underfull \hbox (badness 10000) in paragraph at lines 256--263
 []\T1/lmr/m/n/12 CELERDATA. YAML, JSON and XML: A Prac-ti-cal Gu-ide
  []
@@ -1538,7 +1544,7 @@ Underfull \hbox (badness 3323) in paragraph at lines 264--268
  [on-
  []
 
-) [48] 
+) [49] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (diplomka.aux)
  ***********
@@ -1546,14 +1552,14 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `diplomka.out' has not changed.
-(rerunfilecheck)             Checksum: BD2F088907298F699928116E7C361CEF;12787.
+(rerunfilecheck)             Checksum: 877EEBAD752ADA3D7AFD91C15CE7C7C6;12787.
  ) 
 Here is how much of TeX's memory you used:
- 20417 strings out of 467871
- 342528 string characters out of 5418377
- 874902 words of memory out of 5000000
- 48741 multiletter control sequences out of 15000+600000
- 694061 words of font info for 82 fonts, out of 8000000 for 9000
+ 20419 strings out of 467871
+ 342530 string characters out of 5418377
+ 874833 words of memory out of 5000000
+ 48742 multiletter control sequences out of 15000+600000
+ 694379 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,17n,93p,438b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
@@ -1563,11 +1569,12 @@ fb><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pf
 b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb
+><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (48 pages, 4361524 bytes).
+Output written on diplomka.pdf (49 pages, 3710751 bytes).
 PDF statistics:
- 971 PDF objects out of 1000 (max. 8388607)
+ 979 PDF objects out of 1000 (max. 8388607)
  169 named destinations out of 1000 (max. 500000)
  586 words of extra memory for PDF output out of 10000 (max. 10000000)
 

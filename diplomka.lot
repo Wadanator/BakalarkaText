@@ -6,8 +6,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Hlavné časti backendu Raspberry~Pi}}{30}{table.caption.15}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Prehľad uzlov ESP32 a~ich úloh}}{38}{table.caption.21}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Prehľad uzlov ESP32 a~ich úloh}}{38}{table.caption.20}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces Latencia MQTT feedbacku pri testovacej scéne}}{40}{table.caption.23}%
+\contentsline {table}{\numberline {6.1}{\ignorespaces Latencia MQTT feedbacku pri testovacej scéne}}{41}{table.caption.22}%
 \addvspace {10\p@ }
