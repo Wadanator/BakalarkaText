@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Obrazok 5.6 - Funkcny pohlad weboveho dashboardu</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #ffffff;
+      color: #111;
+      padding: 8px;
+    }
+
+    /* ── MASTER WRAPPER ── */
+    .canvas {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+    .master {
+      width: min(1600px, 100%);
+      border: 1px solid #cfd4da;
+      border-radius: 16px;
+      background: #fcfcfd;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* ── SHARED PRIMITIVES (rovnaké ako 5.4) ── */
+    .sec  { border-radius: 14px; padding: 10px 10px 12px; border: 1px solid; }
+    .lbl  { font-size: 34px; font-weight: 600; margin-bottom: 8px; }
+    .sub  { font-weight: 500; font-size: 27px; opacity: 0.82; display: block; margin-top: 3px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 7px; }
+    .col  { flex-direction: column; }
+    .pill {
+      border-radius: 12px;
+      padding: 9px 13px;
+      font-size: 31px;
+      font-weight: 600;
+      border: 1px solid;
+      line-height: 1.15;
+    }
+
+    /* ── COLOUR PALETTE (rovnaká ako 5.4 + 1 nová) ── */
+    /* modrá — server / backend */
+    .sb { background:#E6F1FB; border-color:#185FA5; }
+    .sb .lbl { color:#0C447C; }
+    .pb { background:#B5D4F4; border-color:#185FA5; color:#0C447C; }
+    .pt { background:#9FE1CB; border-color:#0F6E56; color:#085041; }   /* zelená pill */
+
+    /* fialová — SocketIO / tok */
+    .sp { background:#EEEDFE; border-color:#534AB7; }
+    .sp .lbl { color:#3C3489; }
+    .pp { background:#CECBF6; border-color:#534AB7; color:#3C3489; }
+
+    /* oranžová — UI panely */
+    .sa { background:#FAEEDA; border-color:#854F0B; }
+    .sa .lbl { color:#633806; }
+    .pa { background:#FAC775; border-color:#854F0B; color:#412402; }
+
+    /* červená — interakcie / požiadavky */
+    .sc { background:#FAECE7; border-color:#993C1D; }
+    .sc .lbl { color:#712B13; }
+    .pc { background:#F5C4B3; border-color:#993C1D; color:#4A1B0C; }
+
+    /* sivá — pozn / callouty */
+    .sg { background:#F1EFE8; border-color:#5F5E5A; }
+    .sg .lbl { color:#444441; }
+    .pg { background:#D3D1C7; border-color:#5F5E5A; color:#2C2C2A; }
+
+    /* ── LAYOUT: 3 stĺpce ── */
+    .tricolumn {
+      display: grid;
+      grid-template-columns: 1fr 72px 1fr;
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    /* Stredný stĺpec — šípky */
+    .arrows {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      gap: 0;
+      padding: 4px 0;
+    }
+    .arrow-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+      justify-content: center;
+    }
+    .arrow-label {
+      font-size: 19px;
+      font-weight: 600;
+      color: #534AB7;
+      text-align: center;
+      line-height: 1.2;
+      background: #EEEDFE;
+      border: 1px solid #534AB7;
+      border-radius: 8px;
+      padding: 3px 6px;
+      white-space: nowrap;
+    }
+    .arrow-push {
+      font-size: 26px;
+      color: #0F6E56;
+      line-height: 1;
+    }
+    .arrow-req {
+      font-size: 26px;
+      color: #993C1D;
+      line-height: 1;
+    }
+
+    /* ── Sekcie v ľavom / pravom stĺpci ── */
+    .col-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Dvojitá sekcia (2 pills vedľa seba) */
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; }
+
+    /* Šírky */
+    .w1 { flex: 1; }
+    .w2 { flex: 2; }
+
+    @media print {
+      @page { size: A4 landscape; margin: 8mm; }
+      body { padding: 0; }
+      .master { width: 100%; height: 100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="canvas">
+  <div class="master">
+
+    <!-- ══════════════════════════════════════════════
+         RIADOK 0 — Nadpis / infraštruktúra
+    ═══════════════════════════════════════════════ -->
+    <div style="display:flex; gap:8px;">
+
+      <!-- Backend thread -->
+      <div class="sec sb" style="flex:1;">
+        <div class="lbl">Web backend — daemon vlákno</div>
+        <div class="pills">
+          <div class="pill pb">Flask + Flask-SocketIO<span class="sub">Web/app.py — create_app()</span></div>
+          <div class="pill pb">socketio.run() v threading.Thread<span class="sub">daemon=True, port z config.ini</span></div>
+          <div class="pill pt">Auto-reštart pri páde<span class="sub">while True + sleep(10)</span></div>
+        </div>
+      </div>
+
+      <!-- Auth callout -->
+      <div class="sec sg" style="flex:1;">
+        <div class="lbl">Autentifikácia</div>
+        <div class="pills col">
+          <div class="pill pg">HTTP Basic Auth na REST endpointoch<span class="sub">requires_auth dekorátor</span></div>
+          <div class="pill pg">SocketIO connect — overenie Basic tokenu<span class="sub">dashboard.py → _check_auth()</span></div>
+          <div class="pill pg">Po connecte klient dostane initial snapshot<span class="sub">log_history · stats · status</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         RIADOK 1 — Hlavný 3-stĺpcový tok
+    ═══════════════════════════════════════════════ -->
+    <div class="tricolumn">
+
+      <!-- ── ĽAVÝ stĺpec: Server event sources ── -->
+      <div class="col-wrap">
+
+        <div class="sec sb">
+          <div class="lbl">Zdroje udalostí na serveri</div>
+          <div class="pills col">
+            <div class="pill pb">MuseumController<span class="sub">broadcast_status() · broadcast_stats()</span></div>
+            <div class="pill pb">SceneParser / StateMachine<span class="sub">on_state_change → scene_progress</span></div>
+            <div class="pill pb">MQTTActuatorStateStore<span class="sub">_notify() → broadcast_device_runtime_state()</span></div>
+            <div class="pill pb">WebLogHandler<span class="sub">emit() → add_log_entry() → new_log</span></div>
+          </div>
+        </div>
+
+        <div class="sec sp">
+          <div class="lbl">Server → klient (push eventy)</div>
+          <div class="pills g2">
+            <div class="pill pp">status_update<span class="sub">scene_running · mqtt_connected · uptime</span></div>
+            <div class="pill pp">stats_update<span class="sub">total_scenes · uptime · connected_devices</span></div>
+            <div class="pill pp">scene_progress<span class="sub">activeState — každá zmena stavu FSM</span></div>
+            <div class="pill pp">device_runtime_state_update<span class="sub">desired · confirmed · motor fields</span></div>
+            <div class="pill pp">new_log<span class="sub">živý riadok logu — level · module · message</span></div>
+            <div class="pill pp">log_history<span class="sub">posledných N záznamov pri connecte</span></div>
+          </div>
+        </div>
+
+        <div class="sec sc">
+          <div class="lbl">Klient → server (požiadavky)</div>
+          <div class="pills g2">
+            <div class="pill pc">request_status<span class="sub">pri connecte + visibilitychange</span></div>
+            <div class="pill pc">request_stats<span class="sub">pri connecte + reconnecte</span></div>
+            <div class="pill pc">request_logs<span class="sub">pri connecte + manual refresh</span></div>
+            <div class="pill pc">POST /api/run_scene<span class="sub">spustenie scény podľa názvu</span></div>
+            <div class="pill pc">POST /api/stop_scene<span class="sub">externé zastavenie scény</span></div>
+            <div class="pill pc">POST /api/mqtt/send<span class="sub">manuálny MQTT príkaz z dashboardu</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── STREDNÝ stĺpec: šípky ── -->
+      <div class="arrows">
+
+        <div class="arrow-row">
+          <div class="arrow-label">Socket<br>IO</div>
+          <div class="arrow-push">→</div>
+          <div class="arrow-label">push</div>
+        </div>
+
+        <div class="arrow-row">
+          <div class="arrow-label">Socket<br>IO</div>
+          <div class="arrow-push">→</div>
+          <div class="arrow-label">push</div>
+        </div>
+
+        <div class="arrow-row">
+          <div class="arrow-label">REST<br>HTTP</div>
+          <div class="arrow-req">←</div>
+          <div class="arrow-label">req</div>
+        </div>
+
+      </div>
+
+      <!-- ── PRAVÝ stĺpec: UI panely ── -->
+      <div class="col-wrap">
+
+        <div class="sec sa">
+          <div class="lbl">Hlavný prehľad</div>
+          <div class="pills g2">
+            <div class="pill pa">Stav systému<span class="sub">HeroCard — ready · running · error</span></div>
+            <div class="pill pa">Spustiť / Zastaviť scénu<span class="sub">DashboardControls — safety lock 5 s</span></div>
+            <div class="pill pa">MQTT spojenie<span class="sub">StatsGrid — online / offline indikátor</span></div>
+            <div class="pill pa">Počet pripojených zariadení<span class="sub">StatsGrid — z stats_update</span></div>
+          </div>
+        </div>
+
+        <div class="sec sa">
+          <div class="lbl">Scény a Live monitor</div>
+          <div class="pills g2">
+            <div class="pill pa">Knižnica scén<span class="sub">ScenesView — run · edit · create</span></div>
+            <div class="pill pa">JSON editor + vizualizácia<span class="sub">SceneEditorModal — Monaco + ReactFlow</span></div>
+            <div class="pill pa">Aktívny stav FSM<span class="sub">LiveView — zvýraznený node podľa scene_progress</span></div>
+            <div class="pill pa">Runtime stav zariadení<span class="sub">LiveView — confirmed state z device_runtime_state_update</span></div>
+          </div>
+        </div>
+
+        <div class="sec sa">
+          <div class="lbl">Logy · Štatistiky · Systém</div>
+          <div class="pills g2">
+            <div class="pill pa">Live logy<span class="sub">LogsView — filter DEBUG/INFO/WARNING/ERROR</span></div>
+            <div class="pill pa">História pri connecte<span class="sub">log_history — posledných 50 záznamov</span></div>
+            <div class="pill pa">Štatistiky scén<span class="sub">StatsView — počty spustení · top scény · uptime</span></div>
+            <div class="pill pa">Systémové akcie<span class="sub">SystemView — reštart služby · reboot · shutdown</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /tricolumn -->
+
+    <!-- ══════════════════════════════════════════════
+         RIADOK 2 — Manuálne ovládanie zariadení
+    ═══════════════════════════════════════════════ -->
+    <div style="display:flex; gap:8px;">
+
+      <div class="sec sc" style="flex:2;">
+        <div class="lbl">Manuálne ovládanie zariadení</div>
+        <div class="pills g3">
+          <div class="pill pc">Motory<span class="sub">CommandsView — Vzad · Stop · Vpred</span></div>
+          <div class="pill pc">Relé a svetlá<span class="sub">CommandsView — ON / OFF per topic</span></div>
+          <div class="pill pc">Hromadný STOP<span class="sub">POST mqtt/send → roomX/STOP</span></div>
+          <div class="pill pc">Správa médií<span class="sub">MediaManager — upload · play · delete</span></div>
+          <div class="pill pc">Priamy MQTT príkaz<span class="sub">POST /api/mqtt/send — topic + message</span></div>
+          <div class="pill pc">devices.json editor<span class="sub">DevicesConfigModal — live úprava mapovania</span></div>
+        </div>
+      </div>
+
+      <div class="sec sg" style="flex:1;">
+        <div class="lbl">Stav zariadení (realtime)</div>
+        <div class="pills col">
+          <div class="pill pg">desired state<span class="sub">po odoslaní príkazu — okamžite</span></div>
+          <div class="pill pg">confirmed state<span class="sub">po feedback OK od ESP32</span></div>
+          <div class="pill pg">UNKNOWN / stale<span class="sub">timeout alebo node offline</span></div>
+          <div class="pill pg">force_all_off pri STOP<span class="sub">všetky endpointy → OFF bez čakania</span></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div><!-- /master -->
+</div><!-- /canvas -->
+</body>
+</html>

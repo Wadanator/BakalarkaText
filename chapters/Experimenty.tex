@@ -8,28 +8,28 @@ Táto kapitola stručne opisuje praktické overenie navrhnutého systému.
 
 Systém bol overený na reálnej inštalácii \textbf{CHRONOS} --
 steampunkovej expozičnej stene s~rozmermi približne
-3\,m\,$\times$\,1{,}5\,m. Inštalácia obsahuje hodinové
-mechanizmy, ozubené kolieska, analógové budíky, dymostroj,
-osvetlenie a~ovládacie prvky.
+3\,m\,$\times$\,1{,}5\,m. Inštalácia obsahuje hodinový
+mechanizmus, zostavu ozubených koliesok, podsvietenie analógových budíkov, dymostroj,
+osvetlenie hodín a panelu.
 
 Na testovanie boli použité tieto uzly a~zariadenia:
 \begin{itemize}
     \item \textbf{Raspberry Pi} s~bežiacim centrálnym procesom \texttt{MuseumController}.
-    \item \textbf{ESP32 uzly} pre motory, relé a~tlačidlo.
+    \item \textbf{3x ESP32 uzly} pre motory, relé a~tlačidlo.
 \end{itemize}
 
 \section{Testované scenáre a výsledky}
 \label{TestovaneScenare}
 
 Overenie bolo založené na opakovanom spúšťaní scény, teste obnovy
-po výpadku napájania a~na skrátenom laboratórnom teste na stole.
+po výpadku napájania a~na laboratórnom teste na stole.
 
 \subsection{Laboratórny test logiky}
 \begin{itemize}
     \item \textbf{Priebeh:} Systém bežal na stole so zapojenými iba ESP32 uzlami.
         Motory a~svetlá boli fyzicky odpojené, takže test overoval len logiku a~komunikáciu,
         nie záťaž na výstupoch. Scéna \texttt{all\_relays\_loop\_test} sa spúšťala niekoľkokrát
-        v~rôznych časoch, aby sa overilo, či sa vždy korektne rozbehne a~doberie do konca.
+        v~rôznych časoch v priebehu desiatich dní, aby sa overilo, či sa scéna spustí a prebehne do konca.
     \item \textbf{Výsledok:} Scéna sa spúšťala spoľahlivo a~bez zaseknutia.
         Všetky príkazy prešli cez Wi-Fi, MQTT aj ESP32 logiku a~feedback sa vracal bez timeoutov.
 \end{itemize}
@@ -38,7 +38,7 @@ po výpadku napájania a~na skrátenom laboratórnom teste na stole.
 \begin{itemize}
     \item \textbf{Priebeh:} Raspberry Pi bolo počas behu systému odpojené od napájacieho kábla,
         po chvíli znovu pripojené a~následne sa čakalo, kým sa všetky uzly nespárujú späť do stavu ready.
-    \item \textbf{Výsledok:} Systém sa po reštarte obnovil do funkčného stavu za menej ako 50 sekúnd.
+    \item \textbf{Výsledok:} Systém sa po reštarte obnovil do funkčného v priemere za 38 sekúnd.
         Po opätovnom zapnutí bolo možné scénu znovu spustiť bez zásahu do konfigurácie.
         Počas týchto testov sa neobjavil stav, že by sa systém po reštarte nespustil správne.
 \end{itemize}
@@ -77,18 +77,22 @@ po výpadku napájania a~na skrátenom laboratórnom teste na stole.
 
 \subsection{Presnosť prepínania}
 \begin{itemize}
-    \item \textbf{Priebeh:} Na tej istej testovacej scéne sa sledoval aj interval medzi prepnutiami stavového automatu.
-    \item \textbf{Výsledok:} Namerný priemer bol 255{,}8\,ms pri cieli 250\,ms, teda systém bol mierne pomalší,
+    \item \textbf{Priebeh:} Na tej istej testovacej scéne sa sledoval interval medzi prepnutiami stavového automatu.
+    \item \textbf{Výsledok:} Nameraný priemer bol 255{,}8\,ms pri cieli 250\,ms, teda systém bol mierne pomalší,
         ale stále sa pohyboval blízko nastavenej hodnoty. V~tolerancii \(\pm 20\,\text{ms}\) bolo 26 z~227 intervalov.
-        Kumulatívny drift oproti ideálnemu času dosiahol 1\,317\,ms.
+        Kumulatívny drift oproti ideálnemu času dosiahol 1\,317\,ms. Tento drift vzniká pri sekvenčnom spracovaní
+        stavov, kde sa malé oneskorenia jednotlivých prechodov (spracovanie logiky a komunikácia) postupne sčítavajú.
 \end{itemize}
 
 \subsection{Zhodnotenie}
 \begin{itemize}
     \item Overenie neodhalilo stav, pri ktorom by sa scéna nedala spustiť alebo by niektorý z~výstupov prestal pracovať.
     \item Čas štartu scény závisí od jej zložitosti, pretože pri spustení sa načítavajú multimediálne dáta vrátane audia do pamäte RAM.
-    \item Kumulatívny drift 1\,317\,ms sa týka dlhšieho behu celej scény a~pre svetelné a~divadelné efekty je táto odchýlka zanedbateľná.
-    \item Pri presnom časovaní v~rámci jedného stavu sa používajú absolútne časové väzby, takže sa drift medzi cyklami nesčítava rovnakým spôsobom.
+    \item Pozorovaný drift má lineárny a predvídateľný charakter a prejavuje sa iba medzi jednotlivými stavmi, nie v~ich vnútri.
+    \item V~rámci jedného stavu sa používajú absolútne časové väzby, čím sa zabezpečuje presná synchronizácia udalostí.
+    \item Testovací scenár s intervalom 250\,ms predstavuje extrémny prípad; v reálnych scénach sú stavy výrazne dlhšie
+    a počet prechodov nižší, preto drift nemá praktický vplyv na výsledný vizuálny ani funkčný efekt.
 \end{itemize}
 
-V~rámci týchto testov sa potvrdilo, že systém je použiteľný pre reálnu prevádzku v~expozícii a~že po výpadku napájania sa dokáže vrátiť do plne funkčného stavu bez ručnej opravy.
+V~rámci týchto testov sa potvrdilo, že systém je použiteľný pre reálnu prevádzku a~že po výpadku napájania sa
+dokáže vrátiť do plne funkčného stavu bez nutnosti manuálneho zásahu.

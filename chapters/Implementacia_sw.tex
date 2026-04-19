@@ -249,13 +249,10 @@ propagované do webového dashboardu cez WebSocket.
 
 \begin{figure}[htbp]
     \centering
-    \fbox{\parbox{0.88\linewidth}{\centering\textit{MIESTO PRE OBRÁZOK: Sekvenčný diagram MQTT toku\\[2pt]
-    publish príkazu $\rightarrow$ vykonanie na ESP32 $\rightarrow$ feedback $\rightarrow$ update stavu}}}
-    \caption{Sekvenčný tok MQTT správ počas vykonania akcie}
+    \includegraphics[width=0.95\linewidth]{obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_runtime_final.png}
+    \caption{Sekvenčný tok MQTT správ počas vykonania akcie (vrátane timeout a STOP vetvy)}
     \label{fig:sw_mqtt_flow}
 \end{figure}
-% Poznamka pre obrazok: Pridat vetvu timeout (bez feedback) a vetvu scene stop,
-% kde sa posiela roomX/STOP a zaroven sa vola force_all_off() nad actuator store.
 
 \section{Mediálna vrstva a~webové rozhranie}
 \label{SWMediaWeb}
@@ -284,13 +281,10 @@ operátor vidí zmeny priebežne bez periodického pollingu.
 
 \begin{figure}[htbp]
     \centering
-    \fbox{\parbox{0.88\linewidth}{\centering\textit{MIESTO PRE OBRÁZOK: Funkčný pohľad dashboardu\\[2pt]
-    stav scény, zariadenia, logy, ovládacie akcie}}}
-    \caption{Prehľad funkčných častí webového dashboardu}
+    \includegraphics[width=0.95\linewidth]{obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboard_functional_final.png}
+    \caption{Prehľad funkčných častí webového dashboardu (eventy, panely, akcie)}
     \label{fig:sw_dashboard}
 \end{figure}
-% Poznamka pre obrazok: Zvýraznit real-time WebSocket push udalosti (status_update, scene_progress,
-% stats_update, new_log) a manualne akcie run/stop sceny.
 
 \section{Firmvér uzlov ESP32}
 \label{SWESP32}

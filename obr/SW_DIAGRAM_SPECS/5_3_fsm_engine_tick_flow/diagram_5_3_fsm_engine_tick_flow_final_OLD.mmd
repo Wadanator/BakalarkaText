@@ -1,0 +1,141 @@
+---
+
+config:
+
+  layout: elk
+
+---
+
+flowchart TD
+
+
+
+  subgraph A["1 — Začiatok ticku"]
+
+    AUDIO["Kontrola konca audia\nregistrácia udalosti do fronty"]
+
+    VIDEO["Kontrola konca videa\nregistrácia udalosti do fronty"]
+
+    FIN{"Scéna skončila?\ncurrent_state == END"}
+
+    GETSTATE["Načítanie dát aktuálneho stavu\nonEnter · onExit · transitions · timeline"]
+
+  end
+
+
+
+  subgraph B["2 — Globálne udalosti"]
+
+    GLOBCHECK{"Sú definované\nglobálne udalosti?"}
+
+    GLOB["Vyhodnotenie globálnych prechodov\nvoči celkovému času scény"]
+
+    GCHECK{"Globálny prechod\nnájdený?"}
+
+    GCHANGE["Zmena stavu\nvykonaj _change_state()"]
+
+    GRETURN["Tick skončil\nscéna pokračuje — return True\nlokálne prechody sa preskočia"]
+
+  end
+
+
+
+  subgraph C["3 — Lokálne prechody"]
+
+    TL["Časované akcie\nbežia samostatne cez vlákna\n(no-op v hlavnej slučke)"]
+
+    LOCAL["Vyhodnotenie lokálnych prechodov\nvoči času v aktuálnom stave\ntimeout · audioEnd · videoEnd · mqttMessage · always"]
+
+    LCHECK{"Lokálny prechod\nnájdený?"}
+
+    LCHANGE["Zmena stavu\nvykonaj _change_state()"]
+
+    CONT["Tick skončil\nscéna pokračuje — return True"]
+
+  end
+
+
+
+  subgraph D["4 — Zmena stavu (_change_state)"]
+
+    EXIT["Výstupné akcie starého stavu\nonExit — MQTT · audio · video"]
+
+    GOTO["Prechod do nového stavu\naktualizácia vnútorného kontextu"]
+
+    CLEAR["Vyčistenie čakajúcich udalostí\nMQTT · audioEnd · videoEnd fronty"]
+
+    RESET["Zrušenie starých časovačov\nnová generácia — staré timery sa ignorujú"]
+
+    ENTER["Vstupné akcie nového stavu\nonEnter + naplánovaniečasovačov timeline"]
+
+  end
+
+
+
+  subgraph E["5 — Koniec ticku / scény"]
+
+    SCENEDONE["Scéna skončená\nreturn False"]
+
+  end
+
+
+
+  AUDIO --> VIDEO --> FIN
+
+  FIN -- "áno" --> SCENEDONE
+
+  FIN -- "nie" --> GETSTATE
+
+  GETSTATE -- "dáta nenájdené (None)\nreturn False" --> SCENEDONE
+
+  GETSTATE -- "dáta OK" --> GLOBCHECK
+
+  GLOBCHECK -- "nie" --> TL
+
+  GLOBCHECK -- "áno" --> GLOB --> GCHECK
+
+  GCHECK -- "nie" --> TL
+
+  GCHECK -- "áno" --> GCHANGE --> D --> GRETURN
+
+  TL --> LOCAL --> LCHECK
+
+  LCHECK -- "nie" --> CONT
+
+  LCHECK -- "áno" --> LCHANGE --> D
+
+
+
+  EXIT --> GOTO --> CLEAR --> RESET --> ENTER
+
+
+
+  classDef tick fill:#E6F1FB,stroke:#185FA5,color:#0C447C,stroke-width:1.2px,font-size:20px;
+
+  classDef glob fill:#E1F5EE,stroke:#0F6E56,color:#085041,stroke-width:1.2px,font-size:20px;
+
+  classDef local fill:#EEEDFE,stroke:#534AB7,color:#3C3489,stroke-width:1.2px,font-size:20px;
+
+  classDef change fill:#FAEEDA,stroke:#854F0B,color:#633806,stroke-width:1.2px,font-size:20px;
+
+  classDef end_ fill:#FAECE7,stroke:#993C1D,color:#712B13,stroke-width:1.2px,font-size:20px;
+
+  classDef decision fill:#FFF8EC,stroke:#854F0B,color:#633806,stroke-width:1.2px,font-size:20px;
+
+  classDef ret fill:#F1EFE8,stroke:#5F5E5A,color:#444441,stroke-width:1.2px,font-size:20px;
+
+
+
+  class AUDIO,VIDEO,GETSTATE tick;
+
+  class GLOBCHECK,GLOB,GCHANGE glob;
+
+  class TL,LOCAL,LCHANGE,CONT local;
+
+  class EXIT,GOTO,CLEAR,RESET,ENTER change;
+
+  class SCENEDONE end_;
+
+  class FIN,GCHECK,LCHECK decision;
+
+  class GRETURN ret;
