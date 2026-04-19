@@ -1,0 +1,230 @@
+<mxGraphModel dx="1768" dy="929" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="bg_a" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F1FB;strokeColor=#185FA5;fontColor=#0C447C;fontSize=14;fontStyle=1;verticalAlign=top;opacity=30;strokeWidth=1.5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;1 — Zavedenie systému&lt;/b&gt;" vertex="1">
+      <mxGeometry height="250" width="380" x="20" y="20" as="geometry" />
+    </mxCell>
+    <mxCell id="bg_b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5EE;strokeColor=#0F6E56;fontColor=#085041;fontSize=14;fontStyle=1;verticalAlign=top;opacity=30;strokeWidth=1.5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;2 — Hlavná slučka (Main thread)&lt;/b&gt;" vertex="1">
+      <mxGeometry height="520" width="380" x="20" y="290" as="geometry" />
+    </mxCell>
+    <mxCell id="bg_c" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#3C3489;fontSize=14;fontStyle=1;verticalAlign=top;opacity=30;strokeWidth=1.5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;3 — Štart scény&lt;/b&gt;" vertex="1">
+      <mxGeometry height="340" width="640" x="440" y="20" as="geometry" />
+    </mxCell>
+    <mxCell id="bg_d" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#3C3489;fontSize=14;fontStyle=1;verticalAlign=top;opacity=20;strokeWidth=1.5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;4 — Beh scény (Daemon vlákno)&lt;/b&gt;" vertex="1">
+      <mxGeometry height="430" width="640" x="440" y="380" as="geometry" />
+    </mxCell>
+    <mxCell id="bg_e" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAECE7;strokeColor=#993C1D;fontColor=#712B13;fontSize=14;fontStyle=1;verticalAlign=top;opacity=40;strokeWidth=1.5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;5 — Externý stop&lt;/b&gt;" vertex="1">
+      <mxGeometry height="320" width="460" x="440" y="820" as="geometry" />
+    </mxCell>
+    <mxCell id="bg_f" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1EFE8;strokeColor=#666666;fontColor=#333333;fontSize=14;fontStyle=1;verticalAlign=top;opacity=40;strokeWidth=1.5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;6 — Watchdog&lt;/b&gt;" vertex="1">
+      <mxGeometry height="150" width="380" x="20" y="830" as="geometry" />
+    </mxCell>
+    <mxCell id="a1_start" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#E6F1FB;strokeColor=#185FA5;fontColor=#0C447C;" value="&lt;b&gt;Zavedenie systému&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;bootstrap, načítanie config.ini&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="250" x="85" y="50" as="geometry" />
+    </mxCell>
+    <mxCell id="a2_init" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#E6F1FB;strokeColor=#185FA5;fontColor=#0C447C;" value="&lt;b&gt;Inicializácia služieb&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;ServiceContainer a prepojenie väzieb&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="250" x="85" y="120" as="geometry" />
+    </mxCell>
+    <mxCell id="a3_web" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#E6F1FB;strokeColor=#185FA5;fontColor=#0C447C;" value="&lt;b&gt;Webové rozhranie&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;spustenie Flask servera na pozadí&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="250" x="85" y="190" as="geometry" />
+    </mxCell>
+    <mxCell id="b1_conn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#E1F5EE;strokeColor=#0F6E56;fontColor=#085041;" value="&lt;b&gt;Pripojenie k MQTT brokeru&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;prvotný inicializačný pokus&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="200" x="110" y="330" as="geometry" />
+    </mxCell>
+    <mxCell id="b2_offline" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#E1F5EE;strokeColor=#0F6E56;fontColor=#085041;strokeDasharray=4 4;" value="&lt;b&gt;Záložný offline režim&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;obnovovanie na pozadí&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="160" x="35" y="420" as="geometry" />
+    </mxCell>
+    <mxCell id="b3_loop" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#E1F5EE;strokeColor=#0F6E56;fontColor=#085041;" value="&lt;b&gt;Hlavná monitorovacia slučka&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;health check, MQTT reconnect, GPIO tlačidlá&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="300" x="60" y="520" as="geometry" />
+    </mxCell>
+    <mxCell id="b4_shut" parent="1" style="rhombus;whiteSpace=wrap;html=1;fontSize=14;strokeWidth=2;fillColor=#FFF8EC;strokeColor=#854F0E;fontColor=#5C3409;" value="&lt;b&gt;Požadované&lt;br&gt;vypnutie?&lt;/b&gt;" vertex="1">
+      <mxGeometry height="100" width="150" x="135" y="600" as="geometry" />
+    </mxCell>
+    <mxCell id="b5_clean" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#E1F5EE;strokeColor=#0F6E56;fontColor=#085041;" value="&lt;b&gt;Riadený cleanup&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;zastavenie služieb, uloženie štatistík&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="250" x="85" y="740" as="geometry" />
+    </mxCell>
+    <mxCell id="c1_trig" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#3C3489;" value="&lt;b&gt;Požiadavka na štart scény&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;hardvérové tlačidlo, web alebo MQTT&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="260" x="480" y="50" as="geometry" />
+    </mxCell>
+    <mxCell id="c2_setrun" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#3C3489;" value="&lt;b&gt;Nastavenie príznaku &#39;beží&#39;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;(thread-safe uzamknutie prekrývania)&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="260" x="480" y="130" as="geometry" />
+    </mxCell>
+    <mxCell id="c3_chk" parent="1" style="rhombus;whiteSpace=wrap;html=1;fontSize=14;strokeWidth=2;fillColor=#FFF8EC;strokeColor=#854F0E;fontColor=#5C3409;" value="&lt;b&gt;Zmenil sa&lt;br&gt;príznak?&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;self.is_scene_running&lt;/font&gt;&lt;b&gt;&lt;/b&gt;&lt;/div&gt;" vertex="1">
+      <mxGeometry height="90" width="145" x="537.5" y="200" as="geometry" />
+    </mxCell>
+    <mxCell id="c4_already" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#FAECE7;strokeColor=#993C1D;fontColor=#712B13;" value="&lt;b&gt;Ignorovanie požiadavky&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;scéna už aktuálne beží&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="200" x="850" y="220" as="geometry" />
+    </mxCell>
+    <mxCell id="c5_bcast" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#3C3489;" value="&lt;b&gt;Odoslanie stavu klientom&lt;/b&gt;" vertex="1">
+      <mxGeometry height="40" width="260" x="480" y="290" as="geometry" />
+    </mxCell>
+    <mxCell id="d0_thread" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#3C3489;" value="&lt;b&gt;Spustenie Daemon vlákna&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;neblokujúci beh scény na pozadí&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="260" x="480" y="420" as="geometry" />
+    </mxCell>
+    <mxCell id="d1_load" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#3C3489;" value="&lt;b&gt;Načítanie JSON scény&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;parsovanie a štrukturálna validácia&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="260" x="480" y="500" as="geometry" />
+    </mxCell>
+    <mxCell id="d1_err" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#FAECE7;strokeColor=#993C1D;fontColor=#712B13;" value="&lt;b&gt;Chyba načítania&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;neplatná štruktúra JSON&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="200" x="850" y="500" as="geometry" />
+    </mxCell>
+    <mxCell id="d2_pre" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#3C3489;" value="&lt;b&gt;Príprava a Preload&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;načítanie SFX do RAM pamäte&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="260" x="480" y="580" as="geometry" />
+    </mxCell>
+    <mxCell id="d3_run" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#3C3489;" value="&lt;b&gt;Slučka stavového automatu&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;FSM engine, vyhodnocovanie prechodov&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="260" x="480" y="660" as="geometry" />
+    </mxCell>
+    <mxCell id="d4_end" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#3C3489;" value="&lt;b&gt;Ukončenie scény&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;bezpečný OFF výstupov, zastavenie médií&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="260" x="480" y="740" as="geometry" />
+    </mxCell>
+    <mxCell id="e1_stop" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#FAECE7;strokeColor=#993C1D;fontColor=#712B13;" value="&lt;b&gt;Externá požiadavka na zastavenie&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;globálny STOP príkaz (cez web)&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="300" x="510" y="850" as="geometry" />
+    </mxCell>
+    <mxCell id="e2_was" parent="1" style="rhombus;whiteSpace=wrap;html=1;fontSize=14;strokeWidth=2;fillColor=#FFF8EC;strokeColor=#854F0E;fontColor=#5C3409;" value="&lt;b&gt;Bežala&lt;br&gt;scéna?&lt;/b&gt;" vertex="1">
+      <mxGeometry height="100" width="170" x="575" y="920" as="geometry" />
+    </mxCell>
+    <mxCell id="e3_all" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#FAECE7;strokeColor=#993C1D;fontColor=#712B13;" value="&lt;b&gt;Vynútený cleanup scény&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;force_all_off, okamžité stopnutie médií&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="240" x="450" y="1050" as="geometry" />
+    </mxCell>
+    <mxCell id="e4_bcast" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#FAECE7;strokeColor=#993C1D;fontColor=#712B13;" value="&lt;b&gt;Len notifikácia&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;aktualizácia stavu klientov&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="150" x="715" y="1050" as="geometry" />
+    </mxCell>
+    <mxCell id="f1_file" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fontSize=14;strokeWidth=2;fillColor=#F1EFE8;strokeColor=#666666;fontColor=#333333;strokeDasharray=4 4;" value="&lt;b&gt;Súbor stavu scény&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;/tmp/museum_scene_state&lt;/font&gt;" vertex="1">
+      <mxGeometry height="70" width="140" x="240" y="870" as="geometry" />
+    </mxCell>
+    <mxCell id="f2_wd" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;strokeWidth=2;fillColor=#E1F5EE;strokeColor=#0F6E56;fontColor=#085041;" value="&lt;b&gt;Watchdog proces&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;externá kontrola zdravia&lt;/font&gt;" vertex="1">
+      <mxGeometry height="50" width="150" x="30" y="880" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_a1_a2" edge="1" parent="1" source="a1_start" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#185FA5;strokeWidth=2;" target="a2_init">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_a2_a3" edge="1" parent="1" source="a2_init" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#185FA5;strokeWidth=2;" target="a3_web">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_a3_b1" edge="1" parent="1" source="a3_web" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#185FA5;strokeWidth=2;" target="b1_conn">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_b1_b2" edge="1" parent="1" source="b1_conn" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#0F6E56;strokeWidth=2;" target="b2_offline" value="zlyhanie">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="115" y="445" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_b1_b3" edge="1" parent="1" source="b1_conn" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#0F6E56;strokeWidth=2;" target="b3_loop" value="pripojený">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="290" y="490" />
+          <mxPoint x="290" y="490" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_b2_b3" edge="1" parent="1" source="b2_offline" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#0F6E56;strokeWidth=2;" target="b3_loop">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="115" y="510" />
+          <mxPoint x="115" y="510" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_b3_b4" edge="1" parent="1" source="b3_loop" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#0F6E56;strokeWidth=2;" target="b4_shut">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_b4_b3" edge="1" parent="1" source="b4_shut" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#0F6E56;strokeWidth=2;" target="b3_loop" value="nie">
+      <mxGeometry relative="1" x="0.3182" as="geometry">
+        <mxPoint as="offset" />
+        <Array as="points">
+          <mxPoint x="40" y="650" />
+          <mxPoint x="40" y="545" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_b4_b5" edge="1" parent="1" source="b4_shut" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#0F6E56;strokeWidth=2;" target="b5_clean" value="áno">
+      <mxGeometry relative="1" x="-0.5" as="geometry">
+        <mxPoint as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_c1_c2" edge="1" parent="1" source="c1_trig" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#534AB7;strokeWidth=2;" target="c2_setrun">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_c2_c3" edge="1" parent="1" source="c2_setrun" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#534AB7;strokeWidth=2;" target="c3_chk">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_c3_c4" edge="1" parent="1" source="c3_chk" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#534AB7;strokeWidth=2;" target="c4_already" value="áno (už beží)">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_c3_c5" edge="1" parent="1" source="c3_chk" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#534AB7;strokeWidth=2;exitX=-0.014;exitY=0.516;exitDx=0;exitDy=0;exitPerimeter=0;" target="c5_bcast" value="nie (nová)">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="536" y="245" />
+          <mxPoint x="460" y="245" />
+          <mxPoint x="460" y="330" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_c5_d0" edge="1" parent="1" source="c5_bcast" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#534AB7;strokeWidth=2;" target="d0_thread">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_d0_d1" edge="1" parent="1" source="d0_thread" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#534AB7;strokeWidth=2;" target="d1_load">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_d1_err" edge="1" parent="1" source="d1_load" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#534AB7;strokeWidth=2;" target="d1_err" value="chyba">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_d1_d2" edge="1" parent="1" source="d1_load" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#534AB7;strokeWidth=2;" target="d2_pre" value="ok">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="460" y="525" />
+          <mxPoint x="460" y="605" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_d2_d3" edge="1" parent="1" source="d2_pre" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#534AB7;strokeWidth=2;" target="d3_run">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_d3_d4" edge="1" parent="1" source="d3_run" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#534AB7;strokeWidth=2;" target="d4_end">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_e1_e2" edge="1" parent="1" source="e1_stop" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#993C1D;strokeWidth=2;" target="e2_was">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_e2_e3" edge="1" parent="1" source="e2_was" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#993C1D;strokeWidth=2;" target="e3_all" value="áno">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="565" y="1030" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_e2_e4" edge="1" parent="1" source="e2_was" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#993C1D;strokeWidth=2;" target="e4_bcast" value="nie">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="790" y="970" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_c2_f1" edge="1" parent="1" source="c2_setrun" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#666666;strokeWidth=2;dashed=1;" target="f1_file" value="zápis &#39;running&#39;">
+      <mxGeometry relative="1" x="-0.0471" as="geometry">
+        <mxPoint as="offset" />
+        <Array as="points">
+          <mxPoint x="410" y="155" />
+          <mxPoint x="410" y="850" />
+          <mxPoint x="310" y="850" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_d4_f1" edge="1" parent="1" source="d4_end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#666666;strokeWidth=2;dashed=1;" target="f1_file" value="zápis &#39;idle&#39;">
+      <mxGeometry relative="1" x="-0.2083" y="20" as="geometry">
+        <mxPoint as="offset" />
+        <Array as="points">
+          <mxPoint x="430" y="765" />
+          <mxPoint x="430" y="905" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_f1_f2" edge="1" parent="1" source="f1_file" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#0F6E56;strokeWidth=2;dashed=1;" target="f2_wd" value="číta">
+      <mxGeometry relative="1" y="5" as="geometry">
+        <mxPoint as="offset" />
+      </mxGeometry>
+    </mxCell>
+  </root>
+</mxGraphModel>

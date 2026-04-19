@@ -45,22 +45,56 @@
 
 
 \abstract{ % abstrakt
-	Tato bakalárska práca sa zaoberá návrhom a realizáciou modulárneho riadiaceho systému pre interaktívne múzejné expozície s využitím platforiem Raspberry Pi a ESP32...
-	}{ % abstrakt anglicky
-	This bachelor thesis deals with the design and implementation of a modular control system for interactive museum exhibits using Raspberry Pi and ESP32 platforms...
-	}{ % klicova slova
-	IoT, Raspberry Pi, ESP32, MQTT, múzeum, riadiaci systém, mechatronika
-	}{ % klicova slova anglicky
-	IoT, Raspberry Pi, ESP32, MQTT, museum, control system, mechatronics
-	} 
-
+    Táto bakalárska práca sa zaoberá návrhom a realizáciou modulárneho riadiaceho
+    systému pre interaktívne múzejné expozície s využitím platforiem Raspberry Pi
+    a ESP32. Architektúra systému je postavená na princípoch internetu vecí (IoT),
+    kde centrálna jednotka Raspberry Pi zabezpečuje orchestráciu scén,
+    synchronizáciu audiovizuálneho obsahu a celkovú riadiacu logiku.
+    Distribuované uzly na báze mikrokontrolérov ESP32 slúžia na priame ovládanie
+    periférií, akými sú jednosmerné motory, relé moduly a vstupné senzory.
+    Pre spoľahlivú a asynchrónnu komunikáciu medzi zariadeniami bol implementovaný
+    protokol MQTT s dôrazom na sledovanie spätnej väzby a automatické zotavenie
+    pri výpadkoch siete. Súčasťou riešenia je aj webový dashboard, ktorý
+    operátorom múzea umožňuje monitorovať stav hardvéru, konfigurovať parametre
+    a diagnostikovať systém v reálnom čase. Výsledkom práce je plne funkčný
+    a nasadený riadiaci systém integrovaný do reálneho mechatronického exponátu,
+    ktorý demonštruje vysokú stabilitu, škálovateľnosť a nenáročnú údržbu
+    v podmienkach každodennej múzejnej prevádzky.
+}{ % abstrakt anglicky
+    This bachelor thesis deals with the design and implementation of a modular
+    control system for interactive museum exhibits using Raspberry Pi and ESP32
+    platforms. The system architecture is built on Internet of Things (IoT)
+    principles, where a central Raspberry Pi unit handles scene orchestration,
+    audiovisual content synchronization, and overall control logic. Distributed
+    nodes based on ESP32 microcontrollers are used to directly control peripherals
+    such as DC motors, relay modules, and input sensors. For reliable and
+    asynchronous communication between devices, the MQTT protocol was implemented,
+    with an emphasis on feedback tracking and automatic recovery during network
+    outages. The solution also includes a web dashboard that allows museum
+    operators to monitor hardware status, configure parameters, and diagnose the
+    system in real time. The result of the thesis is a fully functional and
+    deployed control system integrated into a real mechatronic exhibit,
+    demonstrating high stability, scalability, and low maintenance requirements
+    under the conditions of daily museum operation.
+}{ % klicova slova
+    interaktívna expozícia, riadiaci systém, Raspberry Pi, ESP32, MQTT, stavový automat, orchestrácia scén, webový dashboard, React
+}{ % klicova slova anglicky
+    interactive exhibit, control system, Raspberry Pi, ESP32, MQTT, state machine, scene orchestration, web dashboard, React
+}
 \acknowledgements{
-	Týmto čestne vyhlasujem, že som bakalársku prácu vypracoval samostatne...
-	}{
-	Na tomto mieste by som chcel poďakovať...
-	} 
-
-
+    Týmto čestne vyhlasujem, že som bakalársku prácu vypracoval samostatne pod vedením vedúceho práce a s použitím uvedenej literatúry. 
+    
+    V súlade so zásadami Vysokého učenia technického v Brne o využívaní generatívnej AI transparentne vyhlasujem, že som pri vývoji softvérovej časti intenzívne využíval nástroje umelej inteligencie (Claude, GitHub Copilot, Gemini). Tieto nástroje boli využité v nasledujúcom rozsahu:
+    \begin{itemize}
+        \item Jazyková a štylistická korektúra textu práce.
+        \item Generovanie rozsiahlych častí zdrojového kódu metódou iteratívneho promptovania (Prompt-Driven Development) na základe mnou definovaných architektonických špecifikácií.
+        \item Asistencia pri debugovaní a refaktorizácii kódu.
+    \end{itemize}
+    
+    Vyhlasujem, že celkový koncept systému, hardvérový návrh, definícia komunikačných protokolov (MQTT flow) a návrh logiky stavového automatu sú mojím výhradným autorským dielom. Každý AI vygenerovaný blok kódu bol mnou ako autorom prečítaný, kriticky zhodnotený, manuálne upravený pre potreby integrácie a otestovaný v reálnej hardvérovej prevádzke, čím preberám plnú zodpovednosť za jeho funkčnosť, bezpečnosť a správnosť.
+    }{
+    Na tomto mieste by som chcel poďakovať...
+    }
 \vutpagestyle % prepise styl stranky, vlozi obsah
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
