@@ -35,11 +35,9 @@
 # ==============================
 obr/SW_DIAGRAM_SPECS/**/diagram_*_final.svg
 obr/SW_DIAGRAM_SPECS/**/diagram_*_final.pdf
-obr/SW_DIAGRAM_SPECS/**/diagram_*_final.png
 obr/SW_DIAGRAM_SPECS/**/diagram_*_reexport.pdf
 obr/SW_DIAGRAM_SPECS/**/diagram_*_graphviz.svg
 obr/SW_DIAGRAM_SPECS/**/diagram_*_graphviz.pdf
-obr/SW_DIAGRAM_SPECS/**/diagram_*_html.png
 obr/SW_DIAGRAM_SPECS/**/diagram_*_html.pdf
 
 # Browser/headless temporary profile
@@ -53,4 +51,5 @@ node_modules/
 # Non-thesis code directories (ignored by request)
 # ==============================
 raspberry_pi/
+ArduinoIDE/
 src/

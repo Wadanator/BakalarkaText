@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  20 APR 2026 00:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  20 APR 2026 12:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1220,33 +1220,33 @@ Package pdftex.def Info: obr/HW/Button_Schema.png  used on input line 144.
 (pdftex.def)             Requested size: 218.51521pt x 150.2052pt.
 
 
-LaTeX Warning: File `obr/HW/chronos_celok.jpg' not found on input line 178.
+LaTeX Warning: File `obr/HW/chronos_celok.jpg' not found on input line 179.
 
 
-chapters/Implementacia_hw.tex:178: Package pdftex.def Error: File `obr/HW/chron
+chapters/Implementacia_hw.tex:179: Package pdftex.def Error: File `obr/HW/chron
 os_celok.jpg' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.178 ...=0.9\textwidth]{obr/HW/chronos_celok.jpg}
+l.179 ...=0.9\textwidth]{obr/HW/chronos_celok.jpg}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-LaTeX Warning: File `obr/HW/kotol_exponat.jpg' not found on input line 184.
+LaTeX Warning: File `obr/HW/kotol_exponat.jpg' not found on input line 185.
 
 
-chapters/Implementacia_hw.tex:184: Package pdftex.def Error: File `obr/HW/kotol
+chapters/Implementacia_hw.tex:185: Package pdftex.def Error: File `obr/HW/kotol
 _exponat.jpg' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.184 ...=0.8\textwidth]{obr/HW/kotol_exponat.jpg}
+l.185 ...=0.8\textwidth]{obr/HW/kotol_exponat.jpg}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1335,7 +1335,7 @@ runtime_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_r
 untime_final.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram
-_5_5_mqtt_sequence_runtime_final.png  used on input line 211.
+_5_5_mqtt_sequence_runtime_final.png  used on input line 212.
 (pdftex.def)             Requested size: 432.48051pt x 410.36626pt.
  [36
 
@@ -1343,10 +1343,10 @@ _5_5_mqtt_sequence_runtime_final.png  used on input line 211.
 ce_runtime_final.png>]
 
 LaTeX Warning: File `obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram
-_5_6_web_dashboard_functional_final.png' not found on input line 258.
+_5_6_web_dashboard_functional_final.png' not found on input line 259.
 
 
-chapters/Implementacia_sw.tex:258: Package pdftex.def Error: File `obr/SW_DIAGR
+chapters/Implementacia_sw.tex:259: Package pdftex.def Error: File `obr/SW_DIAGR
 AM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboard_functional_fin
 al.png' not found: using draft setting.
 
@@ -1354,7 +1354,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.258 ...m_5_6_web_dashboard_functional_final.png}
+l.259 ...m_5_6_web_dashboard_functional_final.png}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1559,7 +1559,7 @@ Here is how much of TeX's memory you used:
  48735 multiletter control sequences out of 15000+600000
  694379 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,17n,93p,531b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 78i,17n,93p,519b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
 b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.p
 fb><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.p
@@ -1570,7 +1570,7 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (51 pages, 5971656 bytes).
+Output written on diplomka.pdf (51 pages, 5971718 bytes).
 PDF statistics:
  989 PDF objects out of 1000 (max. 8388607)
  170 named destinations out of 1000 (max. 500000)

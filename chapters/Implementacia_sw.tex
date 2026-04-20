@@ -65,7 +65,7 @@ funkčných celkov, ktoré pokrývajú celý životný cyklus behu scény:
         monitorovanie stavov zariadení a~zobrazovanie logov v~reálnom čase.
 \end{itemize}
 
-Jednotlivé celky sú popísané v~nasledujúcich sekciách.
+Jednotlivé celky sú popísané v~nasledujúcich sekciách tejto kapitoly.
 
 \subsection{Orchestrácia behu systému}
 \label{SWOrchestracia}
@@ -181,12 +181,9 @@ Tým sa eliminuje spúšťanie neplatných konfigurácií.
 \label{SWMQTT}
 
 Komunikačná vrstva zabezpečuje výmenu správ medzi backendom
-a~uzlami ESP32. Po úspešnom pripojení backend odoberá minimálne
-stavové topiky zariadení, feedback topiky, scénické topiky
-miestnosti a~všeobecný odber miestnosti. Nasledujúci prehľad
-uvádza implementované topikové skupiny používané v~prevádzke.
-
-V~prevádzke sa používajú najmä tieto skupiny topikov:
+a~uzlami ESP32. Po úspešnom pripojení backend odoberá stavové
+topiky zariadení, feedback topiky, scénické topiky miestnosti
+a~všeobecný odber miestnosti. V~prevádzke sa využívajú tieto skupiny topikov:
 \begin{itemize}
     \item \texttt{roomX/scene} a~\texttt{roomX/start\_scene} pre štart scén,
     \item \texttt{roomX/motor1}, \texttt{roomX/motor2} pre motorické príkazy,
@@ -196,7 +193,11 @@ V~prevádzke sa používajú najmä tieto skupiny topikov:
     \item \texttt{<command\_topic>/feedback} pre potvrdenie vykonania príkazu.
 \end{itemize}
 
-Spoľahlivosť komunikácie je podporená \textbf{trackerom spätnej väzby},
+Všetky riadiace príkazy sú odosielané s~úrovňou kvality \textbf{QoS~0}
+(\textit{fire-and-forget}), čo minimalizuje réžiu a~latenciu komunikácie.
+Záruky doručenia nie sú riešené na úrovni MQTT protokolu, ale vlastným
+mechanizmom spätnej väzby.
+Spoľahlivosť komunikácie je tak podporená \textbf{trackerom spätnej väzby},
 ktorý páruje odoslané príkazy s~odpoveďami zariadení.
 Pri nedoručení potvrdenia v~časovom limite je prípad
 evidovaný ako komunikačný problém (timeout) a~zalogovaný
