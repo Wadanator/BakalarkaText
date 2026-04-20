@@ -17,26 +17,13 @@ Koncepčné dvojúrovňové rozdelenie systému je definované
 v~kapitole~\ref{NavrhArchitektury}. V~tejto časti sú opísané
 konkrétne backendové a~firmvérové komponenty pre beh scény.
 
-Z~implementačného hľadiska je softvérová architektúra
-navrhnutá ako trojica navzájom previazaných vrstiev:
-\textbf{orchestračná vrstva} na Raspberry~Pi,
-\textbf{komunikačná vrstva} založená na MQTT brokeri
-a~\textbf{vykonávacia vrstva} na uzloch ESP32.
-Orchestračná vrstva rozhoduje o~tom, \uv{čo} sa má vykonať
-a~\uv{kedy}, komunikačná vrstva zabezpečuje spoľahlivý
-prenos príkazov a~potvrdení, zatiaľ čo vykonávacia vrstva
-realizuje fyzické akcie priamo na hardvéri.
-
-Dôležitým princípom je \textbf{separácia zodpovedností}:
+Softvérová architektúra je navrhnutá ako trojica previazaných vrstiev,
+pričom kľúčovým princípom je \textbf{separácia zodpovedností}:
 backend neobsahuje hardvérovo špecifickú logiku GPIO výstupov
 a~firmvér uzlov neobsahuje scenárové vetvenie expozície.
 Pri zmenách je tak možné upravovať scenáre, webové rozhranie
 alebo firmvér uzla oddelene.
-
-Počas behu systému prebieha tok informácií v~uzavretej
-smyčke: udalosť vyvolá scénickú akciu v~backende, backend
-publikuje príkaz cez MQTT, uzol vykoná akciu a~odošle
-spätnú väzbu do dashboardu aj ďalšieho vyhodnocovania scény.
+Vzájomné väzby vrstiev a~tok informácií sú znázornené na Obr.~\ref{fig:sw_layers}.
 
 \begin{figure}[p]
     \centering
@@ -49,23 +36,9 @@ spätnú väzbu do dashboardu aj ďalšieho vyhodnocovania scény.
 \label{SWBackendRPI}
 
 Backendová časť je implementovaná v~jazyku \textbf{Python} a~nasadená
-ako systémová služba. Jej vnútorná štruktúra je členená do piatich
-funkčných celkov, ktoré pokrývajú celý životný cyklus behu scény:
-
-\begin{itemize}
-    \item \textbf{Orchestrácia:} Koordinácia štartu všetkých služieb,
-        dohľad nad behom hlavnej slučky a~riadené ukončenie systému.
-    \item \textbf{FSM engine:} Jadro riadiacej logiky --- stavový automat
-        vykonávajúci prechody medzi stavmi scény na základe udalostí.
-    \item \textbf{MQTT vrstva:} Prenos príkazov na uzly ESP32, odber
-        spätnej väzby a~sledovanie stavu aktuátorov.
-    \item \textbf{Mediálna vrstva:} Spúšťanie a~kontrola audio a~video
-        akcií synchronizovaných s~priebehom scény.
-    \item \textbf{Webové rozhranie:} Operátorský dashboard pre ovládanie,
-        monitorovanie stavov zariadení a~zobrazovanie logov v~reálnom čase.
-\end{itemize}
-
-Jednotlivé celky sú popísané v~nasledujúcich sekciách tejto kapitoly.
+ako systémová služba členená do piatich funkčných celkov pokrývajúcich
+celý životný cyklus behu scény (Obr.~\ref{fig:sw_layers}).
+Jednotlivé celky sú popísané v~nasledujúcich sekciách.
 
 \subsection{Orchestrácia behu systému}
 \label{SWOrchestracia}
@@ -109,11 +82,8 @@ minimalizuje riziko prerušenia živej prezentácie.
 \label{SWFSM}
 
 Model konečného stavového automatu je v~runtime implementovaný
-ako spolupráca komponentov \textbf{\texttt{StateMachine}}, \textbf{\texttt{SceneParser}},
-\textbf{\texttt{StateExecutor}} a~\textbf{\texttt{TransitionManager}}.
-\texttt{StateMachine} udržiava aktuálny stav a~riadi zmeny stavov,
-\texttt{StateExecutor} vykonáva akcie a~\texttt{TransitionManager}
-vyhodnocuje podmienky prechodov na základe prichádzajúcich udalostí.
+ako spolupráca štyroch komponentov zodpovedných za udržiavanie stavu,
+spracovanie prechodov, vykonávanie akcií a~načítavanie definícií scény.
 
 V~runtime sú využívané prechody typu \texttt{timeout},
 \texttt{audioEnd}, \texttt{videoEnd}, \texttt{mqttMessage}
@@ -147,20 +117,16 @@ Tento prístup oddeľuje obsahovú vrstvu scenára od implementácie enginu,
 takže zmena priebehu scény nevyžaduje úpravy zdrojového kódu backendu.
 
 Každá scéna obsahuje identifikátor, počiatočný stav
-a~slovník stavov. Na úrovni stavov sa používajú štyri sekcie:
-\begin{itemize}
-    \item \textbf{\texttt{onEnter}} -- akcie vykonané pri vstupe do stavu,
-    \item \textbf{\texttt{onExit}} -- akcie pri odchode zo stavu,
-    \item \textbf{\texttt{transitions}} -- definícia podmienok prechodu,
-    \item \textbf{\texttt{timeline}} -- časovo viazané akcie počas pobytu v~stave.
-\end{itemize}
+a~slovník stavov. Štruktúra konfiguračného súboru vrátane
+štyroch sekcií každého stavu je znázornená na Obr.~\ref{fig:sw_json_structure}.
 
 Sekcia \texttt{timeline} umožňuje naplánovať
 udalosti relatívne voči času vstupu do stavu bez blokovania
 zvyšku systému --- v~implementácii sú tieto akcie realizované
 ako \texttt{threading.Timer} inštancie plánované pri vstupe
 do stavu. Podporované akcie sú tri: \textbf{MQTT akcia}, \textbf{audio akcia}
-a~\textbf{video akcia}.
+a~\textbf{video akcia} --- konkrétne príkazové formáty vrátane
+tópikov pre spustenie scény sú zhrnuté v~Obr.~\ref{fig:sw_json_structure}.
 
 Pri zmene stavu sa plánovanie časovej osi resetuje, takže akcie
 z~predchádzajúceho stavu nemôžu zasiahnuť do nového stavu.

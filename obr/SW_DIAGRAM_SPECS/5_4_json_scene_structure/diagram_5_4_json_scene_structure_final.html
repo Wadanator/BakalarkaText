@@ -39,62 +39,84 @@
     }
     .row { display: flex; gap: 10px; }
     .sec { border-radius: 14px; padding: 10px 10px 12px; border: 1px solid; }
-    .lbl { font-size: 38px; font-weight: 600; margin-bottom: 8px; }
-    .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .lbl { font-size: 36px; font-weight: 700; margin-bottom: 8px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 7px; }
     .col { flex-direction: column; }
-    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
     .pill {
-      border-radius: 12px;
-      padding: 10px 14px;
-      font-size: 35px;
+      border-radius: 11px;
+      padding: 9px 13px;
+      font-size: 33px;
       font-weight: 600;
       border: 1px solid;
       line-height: 1.15;
     }
     .sub {
       font-weight: 500;
-      font-size: 30px;
+      font-size: 28px;
       opacity: 0.82;
       display: block;
-      margin-top: 4px;
+      margin-top: 3px;
+    }
+    .cmds { display: flex; flex-direction: column; gap: 4px; margin-top: 6px; }
+    .cmd {
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 27px;
+      font-weight: 600;
+      border: 1px solid;
+      font-family: "Consolas", "Courier New", monospace;
+      line-height: 1.2;
+    }
+    .cmd-note {
+      font-size: 24px;
+      font-weight: 500;
+      opacity: 0.78;
+      display: block;
+      margin-top: 2px;
+      font-family: "Segoe UI", Arial, sans-serif;
     }
     .w2 { flex: 2; }
     .w1 { flex: 1; }
 
+    /* blue – root */
     .sb { background:#E6F1FB; border-color:#185FA5; }
     .sb .lbl { color:#0C447C; }
     .pb { background:#B5D4F4; border-color:#185FA5; color:#0C447C; }
     .pt { background:#9FE1CB; border-color:#0F6E56; color:#085041; }
 
+    /* purple – state */
     .sp { background:#EEEDFE; border-color:#534AB7; }
     .sp .lbl { color:#3C3489; }
     .pp { background:#CECBF6; border-color:#534AB7; color:#3C3489; }
 
+    /* orange – actions */
     .sa { background:#FAEEDA; border-color:#854F0B; }
     .sa .lbl { color:#633806; }
     .pa { background:#FAC775; border-color:#854F0B; color:#412402; }
+    .ca { background:#F5E0BE; border-color:#A3650E; color:#412402; }
 
+    /* red – transitions */
     .sc { background:#FAECE7; border-color:#993C1D; }
     .sc .lbl { color:#712B13; }
     .pc { background:#F5C4B3; border-color:#993C1D; color:#4A1B0C; }
 
+    /* grey – validation */
     .sg { background:#F1EFE8; border-color:#5F5E5A; }
     .sg .lbl { color:#444441; }
     .pg { background:#D3D1C7; border-color:#5F5E5A; color:#2C2C2A; }
 
+    /* green – scene start */
+    .sm { background:#E6F7EE; border-color:#1E7A48; }
+    .sm .lbl { color:#155C35; }
+    .pm { background:#A8E6C0; border-color:#1E7A48; color:#0D4526; }
+    .cm { background:#C5EFD5; border-color:#2A9958; color:#0D4526; }
+
     @media print {
-      @page {
-        size: A4 landscape;
-        margin: 8mm;
-      }
+      @page { size: A4 landscape; margin: 8mm; }
       body { padding: 0; }
-      .master {
-        width: 100%;
-        height: 100%;
-      }
-      .d {
-        gap: 8px;
-      }
+      .master { width: 100%; height: 100%; }
+      .d { gap: 8px; }
     }
   </style>
 </head>
@@ -102,57 +124,91 @@
   <div class="canvas">
     <div class="master">
       <div class="d">
-    <div class="sec sb">
-      <div class="lbl">Koreň JSON scény</div>
-      <div class="pills">
-        <div class="pill pb">sceneId<span class="sub">identifikátor</span></div>
-        <div class="pill pb">initialState<span class="sub">počiatočný stav</span></div>
-        <div class="pill pb">states { }<span class="sub">zoznam stavov</span></div>
-        <div class="pill pt">globalEvents [ ]<span class="sub">mimo konkrétnych stavov</span></div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="sec sp w2">
-        <div class="lbl">Jeden stav</div>
-        <div class="pills g2">
-          <div class="pill pp">onEnter [ ]<span class="sub">akcie pri vstupe</span></div>
-          <div class="pill pp">timeline [ ]<span class="sub">časové akcie</span></div>
-          <div class="pill pp">onExit [ ]<span class="sub">akcie pri odchode</span></div>
-          <div class="pill pp">transitions [ ]<span class="sub">vyhodnocujú sa v poradí zápisu</span></div>
+        <!-- Row 1: root -->
+        <div class="sec sb">
+          <div class="lbl">Koreň JSON scény</div>
+          <div class="pills">
+            <div class="pill pb">sceneId<span class="sub">identifikátor</span></div>
+            <div class="pill pb">initialState<span class="sub">počiatočný stav</span></div>
+            <div class="pill pb">states { }<span class="sub">zoznam stavov</span></div>
+            <div class="pill pt">globalEvents [ ]<span class="sub">prechody mimo konkrétnych stavov</span></div>
+          </div>
         </div>
-      </div>
 
-      <div class="sec sg w1">
-        <div class="lbl">Validácia pri načítaní</div>
-        <div class="pills col">
-          <div class="pill pg">Schémová<span class="sub">povinné polia + typy</span></div>
-          <div class="pill pg">Logická<span class="sub">goto target existuje alebo END</span></div>
+        <!-- Row 2: state + validation -->
+        <div class="row">
+          <div class="sec sp w2">
+            <div class="lbl">Jeden stav</div>
+            <div class="pills g2">
+              <div class="pill pp">onEnter [ ]<span class="sub">akcie pri vstupe</span></div>
+              <div class="pill pp">timeline [ ]<span class="sub">časové akcie</span></div>
+              <div class="pill pp">onExit [ ]<span class="sub">akcie pri odchode</span></div>
+              <div class="pill pp">transitions [ ]<span class="sub">vyhodnocujú sa v poradí zápisu</span></div>
+            </div>
+          </div>
+          <div class="sec sg w1">
+            <div class="lbl">Validácia pri načítaní</div>
+            <div class="pills col">
+              <div class="pill pg">Schémová<span class="sub">povinné polia + typy</span></div>
+              <div class="pill pg">Logická<span class="sub">goto target existuje alebo END</span></div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="sec sa w1">
-        <div class="lbl">Typy akcií</div>
-        <div class="pills col">
-          <div class="pill pa">mqtt — topic + message</div>
-          <div class="pill pa">audio — message</div>
-          <div class="pill pa">video — message</div>
-        </div>
-      </div>
+        <!-- Row 3: actions (with commands) + transitions + scene start -->
+        <div class="row">
 
-      <div class="sec sc w2">
-        <div class="lbl">Typy prechodov</div>
-        <div class="pills g2">
-          <div class="pill pc">timeout<span class="sub">delay → goto</span></div>
-          <div class="pill pc">audioEnd<span class="sub">target → goto</span></div>
-          <div class="pill pc">videoEnd<span class="sub">target → goto</span></div>
-          <div class="pill pc">mqttMessage<span class="sub">topic + message → goto</span></div>
-          <div class="pill pc">always<span class="sub">→ goto</span></div>
+          <!-- Actions with command syntax -->
+          <div class="sec sa w1">
+            <div class="lbl">Typy akcií &amp; príkazy</div>
+
+            <div class="pill pa" style="margin-bottom:6px;">mqtt
+              <span class="sub">topic + message [+ retain]</span>
+            </div>
+
+            <div class="pill pa">audio — message:
+              <div class="cmds">
+                <div class="cmd ca">PLAY:&lt;súbor&gt;[:&lt;vol&gt;]<span class="cmd-note">prehrá stopu (sfx_ → RAM)</span></div>
+                <div class="cmd ca">STOP&nbsp;&nbsp;/&nbsp;&nbsp;STOP:&lt;súbor&gt;<span class="cmd-note">zastaví všetky / konkrétnu</span></div>
+                <div class="cmd ca">PAUSE&nbsp;&nbsp;/&nbsp;&nbsp;RESUME</div>
+                <div class="cmd ca">VOLUME:&lt;0–100&gt;</div>
+              </div>
+            </div>
+
+            <div class="pill pa" style="margin-top:6px;">video — message:
+              <div class="cmds">
+                <div class="cmd ca">PLAY_VIDEO:&lt;súbor&gt;</div>
+                <div class="cmd ca">STOP_VIDEO</div>
+                <div class="cmd ca">PAUSE&nbsp;&nbsp;/&nbsp;&nbsp;RESUME</div>
+                <div class="cmd ca">SEEK:&lt;sekundy&gt;</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transitions -->
+          <div class="sec sc w1">
+            <div class="lbl">Typy prechodov</div>
+            <div class="pills col">
+              <div class="pill pc">timeout<span class="sub">delay → goto</span></div>
+              <div class="pill pc">audioEnd<span class="sub">target → goto</span></div>
+              <div class="pill pc">videoEnd<span class="sub">target → goto</span></div>
+              <div class="pill pc">mqttMessage<span class="sub">topic + message → goto</span></div>
+              <div class="pill pc">always<span class="sub">→ goto (bez podmienky)</span></div>
+            </div>
+          </div>
+
+          <!-- Scene start -->
+          <div class="sec sm w1">
+            <div class="lbl">Spustenie scény</div>
+            <div class="pills col">
+              <div class="pill pm">roomX/scene<span class="sub">payload = "START" → default scéna</span></div>
+              <div class="pill pm">roomX/start_scene<span class="sub">payload = názov súboru scény</span></div>
+              <div class="pill cm" style="margin-top:4px;">Zastavenie<span class="sub">roomX/STOP — okamžité</span></div>
+            </div>
+          </div>
+
         </div>
-      </div>
-    </div>
       </div>
     </div>
   </div>

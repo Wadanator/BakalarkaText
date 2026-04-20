@@ -39,10 +39,10 @@
 \contentsline {subsection}{\numberline {5.2.1}Orchestrácia behu systému}{30}{subsection.5.2.1}%
 \contentsline {subsection}{\numberline {5.2.2}Watchdog a~odolnosť voči výpadkom}{30}{subsection.5.2.2}%
 \contentsline {subsection}{\numberline {5.2.3}Stavový automat ako jadro logiky}{30}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3}Konfigurácia scén v~JSON}{34}{section.5.3}%
-\contentsline {section}{\numberline {5.4}MQTT komunikačná vrstva}{36}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Sledovanie stavu aktuátorov}{36}{subsection.5.4.1}%
-\contentsline {section}{\numberline {5.5}Mediálna vrstva a~webové rozhranie}{38}{section.5.5}%
+\contentsline {section}{\numberline {5.3}Konfigurácia scén v~JSON}{33}{section.5.3}%
+\contentsline {section}{\numberline {5.4}MQTT komunikačná vrstva}{35}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Sledovanie stavu aktuátorov}{35}{subsection.5.4.1}%
+\contentsline {section}{\numberline {5.5}Mediálna vrstva a~webové rozhranie}{37}{section.5.5}%
 \contentsline {section}{\numberline {5.6}Firmvér uzlov ESP32}{39}{section.5.6}%
 \contentsline {subsection}{\numberline {5.6.1}Spoločná infraštruktúra uzlov}{39}{subsection.5.6.1}%
 \contentsline {subsection}{\numberline {5.6.2}Špecifické funkcionality uzlov}{39}{subsection.5.6.2}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  20 APR 2026 23:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  21 APR 2026 00:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -767,7 +767,7 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'slovak'.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 41
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 42
 .
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -778,24 +778,24 @@ Package babel Info: 'slovak' activates 'slovak' shorthands.
 )
 \openout1 = `diplomka.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
@@ -865,7 +865,7 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 41.
+Package hyperref Info: Link coloring ON on input line 42.
 (diplomka.out) (diplomka.out)
 \@outlinefile=\write4
 \openout4 = `diplomka.out'.
@@ -877,7 +877,7 @@ n: found PDF version <1.7>, but at most version <1.5> allowed
 <pages/TitulniList_color.pdf, id=247, 597.51233pt x 845.0471pt>
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf>
-Package pdftex.def Info: pages/TitulniList_color.pdf  used on input line 45.
+Package pdftex.def Info: pages/TitulniList_color.pdf  used on input line 46.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
 
 
@@ -891,27 +891,27 @@ n: found PDF version <1.7>, but at most version <1.5> allowed
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf, page 1>
 Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
- 45.
+ 46.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf, page 1>
 Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
- 45.
+ 46.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf, page 1>
 Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
- 45.
+ 46.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf, page 1>
 Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
- 45.
+ 46.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf, page 1>
 Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
- 45.
+ 46.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 [1
 
@@ -927,7 +927,7 @@ File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
- used on input line 45.
+ used on input line 46.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
 
 
@@ -945,31 +945,31 @@ File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 1>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page1 used on input line 45.
+, page1 used on input line 46.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 1>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page1 used on input line 45.
+, page1 used on input line 46.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 1>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page1 used on input line 45.
+, page1 used on input line 46.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 1>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page1 used on input line 45.
+, page1 used on input line 46.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 1>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page1 used on input line 45.
+, page1 used on input line 46.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 [2
 
@@ -984,72 +984,72 @@ File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 2>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page2 used on input line 45.
+, page2 used on input line 46.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 2>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page2 used on input line 45.
+, page2 used on input line 46.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 2>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page2 used on input line 45.
+, page2 used on input line 46.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 [3
 
  <./pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 84--84
+Underfull \hbox (badness 10000) in paragraph at lines 85--85
 
  []
 
 [4{C:/Users/Wajdy/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Wa
 jdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}] [5] [6]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-03.
+04.
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-03.
+04.
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-03.
+04.
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-103.
+104.
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-103.
+104.
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 103.
+(Font)              <12> on input line 104.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 103.
+(Font)              <8> on input line 104.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 103.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 103
+(Font)              <6> on input line 104.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 104
 .
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 103
+LaTeX Font Info:    Trying to load font information for U+msb on input line 104
 .
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
@@ -1081,12 +1081,6 @@ LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 4
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Overfull \hbox (4.92735pt too wide) in paragraph at lines 46--54
-[]\T1/lmr/bx/n/12 Centralizovaná to-po-ló-gia: \T1/lmr/m/n/12 Jedna cen-trálna 
-jed-notka priamo ovláda v²etky vstupné
- []
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [10
@@ -1152,13 +1146,6 @@ Package pdftex.def Info: obr/ARCH/FSM_Architektura.pdf  used on input line 133.
 
 (pdftex.def)             Requested size: 409.71692pt x 130.92068pt.
 
-Overfull \hbox (6.35115pt too wide) in paragraph at lines 142--148
-\T1/lmr/m/n/12 bol zvo-lený \T1/lmr/bx/n/12 pro-to-kol MQTT \T1/lmr/m/n/12 (\T1
-/lmr/m/it/12 Mes-sage Qu-e-uing Te-le-metry Tran-s-port\T1/lmr/m/n/12 ) (vi¤ ka
--pi-tola [][]2.4.2[][]).
- []
-
-
 
 pdfTeX warning: pdflatex.exe (file ./obr/ARCH/Mqtt_Flow.pdf): PDF inclusion: fo
 und PDF version <1.7>, but at most version <1.5> allowed
@@ -1222,9 +1209,9 @@ If that doesn't work, type  X <return>  to quit.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [23 <./obr/HW/Motor_Schema.png>]
-Overfull \hbox (0.43938pt too wide) in paragraph at lines 119--127
+Underfull \hbox (badness 1102) in paragraph at lines 119--127
 []\T1/lmr/bx/n/12 Antivandal tla-£idlo: \T1/lmr/m/n/12 Kvôli za-bez-pe-£e-niu o
-dol-nosti bol zvo-lený prie-my-selný \T1/lmr/bx/n/12 19mm
+dol-nosti bol zvo-lený prie-my-selný
  []
 
 
@@ -1278,129 +1265,99 @@ If that doesn't work, type  X <return>  to quit.
 on_Schema.png>] [26] [27]
 Kapitola 5.
 <obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png, id=7
-00, 1236.0579pt x 761.9667pt>
+01, 1236.0579pt x 761.9667pt>
 File: obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png 
 Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runt
-ime_loop_final.png  used on input line 43.
+ime_loop_final.png  used on input line 30.
 (pdftex.def)             Requested size: 432.47586pt x 266.59932pt.
 [28
 
 ] [29 <./obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.p
 ng>]
-Overfull \hbox (17.56317pt too wide) in paragraph at lines 78--86
+Overfull \hbox (17.56317pt too wide) in paragraph at lines 51--59
 []\T1/lmr/m/n/12 Po na-£í-taní kon-fi-gu-rá-cie bac-kend ini-cia-li-zuje v²etky
  run-time sluºby cez \T1/lmtt/m/n/12 ServiceContainer
  []
 
 <obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_final
-.png, id=711, 799.5471pt x 844.5954pt>
+.png, id=713, 799.5471pt x 844.5954pt>
 File: obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_
 final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_f
 inal.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2
-_backend_lifecycle_final.png  used on input line 94.
+_backend_lifecycle_final.png  used on input line 67.
 (pdftex.def)             Requested size: 432.48102pt x 456.84798pt.
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 112.
-
-Overfull \hbox (31.35379pt too wide) in paragraph at lines 111--117
-\T1/lmr/m/n/12 po-nen-tov \T1/lmtt/b/n/12 StateMachine\T1/lmr/m/n/12 , \T1/lmtt
-/b/n/12 SceneParser\T1/lmr/m/n/12 , \T1/lmtt/b/n/12 StateExecutor \T1/lmr/m/n/1
-2 a \T1/lmtt/b/n/12 TransitionManager\T1/lmr/m/n/12 . \T1/lmtt/m/n/12 StateMach
-ine
- []
-
-
-Overfull \hbox (44.27148pt too wide) in paragraph at lines 111--117
-\T1/lmr/m/n/12 udr-ºiava ak-tu-álny stav a riadi zmeny sta-vov, \T1/lmtt/m/n/12
- StateExecutor \T1/lmr/m/n/12 vy-ko-náva ak-cie a \T1/lmtt/m/n/12 TransitionMan
-ager
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [30
-
-]
-[31 <./obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle
-_final.png>]
 <obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick_flow
-_final.png, id=724, 846.16125pt x 806.01125pt>
+_final.png, id=714, 846.16125pt x 806.01125pt>
 File: obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick
 _flow_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick_
 flow_final.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_
-5_3_fsm_engine_tick_flow_final.png  used on input line 136.
+5_3_fsm_engine_tick_flow_final.png  used on input line 106.
 (pdftex.def)             Requested size: 432.47906pt x 411.9581pt.
- [32] [33 <./obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engi
-ne_tick_flow_final.png>]
-Overfull \hbox (19.84418pt too wide) in paragraph at lines 158--164
-\T1/lmr/m/n/12 blo-ko-va-nia zvy²ku sys-tému --- v im-ple-men-tá-cii sú tieto a
-k-cie re-a-li-zo-vané ako \T1/lmtt/m/n/12 threading.Timer
- []
+[30
 
+] [31 <./obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecyc
+le_final.png>] [32 <./obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3
+_fsm_engine_tick_flow_final.png>]
 <obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_structure
-_final_html.png, id=736, 1038.12843pt x 677.53125pt>
+_final_html.png, id=735, 1505.625pt x 1243.64626pt>
 File: obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_stru
 cture_final_html.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_struc
 ture_final_html.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_
-5_4_json_scene_structure_final_html.png  used on input line 175.
-(pdftex.def)             Requested size: 432.47853pt x 282.25574pt.
-[34] [35 <./obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scen
-e_structure_final_html.png>]
+5_4_json_scene_structure_final_html.png  used on input line 141.
+(pdftex.def)             Requested size: 432.48476pt x 357.2324pt.
+ [33] [34 <./obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_sce
+ne_structure_final_html.png (PNG copy)>]
 <obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_runti
-me_final.png, id=747, 588.7596pt x 558.6471pt>
+me_final.png, id=745, 588.7596pt x 558.6471pt>
 File: obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_
 runtime_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_r
 untime_final.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram
-_5_5_mqtt_sequence_runtime_final.png  used on input line 212.
+_5_5_mqtt_sequence_runtime_final.png  used on input line 178.
 (pdftex.def)             Requested size: 432.48051pt x 410.36626pt.
- [36
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 186.
 
-] [37 <./obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequen
-ce_runtime_final.png>]
+[35] [36 <./obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_seq
+uence_runtime_final.png>]
+<obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboard_f
+unctional_final.png, id=758, 1505.625pt x 2428.07124pt>
+File: obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashbo
+ard_functional_final.png Graphic file (type png)
+<use obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboa
+rd_functional_final.png>
+Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/dia
+gram_5_6_web_dashboard_functional_final.png  used on input line 225.
+(pdftex.def)             Requested size: 432.48051pt x 697.45375pt.
 
-LaTeX Warning: File `obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram
-_5_6_web_dashboard_functional_final.png' not found on input line 259.
 
-
-chapters/Implementacia_sw.tex:259: Package pdftex.def Error: File `obr/SW_DIAGR
-AM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboard_functional_fin
-al.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.259 ...m_5_6_web_dashboard_functional_final.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+LaTeX Warning: Float too large for page by 28.18752pt on input line 228.
 
 <obr/SW/dashboard_screenshot.png, id=759, 1443.14156pt x 643.6547pt>
 File: obr/SW/dashboard_screenshot.png Graphic file (type png)
 <use obr/SW/dashboard_screenshot.png>
-Package pdftex.def Info: obr/SW/dashboard_screenshot.png  used on input line 26
-6.
+Package pdftex.def Info: obr/SW/dashboard_screenshot.png  used on input line 23
+2.
 (pdftex.def)             Requested size: 432.48051pt x 192.89165pt.
-[38]
+[37] [38 <./obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_
+dashboard_functional_final.png (PNG copy)>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [39 <./obr/SW/dashboard_screenshot.png>]) (chapters/Experimenty.tex [40]
 Kapitola 6.
 
-Overfull \hbox (32.54126pt too wide) in paragraph at lines 53--58
-\T1/lmr/m/n/12 te©-nos´ do-siahla 100%. Naj-rých-lej-²ie od-po-ve-dali vý-stupy
- \T1/lmtt/m/n/12 room1/light/1 \T1/lmr/m/n/12 a \T1/lmtt/m/n/12 room1/light/2
+Underfull \hbox (badness 1931) in paragraph at lines 53--58
+\T1/lmr/m/n/12 ru-£i-te©-nos´ do-siahla 100%. Naj-rých-lej-²ie od-po-ve-dali vý
+-stupy \T1/lmtt/m/n/12 room1/light/1
  []
 
 
@@ -1434,12 +1391,6 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ] (chapters/SeznamZkratek.tex
 Kapitola 8.
-
-Overfull \hbox (1.10599pt too wide) in paragraph at lines 25--26
-[]\T1/lmr/m/n/12 Raspberry Pi -- jed-no-dos-kový po-£í-ta£ od na-dá-cie Rasp-be
-rry Pi Foun-
- []
-
 ) [47
 
 
@@ -1600,10 +1551,10 @@ Package rerunfilecheck Info: File `diplomka.out' has not changed.
 (rerunfilecheck)             Checksum: 902DA762AD027EC70D8E5B3776CA2A9D;13029.
  ) 
 Here is how much of TeX's memory you used:
- 20438 strings out of 467871
- 343064 string characters out of 5418377
+ 20431 strings out of 467871
+ 342301 string characters out of 5418377
  875006 words of memory out of 5000000
- 48754 multiletter control sequences out of 15000+600000
+ 48747 multiletter control sequences out of 15000+600000
  694379 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,17n,93p,438b,718s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1617,9 +1568,9 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (52 pages, 6102953 bytes).
+Output written on diplomka.pdf (52 pages, 6799066 bytes).
 PDF statistics:
- 1004 PDF objects out of 1200 (max. 8388607)
+ 1008 PDF objects out of 1200 (max. 8388607)
  173 named destinations out of 1000 (max. 500000)
- 604 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 609 words of extra memory for PDF output out of 10000 (max. 10000000)
 
