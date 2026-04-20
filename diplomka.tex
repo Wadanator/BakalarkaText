@@ -33,7 +33,8 @@
 \clubpenalty=10000
 \displaywidowpenalty=10000
 \usepackage{enumitem}
-\setlist{beginpenalty=10000, midpenalty=9000}
+% Kompaktnejšie odrážky v celom dokumente
+\setlist{noitemsep, topsep=0pt, parsep=0pt, partopsep=0pt, beginpenalty=10000, midpenalty=9000}
 % ------------------------------------------------------------------------
 
 
@@ -82,19 +83,24 @@
     interactive exhibit, control system, Raspberry Pi, ESP32, MQTT, state machine, scene orchestration, web dashboard, React
 }
 \acknowledgements{
-    Týmto čestne vyhlasujem, že som bakalársku prácu vypracoval samostatne pod vedením vedúceho práce a s použitím uvedenej literatúry. 
-    
-    V súlade so zásadami Vysokého učenia technického v Brne o využívaní generatívnej AI transparentne vyhlasujem, že som pri vývoji softvérovej časti intenzívne využíval nástroje umelej inteligencie (Claude, GitHub Copilot, Gemini). Tieto nástroje boli využité v nasledujúcom rozsahu:
-    \begin{itemize}
-        \item Jazyková a štylistická korektúra textu práce.
-        \item Generovanie rozsiahlych častí zdrojového kódu metódou iteratívneho promptovania (Prompt-Driven Development) na základe mnou definovaných architektonických špecifikácií.
-        \item Asistencia pri debugovaní a refaktorizácii kódu.
-    \end{itemize}
-    
-    Vyhlasujem, že celkový koncept systému, hardvérový návrh, definícia komunikačných protokolov a návrh logiky stavového automatu sú mojím výhradným autorským dielom. Každý AI vygenerovaný blok kódu bol mnou ako autorom prečítaný, kriticky zhodnotený, manuálne upravený pre potreby integrácie a otestovaný v reálnej hardvérovej prevádzke, čím preberám plnú zodpovednosť za jeho funkčnosť, bezpečnosť a správnosť.
-    }{
-    Na tomto mieste by som chcel poďakovať...
-    }
+    Vyhlasujem, že som bakalársku prácu vypracoval samostatne pod vedením
+    vedúceho práce a~s~použitím literatúry uvedenej v~zozname zdrojov.
+    Všetky prevzaté myšlienky, postupy a~výsledky sú v~texte riadne citované.
+
+    V~súlade so zásadami VUT v~Brne týkajúcimi sa využívania generatívnej
+    umelej inteligencie vyhlasujem, že som pri písaní textu a~vývoji
+    softvérovej časti používal nástroje AI (Claude, GitHub Copilot) ako
+    asistenčné pomôcky -- na jazykovú korektúru, dopĺňanie kódu
+    a~debugovanie. Celková architektúra systému, hardvérový návrh,
+    voľba komunikačných protokolov, návrh stavového automatu
+    a~integrácia do reálnej inštalácie sú výsledkom mojej vlastnej
+    inžinierskej práce. Vygenerovaný kód som v~každom prípade
+    overil, upravil a~otestoval na fyzickom hardvéri.
+}{
+    Na tomto mieste by som chcel poďakovať vedúcemu práce Ing.~Michalovi Bastlovi, Ph.D., za odbornú pomoc, vecné pripomienky a~trpezlivosť počas celého priebehu práce.
+
+    Taktiež by som chcel vyjadriť úprimnú vďaku pánovi Petrovi Bolekovi, majiteľovi spoločnosti EKORAY (\url{https://www.ekoray.sk/}), za prejavenú dôveru a plné finančné krytie nákladov na projekt, ktorý som v rámci tejto práce realizoval a ktorý by bez jeho podpory nevznikol.
+}
 \vutpagestyle % prepise styl stranky, vlozi obsah
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

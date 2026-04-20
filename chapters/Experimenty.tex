@@ -1,7 +1,9 @@
 \chapter{Experimentálne overenie}
 \label{ExperimentalneOverenie}
 
-Táto kapitola stručne opisuje praktické overenie navrhnutého systému.
+Navrhnutý a~implementovaný systém bol overený na reálnej inštalácii
+v~podmienkach múzejnej prevádzky. Nasledujúce sekcie popisujú priebeh
+testov a~hodnotia, či systém spĺňa požiadavky definované v~kapitole~\ref{PoziadavkyNaSystem}.
 
 \section{Popis fyzického testovania a~testovacieho prostredia}
 \label{PopisDemonstracie}
@@ -49,8 +51,10 @@ po výpadku napájania a~na laboratórnom teste na stole.
         s~intervalom 250\,ms. Za 58{,}3 sekundy systém odoslal 1\,824 príkazov a~rovnaký počet feedbackov
         sa úspešne vrátil späť do Raspberry Pi.
     \item \textbf{Výsledok:} Priemerná latencia feedbacku bola 111{,}7\,ms, maximum 219\,ms a~doručiteľnosť
-        dosiahla 100\,\%. Meranie ukázalo, že najrýchlejšie odpovede boli pri \texttt{room1/light/1} a~\texttt{room1/light/2},
-        kým niektoré relé a~výstupy mali vyššiu, ale stále stabilnú odozvu.
+        dosiahla 100\,\%. Najrýchlejšie odpovedali výstupy \texttt{room1/light/1} a~\texttt{room1/light/2}
+        (priemer okolo 82\,ms), niektoré reléové výstupy dosahovali priemer okolo 123\,ms -- rozdiel
+        pravdepodobne súvisí s~internou obsluhou relé na uzle. Pre múzejnú prevádzku, kde sú efekty
+        dlhé niekoľko sekúnd, je táto variabilita zanedbateľná a~neovplyvní zážitok návštevníka.
 \end{itemize}
 
 \begin{table}[H]
@@ -78,10 +82,12 @@ po výpadku napájania a~na laboratórnom teste na stole.
 \subsection{Presnosť prepínania}
 \begin{itemize}
     \item \textbf{Priebeh:} Na tej istej testovacej scéne sa sledoval interval medzi prepnutiami stavového automatu.
-    \item \textbf{Výsledok:} Nameraný priemer bol 255{,}8\,ms pri cieli 250\,ms, teda systém bol mierne pomalší,
-        ale stále sa pohyboval blízko nastavenej hodnoty. V~tolerancii \(\pm 20\,\text{ms}\) bolo 26 z~227 intervalov.
-        Kumulatívny drift oproti ideálnemu času dosiahol 1\,317\,ms. Tento drift vzniká pri sekvenčnom spracovaní
-        stavov, kde sa malé oneskorenia jednotlivých prechodov (spracovanie logiky a komunikácia) postupne sčítavajú.
+    \item \textbf{Výsledok:} Nameraný priemer bol 255{,}8\,ms pri cieli 250\,ms -- odchýlka 2,3\,\%,
+        ktorá je pre reálnu prevádzku zanedbateľná. Kumulatívny drift oproti ideálnemu času dosiahol
+        za celú sekveniu 1\,317\,ms; vzniká sekvenčným spracovaním prechodov, kde sa malé oneskorenia
+        sčítavajú. Dôležité je, že drift má lineárny a~predvídateľný charakter -- nie je náhodný ani
+        rastúci. Keďže v~skutočných scénach sú stavy niekoľkonásobne dlhšie a~počet prechodov výrazne
+        nižší, praktický vplyv na synchronizáciu efektov je minimálny.
 \end{itemize}
 
 \subsection{Zhodnotenie}

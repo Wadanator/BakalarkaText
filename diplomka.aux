@@ -77,6 +77,8 @@
 \newlabel{komunikacne-protokoly}{{2.4}{12}{Komunikačné protokoly}{section.2.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}Prenosové médiá: drôtové vs. bezdrôtové}{12}{subsection.2.4.1}\protected@file@percent }
 \newlabel{prenosove-media}{{2.4.1}{12}{Prenosové médiá: drôtové vs. bezdrôtové}{subsection.2.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}Aplikačné protokoly}{12}{subsection.2.4.2}\protected@file@percent }
+\newlabel{aplikacne-protokoly}{{2.4.2}{12}{Aplikačné protokoly}{subsection.2.4.2}{}}
 \citation{mqtt_websocket_comparison}
 \citation{mqtt_websocket_comparison}
 \citation{mqtt_m2m_survey}
@@ -87,8 +89,12 @@
 \citation{rpi4_datasheet}
 \citation{huntington2017}
 \citation{rpi4_datasheet}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}Aplikačné protokoly}{13}{subsection.2.4.2}\protected@file@percent }
-\newlabel{aplikacne-protokoly}{{2.4.2}{13}{Aplikačné protokoly}{subsection.2.4.2}{}}
+\citation{azad2025iot}
+\citation{maier2017esp32}
+\citation{azad2025iot}
+\citation{maier2017esp32}
+\citation{maier2017esp32}
+\citation{maier2017esp32}
 \@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Úrovne kvality služby (QoS) v~MQTT}}{13}{table.caption.3}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{tab:mqtt-qos}{{2.1}{13}{Úrovne kvality služby (QoS) v~MQTT}{table.caption.3}{}}
@@ -96,15 +102,12 @@
 \newlabel{hardverove-platformy}{{2.5}{13}{Hardvérové platformy pre IoT}{section.2.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Jednodoskové počítače (SBC)}{13}{subsection.2.5.1}\protected@file@percent }
 \newlabel{sbc-platformy}{{2.5.1}{13}{Jednodoskové počítače (SBC)}{subsection.2.5.1}{}}
-\citation{azad2025iot}
-\citation{maier2017esp32}
-\citation{azad2025iot}
-\citation{maier2017esp32}
-\citation{maier2017esp32}
-\citation{maier2017esp32}
 \citation{darlington_vs_mosfet}
 \citation{mosfet_h_bridge}
 \citation{darlington_vs_mosfet}
+\citation{ssr_guide}
+\citation{zero_cross_ssr}
+\citation{ssr_zero_cross_transformers}
 \citation{ssr_guide}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}Mikrokontroléry pre koncové uzly}{14}{subsection.2.5.2}\protected@file@percent }
 \newlabel{mikrokontrolery}{{2.5.2}{14}{Mikrokontroléry pre koncové uzly}{subsection.2.5.2}{}}
@@ -114,9 +117,6 @@
 \newlabel{dc-motory}{{2.6.1}{14}{Riadenie jednosmerných (DC) motorov}{subsection.2.6.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.6.2}Spínanie sieťových a~nízkonapäťových záťaží}{14}{subsection.2.6.2}\protected@file@percent }
 \newlabel{spinanie-sietoveho-napatia}{{2.6.2}{14}{Spínanie sieťových a~nízkonapäťových záťaží}{subsection.2.6.2}{}}
-\citation{zero_cross_ssr}
-\citation{ssr_zero_cross_transformers}
-\citation{ssr_guide}
 \citation{computational_frameworks_art}
 \citation{computational_frameworks_art}
 \citation{distributed_control_modeling}
@@ -129,15 +129,15 @@
 \citation{arduinojson_reduce_memory}
 \citation{iot_data_formats_review}
 \citation{partarakis2016adaptable}
-\@writefile{toc}{\contentsline {section}{\numberline {2.7}Prístupy k~riadiacej logike expozície}{15}{section.2.7}\protected@file@percent }
-\newlabel{riadiaca-logika}{{2.7}{15}{Prístupy k~riadiacej logike expozície}{section.2.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.8}Dátové formáty pre konfiguráciu a~prenos}{15}{section.2.8}\protected@file@percent }
-\newlabel{datove-formaty}{{2.8}{15}{Dátové formáty pre konfiguráciu a~prenos}{section.2.8}{}}
 \citation{iec61131}
 \citation{john2010plc}
 \citation{noural2019iot}
 \citation{computational_frameworks_art}
 \citation{interactive_small_museums}
+\@writefile{toc}{\contentsline {section}{\numberline {2.7}Prístupy k~riadiacej logike expozície}{15}{section.2.7}\protected@file@percent }
+\newlabel{riadiaca-logika}{{2.7}{15}{Prístupy k~riadiacej logike expozície}{section.2.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.8}Dátové formáty pre konfiguráciu a~prenos}{15}{section.2.8}\protected@file@percent }
+\newlabel{datove-formaty}{{2.8}{15}{Dátové formáty pre konfiguráciu a~prenos}{section.2.8}{}}
 \citation{mqtt_websocket_comparison}
 \citation{rpi_esp32_scada}
 \citation{distributed_control_modeling}
@@ -239,8 +239,8 @@
 \newlabel{SWESPSpecific}{{5.6.2}{39}{Špecifické funkcionality uzlov}{subsection.5.6.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Spoločná a~špecifická logika uzlov ESP32}}{39}{figure.caption.21}\protected@file@percent }
 \newlabel{fig:sw_esp_compare}{{5.7}{39}{Spoločná a~špecifická logika uzlov ESP32}{figure.caption.21}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.7}Zhrnutie kapitoly}{40}{section.5.7}\protected@file@percent }
-\newlabel{SWZhrnutie}{{5.7}{40}{Zhrnutie kapitoly}{section.5.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.7}Zhrnutie kapitoly}{39}{section.5.7}\protected@file@percent }
+\newlabel{SWZhrnutie}{{5.7}{39}{Zhrnutie kapitoly}{section.5.7}{}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {6}Experimentálne overenie}{41}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -251,15 +251,15 @@
 \newlabel{TestovaneScenare}{{6.2}{41}{Testované scenáre a výsledky}{section.6.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Laboratórny test logiky}{41}{subsection.6.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}Výpadok napájania Raspberry Pi}{41}{subsection.6.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.3}Meranie latencie}{42}{subsection.6.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.3}Meranie latencie}{41}{subsection.6.2.3}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces Latencia MQTT feedbacku pri testovacej scéne}}{42}{table.caption.22}\protected@file@percent }
 \newlabel{tab:latencia_feedback}{{6.1}{42}{Latencia MQTT feedbacku pri testovacej scéne}{table.caption.22}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2.4}Presnosť prepínania}{42}{subsection.6.2.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2.5}Zhodnotenie}{42}{subsection.6.2.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}Záver}{44}{chapter.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Záver}{43}{chapter.7}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{Zaver}{{7}{44}{Záver}{chapter.7}{}}
+\newlabel{Zaver}{{7}{43}{Záver}{chapter.7}{}}
 \@writefile{toc}{\contentsline {chapter}{Zoznam obrázkov}{45}{chapter*.23}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{Zoznam tabuliek}{46}{chapter*.24}\protected@file@percent }
 \bibcite{iec61131}{1}

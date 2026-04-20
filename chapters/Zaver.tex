@@ -1,52 +1,61 @@
 \chapter{Záver}
 \label{Zaver}
 
-Cieľom práce bol návrh a realizácia riadiaceho systému pre interaktívnu
-múzejnú expozíciu na otvorených IoT platformách. Tento cieľ bol splnený
-návrhom, implementáciou a experimentálnym overením systému na reálnej
-inštalácii CHRONOS.
+Práca si kládla za cieľ navrhnúť a~implementovať riadiaci systém
+pre interaktívnu múzejnú expozíciu, ktorý by zvládol synchronizáciu
+fyzických efektov, multimédií a~vetvenie scenára podľa vstupu
+návštevníka -- a~to bez priemyselných PLC a~komerčných show-control
+licencií. Systém bol nasadený na reálnej inštalácii CHRONOS
+a~overený v~podmienkach každodennej múzejnej prevádzky.
 
-Architektonickým jadrom navrhnutého riešenia je konečný stavový automat
-s externou JSON konfiguráciou scenárov, ktorá umožňuje meniť časovanie,
-poradie efektov aj celý priebeh expozície bez zásahu do zdrojového kódu.
-Oddelenie obsahovej vrstvy od implementácie riadiaceho enginu predstavuje
-z pohľadu dlhodobej prevádzky a údržby zásadnú vlastnosť systému.
+\section*{Dosiahnuté výsledky}
 
-Z hardvérového hľadiska sa voľba priemyselných certifikovaných modulov
-pred návrhom vlastných výkonových obvodov v prevádzke osvedčila.
-Počas fyzického testovania sa nevyskytli poruchy spôsobené hardvérovým
-zlyhaním a výmena komponentov nevyžaduje špeciálne znalosti elektroniky.
-Softvérová vrstva dosiahla 100\,\% doručiteľnosť MQTT príkazov
-(Message Queuing Telemetry Transport) pri priemernej latencii feedbacku
-111{,}7\,ms, pričom systém bežal počas viacdenného testovania stabilne
-bez potreby reštartu a scény boli opakovane spustené a dokončené bez chyby.
+Na softvérovej úrovni tvorí jadro riešenia konečný stavový automat
+s~externou JSON konfiguráciou. Scenár expozície -- časovanie, poradie
+efektov, podmienky vetvenia -- je možné meniť editáciou textového
+súboru bez akéhokoľvek zásahu do zdrojového kódu. Toto oddelenie
+obsahovej vrstvy od implementácie enginu je v~praxi kľúčové:
+múzeum môže upravovať scenáre samostatne, bez nutnosti volať
+vývojára. Komunikácia medzi centrálnym Raspberry~Pi a~uzlami ESP32
+cez protokol MQTT dosiahla počas testovania 100\,\% doručiteľnosť
+príkazov pri priemernej latencii spätnej väzby 111{,}7\,ms.
+Systém bežal niekoľko dní bez reštartu a~po výpadku napájania
+sa obnovil do plne funkčného stavu v~priemere za 38 sekúnd.
 
-Experimentálne overenie preukázalo, že navrhnutý systém je schopný
-spoľahlivej prevádzky, predvídateľnej odozvy a automatickej obnovy
-po výpadku napájania bez nutnosti manuálneho zásahu. Kombinácia
-platformy Raspberry~Pi, mikrokontrolérov ESP32 a komunikačného
-protokolu MQTT predstavuje realizovateľnú alternatívu ku komerčným
-show-control systémom aj priemyselným PLC. Systém umožňuje realizovať
-nelineárne vetvenie scenára, synchronizáciu multimédií a riadenie
-výkonových prvkov vrátane sieťového napätia 230\,V. Kľúčovou vlastnosťou
-je schopnosť reagovať na vstupy návštevníka a dynamicky meniť priebeh
-expozície bez blokovania ostatných podmienok prechodu.
+Na hardvérovej úrovni sa rozhodnutie stavať na certifikovaných
+priemyselných moduloch namiesto vlastných dosiek osvedčilo.
+Počas testovania nevznikla žiadna porucha spôsobená hardvérovým
+zlyhaním a~výmena komponentu v~prípade poruchy nevyžaduje znalosti
+elektroniky -- len náhradu kus za kus.
 
-Systém má dve identifikované prevádzkové obmedzenia. Bezdrôtová
-komunikácia vyžaduje oddelenú sieť, pretože jej zdieľanie s verejnosťou
-môže negatívne ovplyvniť odozvu systému. Druhým obmedzením je počiatočná
-konfigurácia nových uzlov, ktorá si vyžaduje fyzický prístup k zariadeniu
-pred prvým nasadením.
+\section*{Obmedzenia}
 
-Do budúcna sa systém otvára viacerým smerom rozvoja. Prvým je rozšírenie
-webového dashboardu o vizuálny editor scenárov, ktorý umožní tvorbu
-scén grafickým spôsobom bez manuálneho editovania konfiguračných súborov.
-Druhým smerom je rozšírenie systému na viacero miestností, čo je
-podporené už samotným návrhom architektúry. Tretím smerom je
-zjednodušenie procesu nasadenia uzlov, keďže hoci aktualizácia firmvéru
-je už dnes riešiteľná bezdrôtovo, počiatočná konfigurácia si stále
-vyžaduje fyzický zásah.
+Systém má dve identifikované obmedzenia. Bezdrôtová Wi-Fi komunikácia
+vyžaduje vyhradenú sieť oddelenú od verejného pripojenia múzea;
+pri zdieľaní siete s~návštevníkmi hrozí degradácia odozvy. Druhým
+obmedzením je prvotná konfigurácia nových uzlov: aktualizácia
+firmvéru prebieha bezdrôtovo, avšak prvé nastavenie sieťových
+parametrov si vyžaduje fyzický prístup k~zariadeniu. Pre jednorázové
+nasadenie ide o~zanedbateľnú záťaž, pri škálovaní na desiatky
+uzlov by však stálo za to tento krok automatizovať.
 
-Výsledky práce potvrdzujú, že navrhnutý systém predstavuje spoľahlivé,
-flexibilné a prakticky nasaditeľné riešenie, ktoré vytvára vhodný základ
-pre ďalší rozvoj riadiacich systémov interaktívnych expozícií.
+\section*{Výhľad do budúcna}
+
+Najväčší priestor na rozvoj vidím v~rozšírení stavového automatu
+o~perzistentné dáta v~rámci scény. Aktuálna implementácia
+neuchováva stav medzi prechodmi; pridanie jednoduchého kľúč-hodnota
+slovníka by otvorilo celú triedu nových scenárov -- napríklad
+kvízové expozície, kde sa v~priebehu scény zbierajú body
+a~záverečný stav (správna alebo nesprávna odpoveď, výsledné
+skóre) určuje, do ktorého stavu automat prejde. Súvisiacim
+rozšírením sú náhodné prechody: namiesto deterministickej
+sekvencie by systém pri každom spustení mohol vybrať inú vetvu
+scenára, čím sa predíde stereotypu pri opakovaných návštevách.
+
+Druhým smerom je vizuálny editor scenárov, ktorý by nahradil
+manuálne editovanie JSON súborov grafickým rozhraním. Scenár
+by sa skladal z~blokov a~šípok priamo v~prehliadači -- bez
+znalosti formátu konfiguračného súboru. Rozšírenie systému
+na viacero miestností je z~architektonického hľadiska
+pripravené: vyžaduje len pridanie nových uzlov a~konfiguráciu
+príslušných topikov, nie zmenu kódu enginu.

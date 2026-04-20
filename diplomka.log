@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  20 APR 2026 12:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  20 APR 2026 18:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -767,7 +767,7 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'slovak'.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 40
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 41
 .
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -778,24 +778,24 @@ Package babel Info: 'slovak' activates 'slovak' shorthands.
 )
 \openout1 = `diplomka.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
@@ -865,7 +865,7 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 40.
+Package hyperref Info: Link coloring ON on input line 41.
 (diplomka.out) (diplomka.out)
 \@outlinefile=\write4
 \openout4 = `diplomka.out'.
@@ -877,7 +877,7 @@ n: found PDF version <1.7>, but at most version <1.5> allowed
 <pages/TitulniList_color.pdf, id=243, 597.51233pt x 845.0471pt>
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf>
-Package pdftex.def Info: pages/TitulniList_color.pdf  used on input line 44.
+Package pdftex.def Info: pages/TitulniList_color.pdf  used on input line 45.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
 
 
@@ -891,27 +891,27 @@ n: found PDF version <1.7>, but at most version <1.5> allowed
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf, page 1>
 Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
- 44.
+ 45.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf, page 1>
 Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
- 44.
+ 45.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf, page 1>
 Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
- 44.
+ 45.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf, page 1>
 Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
- 44.
+ 45.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf, page 1>
 Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
- 44.
+ 45.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 [1
 
@@ -927,7 +927,7 @@ File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
- used on input line 44.
+ used on input line 45.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
 
 
@@ -945,31 +945,31 @@ File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 1>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page1 used on input line 44.
+, page1 used on input line 45.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 1>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page1 used on input line 44.
+, page1 used on input line 45.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 1>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page1 used on input line 44.
+, page1 used on input line 45.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 1>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page1 used on input line 44.
+, page1 used on input line 45.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 1>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page1 used on input line 44.
+, page1 used on input line 45.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 [2
 
@@ -984,77 +984,78 @@ File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 2>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page2 used on input line 44.
+, page2 used on input line 45.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 2>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page2 used on input line 44.
+, page2 used on input line 45.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
 <use pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, page 2>
 Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf 
-, page2 used on input line 44.
+, page2 used on input line 45.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 [3
 
  <./pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 83--83
+Underfull \hbox (badness 10000) in paragraph at lines 84--84
 
  []
 
 [4{C:/Users/Wajdy/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Wa
-jdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}] [5]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 9
-7.
+jdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}] [5] [6]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
+03.
 
-(C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
-File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [6{C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc
-}] [7]
-(diplomka.toc
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 5
-.
+(C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
+03.
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 5
-.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+03.
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-5.
+103.
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-5.
+103.
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 5.
+(Font)              <12> on input line 103.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 5.
+(Font)              <8> on input line 103.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 5.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 5.
+(Font)              <6> on input line 103.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 103
+.
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 5.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 103
+.
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+[7] (diplomka.toc
 Underfull \vbox (badness 1681) has occurred while \output is active []
 
 
@@ -1075,28 +1076,41 @@ Kapitola 1.
 
 ]
 Kapitola 2.
-
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 4
+6.
+(C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
 Overfull \hbox (4.92735pt too wide) in paragraph at lines 46--54
 []\T1/lmr/bx/n/12 Centralizovaná to-po-ló-gia: \T1/lmr/m/n/12 Jedna cen-trálna 
 jed-notka priamo ovláda v²etky vstupné
  []
 
-[10
 
-]
-<obr/Star_topology.png, id=402, 563.85657pt x 423.08063pt>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10
+
+{C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
+<obr/Star_topology.png, id=404, 563.85657pt x 423.08063pt>
 File: obr/Star_topology.png Graphic file (type png)
 <use obr/Star_topology.png>
 Package pdftex.def Info: obr/Star_topology.png  used on input line 70.
 (pdftex.def)             Requested size: 207.58878pt x 155.7627pt.
-<obr/Pyramid_topology.png, id=404, 563.85657pt x 381.67593pt>
+<obr/Pyramid_topology.png, id=406, 563.85657pt x 381.67593pt>
 File: obr/Pyramid_topology.png Graphic file (type png)
 <use obr/Pyramid_topology.png>
 Package pdftex.def Info: obr/Pyramid_topology.png  used on input line 76.
 (pdftex.def)             Requested size: 207.58878pt x 140.51901pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 Package babel Info: 'slovak' activates 'slovak' shorthands.
 (babel)             Reported on input line 138.
- [11 <./obr/Star_topology.png> <./obr/Pyramid_topology.png>] [12]
+ [11 <./obr/Star_topology.png> <./obr/Pyramid_topology.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [12]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [13{C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}
@@ -1110,54 +1124,60 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [15])
 (chapters/Architektura.tex [16]
 Kapitola 3.
-[17
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17
 
 ]
 
 pdfTeX warning: pdflatex.exe (file ./obr/ARCH/system_topology.pdf): PDF inclusi
 on: found PDF version <1.7>, but at most version <1.5> allowed
-<obr/ARCH/system_topology.pdf, id=547, 442.53331pt x 233.9139pt>
+<obr/ARCH/system_topology.pdf, id=549, 442.53331pt x 233.9139pt>
 File: obr/ARCH/system_topology.pdf Graphic file (type pdf)
 <use obr/ARCH/system_topology.pdf>
-Package pdftex.def Info: obr/ARCH/system_topology.pdf  used on input line 66.
+Package pdftex.def Info: obr/ARCH/system_topology.pdf  used on input line 68.
 (pdftex.def)             Requested size: 409.71692pt x 216.56683pt.
-[18 <./obr/ARCH/system_topology.pdf>]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [18 <./obr/ARCH/system_topology.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./obr/ARCH/FSM_Architektura.pdf): PDF inclus
 ion: found PDF version <1.7>, but at most version <1.5> allowed
-<obr/ARCH/FSM_Architektura.pdf, id=573, 436.5108pt x 139.4811pt>
+<obr/ARCH/FSM_Architektura.pdf, id=575, 436.5108pt x 139.4811pt>
 File: obr/ARCH/FSM_Architektura.pdf Graphic file (type pdf)
 <use obr/ARCH/FSM_Architektura.pdf>
-Package pdftex.def Info: obr/ARCH/FSM_Architektura.pdf  used on input line 131.
+Package pdftex.def Info: obr/ARCH/FSM_Architektura.pdf  used on input line 133.
 
 (pdftex.def)             Requested size: 409.71692pt x 130.92068pt.
 
-Overfull \hbox (6.35115pt too wide) in paragraph at lines 140--146
+Overfull \hbox (6.35115pt too wide) in paragraph at lines 142--148
 \T1/lmr/m/n/12 bol zvo-lený \T1/lmr/bx/n/12 pro-to-kol MQTT \T1/lmr/m/n/12 (\T1
 /lmr/m/it/12 Mes-sage Qu-e-uing Te-le-metry Tran-s-port\T1/lmr/m/n/12 ) (vi¤ ka
 -pi-tola [][]2.4.2[][]).
  []
 
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-64.
-(C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [19 <./obr/ARCH/FSM_Architektura.pdf>]
+
 
 pdfTeX warning: pdflatex.exe (file ./obr/ARCH/Mqtt_Flow.pdf): PDF inclusion: fo
 und PDF version <1.7>, but at most version <1.5> allowed
-<obr/ARCH/Mqtt_Flow.pdf, id=591, 746.79pt x 566.115pt>
+<obr/ARCH/Mqtt_Flow.pdf, id=579, 746.79pt x 566.115pt>
 File: obr/ARCH/Mqtt_Flow.pdf Graphic file (type pdf)
 <use obr/ARCH/Mqtt_Flow.pdf>
-Package pdftex.def Info: obr/ARCH/Mqtt_Flow.pdf  used on input line 173.
+Package pdftex.def Info: obr/ARCH/Mqtt_Flow.pdf  used on input line 175.
 (pdftex.def)             Requested size: 409.71692pt x 310.58678pt.
-) (chapters/Implementacia_hw.tex [20 <./obr/ARCH/Mqtt_Flow.pdf>]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [19 <./obr/ARCH/FSM_Architektura.pdf>]) (chapters/Implementacia_hw.tex [20 <./
+obr/ARCH/Mqtt_Flow.pdf>]
 Kapitola 4.
 
 
 pdfTeX warning: pdflatex.exe (file ./obr/HW/RPI_HW.pdf): PDF inclusion: found P
 DF version <1.7>, but at most version <1.5> allowed
-<obr/HW/RPI_HW.pdf, id=620, 399.41219pt x 117.3183pt>
+<obr/HW/RPI_HW.pdf, id=621, 399.41219pt x 117.3183pt>
 File: obr/HW/RPI_HW.pdf Graphic file (type pdf)
 <use obr/HW/RPI_HW.pdf>
 Package pdftex.def Info: obr/HW/RPI_HW.pdf  used on input line 21.
@@ -1168,12 +1188,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [21
 
  <./obr/HW/RPI_HW.pdf>]
-<obr/HW/main_box_photo.jpeg, id=644, 1541.76pt x 867.24pt>
+<obr/HW/main_box_photo.jpeg, id=645, 1541.76pt x 867.24pt>
 File: obr/HW/main_box_photo.jpeg Graphic file (type jpg)
 <use obr/HW/main_box_photo.jpeg>
 Package pdftex.def Info: obr/HW/main_box_photo.jpeg  used on input line 44.
 (pdftex.def)             Requested size: 386.96027pt x 217.65637pt.
-<obr/HW/Motor_Schema.png, id=648, 1084.80281pt x 575.90157pt>
+<obr/HW/Motor_Schema.png, id=649, 1084.80281pt x 575.90157pt>
 File: obr/HW/Motor_Schema.png Graphic file (type png)
 <use obr/HW/Motor_Schema.png>
 Package pdftex.def Info: obr/HW/Motor_Schema.png  used on input line 72.
@@ -1207,13 +1227,16 @@ Overfull \hbox (0.43938pt too wide) in paragraph at lines 119--127
 dol-nosti bol zvo-lený prie-my-selný \T1/lmr/bx/n/12 19mm
  []
 
-[24]
-<obr/HW/button_photo.jpg, id=672, 3982.88pt x 2240.37pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [24]
+<obr/HW/button_photo.jpg, id=673, 3982.88pt x 2240.37pt>
 File: obr/HW/button_photo.jpg Graphic file (type jpg)
 <use obr/HW/button_photo.jpg>
 Package pdftex.def Info: obr/HW/button_photo.jpg  used on input line 138.
 (pdftex.def)             Requested size: 218.51521pt x 122.89597pt.
-<obr/HW/Button_Schema.png, id=673, 968.11688pt x 665.48625pt>
+<obr/HW/Button_Schema.png, id=674, 968.11688pt x 665.48625pt>
 File: obr/HW/Button_Schema.png Graphic file (type png)
 <use obr/HW/Button_Schema.png>
 Package pdftex.def Info: obr/HW/Button_Schema.png  used on input line 144.
@@ -1255,7 +1278,7 @@ If that doesn't work, type  X <return>  to quit.
 on_Schema.png>] [26] [27]
 Kapitola 5.
 <obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png, id=6
-94, 1236.0579pt x 761.9667pt>
+95, 1236.0579pt x 761.9667pt>
 File: obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png 
 Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png>
@@ -1272,7 +1295,7 @@ Overfull \hbox (17.56317pt too wide) in paragraph at lines 78--86
  []
 
 <obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_final
-.png, id=705, 799.5471pt x 844.5954pt>
+.png, id=706, 799.5471pt x 844.5954pt>
 File: obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_
 final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_f
@@ -1297,12 +1320,16 @@ Overfull \hbox (44.27148pt too wide) in paragraph at lines 111--117
 ager
  []
 
-[30
 
-] [31 <./obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecyc
-le_final.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [30
+
+]
+[31 <./obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle
+_final.png>]
 <obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick_flow
-_final.png, id=718, 846.16125pt x 806.01125pt>
+_final.png, id=719, 846.16125pt x 806.01125pt>
 File: obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick
 _flow_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick_
@@ -1318,7 +1345,7 @@ k-cie re-a-li-zo-vané ako \T1/lmtt/m/n/12 threading.Timer
  []
 
 <obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_structure
-_final_html.png, id=730, 1038.12843pt x 677.53125pt>
+_final_html.png, id=731, 1038.12843pt x 677.53125pt>
 File: obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_stru
 cture_final_html.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_struc
@@ -1329,7 +1356,7 @@ Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_
 [34] [35 <./obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scen
 e_structure_final_html.png>]
 <obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_runti
-me_final.png, id=741, 588.7596pt x 558.6471pt>
+me_final.png, id=742, 588.7596pt x 558.6471pt>
 File: obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_
 runtime_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_r
@@ -1362,27 +1389,35 @@ If that doesn't work, type  X <return>  to quit.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [38]
-[39]) (chapters/Experimenty.tex [40]
+ [38])
+(chapters/Experimenty.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [39]
+[40]
 Kapitola 6.
 
-Overfull \hbox (28.97551pt too wide) in paragraph at lines 51--54
-\T1/lmr/m/n/12 te©-nos´ do-siahla 100%. Me-ra-nie uká-zalo, ºe naj-rých-lej-²ie
- od-po-vede boli pri \T1/lmtt/m/n/12 room1/light/1
+Overfull \hbox (32.54126pt too wide) in paragraph at lines 53--58
+\T1/lmr/m/n/12 te©-nos´ do-siahla 100%. Naj-rých-lej-²ie od-po-ve-dali vý-stupy
+ \T1/lmtt/m/n/12 room1/light/1 \T1/lmr/m/n/12 a \T1/lmtt/m/n/12 room1/light/2
  []
 
 
-Underfull \vbox (badness 2846) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [41
 
 {C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}
 ])
-(chapters/Zaver.tex [42] [43]
+(chapters/Zaver.tex [42]
 Kapitola 7.
-) [44
 
-] (diplomka.lof)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [43
+
+])
+[44] (diplomka.lof)
 \tf@lof=\write6
 \openout6 = `diplomka.lof'.
 
@@ -1555,11 +1590,11 @@ Package rerunfilecheck Info: File `diplomka.out' has not changed.
 Here is how much of TeX's memory you used:
  20413 strings out of 467871
  342292 string characters out of 5418377
- 874833 words of memory out of 5000000
+ 874933 words of memory out of 5000000
  48735 multiletter control sequences out of 15000+600000
  694379 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,17n,93p,519b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 78i,17n,93p,438b,718s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
 b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.p
 fb><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.p
@@ -1570,9 +1605,9 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (51 pages, 5971718 bytes).
+Output written on diplomka.pdf (51 pages, 5971991 bytes).
 PDF statistics:
- 989 PDF objects out of 1000 (max. 8388607)
+ 991 PDF objects out of 1000 (max. 8388607)
  170 named destinations out of 1000 (max. 500000)
  591 words of extra memory for PDF output out of 10000 (max. 10000000)
 

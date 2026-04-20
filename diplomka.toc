@@ -10,7 +10,7 @@
 \contentsline {subsection}{\numberline {2.3.3}Otvorené systémy na báze IoT platforiem}{12}{subsection.2.3.3}%
 \contentsline {section}{\numberline {2.4}Komunikačné protokoly}{12}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}Prenosové médiá: drôtové vs. bezdrôtové}{12}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Aplikačné protokoly}{13}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.2}Aplikačné protokoly}{12}{subsection.2.4.2}%
 \contentsline {section}{\numberline {2.5}Hardvérové platformy pre IoT}{13}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}Jednodoskové počítače (SBC)}{13}{subsection.2.5.1}%
 \contentsline {subsection}{\numberline {2.5.2}Mikrokontroléry pre koncové uzly}{14}{subsection.2.5.2}%
@@ -46,16 +46,16 @@
 \contentsline {section}{\numberline {5.6}Firmvér uzlov ESP32}{39}{section.5.6}%
 \contentsline {subsection}{\numberline {5.6.1}Spoločná infraštruktúra uzlov}{39}{subsection.5.6.1}%
 \contentsline {subsection}{\numberline {5.6.2}Špecifické funkcionality uzlov}{39}{subsection.5.6.2}%
-\contentsline {section}{\numberline {5.7}Zhrnutie kapitoly}{40}{section.5.7}%
+\contentsline {section}{\numberline {5.7}Zhrnutie kapitoly}{39}{section.5.7}%
 \contentsline {chapter}{\numberline {6}Experimentálne overenie}{41}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Popis fyzického testovania a~testovacieho prostredia}{41}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Testované scenáre a výsledky}{41}{section.6.2}%
 \contentsline {subsection}{\numberline {6.2.1}Laboratórny test logiky}{41}{subsection.6.2.1}%
 \contentsline {subsection}{\numberline {6.2.2}Výpadok napájania Raspberry Pi}{41}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Meranie latencie}{42}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.3}Meranie latencie}{41}{subsection.6.2.3}%
 \contentsline {subsection}{\numberline {6.2.4}Presnosť prepínania}{42}{subsection.6.2.4}%
 \contentsline {subsection}{\numberline {6.2.5}Zhodnotenie}{42}{subsection.6.2.5}%
-\contentsline {chapter}{\numberline {7}Záver}{44}{chapter.7}%
+\contentsline {chapter}{\numberline {7}Záver}{43}{chapter.7}%
 \contentsline {chapter}{Zoznam obrázkov}{45}{chapter*.23}%
 \contentsline {chapter}{Zoznam tabuliek}{46}{chapter*.24}%
 \contentsline {chapter}{Použitá literatúra}{47}{section*.25}%
