@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  21 APR 2026 10:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  21 APR 2026 11:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1385,16 +1385,20 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ] (chapters/SeznamZkratek.tex
 Kapitola 8.
-) [47
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [47
 
 
-] (chapters/Literatura.tex
+])
+[48] (chapters/Literatura.tex
 Underfull \hbox (badness 1789) in paragraph at lines 22--28
 \T1/lmr/m/n/12 stupné z: [][]$\T1/lmtt/m/n/12 https : / / scholarsbank . uorego
 n . edu / server / api / core / bitstreams /
  []
 
-[48
+[49
 
 
 ]
@@ -1421,7 +1425,7 @@ Underfull \hbox (badness 1789) in paragraph at lines 161--166
 d / index . php / bt / article / download / 3223 /
  []
 
-[49]
+[50]
 Underfull \hbox (badness 1112) in paragraph at lines 179--183
 \T1/lmr/m/n/12 03-15]. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / www . rese
 archgate . net / publication / 373640610 _
@@ -1511,7 +1515,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 244--250
 -[]to-[]Device _ Data _
  []
 
-[50]
+[51]
 Underfull \hbox (badness 10000) in paragraph at lines 256--263
 []\T1/lmr/m/n/12 CELERDATA. YAML, JSON and XML: A Prac-ti-cal Gu-ide
  []
@@ -1534,7 +1538,7 @@ Underfull \hbox (badness 3323) in paragraph at lines 264--268
  [on-
  []
 
-) [51] 
+) [52] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (diplomka.aux)
  ***********
@@ -1545,8 +1549,8 @@ Package rerunfilecheck Info: File `diplomka.out' has not changed.
 (rerunfilecheck)             Checksum: 902DA762AD027EC70D8E5B3776CA2A9D;13029.
  ) 
 Here is how much of TeX's memory you used:
- 20431 strings out of 467871
- 342301 string characters out of 5418377
+ 20432 strings out of 467871
+ 342308 string characters out of 5418377
  875006 words of memory out of 5000000
  48747 multiletter control sequences out of 15000+600000
  694379 words of font info for 83 fonts, out of 8000000 for 9000
@@ -1562,9 +1566,9 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (52 pages, 6798966 bytes).
+Output written on diplomka.pdf (53 pages, 6799984 bytes).
 PDF statistics:
- 1008 PDF objects out of 1200 (max. 8388607)
- 173 named destinations out of 1000 (max. 500000)
+ 1012 PDF objects out of 1200 (max. 8388607)
+ 174 named destinations out of 1000 (max. 500000)
  609 words of extra memory for PDF output out of 10000 (max. 10000000)
 
