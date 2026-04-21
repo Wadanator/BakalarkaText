@@ -2,7 +2,7 @@
 
 Táto kapitola opisuje hardvérovú realizáciu navrhnutého riadiaceho
 systému pre konkrétny exponát s názvom ``Chronos''. Jednotlivé uzly sú rozdelené podľa svojej funkčnej
-zodpovednosti --- centrálna jednotka (Raspberry Pi 4 Model B 4GB RAM) zabezpečuje riadiacu logiku
+zodpovednosti --- centrálna jednotka (Raspberry Pi 4 Model B 4\,GB RAM) zabezpečuje riadiacu logiku
 a~audio~výstup, distribuované uzly na báze ESP32 zabezpečujú
 ovládanie motorov, relé a~senzorickú detekciu vstupu návštevníka.
 
@@ -27,7 +27,7 @@ Na napájanie Raspberry Pi bol použitý USB-C adaptér --- 5,0\,V / 3,0\,A.
 Riadiaca logika expozície bola decentralizovaná do niekoľkých
 samostatných uzlov postavených na mikrokontroléroch
 rodiny ESP32 (viď kapitola~\ref{mikrokontrolery}). Všetky uzly komunikujú s~Raspberry Pi cez Wi-Fi.
-Motorický aj tlačidlový uzol bežia na ESP32 DevKit V1 a~zdieľajú spoločný firmvérový základ pre Wi-Fi, MQTT, LWT, feedback a~globálny príkaz STOP; líšia sa len perifériami a~rolou v~systéme.
+Motorický aj tlačidlový uzol bežia na ESP32 DevKit V1.
 
 Hlavná riadiaca elektronika (uzly pre ovládanie motorov a~spínanie relé)
 bola umiestnená spoločne vo vnútri inštalačného rozvádzača (Obr.~\ref{fig:main_control_box}), ktorý je fyzicky
@@ -37,7 +37,7 @@ hlavný jednosmerný spínaný zdroj (menič 230\,V\,AC na 12\,V\,DC s~výkonom 
 Táto 12\,V vetva napájala reléový modul Waveshare s~integrovaným ESP32-S3. 
 Z~rovnakej 12\,V vetvy bol cez znižujúci DC/DC menič (step-down z~12\,V na 5\,V) 
 napájaný mikrokontrolér ESP32 v~motorickom uzle, zatiaľ čo výkonové H-mostíky
-pre motory boli napájané priamo z~12\,V. V~rozvodnej skrini boli zároveň osadené napájacie zásuvky 230\,V a~konektory na pripojenie jednotlivých zariadení a~motorov.
+pre motory boli napájané priamo z~12\,V. V~rozvodnej skrini boli zároveň osadené napájacie zásuvky 230\,V a~konektory typu GX na pripojenie jednotlivých zariadení a~motorov.
 
 \begin{figure}[htbp]
     \centering
@@ -52,7 +52,7 @@ Tlačidlový uzol pre používateľský vstup bol namontovaný oddelene pri vstu
 Pre ovládanie pohonov exponátov bol navrhnutý samostatný motorický uzol.
 Jeho hardvérová architektúra bola navrhnutá tak, aby pokrývala celý rozsah požiadaviek od príjmu
 riadiacej logiky až po silové spínanie a~generovanie výkonového PWM signálu
-pre dva nezávislé jednosmerné (DC) motory. Konkrétne fyzické exponáty, ktoré
+pre dva nezávislé jednosmerné motory. Konkrétne fyzické exponáty, ktoré
 tento uzol poháňa, sú popísané v~kapitole~\ref{MechanickaKonstrukcia}.
 
 Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov (Obr.~\ref{fig:motor_schema}):
@@ -64,7 +64,7 @@ Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov (Obr.~\
     \item \textbf{2x Výkonový budič BTS7960B:} Polovodičový H-mostík slúži na
         riadenie výkonu motorov (viď kapitola~\ref{dc-motory}). Tento masívne
         dimenzovaný obvod bezpečne odoláva vysokým prúdovým špičkám pri
-        rozbehoch (až do 43\,A).
+        rozbehoch (do 43\,A). H-mostík teda umožnuje ovládať širokú škálu jednosmerných motorov.
 \end{itemize}
 
 \begin{figure}[H]
@@ -79,22 +79,21 @@ Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov (Obr.~\
 
 Na spínanie záťaží ostatných prvkov expozície slúži reléový uzol (Obr.~\ref{fig:relay_schema}):
 \begin{itemize}
-    \item \textbf{Priemyselný I/O modul Waveshare:} Základom tohto uzla bol
-        komerčný hotový modul s~čipom \textbf{ESP32-S3} a~integrovanými relé
-        (viď Obr.~\ref{fig:main_control_box}). Obsahuje integrovanú
+    \item \textbf{Priemyselný I/O modul Waveshare:} Základom tohto uzla je
+        komerčný modul s~čipom \textbf{ESP32-S3} a~integrovanými relé
+        (viď Obr.~\ref{fig:main_control_box}). Obsahuje natívnu
         podporu pre \textit{Power over Ethernet} (PoE) a~zbernicu RS485.
         Napriek výhodám polovodičových relé (SSR) v~oblasti životnosti a~akustického hluku (viď kapitola~\ref{spinanie-sietoveho-napatia})
-        bola zvolená táto certifikovaná doska s~mechanickými relé, a~to primárne z~dôvodu bezpečnosti a~jednoduchej výmeny v~múzejnej prevádzke.
-        V~prípade hardvérového zlyhania v~múzejnej prevádzke umožňuje technikom
-        okamžitú a~bezpečnú výmenu \uv{kus za kus}.
+        bola zvolená táto certifikovaná doska s~mechanickými relé. Hlavným dôvodom 
+        bola jednoduchá inštalácia, expandovateľnosť a vyššia bezpečnosť a spoľahlivosť ako pri vlastnoručne zostavených riešeniach.
     \item \textbf{10\,A mechanické relé:} Modul disponuje ôsmimi nezávislými
-        relé. Spínajú priamo striedavé
-        230\,V na chod dekoratívnej \textbf{Edisonovej žiarovky},
+        relé. Časť z~nich spína priamo striedavé sieťové napätie
+        230\,V pre chod dekoratívnej \textbf{Edisonovej žiarovky},
         \textbf{výrobníka dymu} (ktorý vháňa paru do potrubia)
-        a~tiež \textbf{svetlo simulujúce oheň} v~kotle.
-        Ďalšou sekciou je spínanie jednosmernej 12\,V vetvy určenej na
-        napájanie podsvietenia dvoch oddelených skupín \textbf{industriálnych
-        analógových budíkov} a~LED pásov na podsvietenie exponátu.
+        a~taktiež \textbf{svetla simulujúceho oheň} v~kotle.
+        Zvyšné relé slúžia na spínanie jednosmernej 12\,V vetvy, ktorá
+        napája LED pásy a~podsvietenie dvoch oddelených skupín 
+        \textbf{industriálnych analógových budíkov}.
 \end{itemize}
 
 \begin{figure}[H]
@@ -107,28 +106,24 @@ Na spínanie záťaží ostatných prvkov expozície slúži reléový uzol (Obr
 
 \subsection{Vstupný tlačidlový uzol}\label{UzolSenzorov}
 
-Fyzický vstup zameraný na interakciu s~návštevníkmi je spracovaný
-samostatným uzlom (Obr.~\ref{fig:button_photo}, Obr.~\ref{fig:button_schema}):
+Fyzickú interakciu s~návštevníkmi zabezpečuje samostatný vstupný uzol 
+(Obr.~\ref{fig:button_photo}, Obr.~\ref{fig:button_schema}):
 \begin{itemize}
     \item \textbf{Samostatný mikrokontrolér:} Na vstupnom mieste pred
-        stenou je fyzicky osadená inštalačná krabička. Táto disponuje vlastným
-        mikrokontrolérom ESP32 DevKit V1, ktorý je napájaný z 5\,V sieťového adaptéra.
-        V~tej istej krabičke je osadený aj MOSFET spínací modul pre riadenie
-        LED prstenca tlačidla.
-
-    \item \textbf{Antivandal tlačidlo:} Kvôli zabezpečeniu odolnosti bol zvolený
-        priemyselný \textbf{19\,mm vodotesný kovový spínač}, ktorý je
-        prepojený s~krabičkou riadiaceho modulu pomocou leteckého
-        konektora typu \textbf{GX12 (4-pin)}. Dva piny konektora sú využité
-        ako kontakt spínača a~ďalšie dva piny zabezpečujú napájanie LED
-        prstenca tlačidla. Spínač slúži ako prvotný štartovací
-        impulz pre chod scény. Na pinoch \textbf{GPIO\,32} je využitý
-        \textbf{externý pull-up rezistor}.
-    \item \textbf{Riadenie LED prstenca cez MOSFET spínač:} LED prstenec
-        bol riadený cez kompaktný MOSFET PWM modul s~tranzistorom F5305S
-        (viď kapitola~\ref{dc-motory}), čím bola GPIO periféria
-        mikrokontroléra chránená pred prúdovým preťažením a~zároveň bolo
-        umožnené PWM stmievanie pre rôzne signalizačné režimy.
+        stenou je umiestnená inštalačná krabička. Jej základom je vlastný 
+        mikrokontrolér ESP32 DevKit V1, ktorý je napájaný z~5\,V sieťového adaptéra.
+        V~tejto krabičke sa nachádza aj MOSFET modul pre riadenie
+        podsvietenia tlačidla.
+    \item \textbf{Antivandal tlačidlo:} Pre zabezpečenie vysokej mechanickej odolnosti bol zvolený
+        priemyselný \textbf{19\,mm vodotesný kovový spínač}. S~riadiacou krabičkou 
+        je prepojený pomocou odolného leteckého konektora typu \textbf{GX12 (4-pin)}. 
+        Dva piny konektora slúžia ako kontakt spínača a~zvyšné dva zabezpečujú napájanie 
+        LED prstenca. Spínač slúži ako prvotný štartovací impulz pre chod scény. 
+        Na pine \textbf{GPIO\,32} je zapojený \textbf{externý pull-up rezistor}.
+    \item \textbf{Riadenie LED prstenca cez MOSFET:} Aby bola GPIO periféria mikrokontroléra 
+        chránená pred prúdovým preťažením, LED prstenec je riadený cez kompaktný 
+        MOSFET PWM modul s~tranzistorom F5305S (viď kapitola~\ref{dc-motory}). 
+        Toto riešenie zároveň umožňuje plynulé PWM stmievanie pre vytváranie rôznych signalizačných režimov.
 \end{itemize}
 
 \begin{figure}[htbp]
