@@ -35,8 +35,17 @@ Súbory sú referencované v texte, ale neexistujú:
 
 ## 5. Citácie
 
+*(Celková kontrola: umiestenie citácií pred interpunkciou je v celom texte v poriadku — žiadne citácie za bodkou.)*
+
+### Chýbajúce citácie
+
+- [ ] **`Resers.tex`, I2C expandéry** — veta *"Na rozšírenie výstupnej kapacity sa využívajú I2C expandéry, ktoré cez dvojvodičovú zbernicu sprístupňujú dodatočné výstupy bez obsadenia všetkých GPIO pinov."* nemá citáciu. Doplniť `\cite{maier2017esp32}` pred bodku.
+- [ ] **`Resers.tex`, Zhrnutie rešerše** — veta *"Konfigurácia vo formáte JSON poskytuje ľahko editovateľné definície stavov a prechodov bez nutnosti zásahu do zdrojového kódu."* nemá citáciu (v tele kapitoly bol fakt citovaný). Doplniť `\cite{iot_data_formats_review, partarakis2016adaptable}`, alebo vetu preformulovať ako záver z vlastnej analýzy (bez citácie).
+- [ ] **BTS7960B** *"do 43 A"* — chýba citácia datasheetu (Infineon BTS7960B datasheet).
+
+### Nesprávne zdroje
+
 - [ ] `\cite{noural2019iot}` je použité na podporu tvrdenia o vendor lock-in show-control systémov, ale zdroj je článok o software-defined networking — nesúvisí. Nájsť priamejší zdroj alebo citáciu odstrániť.
-- [ ] BTS7960B *"do 43 A"* — chýba citácia datasheetu (Infineon BTS7960B datasheet).
 
 ---
 
@@ -69,15 +78,11 @@ Všetky nahradiť opisom funkcie (napr. namiesto "`force_all_off()`" napísať *
 
 ## 9. Experimenty — chyby v interpretácii
 
-- [ ] Sekcia *Meranie latencie* prepisuje čísla z tabuľky do textu (*"Najrýchlejšie odpovedali výstupy room1/light/1 a room1/light/2 (priemer okolo 82 ms)..."*) — podľa General_text_instruction sa na tabuľku len odkazuje, text má ísť priamo k interpretácii. Preformulovať.
 - [ ] **Chýba porovnanie s literatúrou**: rešerše uvádza MQTT latenciu 11,04 ms (zdroj `mqtt_websocket_comparison`), namerané je 111,7 ms — teda 10× viac. Rozdiel je pochopiteľný (iné podmienky: feedback round-trip vs. jednosmerná latencia), ale mal by byť v diskusii vysvetlený, inak to pôsobí ako rozpor s vlastnou rešeršou.
-- [ ] *"rozdiel pravdepodobne súvisí s internou obsluhou relé"* — vágne. Buď stručne overiť/vysvetliť mechanizmus, alebo formuláciu zmeniť na *"príčina nebola ďalej skúmaná"*.
 
 ---
 
 ## 10. Drobnosti
 
-- [ ] **PCF8574 v rešerši bez využitia v HW kapitole**: I2C expandéry (PCF8574) sú zmienené v rešerši ako príklad rozšírenia GPIO, ale v kapitole Implementácia HW sa vôbec nevyskytujú. Ak sa v projekte nepoužili, vetu z rešerše odstrániť alebo generalizovať (bez konkrétneho čipu).
 - [ ] **"Vite" bez vysvetlenia**: `Implementacia_sw.tex` — *"Frontend je realizovaný ako React SPA (Vite)"* — Vite je build nástroj, nie framework; pri prvom použití doplniť jednoslušnú charakteristiku v zátvorke.
-- [ ] **"masívne dimenzovaný obvod"** (`Implementacia_hw.tex`, sekcia BTS7960B) — neakademický výraz. Nahradiť napr. *"obvod dimenzovaný na vysoké prúdové špičky"*.
 - [ ] **Popisok obrázku dashboardu**: `fig:sw_dashboard_screenshot` má popisok len *"Hlavná stránka"* — príliš vágne. Doplniť napr. *"Hlavná stránka webového dashboardu s prehľadom stavu zariadení"*.
