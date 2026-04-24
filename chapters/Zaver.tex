@@ -13,10 +13,7 @@ a~overený v~podmienkach každodennej múzejnej prevádzky.
 Na softvérovej úrovni tvorí jadro riešenia konečný stavový automat
 s~externou JSON konfiguráciou. Scenár expozície -- časovanie, poradie
 efektov, podmienky vetvenia -- je možné meniť editáciou textového
-súboru bez akéhokoľvek zásahu do zdrojového kódu. Toto oddelenie
-obsahovej vrstvy od implementácie enginu je v~praxi kľúčové:
-múzeum môže upravovať scenáre samostatne, bez nutnosti volať
-vývojára. Komunikácia medzi centrálnym Raspberry~Pi a~uzlami ESP32
+súboru bez akéhokoľvek zásahu do zdrojového kódu. Komunikácia medzi centrálnym Raspberry~Pi a~uzlami ESP32
 cez protokol MQTT dosiahla počas testovania 100\,\% doručiteľnosť
 príkazov pri priemernej latencii spätnej väzby 111{,}7\,ms.
 Systém bežal niekoľko dní bez reštartu a~po výpadku napájania
@@ -59,3 +56,14 @@ znalosti formátu konfiguračného súboru. Rozšírenie systému
 na viacero miestností je z~architektonického hľadiska
 pripravené: vyžaduje len pridanie nových uzlov a~konfiguráciu
 príslušných topikov, nie zmenu kódu enginu.
+
+Tretím smerom je využitie hardvérových rozhraní, ktoré reléový
+uzol síce poskytuje, no v~tejto inštalácii neboli potrebné.
+Konkrétne ide o~natívnu podporu \textit{Power over Ethernet}
+(PoE) a~zbernicu RS485. V~budúcich nasadeniach, kde nie je
+k~dispozícii spoľahlivá Wi-Fi sieť, by PoE umožnilo drôtové
+ethernetové napájanie a~komunikáciu v~jednom kábli --
+čím by sa priamo eliminovalo obmedzenie identifikované
+v~tejto práci. Zbernica RS485 by zas otvorila možnosť
+integrácie priemyselných senzorov a~aktuátorov s~rozhraním
+kompatibilným s~protokolom Modbus.

@@ -2,7 +2,7 @@
 
 Moderné výstavníctvo smeruje od pasívneho vystavovania
 k~automatizácii expozičného priestoru. Namiesto statických
-popisok a~izolovaných exponátov sa priestor stáva aktívnym
+popisných tabúľ a~izolovaných exponátov sa priestor stáva aktívnym
 prostredím, ktoré reaguje na prítomnosť návštevníka --
 koordinuje osvetlenie, zvuk, video a~pohyb fyzických prvkov
 do jedného synchronizovaného celku. Takýto prístup je
@@ -23,12 +23,15 @@ interaktivity a~flexibility. Problematická je aj kabeláž
 -- v~historických objektoch býva ťažké, prípadne nežiadúce
 viesť desiatky metrov vodičov k~senzorom
 a~aktuátorom \cite{zonta2010wireless}.
+Chýba teda riešenie, ktoré by kombinovalo nízke obstarávacie
+náklady, minimálne nároky na kabeláž a~dostatočnú konfigurovateľnosť
+scenárov prispôsobenú potrebám menších múzejných inštalácií.
 
 Cieľom tejto bakalárskej práce je návrh a~implementácia
 riadiaceho systému, ktorý uvedené problémy rieši kombináciou
 IoT technológií a~vlastnej softvérovej architektúry. Výsledkom
 je systém postavený na stavovom automate, ktorý umožňuje
-definovať priebeh expozície presnejšie a~flexibilnejšie.
+definovať priebeh expozície flexibilnejšie.
 
 Navrhovaná architektúra využíva bezdrôtový model klient--server,
 ktorý minimalizuje potrebu rozsiahlej kabeláže. Centrálnu
@@ -37,7 +40,4 @@ komunikuje s~distribuovanými uzlami na platforme ESP32
 prostredníctvom protokolu MQTT. Správanie systému nie je pevne
 zakompilované vo firmvéri, ale je konfigurovateľné pomocou
 JSON súborov. Táto vlastnosť umožňuje jednoducho meniť scenár
-expozície bez zásahu do zdrojového kódu. Funkčnosť systému
-je v~závere práce demonštrovaná na prototypovej miestnosti,
-ktorá integruje riadenie motorov, osvetlenia, dymostroja
-a~multimediálneho obsahu.
+expozície bez zásahu do zdrojového kódu.

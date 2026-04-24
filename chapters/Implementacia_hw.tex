@@ -58,13 +58,13 @@ tento uzol poháňa, sú popísané v~kapitole~\ref{MechanickaKonstrukcia}.
 Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov (Obr.~\ref{fig:motor_schema}):
 \begin{itemize}
     \item \textbf{Mikrokontrolér ESP32 DevKit V1:} Slúži ako hlavná riadiaca jednotka uzla,
-        ktorá spracováva príkazy z~MQTT brokera a~následne generuje hardvérový PWM
+        ktorá spracováva príkazy z Raspberry Pi a~následne generuje hardvérový PWM
         signál s~frekvenciou 20\,kHz, čo umožňuje plynulé ovládanie rýchlosti motorov.
         Frekvencia je zvolená nad počuteľným pásmom.
     \item \textbf{2x Výkonový budič BTS7960B:} Polovodičový H-mostík slúži na
         riadenie výkonu motorov (viď kapitola~\ref{dc-motory}). Tento obvod dimenzovaný na vysoké prúdové špičky
-        bezpečne odoláva záťaži pri
-        rozbehoch (do 43\,A). H-mostík teda umožnuje ovládať širokú škálu jednosmerných motorov.
+        bezpečne odoláva záťaži pri rozbehoch (do 43\,A) \cite{bts7960b_datasheet}.
+        H-mostík teda umožnuje ovládať širokú škálu jednosmerných motorov.
 \end{itemize}
 
 \begin{figure}[H]
@@ -82,7 +82,8 @@ Na spínanie záťaží ostatných prvkov expozície slúži reléový uzol (Obr
     \item \textbf{Priemyselný I/O modul Waveshare:} Základom tohto uzla je
         komerčný modul s~čipom \textbf{ESP32-S3} a~integrovanými relé
         (viď Obr.~\ref{fig:main_control_box}). Obsahuje natívnu
-        podporu pre \textit{Power over Ethernet} (PoE) a~zbernicu RS485.
+        podporu pre \textit{Power over Ethernet} (PoE) a~zbernicu RS485,
+        ktoré ale v~tejto inštalácii neboli využité.
         Napriek výhodám polovodičových relé (SSR) v~oblasti životnosti a~akustického hluku (viď kapitola~\ref{spinanie-sietoveho-napatia})
         bola zvolená táto certifikovaná doska s~mechanickými relé. Hlavným dôvodom 
         bola jednoduchá inštalácia, expandovateľnosť a vyššia bezpečnosť a spoľahlivosť ako pri vlastnoručne zostavených riešeniach.
@@ -98,8 +99,8 @@ Na spínanie záťaží ostatných prvkov expozície slúži reléový uzol (Obr
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{obr/HW/relay_schema.pdf}
-    \caption{Schéma zapojenia relé uzla (Waveshare ESP32-S3, 230\,V a~12\,V obvody)}\label{fig:relay_schema}
+    \includegraphics[width=0.9\textwidth]{obr/HW/relay_schema.png}
+    \caption{Schéma zapojenia relé uzla Waveshare}\label{fig:relay_schema}
 \end{figure}
 
 \FloatBarrier%
@@ -150,7 +151,7 @@ v~prostredí \textbf{Fusion 360}. Celková sústava
 obsahuje \textbf{25 dekoratívnych ozubených kolies rôznych veľkostí} z~preglejky
 s~jednotným modulom $m = 8$. Pre každé koleso bol
 vytvorený samostatný 3D model; pri menších kolesách
-bol G-kód generovaný a~obrobky boli vyfrézované
+bol G-kód generovaný a~kolesá boli vyfrézované
 na dostupnej CNC fréze. Väčšie kolesá boli zadané
 externej firme, ktorá disponuje strojom s~väčším
 pracovným priestorom.
@@ -160,13 +161,10 @@ pripevnený na sústave kolies a~\textbf{hodinový
 mechanizmus} s~priemerom 1{,}3\,m vrátane
 planetového prevodu s prevodom 12:1. Jeden motor
 bol umiestnený pod kolesom, ktoré je prepojené s~ojnicou piestu,
-zatiaľ čo druhý motor bol pripojený na sekundovú ručičku,
-konkrétne na \uv{slnko} planetového prevodu. Montáž
-a~povrchovú úpravu exponátov zabezpečila
-externá firma. Podrobná konštrukčná dokumentácia
-(výkresy a~modely) presahuje
-rámec tejto práce a~nie je jej predmetom. Celkový vizuál inštalácie
-s~identifikačným označením je zobrazený na Obr.~\ref{fig:chronos_celok},
+zatiaľ čo druhý motor bol pripojený na minutovú ručičku,
+konkrétne na \uv{slnko} planetového prevodu.
+Podrobná konštrukčná dokumentácia (výkresy a~modely) presahuje
+rámec tejto práce a~nie je jej predmetom. Celkový vizuál inštalácie je zobrazený na Obr.~\ref{fig:chronos_celok},
 zatiaľ čo konštrukčné riešenie parného kotla s~integrovanou elektronikou ilustruje Obr.~\ref{fig:kotol_exponat}.
 
 \begin{figure}[htbp]
@@ -180,8 +178,3 @@ zatiaľ čo konštrukčné riešenie parného kotla s~integrovanou elektronikou 
     \includegraphics[width=0.8\textwidth]{obr/HW/kotol_exponat.jpg}
     \caption{Parný kotol s~integrovanou elektronikou}\label{fig:kotol_exponat}
 \end{figure}
-
-V~tejto kapitole bola uzavretá fyzická vrstva riešenia. Na ňu
-bezprostredne nadväzuje implementácia softvérovej vrstvy, ktorá
-zabezpečuje orchestráciu scén, komunikáciu uzlov a~synchronizáciu
-multimédií.

@@ -4,8 +4,8 @@
 Skôr než sa pristúpi k~samotnému návrhu systému, je potrebné
 zmapovať technický terén: aké riešenia dnes existujú, kde narážajú
 na svoje limity a~ktoré princípy stojí za to preniesť do vlastnej
-implementácie. Táto kapitola preto analyzuje dostupné hardvérové
-a~softvérové platformy s~dôrazom na ich vhodnosť pre realizáciu
+implementácie. Táto kapitola analyzuje dostupné hardvérové
+a~softvérové platformy a ich vhodnosť pre realizáciu
 interaktívnych expozícií, a~zároveň sa venuje kľúčovým technickým
 otázkam -- komunikačným protokolom, prístupom k~riadiacej logike
 a~vhodným dátovým formátom.
@@ -16,13 +16,14 @@ a~vhodným dátovým formátom.
 
 Interaktívne prvky v~múzeách nie sú novinkou -- prvé mechanické
 systémy s~preklápateľnými odpoveďami sa objavovali už v~70. rokoch
-20. storočia \cite{interactive_small_museums}. S~nástupom digitálnych
-technológií sa tieto prvky rozvinuli do systémov zahŕňajúcich dotykové
-obrazovky, virtuálnu a~rozšírenú realitu, čím sa zásadne zmenili
+20. storočia \cite{interactive_small_museums}. S~nástupom digitálnych technológií
+sa tieto prvky rozvinuli do komplexných systémov, ktoré zahŕňajú nielen dotykové obrazovky,
+ale najmä interaktívne ovládacie panely s~mechanickými tlačidlami, dynamicky riadené osvetlenie
+a~iné moduly spúšťajúce špecifické deje, čím sa zásadne zmenili
 požiadavky na riadiacu infraštruktúru \cite{museum_immersive_design}.
 
 Rastúca technologická komplexnosť však so sebou priniesla aj nové
-prevádzkové výzvy. Ako upozorňuje súčasná literatúra, pokročilé
+prevádzkové výzvy. Ako upozorňuje literatúra, pokročilé
 interaktívne inštalácie si vyžadujú neustálu údržbu a~aktualizáciu,
 čo naráža na finančné a~personálne limity najmä v~menších kultúrnych
 inštitúciách bez vyhradeného IT oddelenia \cite{shehade2020}. Snaha
@@ -30,7 +31,7 @@ o~minimalizáciu prevádzkových výpadkov a~zníženie závislosti od externýc
 technikov tak prirodzene vytvorila tlak na zmenu návrhu riadiacich
 systémov. Do popredia sa dostáva požiadavka na modulárne architektúry,
 ktoré namiesto uzavretého jednoúčelového hardvéru umožňujú jednoduchšiu
-škálovateľnosť, vzdialenú diagnostiku a~rekonfiguráciu bez nutnosti
+škálovateľnosť, ľahkú výmenu, vzdialenú diagnostiku a~rekonfiguráciu bez nutnosti
 fyzického zásahu na mieste \cite{bachi2024}.
 
 % ------------------------------------------------------------------
@@ -60,7 +61,7 @@ V~praxi sa stretávame predovšetkým s~dvoma základnými prístupmi:
         s~centrálnou jednotkou len pri dôležitých stavových
         zmenách. Topológia tak umožňuje modulárne rozširovanie
         systému a~redukuje potrebu ťahať kabeláž z~jedného
-        riadiaceho bodu \cite{distributed_control_modeling}.
+        riadiaceho bodu. \cite{distributed_control_modeling}.
 \end{itemize}
 
 \begin{figure}[H]
@@ -111,9 +112,9 @@ vlastnosť je kritická pre bezpečnostné funkcie, ale pre bežné
 interaktívne inštalácie v~múzeách je často nadbytočná. PLC sú
 však primárne navrhnuté na prácu s~logickými signálmi a~narážajú
 na výrazné obmedzenia v~oblasti multimédií. Absencia natívnych
-HDMI portov a~neschopnosť priamo dekódovať video súbory vyžadujú
+HDMI portov a~neschopnosť priamo prehrávať video súbory vyžadujú
 použitie externých mediálnych prehrávačov \cite{huntington2017}.
-Vysoká cena licencií a~hardvéru navyše robí tieto systémy
+Vysoká cena hardvéru navyše robí tieto systémy
 neprístupnými pre menšie kultúrne inštitúcie
 \cite{interactive_small_museums}.
 
@@ -125,7 +126,7 @@ McBride} sú navrhnuté priamo pre potreby tematických parkov
 a~múzeí \cite{medialon_sumble, alcornmcbride}. Na rozdiel od
 priemyselných PLC ich architektúra nie je postavená na cyklickom
 vykonávaní kódu, ale na princípe časovej osi (\textit{timeline}),
-ktorá umožňuje operátorovi precízne definovať a~synchronizovať
+ktorá umožňuje operátorovi definovať a~synchronizovať
 udalosti v~čase \cite{alcornmcbride_history, huntington2017}.
 Tieto systémy natívne integrujú protokoly zábavného priemyslu
 (SMPTE Timecode, DMX512, OSC), ktoré sú optimalizované pre
@@ -134,7 +135,7 @@ inštalácie v~menších múzeách však táto špecializácia predstavuje
 skôr obmedzenie -- podpora týchto protokolov vyžaduje certifikovaný
 hardvér a~proprietárna povaha systému vytvára závislosť na
 dodávateľovi, čo znemožňuje flexibilné rozširovanie o~vlastné
-hardvérové riešenia bez drahých certifikácií \cite{noural2019iot}.
+hardvérové riešenia bez drahých certifikácií \cite{huntington2017}.
 
 \subsection{Otvorené systémy na báze IoT platforiem}
 \label{otvorene-iot}
@@ -147,14 +148,14 @@ jednodoskových počítačov (SBC) a~výkonných mikrokontrolérov
 systémov táto kategória využíva open-source softvér a~štandardné
 programovacie jazyky (Python, C++), čo poskytuje vývojárom
 plnú kontrolu nad riadiacou logikou bez obmedzení uzavretých
-komerčných platforiem \cite{computational_frameworks_art}.
+komerčných platforiem \cite{microcontrollers_museum_arxiv}.
 Architektúra je typicky rozdelená na dve funkčné úrovne \cite{rpi_esp32_scada}:
 
 \begin{itemize}
     \item \textbf{Výkonné centrálne jednotky (SBC):} Jednodoskové
         počítače s~plnohodnotným operačným systémom (najčastejšie
         na báze Linuxu) slúžiace na koordináciu celého systému
-        a~predovšetkým na náročné multimediálne úlohy.
+        a~predovšetkým na multimediálne úlohy.
     \item \textbf{Distribuované periférie:} Koncové prvky (senzory,
         osvetlenie, mechanika) riadené samostatnými mikrokontrolérmi,
         ktoré fungujú ako inteligentné sieťové uzly schopné
@@ -334,7 +335,7 @@ stave takmer úplne eliminujú nežiaduce zahrievanie. Pre
 nízkoenergetické aplikácie sa využívajú kompaktné čipy 
 s~vstavanými ochranami (napr. DRV88xx), zatiaľ čo pre 
 zvládanie rozbehových špičiek v~rádoch desiatok ampérov 
-slúžia vysokoprúdové moduly typu BTS7960 \cite{mosfet_h_bridge}.
+slúžia vysokoprúdové moduly a to napríklad typu BTS7960 \cite{mosfet_h_bridge}.
 
 Pre jednosmerné spínanie a~PWM reguláciu záťaží, ktoré 
 presahujú prúdový limit GPIO pinov (jednotky miliampérov), 
@@ -368,8 +369,7 @@ typy podporujú súčasne AC aj DC obvody
 Elektromechanické relé naopak poskytujú galvanickú
 izoláciu a~sú schopné spínať záťaže rôzneho charakteru
 bez obmedzenia, za cenu pohyblivých kontaktov
-s~obmedzenou životnosťou pri vyššej frekvencii spínania
-\cite{ssr_guide}.
+s~obmedzenou životnosťou pri vyššej frekvencii spínania.
 
 % ------------------------------------------------------------------
 \section{Prístupy k~riadiacej logike expozície}
@@ -396,8 +396,8 @@ mediálny klip), je vhodnejší prístup založený na
 (\textit{Finite State Machine}, FSM). V~tomto modeli je
 správanie systému rozdelené do diskrétnych stavov; prechody
 medzi nimi sú podmienené konkrétnymi udalosťami
-(\textit{events}) -- uplynutím časovača, prijatím MQTT
-správy alebo dokončením prehrávania média
+(\textit{events}) -- uplynutím časovača, prijatím signálu 
+alebo dokončením prehrávania média
 \cite{distributed_control_modeling}. FSM umožňuje
 neblokujúce čakanie na viacero rôznych podmienok súčasne,
 čo je nevyhnutné pre dynamické vetvenie scenára
@@ -441,7 +441,7 @@ akcií v~podobe textového súboru editovateľného bez
 rekompilácie softvéru \cite{iot_data_formats_review}.
 Tento prístup oddeľuje konfiguráciu od kódu aplikácie,
 čo znižuje závislosť na vývojároch pri bežných zmenách
-logiky systému \cite{partarakis2016adaptable}.
+logiky systému \cite{iot_data_formats_review}.
 
 % ------------------------------------------------------------------
 \section{Zhrnutie rešerše}
@@ -452,7 +452,7 @@ Analýza dostupných technických riešení preukázala, že pre
 inštalácie nie sú optimálne ani priemyselné PLC (vysoká
 cena, absencia multimediálnych rozhraní), ani uzavreté
 komerčné show-control systémy (závislosť na dodávateľovi,
-obmedzená rozšíriteľnosť) \cite{iec61131, john2010plc, noural2019iot}.
+obmedzená rozšíriteľnosť, vyššia cena) \cite{iec61131, john2010plc, huntington2017}.
 Najvhodnejším prístupom je distribuovaný IoT systém
 postavený na otvorených platformách, ktorý poskytuje
 flexibilitu pre implementáciu nelineárnych naratívov pri
@@ -461,7 +461,7 @@ interactive_small_museums}.
 
 Z~hľadiska jednotlivých technických vrstiev rešerš
 identifikovala nasledujúce závery. Protokol MQTT sa ukázal
-ako jednoznačne vhodný pre distribuované systémy
+ako veľmi vhodný pre distribuované systémy
 s~požiadavkou na nízku latenciu \cite{mqtt_websocket_comparison}.
 Centrálna SBC jednotka pritom nesie zodpovednosť nielen za
 MQTT orchestráciu, ale aj za synchrónne prehrávanie
@@ -471,7 +471,7 @@ stavového automatu (FSM), ktorý umožňuje neblokujúce
 vetvenie scenára na základe externých udalostí
 \cite{distributed_control_modeling}. Konfigurácia vo
 formáte JSON poskytuje ľahko editovateľné definície stavov
-a~prechodov bez nutnosti zásahu do zdrojového kódu.
+a~prechodov bez nutnosti zásahu do zdrojového kódu \cite{iot_data_formats_review}.
 
 Na základe týchto zistení je v~nasledujúcej kapitole navrhnutá
 konkrétna architektúra systému, ktorá prenáša uvedené princípy

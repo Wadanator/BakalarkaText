@@ -11,19 +11,6 @@ Súbory sú referencované v texte, ale neexistujú:
 
 ---
 
-## 2. Abstrakt
-
-- [ ] Začína frázou *"Táto bakalárska práca sa zaoberá..."* — podľa General_text_instruction je táto fráza explicitne zakázaná. Prepísať prvú vetu tak, aby začínala priamo kľúčovým pojmom (napr. *"Modulárne riadenie interaktívnych múzejných expozícií..."*).
-
----
-
-## 3. Úvod
-
-- [ ] Veta *"Funkčnosť systému je v závere práce demonštrovaná na prototypovej miestnosti..."* patrí do Záveru, nie do Úvodu — výsledky do Úvodu nepatria. Odstrániť alebo preformulovať.
-- [ ] Chýba explicitná **medzera (Gap)**: prechod z „čo existuje" na „čo robíme" je príliš priamy. Doplniť jednu vetu — čo konkrétne existujúce riešenia nevedia, a prečo si to vyžiadalo vlastný vývoj.
-
----
-
 ## 4. Experimenty — nedostatočné dáta
 
 - [ ] **Test obnovy po výpadku**: uvedený len priemer 38 s — doplniť **n** (koľkokrát sa testovalo), min, max.
@@ -49,18 +36,6 @@ Súbory sú referencované v texte, ale neexistujú:
 
 ---
 
-## 6. Drobná logická nejasnosť
-
-- [ ] V sekcii o reléovom uzle je zmienka, že Waveshare modul obsahuje *"natívnu podporu pre PoE a RS485"* — tieto funkcie neboli využité a ich zmienka bez vysvetlenia mätie čitateľa. Buď doplniť jednovetnové vysvetlenie, alebo celú vetu odstrániť.
-
----
-
-## 7. Chýbajúca kľúčová implementačná informácia
-
-- [ ] **MQTT broker nie je nikde identifikovaný** — celá komunikácia prebieha cez broker, ale text nikde neuvádza, aký softvér broker zabezpečuje (Mosquitto? EMQX?), kde beží (na Raspberry Pi?) ani ako je nakonfigurovaný. Doplniť aspoň jednu vetu v kapitole Implementácia SW alebo Architektúra.
-- [ ] **Video prehrávač nie je pomenovaný** — `Implementacia_sw.tex`: *"Video vrstva je realizovaná cez externý prehrávač riadený IPC rozhraním"* — ktorý prehrávač? (napr. VLC, mpv, omxplayer). Konkrétny nástroj uviesť.
-
----
 
 ## 8. Kódové identifikátory v próze (porušenie General_text_instruction)
 
@@ -85,4 +60,3 @@ Všetky nahradiť opisom funkcie (napr. namiesto "`force_all_off()`" napísať *
 ## 10. Drobnosti
 
 - [ ] **"Vite" bez vysvetlenia**: `Implementacia_sw.tex` — *"Frontend je realizovaný ako React SPA (Vite)"* — Vite je build nástroj, nie framework; pri prvom použití doplniť jednoslušnú charakteristiku v zátvorke.
-- [ ] **Popisok obrázku dashboardu**: `fig:sw_dashboard_screenshot` má popisok len *"Hlavná stránka"* — príliš vágne. Doplniť napr. *"Hlavná stránka webového dashboardu s prehľadom stavu zariadení"*.

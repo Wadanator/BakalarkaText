@@ -146,6 +146,13 @@ Tým sa eliminuje spúšťanie neplatných konfigurácií.
 \section{MQTT komunikačná vrstva}
 \label{SWMQTT}
 
+Úlohu sieťového sprostredkovateľa správ zabezpečuje softvér
+\textbf{Mosquitto}, spustený ako systémová služba priamo
+na riadiacom počítači Raspberry~Pi. Broker počúva na dvoch
+portoch: port \textbf{1883} pre štandardnú MQTT komunikáciu
+(Python backend a~uzly ESP32) a~port \textbf{9001} pre
+pripojenia webového dashboardu cez protokol WebSocket.
+
 Komunikačná vrstva zabezpečuje výmenu správ medzi backendom
 a~uzlami ESP32. Po úspešnom pripojení backend odoberá stavové
 topiky zariadení, feedback topiky, scénické topiky miestnosti
@@ -205,9 +212,11 @@ Ostatné stopy sú streamované z~disku ako hudba, čím sa šetrí
 pamäť pre dlhšie nahrávky. Prescan a~preloading prebehne ešte
 pred štartom stavového automatu.
 
-Video vrstva je realizovaná cez externý prehrávač
-riadený \textbf{IPC rozhraním}, pričom počas behu sa periodicky
-kontroluje dostupnosť procesu a~odozva ovládacieho kanála.
+Video vrstva je realizovaná prostredníctvom prehrávača
+\textbf{mpv} spusteného v~režime celej obrazovky.
+Prehrávač je riadený cez \textbf{IPC rozhranie} na báze
+UNIX socketu, pričom počas behu sa periodicky kontroluje
+dostupnosť procesu a~odozva ovládacieho kanála.
 
 Webové rozhranie poskytuje obsluhe prevádzkové funkcie
 bez potreby zásahu do konzoly. Frontend je realizovaný ako

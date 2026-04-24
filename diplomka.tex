@@ -47,9 +47,8 @@
 
 
 \abstract{ % abstrakt
-    Táto bakalárska práca sa zaoberá návrhom a realizáciou modulárneho riadiaceho
-    systému pre interaktívne múzejné expozície s využitím platforiem Raspberry Pi
-    a ESP32. Architektúra systému je postavená na princípoch internetu vecí (IoT),
+    Modulárny riadiaci systém pre interaktívne múzejné expozície bol navrhnutý
+    a realizovaný s využitím platforiem Raspberry Pi a ESP32. Architektúra systému je postavená na princípoch internetu vecí (IoT),
     kde centrálna jednotka Raspberry Pi zabezpečuje orchestráciu scén,
     synchronizáciu audiovizuálneho obsahu a celkovú riadiacu logiku.
     Distribuované uzly na báze mikrokontrolérov ESP32 slúžia na priame ovládanie
@@ -59,13 +58,12 @@
     pri výpadkoch siete. Súčasťou riešenia je aj webový dashboard, ktorý
     operátorom múzea umožňuje monitorovať stav hardvéru, konfigurovať parametre
     a diagnostikovať systém v reálnom čase. Výsledkom práce je plne funkčný
-    a nasadený riadiaci systém integrovaný do reálneho mechatronického exponátu,
-    ktorý demonštruje vysokú stabilitu, škálovateľnosť a nenáročnú údržbu
+    a nasadený riadiaci systém integrovaný do reálneho exponátu,
+    ktorý demonštruje škálovateľnosť a nenáročnú údržbu
     v podmienkach každodennej múzejnej prevádzky.
 }{ % abstrakt anglicky
-    This bachelor thesis deals with the design and implementation of a modular
-    control system for interactive museum exhibits using Raspberry Pi and ESP32
-    platforms. The system architecture is built on Internet of Things (IoT)
+    A modular control system for interactive museum exhibits was designed and
+    implemented using Raspberry Pi and ESP32 platforms. The system architecture is built on Internet of Things (IoT)
     principles, where a central Raspberry Pi unit handles scene orchestration,
     audiovisual content synchronization, and overall control logic. Distributed
     nodes based on ESP32 microcontrollers are used to directly control peripherals
@@ -75,8 +73,8 @@
     outages. The solution also includes a web dashboard that allows museum
     operators to monitor hardware status, configure parameters, and diagnose the
     system in real time. The result of the thesis is a fully functional and
-    deployed control system integrated into a real mechatronic exhibit,
-    demonstrating high stability, scalability, and low maintenance requirements
+    deployed control system integrated into a real exhibit,
+    demonstrating scalability, and low maintenance requirements
     under the conditions of daily museum operation.
 }{ % klicova slova
     interaktívna expozícia, riadiaci systém, Raspberry Pi, ESP32, MQTT, stavový automat, orchestrácia scén, webový dashboard, React
@@ -95,12 +93,15 @@
     a~debugovanie. Celková architektúra systému, hardvérový návrh,
     voľba komunikačných protokolov, návrh stavového automatu
     a~integrácia do reálnej inštalácie sú výsledkom mojej vlastnej
-    inžinierskej práce. Vygenerovaný kód som v~každom prípade
-    overil, upravil a~otestoval na fyzickom hardvéri.
+    práce.
 }{
-    Na tomto mieste by som chcel poďakovať vedúcemu práce Ing.~Michalovi Bastlovi, Ph.D., za odbornú pomoc, vecné pripomienky a~trpezlivosť počas celého priebehu práce.
+    Rád by som poďakoval vedúcemu práce Ing.~Michalovi Bastlovi, Ph.D., za čas venovaný
+    konzultáciám, návrhom a za jeho vecné pripomienky pri tvorbe tejto práce.
 
-    Taktiež by som chcel vyjadriť úprimnú vďaku pánovi Petrovi Bolekovi, majiteľovi spoločnosti EKORAY (\url{https://www.ekoray.sk/}), za prejavenú dôveru a plné finančné krytie nákladov na projekt, ktorý som v rámci tejto práce realizoval a ktorý by bez jeho podpory nevznikol.
+    Úprimnú vďaku patrí aj pánovi Ing. Petrovi Bolekovi, majiteľovi spoločnosti EKORAY,
+    ktorý buduje technické múzeum a~oslovil ma s~príležitosťou podieľať sa
+    na návrhu a~realizácii expozičných prvkov. Práve táto spolupráca položila základy pre tému i~reálne prostredie tejto práce.
+    Bez jeho plnej dôvery, ústretovosti a~finančného krytia nákladov by samotná realizácia projektu nebola možná.
 }
 \vutpagestyle % prepise styl stranky, vlozi obsah
 
