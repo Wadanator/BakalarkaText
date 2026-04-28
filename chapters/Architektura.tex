@@ -113,7 +113,7 @@ Dvojúrovňová architektúra bola fyzicky realizovaná nasledovným hardvérom:
 \section{Softvérové jadro systému -- konečný stavový automat}
 \label{SoftverovArchitektura}
 
-Ústrednou požiadavkou na softvérové jadro bola schopnosť
+Hlavnou požiadavkou na softvérové jadro bola schopnosť
 \textbf{vetviť priebeh expozície} na základe reálnych
 podnetov od návštevníka. Scenár preto nesmel byť pevnou
 lineárnou sekvenciou akcií -- systém musel v~ľubovoľnom
@@ -126,9 +126,23 @@ Z~tohto dôvodu bolo softvérové jadro navrhnuté ako
 \textbf{konečný stavový automat (FSM -- \textit{Finite State Machine})}.
 Na úrovni architektúry je podstatné, že priebeh expozície je
 rozdelený do samostatných \textbf{stavov} a~zmeny medzi nimi
-sú riadené udalosťami. Konkrétne implementačné detaily
-spracovania stavov, prechodov a~eventov sú rozpracované
-v~kapitole~\ref{ImplementaciaSW}.
+sú riadené udalosťami.
+
+Každý stav navrhnutého modelu pozostáva z~dvoch 
+zložiek: zo \textbf{sekvencie akcií} naplánovaných voči okamihu
+vstupu do stavu a~z~množiny \textbf{podmienok prechodu}, ktoré
+určujú, kedy a~do ktorého stavu automat postúpi. Podnety
+spúšťajúce prechody vychádzajú z~troch zdrojov: z~uplynutia
+stanoveného času, z~ukončenia prehrávania média alebo
+zo~správy prijatej od periférneho uzla. Popri prechodoch
+viazaných na konkrétny stav model rozlišuje aj
+\textbf{globálne podmienky} -- platné pre celú scénu bez
+ohľadu na to, v~ktorom stave sa automat práve nachádza.
+Všetky stavy, ich akcie a podmienky prechodov sú definovaný externe, oddelene od kódu enginu,
+ako je opísané v~sekcii~\ref{KomunikacnaVrstva}.
+
+Konkrétne implementačné detaily spracovania stavov,
+prechodov a~udalostí sú rozpracované v~kapitole~\ref{ImplementaciaSW}.
 
 \begin{figure}[H]
 \centering

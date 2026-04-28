@@ -11,7 +11,7 @@
       font-family: "Segoe UI", Arial, sans-serif;
       background: #ffffff;
       color: #111;
-      padding: 8px;
+      padding: 6px;
     }
     .canvas {
       width: 100%;
@@ -23,57 +23,57 @@
     .master {
       width: min(1500px, 100%);
       border: 1px solid #cfd4da;
-      border-radius: 16px;
+      border-radius: 14px;
       background: #fcfcfd;
-      padding: 10px;
+      padding: 8px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
     .d {
       width: 100%;
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
-    .row { display: flex; gap: 10px; }
-    .sec { border-radius: 14px; padding: 10px 10px 12px; border: 1px solid; }
-    .lbl { font-size: 36px; font-weight: 700; margin-bottom: 8px; }
-    .pills { display: flex; flex-wrap: wrap; gap: 7px; }
+    .row { display: flex; gap: 8px; }
+    .sec { border-radius: 12px; padding: 8px 8px 9px; border: 1px solid; }
+    .lbl { font-size: 33px; font-weight: 700; margin-bottom: 6px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 5px; }
     .col { flex-direction: column; }
-    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
     .pill {
-      border-radius: 11px;
-      padding: 9px 13px;
-      font-size: 33px;
+      border-radius: 9px;
+      padding: 7px 10px;
+      font-size: 30px;
       font-weight: 600;
       border: 1px solid;
       line-height: 1.15;
     }
     .sub {
       font-weight: 500;
-      font-size: 28px;
+      font-size: 25px;
       opacity: 0.82;
       display: block;
-      margin-top: 3px;
+      margin-top: 2px;
     }
-    .cmds { display: flex; flex-direction: column; gap: 4px; margin-top: 6px; }
+    .cmds { display: flex; flex-direction: column; gap: 3px; margin-top: 5px; }
     .cmd {
-      border-radius: 8px;
-      padding: 5px 10px;
-      font-size: 27px;
+      border-radius: 7px;
+      padding: 4px 8px;
+      font-size: 24px;
       font-weight: 600;
       border: 1px solid;
       font-family: "Consolas", "Courier New", monospace;
       line-height: 1.2;
     }
     .cmd-note {
-      font-size: 24px;
+      font-size: 21px;
       font-weight: 500;
       opacity: 0.78;
       display: block;
-      margin-top: 2px;
+      margin-top: 1px;
       font-family: "Segoe UI", Arial, sans-serif;
     }
     .w2 { flex: 2; }
@@ -164,7 +164,7 @@
             <div class="lbl">Typy akcií &amp; príkazy</div>
 
             <div class="pill pa" style="margin-bottom:6px;">mqtt
-              <span class="sub">topic + message [+ retain]</span>
+              <span class="sub">topic + message</span>
             </div>
 
             <div class="pill pa">audio — message:
@@ -172,7 +172,7 @@
                 <div class="cmd ca">PLAY:&lt;súbor&gt;[:&lt;vol&gt;]<span class="cmd-note">prehrá stopu (sfx_ → RAM)</span></div>
                 <div class="cmd ca">STOP&nbsp;&nbsp;/&nbsp;&nbsp;STOP:&lt;súbor&gt;<span class="cmd-note">zastaví všetky / konkrétnu</span></div>
                 <div class="cmd ca">PAUSE&nbsp;&nbsp;/&nbsp;&nbsp;RESUME</div>
-                <div class="cmd ca">VOLUME:&lt;0–100&gt;</div>
+                <div class="cmd ca">VOLUME:&lt;0.0–1.0&gt;</div>
               </div>
             </div>
 

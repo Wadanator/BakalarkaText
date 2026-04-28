@@ -3,6 +3,15 @@
 \usepackage{xifthen}
 
 
+\newcommand{\vutheaderleft}[1]{%
+	\parbox[b]{0.47\headwidth}{\raggedright\footnotesize\normalfont #1}%
+}
+
+\newcommand{\vutheaderright}[1]{%
+	\parbox[b]{0.47\headwidth}{\raggedleft\footnotesize\normalfont #1}%
+}
+
+
 % definice promenne docmode - print or screen mode
 \newcommand{\visualmode}[1]{
 	\def\docmode{#1}
@@ -147,13 +156,15 @@
 	\fancyfoot{}
 	\ifthenelse{\equal{\docmode}{print}}
 	{
-	\fancyhead[LE,RO]{\leftmark}
-	\fancyhead[LO,RE]{\rightmark}
+	\fancyhead[LE]{\vutheaderleft{\leftmark}}
+	\fancyhead[RO]{\vutheaderright{\leftmark}}
+	\fancyhead[LO]{\vutheaderleft{\rightmark}}
+	\fancyhead[RE]{\vutheaderright{\rightmark}}
 	\fancyfoot[RO]{\thepage}
 	\fancyfoot[LE]{\thepage}
 	}{
-	\fancyhead[L]{\leftmark}
-	\fancyhead[R]{\rightmark}
+	\fancyhead[L]{\vutheaderleft{\leftmark}}
+	\fancyhead[R]{\vutheaderright{\rightmark}}
 	\fancyfoot[C]{\thepage}
 	}
 }

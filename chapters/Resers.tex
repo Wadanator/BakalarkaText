@@ -1,10 +1,7 @@
 \chapter{Súčasný stav problematiky}
 \label{SucasnyStav}
 
-Skôr než sa pristúpi k~samotnému návrhu systému, je potrebné
-zmapovať technický terén: aké riešenia dnes existujú, kde narážajú
-na svoje limity a~ktoré princípy stojí za to preniesť do vlastnej
-implementácie. Táto kapitola analyzuje dostupné hardvérové
+Táto kapitola analyzuje dostupné hardvérové
 a~softvérové platformy a ich vhodnosť pre realizáciu
 interaktívnych expozícií, a~zároveň sa venuje kľúčovým technickým
 otázkam -- komunikačným protokolom, prístupom k~riadiacej logike
@@ -176,7 +173,7 @@ prototypovanie a~iteratívny vývoj riadiacej logiky
 
 V~prípade využitia otvorenej IoT architektúry, ktorá fyzicky
 oddeľuje centrálnu riadiacu jednotku od distribuovaných periférnych
-uzlov, vzniká kritická potreba ich vzájomnej koordinácie. 
+uzlov, vzniká potreba ich vzájomnej koordinácie. 
 V~takomto distribuovanom systéme je voľba komunikačného 
 protokolu rozhodujúcim faktorom pre celkovú plynulosť 
 interakcie \cite{rpi_esp32_scada}. Pri výbere vhodného 
@@ -211,9 +208,9 @@ réžii pri prenose krátkych riadiacich príkazov
 jeho implementácia na jednoduchých mikrokontroléroch je však
 pamäťovo náročná \cite{mqtt_websocket_comparison}.
 \textbf{MQTT} (\textit{Message Queuing Telemetry Transport}),
-definovaný ako ISO štandard ISO/IEC~20922:2016, je v~súčasnosti
-najrozšírenejším protokolom pre distribuované IoT systémy
-\cite{mqtt_iso_standard}. Funguje na modeli
+definovaný ako ISO štandard ISO/IEC~20922:2016, patrí medzi
+najpoužívanejšie protokoly pre distribuované IoT systémy
+\cite{mqtt_iso_standard, mqtt_m2m_survey}. Funguje na modeli
 \textit{Publish/Subscribe}, kde centrálny sprostredkovateľ
 (broker) distribuuje správy prihláseným klientom na základe
 hierarchických tém (topics) \cite{mqtt_m2m_survey}. Prenos
@@ -291,11 +288,11 @@ Dostupnosť GPIO rozhrania navyše umožňuje pripojiť rôzne vstupy a~výstupy
 Historicky populárna platforma \textbf{Arduino Uno}
 (8-bitový čip ATmega328P) sa v~kontexte moderného IoT
 stáva limitujúcou \cite{azad2025iot, maier2017esp32}.
-S~taktom 16\,MHz a~2\,kB RAM nie je schopná efektívne
-spracovávať sieťový TCP/IP stack a~súčasne parsovať
-komplexné JSON správy, čo vedie k~nestabilite systému
-pri vyššej sieťovej záťaži \cite{azad2025iot,
-maier2017esp32}. Nástup čipu \textbf{ESP32} od spoločnosti
+Jej výrazne obmedzené pamäťové a~výpočtové prostriedky
+sťažujú súčasnú obsluhu sieťovej komunikácie
+a~spracovania štruktúrovaných správ, čo môže viesť
+k~nestabilite systému pri vyššej sieťovej záťaži
+\cite{azad2025iot, maier2017esp32}. Nástup čipu \textbf{ESP32} od spoločnosti
 Espressif priniesol veľkú zmenu v~oblasti IoT periférií.
 Integrácia Wi-Fi konektivity priamo v~čipe eliminuje potrebu
 externých sieťových modulov, čo zjednodušuje hardvérový
@@ -465,7 +462,7 @@ ako veľmi vhodný pre distribuované systémy
 s~požiadavkou na nízku latenciu \cite{mqtt_websocket_comparison}.
 Centrálna SBC jednotka pritom nesie zodpovednosť nielen za
 MQTT orchestráciu, ale aj za synchrónne prehrávanie
-audiovizuálneho obsahu \cite{rpi_esp32_scada}. Pre riadiacu
+audiovizuálneho obsahu \cite{rpi4_datasheet}. Pre riadiacu
 logiku interaktívnych expozícií je vhodný model konečného
 stavového automatu (FSM), ktorý umožňuje neblokujúce
 vetvenie scenára na základe externých udalostí

@@ -30,11 +30,11 @@ Ukázať dátový model scény (koreň, stav, sekcie), typy akcií s konkretným
 
 | Blok v diagrame | Súbor / funkcia | Čo robí v reálnom kóde |
 |---|---|---|
-| mqtt — topic + message | `state_executor.py` → `_execute_mqtt()` | Publikuje správu cez `mqtt_client.publish(topic, message)`; voliteľne s `retain=True` |
+| mqtt — topic + message | `state_executor.py` → `_execute_mqtt()` | Publikuje správu cez `mqtt_client.publish(topic, message)`; runtime odosiela scénické MQTT akcie s `retain=False` |
 | audio — PLAY:\<súbor\>[:\<vol\>] | `raspberry_pi/utils/audio_handler.py` → `handle_command()` | Prehrá zvukový súbor; súbory s prefixom `sfx_` sú preloadované do RAM, ostatné streamované z disku |
 | audio — STOP / STOP:\<súbor\> | `audio_handler.py` → `handle_command()` | `STOP` zastaví všetky stopy; `STOP:<súbor>` zastaví konkrétnu stopu |
 | audio — PAUSE / RESUME | `audio_handler.py` → `handle_command()` | Pozastaví / obnoví prehrávanie aktuálnej stopy |
-| audio — VOLUME:\<0–100\> | `audio_handler.py` → `handle_command()` | Nastaví hlasitosť na danú hodnotu |
+| audio — VOLUME:\<0.0–1.0\> | `audio_handler.py` → `handle_command()` | Nastaví hlasitosť na danú hodnotu |
 | video — PLAY\_VIDEO:\<súbor\> | `raspberry_pi/utils/video_handler.py` → `handle_command()` | Spustí externý video prehrávač cez IPC rozhranie |
 | video — STOP\_VIDEO | `video_handler.py` → `handle_command()` | Zastaví video a ukončí externý prehrávač |
 | video — PAUSE / RESUME | `video_handler.py` → `handle_command()` | Pozastaví / obnoví prehrávanie videa |

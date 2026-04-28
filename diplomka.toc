@@ -13,13 +13,13 @@
 \contentsline {subsection}{\numberline {2.4.2}Aplikačné protokoly}{12}{subsection.2.4.2}%
 \contentsline {section}{\numberline {2.5}Hardvérové platformy pre IoT}{13}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}Jednodoskové počítače (SBC)}{13}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Mikrokontroléry pre koncové uzly}{14}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.2}Mikrokontroléry pre koncové uzly}{13}{subsection.2.5.2}%
 \contentsline {section}{\numberline {2.6}Výkonová elektronika pre fyzické efekty}{14}{section.2.6}%
 \contentsline {subsection}{\numberline {2.6.1}Riadenie jednosmerných (DC) motorov}{14}{subsection.2.6.1}%
 \contentsline {subsection}{\numberline {2.6.2}Spínanie sieťových a~nízkonapäťových záťaží}{14}{subsection.2.6.2}%
 \contentsline {section}{\numberline {2.7}Prístupy k~riadiacej logike expozície}{15}{section.2.7}%
 \contentsline {section}{\numberline {2.8}Dátové formáty pre konfiguráciu a~prenos}{15}{section.2.8}%
-\contentsline {section}{\numberline {2.9}Zhrnutie rešerše}{16}{section.2.9}%
+\contentsline {section}{\numberline {2.9}Zhrnutie rešerše}{15}{section.2.9}%
 \contentsline {chapter}{\numberline {3}Návrh architektúry systému}{17}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Požiadavky na systém}{17}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Systémová topológia a~sieťová koncepcia}{17}{section.3.2}%
