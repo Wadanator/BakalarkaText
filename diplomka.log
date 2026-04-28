@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  28 APR 2026 23:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  28 APR 2026 23:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1279,18 +1279,18 @@ Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_
 le_final.png>] [32 <./obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3
 _fsm_engine_tick_flow_final.png>]
 <obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_structure
-_final_html.png, id=730, 1505.625pt x 1243.64626pt>
+_final_html.png, id=730, 1129.21875pt x 861.9703pt>
 File: obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_stru
 cture_final_html.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_struc
 ture_final_html.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_
 5_4_json_scene_structure_final_html.png  used on input line 141.
-(pdftex.def)             Requested size: 432.48476pt x 357.2324pt.
+(pdftex.def)             Requested size: 432.48476pt x 330.13002pt.
  [33] [34 <./obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_sce
-ne_structure_final_html.png (PNG copy)>]
+ne_structure_final_html.png>]
 <obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_runti
-me_final.png, id=740, 588.7596pt x 558.6471pt>
+me_final.png, id=741, 588.7596pt x 558.6471pt>
 File: obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_
 runtime_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_r
@@ -1300,11 +1300,10 @@ _5_5_mqtt_sequence_runtime_final.png  used on input line 185.
 (pdftex.def)             Requested size: 432.48051pt x 410.36626pt.
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 193.
-
-[35] [36 <./obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_seq
-uence_runtime_final.png>]
+ [35] [36 <./obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_se
+quence_runtime_final.png>]
 <obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboard_f
-unctional_final.png, id=753, 1505.625pt x 2428.07124pt>
+unctional_final.png, id=754, 1505.625pt x 2428.07124pt>
 File: obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashbo
 ard_functional_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboa
@@ -1316,7 +1315,7 @@ gram_5_6_web_dashboard_functional_final.png  used on input line 234.
 
 LaTeX Warning: Float too large for page by 28.18752pt on input line 237.
 
-<obr/SW/dashboard_screenshot.png, id=754, 1443.14156pt x 643.6547pt>
+<obr/SW/dashboard_screenshot.png, id=755, 1443.14156pt x 643.6547pt>
 File: obr/SW/dashboard_screenshot.png Graphic file (type png)
 <use obr/SW/dashboard_screenshot.png>
 Package pdftex.def Info: obr/SW/dashboard_screenshot.png  used on input line 24
@@ -1546,9 +1545,9 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (53 pages, 6979028 bytes).
+Output written on diplomka.pdf (53 pages, 6887934 bytes).
 PDF statistics:
- 1004 PDF objects out of 1200 (max. 8388607)
+ 1005 PDF objects out of 1200 (max. 8388607)
  173 named destinations out of 1000 (max. 500000)
  614 words of extra memory for PDF output out of 10000 (max. 10000000)
 

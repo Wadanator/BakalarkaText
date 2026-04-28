@@ -8,7 +8,6 @@ uvedený v~kapitole~\ref{NavrhArchitektury} a~na hardvérovú realizáciu
 z~kapitoly~\ref{ImplementaciaHW}. V~praxi je táto vrstva zodpovedná
 za vykonávanie scén, koordináciu multimédií, odosielanie príkazov
 na fyzické zariadenia a~za spätné vyhodnocovanie ich stavu.
-Ďalší text sa sústreďuje na implementáciu jednotlivých softvérových komponentov.
 
 \section{Softvérová architektúra systému}
 \label{SWAchitektura}
@@ -38,7 +37,6 @@ Vzájomné väzby vrstiev a~tok informácií sú znázornené na Obr.~\ref{fig:s
 Backendová časť je implementovaná v~jazyku \textbf{Python} a~nasadená
 ako systémová služba členená do piatich funkčných celkov pokrývajúcich
 celý životný cyklus behu scény (Obr.~\ref{fig:sw_backend_lifecycle}).
-Jednotlivé celky sú popísané v~nasledujúcich sekciách.
 
 \subsection{Orchestrácia behu systému}
 \label{SWOrchestracia}
@@ -206,7 +204,7 @@ propagované do webového dashboardu cez \textbf{WebSocket}.
 \label{SWMediaWeb}
 
 Mediálna vrstva kombinuje dva režimy práce so zvukom.
-Súbory s~prefixom \texttt{sfx\_} sa pred štartom scény prehrajú
+Súbory s~prefixom \texttt{sfx\_} sa pred štartom scény načítajú
 do RAM ako \texttt{pygame.mixer.Sound}, aby sa eliminovala latencia.
 Ostatné stopy sú streamované z~disku ako hudba, čím sa šetrí
 pamäť pre dlhšie nahrávky. Prescan a~preloading prebehne ešte

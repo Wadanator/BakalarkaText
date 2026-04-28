@@ -36,7 +36,7 @@ Ukázať dátový model scény (koreň, stav, sekcie), typy akcií s konkretným
 | audio — PAUSE / RESUME | `audio_handler.py` → `handle_command()` | Pozastaví / obnoví prehrávanie aktuálnej stopy |
 | audio — VOLUME:\<0.0–1.0\> | `audio_handler.py` → `handle_command()` | Nastaví hlasitosť na danú hodnotu |
 | video — PLAY\_VIDEO:\<súbor\> | `raspberry_pi/utils/video_handler.py` → `handle_command()` | Spustí externý video prehrávač cez IPC rozhranie |
-| video — STOP\_VIDEO | `video_handler.py` → `handle_command()` | Zastaví video a ukončí externý prehrávač |
+| video — STOP\_VIDEO | `video_handler.py` → `handle_command()` | Zastaví prehrávanie videa a vráti prehrávač na idle obrázok |
 | video — PAUSE / RESUME | `video_handler.py` → `handle_command()` | Pozastaví / obnoví prehrávanie videa |
 | video — SEEK:\<sekundy\> | `video_handler.py` → `handle_command()` | Presunie prehrávanie na zadanú pozíciu v sekundách |
 
