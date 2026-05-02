@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  2 MAY 2026 19:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  2 MAY 2026 19:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1122,7 +1122,7 @@ on: found PDF version <1.7>, but at most version <1.5> allowed
 <obr/ARCH/system_topology.pdf, id=551, 442.53331pt x 233.9139pt>
 File: obr/ARCH/system_topology.pdf Graphic file (type pdf)
 <use obr/ARCH/system_topology.pdf>
-Package pdftex.def Info: obr/ARCH/system_topology.pdf  used on input line 70.
+Package pdftex.def Info: obr/ARCH/system_topology.pdf  used on input line 71.
 (pdftex.def)             Requested size: 409.71692pt x 216.56683pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1131,7 +1131,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <obr/ARCH/FSM_Architektura.png, id=578, 1251.92719pt x 408.77719pt>
 File: obr/ARCH/FSM_Architektura.png Graphic file (type png)
 <use obr/ARCH/FSM_Architektura.png>
-Package pdftex.def Info: obr/ARCH/FSM_Architektura.png  used on input line 149.
+Package pdftex.def Info: obr/ARCH/FSM_Architektura.png  used on input line 151.
 
 (pdftex.def)             Requested size: 409.71692pt x 133.78038pt.
 
@@ -1139,7 +1139,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [19 <./obr/ARCH/FSM_Architektura.png>]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-82.
+84.
 
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1150,7 +1150,7 @@ und PDF version <1.7>, but at most version <1.5> allowed
 <obr/ARCH/Mqtt_Flow.pdf, id=588, 746.79pt x 566.115pt>
 File: obr/ARCH/Mqtt_Flow.pdf Graphic file (type pdf)
 <use obr/ARCH/Mqtt_Flow.pdf>
-Package pdftex.def Info: obr/ARCH/Mqtt_Flow.pdf  used on input line 191.
+Package pdftex.def Info: obr/ARCH/Mqtt_Flow.pdf  used on input line 193.
 (pdftex.def)             Requested size: 409.71692pt x 310.58678pt.
 ) (chapters/Implementacia_hw.tex [20 <./obr/ARCH/Mqtt_Flow.pdf>]
 Kapitola 4.
@@ -1545,7 +1545,7 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (54 pages, 6864965 bytes).
+Output written on diplomka.pdf (54 pages, 6864888 bytes).
 PDF statistics:
  1005 PDF objects out of 1200 (max. 8388607)
  174 named destinations out of 1000 (max. 500000)

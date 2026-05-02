@@ -1,12 +1,12 @@
 \chapter{Návrh architektúry systému}
 \label{NavrhArchitektury}
 
-V predchádzajúcej kapitole sme rešerš uzavreli jasnou voľbou: 
-distribuovaným IoT systémom na otvorených platformách. 
-V tejto kapitole tento záver pretavíme do konkrétnych 
-technických rozhodnutí -- od výberu hardvérových uzlov 
-cez komunikačný model až po softvérové jadro riadiaceho enginu. 
-Všetky tieto kroky sú priamou odpoveďou na požiadavky 
+Predchádzajúca kapitola uzavrela rešerš voľbou distribuovaného
+IoT systému postaveného na otvorených platformách.
+V~tejto kapitole sa uvedený záver premieta do konkrétnych
+technických rozhodnutí -- od výberu hardvérových uzlov
+cez komunikačný model až po softvérové jadro riadiaceho enginu.
+Všetky tieto kroky sú priamou odpoveďou na požiadavky
 definované v~sekcii~\ref{PoziadavkyNaSystem}.
 
 % ------------------------------------------------------------------
@@ -20,29 +20,30 @@ pre ktorú bol systém navrhnutý a~implementovaný.
 Z~hľadiska \textbf{funkčných požiadaviek} sa očakáva najmä bezproblémová
 integrácia a~synchronizácia rôznorodých hardvérových prvkov:
 \begin{itemize}
-    \item \textbf{Riadenie motora a~výkonu:} Primárnou úlohou je riadenie
-        výkonových prvkov, špecificky jednosmerných motorov s~riadením ich
+    \item \textbf{Riadenie motorov a~výkonu:} Primárnou úlohou je riadenie
+        výkonových prvkov, konkrétne jednosmerných motorov s~možnosťou riadenia
         rýchlosti a~smeru otáčania. Ďalšou kľúčovou funkciou je priame spínanie
         záťaží pracujúcich na sieťovom napätí \textbf{230\,V} (osvetlenie,
         dymostroje) a~taktiež \textbf{12\,V}.
     \item \textbf{Multimediálna synchronizácia:} Keďže moderné expozície
-        stavajú aj na audiovizuálnych vnemoch, systém musí zabezpečiť synchronizované
+        využívajú aj audiovizuálne vnemy, systém musí zabezpečiť synchronizované
         prehrávanie zvuku a~videa.
     \item \textbf{Interaktivita a~časová os (\textit{timeline}):} Systém musí
-        vedieť na základe hardvérových vstupov zmeniť vetvenie prebiehajúcej
+        vedieť na základe hardvérových vstupov meniť vetvenie prebiehajúcej
         scény, no zároveň podporovať chronologické časovanie sekvencií.
 \end{itemize}
 
 Medzi \textbf{nefunkčné požiadavky} s~ohľadom na udržateľnosť patria:
 \begin{itemize}
-    \item \textbf{Modularita a~softvérové oddelenie:} Pre zachovanie oddelenia
-        softvérového inžinierstva od obsahovej tvorby sa úprava logiky (scenára)
-        musí dať vykonať výhradne modifikáciou \textbf{textových konfiguračných
+    \item \textbf{Modularita a~softvérové oddelenie:} Na zachovanie oddelenia
+        softvérového inžinierstva od obsahovej tvorby musí byť možné úpravu
+        logiky scenára vykonať výhradne modifikáciou \textbf{textových konfiguračných
         súborov}. Tým sa odstraňuje nutnosť zásahu do zdrojového kódu v~Pythone.
     \item \textbf{Dostupnosť:} Vzhľadom na finančné limity
         inštalácií musí byť systém postavený na komerčne dostupných, cenovo
-        výhodných mikrokontroléroch a~\textbf{Internet of Things (IoT)}
-        platformách namiesto drahých priemyselných automatov (PLC).
+        výhodných mikrokontroléroch a~platformách internetu vecí
+        (\textit{Internet of Things}, IoT)
+        namiesto drahých priemyselných automatov (PLC).
 \end{itemize}
 
 % ------------------------------------------------------------------
@@ -54,7 +55,7 @@ no vzájomne sa dopĺňajúcich hľadísk: z~\textbf{logického (výpočtového)
 a~z~\textbf{fyzického (sieťového)}.
 
 Z~logického hľadiska ide o~\textbf{distribuovanú architektúru}
-(viď kapitola~\ref{architektury-systemov}). Riadiaca logika nie je sústredená výhradne v~jednom centrálnom procesore,
+(kapitola~\ref{architektury-systemov}). Riadiaca logika nie je sústredená výhradne v~jednom centrálnom procesore,
 ale je rozdelená medzi viacero častí systému a~presunutá bližšie k~výkonovým prvkom.
 Koncové periférie postavené na mikrokontroléroch preto neslúžia len ako pasívne spínače, ale ako aktívne prvky,
 ktoré lokálne spracúvajú prijaté príkazy a~samostatne vykonávajú im pridelené fyzické akcie.
@@ -62,7 +63,7 @@ ktoré lokálne spracúvajú prijaté príkazy a~samostatne vykonávajú im prid
 Z~fyzického a~sieťového hľadiska systém zároveň dodržiava
 \textbf{hviezdicovú topológiu (\textit{Star topology})}. Hoci sú distribuované
 uzly plne inteligentné, nekomunikujú vzájomne medzi sebou (netvoria
-\textit{Mesh} sieť). Akýkoľvek dátový tok na sieti vedie striktne obojsmerne
+\textit{mesh} sieť). Akýkoľvek dátový tok na sieti prebieha striktne obojsmerne
 len cez centrálny uzol.
 
 \begin{figure}[H]
@@ -76,15 +77,15 @@ len cez centrálny uzol.
 \section{Výber a~rozdelenie hardvérových uzlov}
 \label{HardverovaTopoligia}
 
-Systém je rozdelený do dvoch samostatných kategórií: na jeden centrálny uzol
-a~na viacero výkonných periférií. Z~hľadiska spoľahlivosti a~rýchlosti prenosu
+Systém je rozdelený na jeden centrálny uzol
+a~viacero vykonávacích periférií. Z~hľadiska spoľahlivosti a~rýchlosti prenosu
 medzi nimi by bolo ideálne zabezpečiť komunikáciu výhradne drôtovým
 spojením. V~praxi však v~expozíciách či \textit{escape room} inštaláciách
-často nie je technologicky alebo esteticky možné naťahovať dodatočné káblové
+často nie je technologicky alebo esteticky možné viesť dodatočné káblové
 zväzky naprieč miestnosťou. Z~tohto dôvodu bolo na distribúciu dátových
 príkazov z~centrály zvolené bezdrôtové Wi-Fi pripojenie.
 
-Dvojúrovňová architektúra bola fyzicky realizovaná nasledovným hardvérom:
+Dvojúrovňová architektúra bola fyzicky realizovaná nasledujúcim hardvérom:
 \begin{itemize}
     \item \textbf{Centrálny uzol (\uv{Mozog}):} Hlavnú riadiacu jednotku
         systému tvorí jednodoskový počítač \textbf{Raspberry Pi}. Ako bolo
@@ -93,17 +94,17 @@ Dvojúrovňová architektúra bola fyzicky realizovaná nasledovným hardvérom:
         aj prehrávanie multimediálneho obsahu, pričom natívne hardvérové
         rozhrania umožňujú priame prepojenie s~displejom a~reproduktormi
         bez externých adaptérov.
-    \item \textbf{Distribuované uzly (\uv{Svaly a~zmysly}):} Na plnenie
+    \item \textbf{Distribuované uzly (\uv{Svaly a~zmysly}):} Na vykonávanie
         fyzických úkonov slúži modulárna sieť bezdrôtových mikrokontrolérov
-        \textbf{ESP32}, ktoré sú implementované a~napájané priamo pri
-        interaktívnych objektoch. Tieto uzly sa na základe svojho zamerania
+        \textbf{ESP32}, ktoré sú umiestnené a~napájané priamo pri
+        interaktívnych objektoch. Tieto uzly sa podľa svojho zamerania
         softvérovo rozdeľujú na:
         \begin{itemize}
-            \item \textbf{Tlačidlový uzol} pre hardvérovú detekciu vstupu
+            \item \textbf{Tlačidlový uzol} na hardvérovú detekciu vstupu
                 od používateľa.
-            \item \textbf{Motorický uzol} pre ovládanie fyzického pohybu
+            \item \textbf{Motorický uzol} na ovládanie fyzického pohybu
                 exponátov (jednosmerné motory).
-            \item \textbf{Reléový uzol} pre spínanie efektov a osvetlenia
+            \item \textbf{Reléový uzol} na spínanie efektov a~osvetlenia
                 či~iných zariadení pracujúcich na 12\,V a~sieťovom napätí
                 230\,V.
         \end{itemize}
@@ -116,9 +117,9 @@ Dvojúrovňová architektúra bola fyzicky realizovaná nasledovným hardvérom:
 Hlavnou požiadavkou na softvérové jadro bola schopnosť
 \textbf{vetviť priebeh expozície} na základe reálnych
 podnetov od návštevníka. Scenár preto nesmel byť pevnou
-lineárnou sekvenciou akcií -- systém musel v~ľubovoľnom
-momente vedieť čakať na vonkajší vstup (napr. stlačenie
-tlačidla) a~podľa jeho výsledku zvoliť ďalší smer deja.
+lineárnou sekvenciou akcií -- systém musel umožniť čakanie
+na vonkajší vstup v~ľubovoľnom momente (napr. stlačenie
+tlačidla) a~podľa prijatého podnetu zvoliť ďalší smer deja.
 Klasický sekvenčný prístup je na takúto úlohu nevhodný
 z~dôvodov analyzovaných v~kapitole~\ref{riadiaca-logika}.
 
@@ -128,8 +129,8 @@ Na úrovni architektúry je podstatné, že priebeh expozície je
 rozdelený do samostatných \textbf{stavov} a~zmeny medzi nimi
 sú riadené udalosťami.
 
-Každý stav navrhnutého modelu pozostáva z~dvoch 
-zložiek: zo \textbf{sekvencie akcií} naplánovaných voči okamihu
+Každý stav navrhnutého modelu pozostáva z~dvoch
+zložiek: zo \textbf{sekvencie akcií} naplánovaných relatívne voči okamihu
 vstupu do stavu a~z~množiny \textbf{podmienok prechodu}, ktoré
 určujú, kedy a~do ktorého stavu automat postúpi. Podnety
 spúšťajúce prechody vychádzajú z~troch zdrojov: z~uplynutia
@@ -138,7 +139,8 @@ zo~správy prijatej od periférneho uzla. Popri prechodoch
 viazaných na konkrétny stav model rozlišuje aj
 \textbf{globálne podmienky} -- platné pre celú scénu bez
 ohľadu na to, v~ktorom stave sa automat práve nachádza.
-Všetky stavy, ich akcie a podmienky prechodov sú definovaný externe, oddelene od kódu enginu,
+Všetky stavy, ich akcie a~podmienky prechodov sú definované externe
+a~oddelene od kódu enginu,
 ako je opísané v~sekcii~\ref{KomunikacnaVrstva}.
 
 Konkrétne implementačné detaily spracovania stavov,
@@ -155,14 +157,14 @@ prechodov a~udalostí sú rozpracované v~kapitole~\ref{ImplementaciaSW}.
 \section{Komunikačná vrstva -- MQTT a~formát scén}
 \label{KomunikacnaVrstva}
 
-Pre výmenu dát medzi centrálnym Raspberry~Pi a~distribuovanými
+Na výmenu dát medzi centrálnym Raspberry~Pi a~distribuovanými
 perifériami (ESP32) bol zvolený \textbf{protokol MQTT}
 (\textit{Message Queuing Telemetry Transport})
-(viď kapitola~\ref{aplikacne-protokoly}). Prenos správ prebieha na
-koncepte \textit{Publish/Subscribe} cez trvalé TCP/IP spojenie s~centrálnym
+(kapitola~\ref{aplikacne-protokoly}). Prenos správ prebieha na
+princípe \textit{Publish/Subscribe} cez trvalé TCP/IP spojenie s~centrálnym
 sieťovým sprostredkovateľom (\textit{brokerom}).
 
-Navrhnutý model siete implementuje niekoľko kľúčových komunikačných štandardov:
+Navrhnutý model siete obsahuje niekoľko kľúčových komunikačných mechanizmov:
 \begin{itemize}
     \item \textbf{Hierarchické adresovanie zariadení:} Každé zariadenie je
         adresované vlastným topikom v~hierarchickom formáte. Tento princíp
@@ -177,15 +179,15 @@ Navrhnutý model siete implementuje niekoľko kľúčových komunikačných šta
         pozná aktuálny stav siete. Súčasne je nastavená správa
         \textit{Last Will and Testament} (LWT), ktorú broker automaticky
         zverejní v~prípade neočakávaného výpadku spojenia.
-    \item \textbf{Konfigurácia scény ako externý JSON súbor}
-        (viď kapitola~\ref{datove-formaty})\textbf{:} Celá logika
+    \item \textbf{Konfigurácia scény ako externý súbor JSON}
+        (kapitola~\ref{datove-formaty})\textbf{:} Celá logika
         scenára je definovaná výhradne v~externom súbore \texttt{.json},
         nie priamo v~kóde enginu.
 \end{itemize}
 Toto oddelenie konfigurácie od kódu enginu umožňuje upravovať logiku
 a~priebeh expozície bez zásahu do zdrojového kódu systému. Konkrétna
 realizácia topikov, potvrdzovacích správ a~spracovania JSON scén je
-detailne rozpracovaná až v~kapitole~\ref{ImplementaciaSW}.
+detailne rozpracovaná v~kapitole~\ref{ImplementaciaSW}.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\linewidth]{obr/ARCH/Mqtt_Flow}
