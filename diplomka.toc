@@ -55,9 +55,9 @@
 \contentsline {subsection}{\numberline {6.2.3}Meranie latencie}{41}{subsection.6.2.3}%
 \contentsline {subsection}{\numberline {6.2.4}Presnosť prepínania}{42}{subsection.6.2.4}%
 \contentsline {subsection}{\numberline {6.2.5}Zhodnotenie}{42}{subsection.6.2.5}%
-\contentsline {chapter}{\numberline {7}Záver}{43}{chapter.7}%
-\contentsline {chapter}{Zoznam obrázkov}{45}{chapter*.24}%
-\contentsline {chapter}{Zoznam tabuliek}{46}{chapter*.25}%
-\contentsline {chapter}{\numberline {8}Zoznam použitých skratiek a symbolov}{47}{chapter.8}%
-\contentsline {chapter}{Použitá literatúra}{49}{section*.26}%
-\contentsline {chapter}{Použitá literatúra}{49}{chapter*.27}%
+\contentsline {chapter}{\numberline {7}Záver}{44}{chapter.7}%
+\contentsline {chapter}{Zoznam obrázkov}{46}{chapter*.24}%
+\contentsline {chapter}{Zoznam tabuliek}{47}{chapter*.25}%
+\contentsline {chapter}{\numberline {8}Zoznam použitých skratiek a symbolov}{48}{chapter.8}%
+\contentsline {chapter}{Použitá literatúra}{50}{section*.26}%
+\contentsline {chapter}{Použitá literatúra}{50}{chapter*.27}%

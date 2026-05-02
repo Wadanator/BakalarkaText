@@ -16,7 +16,7 @@ osvetlenie hodín a panelu.
 
 Na testovanie boli použité tieto uzly a~zariadenia:
 \begin{itemize}
-    \item \textbf{Raspberry Pi} s~bežiacim centrálnym procesom \texttt{MuseumController}.
+    \item \textbf{Raspberry Pi} s~bežiacim centrálnym riadiacim procesom.
     \item \textbf{3x ESP32 uzly} pre motory, relé a~tlačidlo.
 \end{itemize}
 
@@ -30,8 +30,9 @@ po výpadku napájania a~na laboratórnom teste na stole.
 \begin{itemize}
     \item \textbf{Priebeh:} Systém bežal na stole so zapojenými iba ESP32 uzlami.
         Motory a~svetlá boli fyzicky odpojené, takže test overoval len logiku a~komunikáciu,
-        nie záťaž na výstupoch. Scéna \texttt{all\_relays\_loop\_test} sa spúšťala niekoľkokrát
-        v~rôznych časoch v priebehu desiatich dní, aby sa overilo, či sa scéna spustí a prebehne do konca.
+        nie záťaž na výstupoch. Testovacia scéna slučkového prepínania relé sa spúšťala opakovane
+        v~rôznych časoch v~priebehu desiatich dní, zvyčajne viackrát denne,
+        aby sa overilo, či sa scéna spustí a~prebehne do konca.
     \item \textbf{Výsledok:} Scéna sa spúšťala spoľahlivo a~bez zaseknutia.
         Všetky príkazy prešli cez Wi-Fi, MQTT aj ESP32 logiku a~feedback sa vracal bez timeoutov.
 \end{itemize}
@@ -79,12 +80,18 @@ po výpadku napájania a~na laboratórnom teste na stole.
 \end{tabular}
 \end{table}
 
+Nameraná hodnota je vyššia ako jednosmerná latencia 11{,}04\,ms uvádzaná
+v~literatúre~\cite{mqtt_websocket_comparison} -- rozdiel je spôsobený tým,
+že meranie pokrýva round-trip (Raspberry Pi → ESP32 → Raspberry Pi) cez
+bezdrôtovú sieť Wi-Fi, ktorá vnáša variabilné oneskorenie.
+Pre nižšiu latenciu by bolo vhodné použiť káblové sieťové pripojenie uzlov.
+
 \subsection{Presnosť prepínania}
 \begin{itemize}
     \item \textbf{Priebeh:} Na tej istej testovacej scéne sa sledoval interval medzi prepnutiami stavového automatu.
     \item \textbf{Výsledok:} Nameraný priemer bol 255{,}8\,ms pri cieli 250\,ms -- odchýlka 2,3\,\%,
         ktorá je pre reálnu prevádzku zanedbateľná. Kumulatívny drift oproti ideálnemu času dosiahol
-        za celú sekveniu 1\,317\,ms; vzniká sekvenčným spracovaním prechodov, kde sa malé oneskorenia
+        za celú sekveniu 1\,317\,ms pri 232 prechodoch; vzniká spracovaním prechodov, kde sa malé oneskorenia
         sčítavajú. Dôležité je, že drift má lineárny a~predvídateľný charakter -- nie je náhodný ani
         rastúci. Keďže v~skutočných scénach sú stavy niekoľkonásobne dlhšie a~počet prechodov výrazne
         nižší, praktický vplyv na synchronizáciu efektov je minimálny.

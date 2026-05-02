@@ -5,7 +5,7 @@ Softvérová vrstva systému je realizovaná ako distribuované riešenie,
 ktoré prepája centrálny backend na platforme Raspberry~Pi
 s~periférnymi uzlami ESP32. Nadväzuje na architektonický návrh
 uvedený v~kapitole~\ref{NavrhArchitektury} a~na hardvérovú realizáciu
-z~kapitoly~\ref{ImplementaciaHW}. V~praxi je táto vrstva zodpovedná
+z~kapitoly~\ref{ImplementaciaHW}. Táto vrstva zodpovedná
 za vykonávanie scén, koordináciu multimédií, odosielanie príkazov
 na fyzické zariadenia a~za spätné vyhodnocovanie ich stavu.
 
@@ -41,13 +41,13 @@ celý životný cyklus behu scény (Obr.~\ref{fig:sw_backend_lifecycle}).
 \subsection{Orchestrácia behu systému}
 \label{SWOrchestracia}
 
-Pri štarte backend načíta konfiguráciu zo súboru \texttt{config.ini}
+Pri štarte backend načíta konfiguráciu z~inicializačného súboru
 (MQTT parametre, GPIO vstupy, cesty k~médiám, identifikátor
 miestnosti a~logovanie). Konfigurácia runtime je oddelená
 od obsahovej konfigurácie scén.
 
 Po načítaní konfigurácie backend inicializuje všetky runtime služby
-cez \texttt{ServiceContainer} a~prepojí ich callback mechanizmami.
+a~prepojí ich callback mechanizmami.
 Po inicializácii sa spustí hlavná slučka, v~ktorej sa
 periodicky vyhodnocuje stav MQTT spojenia, stav dostupnosti
 zariadení a~vstupy fyzického tlačidla. Samotné vykonávanie
@@ -74,29 +74,31 @@ Okrem hlavnej služby beží samostatná \textbf{watchdog služba}, ktorá
 monitoruje zdravie backendového procesu a~v~prípade poruchy ho
 automaticky reštartuje. Pred každým reštartom overí, či práve
 prebieha scéna, a~ak áno, čaká na jej dokončenie --- čím sa
-minimalizuje riziko prerušenia živej prezentácie.
+minimalizuje riziko prerušenia scény.
 
 \subsection{Stavový automat ako jadro logiky}
 \label{SWFSM}
 
 Model konečného stavového automatu je v~runtime implementovaný
 ako spolupráca štyroch komponentov zodpovedných za udržiavanie stavu,
-spracovanie prechodov, vykonávanie akcií a~načítavanie definícií scény.
+spracovanie prechodov, vykonávanie akcií a~načítavanie scény.
 
-V~runtime sú využívané prechody typu \texttt{timeout},
-\texttt{audioEnd}, \texttt{videoEnd}, \texttt{mqttMessage}
-a~\texttt{always}. Vyhodnocovanie prechodov prebieha
-v~poradí, v~akom sú zapísané v~JSON súbore, pričom
-pri splnení prvej podmienky sa vykoná prechod do cieľového stavu.
+Podporované typy prechodov medzi stavmi sú:
+\begin{itemize}
+    \item \textbf{Časový limit} --- prechod po uplynutí nastaveného času,
+    \item \textbf{Koniec audia} --- prechod po dohratí zvukovej stopy,
+    \item \textbf{Koniec videa} --- prechod po dohratí videoklip,
+    \item \textbf{MQTT správa} --- prechod po prijatí správy od uzla (napr. stlačenie tlačidla),
+    \item \textbf{Bezpodmienečný prechod} --- vykoná sa vždy pri vstupe do stavu.
+\end{itemize}
+Vyhodnocovanie prebieha v~poradí, v~akom sú prechody zapísané
+v~konfiguračnom súbore; pri splnení prvej podmienky sa okamžite
+vykoná príslušný prechod.
 
-Okrem lokálnych prechodov stavu sú podporené aj
-\texttt{globalEvents}, teda prechody platné pre celú scénu
-bez ohľadu na aktuálny stav. Tento mechanizmus sa používa
-najmä pre globálne núdzové podmienky a~časové limity.
-
-V~spracovateľskom cykle sa najprv vyhodnocujú \texttt{globalEvents}
-voči celkovému času scény a~až následne lokálne prechody aktuálneho
-stavu. Tým sa zabezpečí, že globálne podmienky majú prednosť
+Okrem lokálnych prechodov sú podporené aj \textbf{globálne podmienky}
+platné pre celú scénu bez ohľadu na aktuálny stav --- používajú sa
+najmä pre núdzové zastavenie a~celkové časové limity.
+V~spracovateľskom cykle majú globálne podmienky prednosť
 pred lokálnou logikou jednotlivých stavov.
 
 \begin{figure}[p]
@@ -118,10 +120,10 @@ Každá scéna obsahuje identifikátor, počiatočný stav
 a~slovník stavov. Štruktúra konfiguračného súboru vrátane
 štyroch sekcií každého stavu je znázornená na Obr.~\ref{fig:sw_json_structure}.
 
-Sekcia \texttt{timeline} umožňuje naplánovať
+Sekcia časovej osi umožňuje naplánovať
 udalosti relatívne voči času vstupu do stavu bez blokovania
 zvyšku systému --- v~implementácii sú tieto akcie realizované
-ako \texttt{threading.Timer} inštancie plánované pri vstupe
+ako asynchrónne časovače plánované pri vstupe
 do stavu. Podporované akcie sú tri: \textbf{MQTT akcia}, \textbf{audio akcia}
 a~\textbf{video akcia} --- konkrétne príkazové formáty vrátane
 tópikov pre spustenie scény sú zhrnuté v~Obr.~\ref{fig:sw_json_structure}.
@@ -188,14 +190,14 @@ nevznikali falošné timeout udalosti.
 \subsection{Sledovanie stavu aktuátorov}
 \label{SWActuatorStore}
 
-Súčasťou MQTT vrstvy je aj komponent \textbf{\texttt{MQTTActuatorStateStore}},
+Súčasťou MQTT vrstvy je aj \textbf{register stavov aktuátorov},
 ktorý pre každý príkazový topik udržiava dvojicu stavov:
 \textit{desired} (požadovaný stav po odoslaní príkazu)
 a~\textit{confirmed} (potvrdený stav po prijatí feedback správy
 \texttt{OK} od uzla). Tento prístup oddeľuje okamžitú spätnú
 väzbu pre používateľské rozhranie od skutočného hardvérového
 potvrdenia. Pri zastavení scény sa nad celým store volá
-operácia \texttt{force\_all\_off()}, ktorá nastaví všetky
+operácia núteného vypnutia, ktorá nastaví všetky
 sledované výstupy do bezpečného stavu nezávisle od prípadných
 oneskorených feedback správ. Zmeny stavu sú okamžite
 propagované do webového dashboardu cez \textbf{WebSocket}.
@@ -203,29 +205,34 @@ propagované do webového dashboardu cez \textbf{WebSocket}.
 \section{Mediálna vrstva a~webové rozhranie}
 \label{SWMediaWeb}
 
-Mediálna vrstva kombinuje dva režimy práce so zvukom.
-Súbory s~prefixom \texttt{sfx\_} sa pred štartom scény načítajú
-do RAM ako \texttt{pygame.mixer.Sound}, aby sa eliminovala latencia.
-Ostatné stopy sú streamované z~disku ako hudba, čím sa šetrí
-pamäť pre dlhšie nahrávky. Prescan a~preloading prebehne ešte
-pred štartom stavového automatu.
+Sekcia pokrýva tri samostatné podsystémy:
 
-Video vrstva je realizovaná prostredníctvom prehrávača
-\textbf{mpv} spusteného v~režime celej obrazovky.
-Prehrávač je riadený cez \textbf{IPC rozhranie} na báze
-UNIX socketu, pričom počas behu sa periodicky kontroluje
-dostupnosť procesu a~odozva ovládacieho kanála.
+\begin{itemize}
+    \item \textbf{Zvuková vrstva.}
+        Kombinuje dva režimy prehrávania: zvukové efekty určené
+        na okamžité prehrávanie sa pred štartom scény načítajú
+        do pamäte RAM (čím sa eliminuje latencia pri spustení),
+        zatiaľ čo dlhšie hudobné stopy sú streamované priebežne
+        z~disku. Prescan a~preloading prebehne ešte pred štartom
+        stavového automatu.
 
-Webové rozhranie poskytuje obsluhe prevádzkové funkcie
-bez potreby zásahu do konzoly. Frontend je realizovaný ako
-\textbf{React} SPA (Vite), backend ako \textbf{Flask} služba
-s~vrstvou \textbf{Flask-SocketIO}. Rozhranie zahŕňa
-spúšťanie a~zastavovanie scén, odosielanie príkazov,
-správu médií a~monitorovanie stavov zariadení a~logov.
-Klient po prihlásení nadviaže \textbf{Socket.IO} spojenie,
-server následne pushuje udalosti o~stave systému
-(napr. logy, priebeh scény, runtime stavy), takže
-operátor vidí zmeny priebežne bez periodického pollingu.
+    \item \textbf{Video vrstva.}
+        Realizovaná prostredníctvom prehrávača \textbf{mpv}
+        spusteného v~režime celej obrazovky. Prehrávač je riadený
+        cez \textbf{IPC rozhranie} na báze UNIX socketu; počas
+        behu sa periodicky kontroluje dostupnosť procesu
+        a~odozva ovládacieho kanála.
+
+    \item \textbf{Webové rozhranie.}
+        Poskytuje obsluhe prevádzkové funkcie bez potreby zásahu
+        do konzoly. Frontend je realizovaný ako \textbf{React} SPA,
+        backend ako \textbf{Flask} služba s~vrstvou
+        \textbf{Flask-SocketIO}. Rozhranie zahŕňa spúšťanie
+        a~zastavovanie scén, odosielanie príkazov, správu médií
+        a~monitorovanie stavov zariadení a~logov. Server pushuje
+        udalosti o~stave systému priebežne, takže operátor vidí
+        zmeny bez periodického pollingu.
+\end{itemize}
 
 \begin{figure}[htbp]
     \centering
