@@ -73,7 +73,7 @@ po ukončení služby ostane časť zariadení v~neželanom stave.
 Okrem hlavnej služby beží samostatná \textbf{watchdog služba}, ktorá
 monitoruje zdravie backendového procesu a~v~prípade poruchy ho
 automaticky reštartuje. Pred každým reštartom overí, či práve
-prebieha scéna, a~ak áno, čaká na jej dokončenie --- čím sa
+prebieha scéna; ak áno, čaká na jej dokončenie --- čím sa
 minimalizuje riziko prerušenia scény.
 
 \subsection{Stavový automat ako jadro logiky}
@@ -160,7 +160,7 @@ pripojenia webového dashboardu cez protokol WebSocket.
 
 Komunikačná vrstva zabezpečuje výmenu správ medzi backendom
 a~uzlami ESP32. Po úspešnom pripojení backend odoberá stavové
-topiky zariadení, feedback topiky, scénické topiky miestnosti
+topiky zariadení, topiky spätnej väzby, scénické topiky miestnosti
 a~všeobecný odber miestnosti. V~prevádzke sa využívajú tieto skupiny topikov:
 \begin{itemize}
     \item \texttt{roomX/scene} a~\texttt{roomX/start\_scene} pre štart scén,
@@ -179,8 +179,8 @@ mechanizmom spätnej väzby.
 Spoľahlivosť komunikácie je tak podporená \textbf{trackerom spätnej väzby},
 ktorý páruje odoslané príkazy s~odpoveďami zariadení.
 Pri nedoručení potvrdenia v~časovom limite je prípad
-evidovaný ako komunikačný problém (timeout) a~zalogovaný
-pre diagnostiku.
+evidovaný ako komunikačný problém (timeout) a~zaznamenaný
+na diagnostické účely.
 
 Tracker je aktivovaný iba počas aktívneho behu scény a~pri jej
 ukončení sa explicitne vypína, aby mimo scénického cyklu
@@ -199,13 +199,13 @@ nevznikali falošné timeout udalosti.
 Súčasťou MQTT vrstvy je aj \textbf{register stavov aktuátorov},
 ktorý pre každý príkazový topik udržiava dvojicu stavov:
 \textit{desired} (požadovaný stav po odoslaní príkazu)
-a~\textit{confirmed} (potvrdený stav po prijatí feedback správy
+a~\textit{confirmed} (potvrdený stav po prijatí správy spätnej väzby
 \texttt{OK} od uzla). Tento prístup oddeľuje okamžitú spätnú
 väzbu pre používateľské rozhranie od skutočného hardvérového
 potvrdenia. Pri zastavení scény sa nad celým registrom volá
 operácia núteného vypnutia, ktorá nastaví všetky
 sledované výstupy do bezpečného stavu nezávisle od prípadných
-oneskorených feedback správ. Zmeny stavu sú okamžite
+oneskorených správ spätnej väzby. Zmeny stavu sú okamžite
 propagované do webového dashboardu cez \textbf{WebSocket}.
 
 \section{Mediálna vrstva a~webové rozhranie}
@@ -219,11 +219,11 @@ Mediálna a~webová časť systému pozostáva z~troch samostatných podsystémo
         na okamžité prehrávanie sa pred štartom scény načítajú
         do pamäte RAM (čím sa eliminuje latencia pri spustení),
         zatiaľ čo dlhšie hudobné stopy sú streamované priebežne
-        z~disku. Prescan a~preloading prebehne ešte pred štartom
+        z~disku. Prescan a~preloading prebehnú ešte pred štartom
         stavového automatu.
 
     \item \textbf{Video vrstva.}
-        Realizovaná prostredníctvom prehrávača \textbf{mpv}
+        Je realizovaná prostredníctvom prehrávača \textbf{mpv}
         spusteného v~režime celej obrazovky. Prehrávač je riadený
         cez \textbf{IPC rozhranie} na báze UNIX socketu; počas
         behu sa periodicky kontroluje dostupnosť procesu
@@ -269,7 +269,7 @@ a~zároveň obsahujú uzlovo špecifické funkcionality.
         \hline
         \textbf{Uzol} & \textbf{Hlavná úloha} & \textbf{Typický výstup} \\
         \hline
-        Tlačidlový & Detekcia vstupu od používateľa & Odoslanie MQTT trigger správy \\
+        Tlačidlový & Detekcia vstupu od používateľa & Odoslanie spúšťacej správy MQTT \\
         \hline
         Motorický & Ovládanie pohybu exponátu & PWM, smer, rýchlosť \\
         \hline
@@ -299,16 +299,16 @@ zjednodušuje diagnostiku a~znižuje duplicitu aplikačného kódu.
     \item \textbf{Tlačidlový uzol.}
         Uzol vykonáva filtráciu stlačenia tlačidla
         (odstránenie zákmitov a~cooldown interval) a~po úspešnom vyhodnotení
-        publikuje správu \texttt{START} na scénický topic.
+        publikuje správu \texttt{START} na scénický topik.
 
     \item \textbf{Motorický uzol.}
         Uzol riadi dva DC pohony pomocou PWM, vrátane
         riadenia smeru a~bezpečnej zmeny smeru s~plynulým dobehom.
-        Sú podporované príkazy pre zapnutie, vypnutie,
+        Sú podporované príkazy na zapnutie, vypnutie,
         zmenu rýchlosti a~zmenu smeru.
 
     \item \textbf{Reléový uzol.}
-        Uzol vykonáva spínanie zariadení podľa mapovania topicov
+        Uzol vykonáva spínanie zariadení podľa mapovania topikov
         na výstupy, vrátane časovo obmedzených efektov
         a~skupinových efektových režimov. Časovo citlivé
         sekvencie sa vykonávajú lokálne na uzle,
