@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  2 MAY 2026 19:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  2 MAY 2026 19:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1155,6 +1155,12 @@ Package pdftex.def Info: obr/ARCH/Mqtt_Flow.pdf  used on input line 193.
 ) (chapters/Implementacia_hw.tex [20 <./obr/ARCH/Mqtt_Flow.pdf>]
 Kapitola 4.
 
+Underfull \hbox (badness 1028) in paragraph at lines 11--18
+\T1/lmr/m/n/12 Úlohu hlav-ného ko-mu-ni-ka£-ného a mul-ti-me-diál-neho uzla pln
+í Rasp-berry Pi (ka-pi-
+ []
+
+
 
 pdfTeX warning: pdflatex.exe (file ./obr/HW/RPI_HW.pdf): PDF inclusion: found P
 DF version <1.7>, but at most version <1.5> allowed
@@ -1545,7 +1551,7 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (54 pages, 6864888 bytes).
+Output written on diplomka.pdf (54 pages, 6864885 bytes).
 PDF statistics:
  1005 PDF objects out of 1200 (max. 8388607)
  174 named destinations out of 1000 (max. 500000)

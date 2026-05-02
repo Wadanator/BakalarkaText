@@ -9,11 +9,11 @@ ovládanie motorov, relé a~senzorickú detekciu vstupu návštevníka.
 \section{Centrálna jednotka --- Raspberry Pi}\label{CentralnaJednotka}
 
 Úlohu hlavného komunikačného a multimediálneho uzla plní
-Raspberry Pi (viď kapitola~\ref{sbc-platformy}). Z~hľadiska fyzickej
-inštalácie bol umiestnený v tesnej blízkosti audiovizuálnej techniky
+Raspberry Pi (kapitola~\ref{sbc-platformy}). Z~hľadiska fyzickej
+inštalácie bol umiestnený v~tesnej blízkosti audiovizuálnej techniky
 (priamo za LCD displejom). Toto riešenie minimalizuje dĺžku
 káblových zväzkov, keďže Raspberry Pi má HDMI port aj audio výstup cez 3,5\,mm
-jack. Pre integráciu do systému postačuje len bežný Ethernet kábel pre prístup do LAN siete.
+jack. Na integráciu do systému postačuje len bežný Ethernet kábel na prístup do siete LAN.
 Na napájanie Raspberry Pi bol použitý USB-C adaptér --- 5,0\,V / 3,0\,A.
 
 \begin{figure}[htbp]
@@ -26,16 +26,16 @@ Na napájanie Raspberry Pi bol použitý USB-C adaptér --- 5,0\,V / 3,0\,A.
 
 Riadiaca logika expozície bola decentralizovaná do niekoľkých
 samostatných uzlov postavených na mikrokontroléroch
-rodiny ESP32 (viď kapitola~\ref{mikrokontrolery}). Všetky uzly komunikujú s~Raspberry Pi cez Wi-Fi.
+rodiny ESP32 (kapitola~\ref{mikrokontrolery}). Všetky uzly komunikujú s~Raspberry Pi cez Wi-Fi.
 Motorický aj tlačidlový uzol bežia na ESP32 DevKit V1.
 
 Hlavná riadiaca elektronika (uzly pre ovládanie motorov a~spínanie relé)
 bola umiestnená spoločne vo vnútri inštalačného rozvádzača (Obr.~\ref{fig:main_control_box}), ktorý je fyzicky
 ukrytý v~dekoratívnom exponáte --- \textbf{parnom kotle}.
-Do tohto rozvádzača je privedené sieťové napätie 230\,V. Z~neho je napájaný 
-hlavný jednosmerný spínaný zdroj (menič 230\,V\,AC na 12\,V\,DC s~výkonom 180\,W). 
-Táto 12\,V vetva napájala reléový modul Waveshare s~integrovaným ESP32-S3. 
-Z~rovnakej 12\,V vetvy bol cez znižujúci DC/DC menič (step-down z~12\,V na 5\,V) 
+Do tohto rozvádzača je privedené sieťové napätie 230\,V. Z~neho je napájaný
+hlavný jednosmerný spínaný zdroj (menič 230\,V\,AC na 12\,V\,DC s~výkonom 180\,W).
+Táto 12\,V vetva napájala reléový modul Waveshare s~integrovaným ESP32-S3.
+Z~rovnakej 12\,V vetvy bol cez znižujúci DC/DC menič (step-down z~12\,V na 5\,V)
 napájaný mikrokontrolér ESP32 v~motorickom uzle, zatiaľ čo výkonové H-mostíky
 pre motory boli napájané priamo z~12\,V. V~rozvodnej skrini boli zároveň osadené napájacie zásuvky 230\,V a~konektory typu GX na pripojenie jednotlivých zariadení a~motorov.
 
@@ -62,9 +62,9 @@ Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov (Obr.~\
         signál s~frekvenciou 20\,kHz, čo umožňuje plynulé ovládanie rýchlosti motorov.
         Frekvencia je zvolená nad počuteľným pásmom.
     \item \textbf{2x Výkonový budič BTS7960B:} Polovodičový H-mostík slúži na
-        riadenie výkonu motorov (viď kapitola~\ref{dc-motory}). Tento obvod dimenzovaný na vysoké prúdové špičky
+        riadenie výkonu motorov (kapitola~\ref{dc-motory}). Tento obvod je dimenzovaný na vysoké prúdové špičky
         bezpečne odoláva záťaži pri rozbehoch (do 43\,A) \cite{bts7960b_datasheet}.
-        H-mostík teda umožnuje ovládať širokú škálu jednosmerných motorov.
+        H-mostík teda umožňuje ovládať širokú škálu jednosmerných motorov.
 \end{itemize}
 
 \begin{figure}[H]
@@ -81,19 +81,19 @@ Na spínanie záťaží ostatných prvkov expozície slúži reléový uzol (Obr
 \begin{itemize}
     \item \textbf{Priemyselný I/O modul Waveshare:} Základom tohto uzla je
         komerčný modul s~čipom \textbf{ESP32-S3} a~integrovanými relé
-        (viď Obr.~\ref{fig:main_control_box}). Obsahuje natívnu
+        (Obr.~\ref{fig:main_control_box}). Obsahuje natívnu
         podporu pre \textit{Power over Ethernet} (PoE) a~zbernicu RS485,
-        ktoré ale v~tejto inštalácii neboli využité.
-        Napriek výhodám polovodičových relé (SSR) v~oblasti životnosti a~akustického hluku (viď kapitola~\ref{spinanie-sietoveho-napatia})
-        bola zvolená táto certifikovaná doska s~mechanickými relé. Hlavným dôvodom 
-        bola jednoduchá inštalácia, expandovateľnosť a vyššia bezpečnosť a spoľahlivosť ako pri vlastnoručne zostavených riešeniach.
+        ktoré však v~tejto inštalácii neboli využité.
+        Napriek výhodám polovodičových relé (SSR) v~oblasti životnosti a~akustického hluku (kapitola~\ref{spinanie-sietoveho-napatia})
+        bola zvolená táto certifikovaná doska s~mechanickými relé. Hlavným dôvodom
+        bola jednoduchá inštalácia, expandovateľnosť a~vyššia bezpečnosť a~spoľahlivosť ako pri vlastnoručne zostavených riešeniach.
     \item \textbf{10\,A mechanické relé:} Modul disponuje ôsmimi nezávislými
         relé. Časť z~nich spína priamo striedavé sieťové napätie
         230\,V pre chod dekoratívnej \textbf{Edisonovej žiarovky},
         \textbf{výrobníka dymu} (ktorý vháňa paru do potrubia)
         a~taktiež \textbf{svetla simulujúceho oheň} v~kotle.
         Zvyšné relé slúžia na spínanie jednosmernej 12\,V vetvy, ktorá
-        napája LED pásy a~podsvietenie dvoch oddelených skupín 
+        napája LED pásy a~podsvietenie dvoch oddelených skupín
         \textbf{industriálnych analógových budíkov}.
 \end{itemize}
 
@@ -107,23 +107,23 @@ Na spínanie záťaží ostatných prvkov expozície slúži reléový uzol (Obr
 
 \subsection{Vstupný tlačidlový uzol}\label{UzolSenzorov}
 
-Fyzickú interakciu s~návštevníkmi zabezpečuje samostatný vstupný uzol 
+Fyzickú interakciu s~návštevníkmi zabezpečuje samostatný vstupný uzol
 (Obr.~\ref{fig:button_photo}, Obr.~\ref{fig:button_schema}):
 \begin{itemize}
     \item \textbf{Samostatný mikrokontrolér:} Na vstupnom mieste pred
-        stenou je umiestnená inštalačná krabička. Jej základom je vlastný 
+        stenou je umiestnená inštalačná krabička. Jej základom je vlastný
         mikrokontrolér ESP32 DevKit V1, ktorý je napájaný z~5\,V sieťového adaptéra.
         V~tejto krabičke sa nachádza aj MOSFET modul pre riadenie
         podsvietenia tlačidla.
-    \item \textbf{Antivandal tlačidlo:} Pre zabezpečenie mechanickej odolnosti bol zvolený
-        priemyselný \textbf{19\,mm vodotesný kovový spínač}. S~riadiacou krabičkou 
-        je prepojený pomocou konektora typu \textbf{GX12 (4-pin)}. 
-        Dva piny konektora slúžia ako kontakt spínača a~zvyšné dva zabezpečujú napájanie 
-        LED prstenca. Spínač slúži ako prvotný štartovací impulz pre chod scény. 
+    \item \textbf{Antivandal tlačidlo:} Na zabezpečenie mechanickej odolnosti bol zvolený
+        priemyselný \textbf{19\,mm vodotesný kovový spínač}. S~riadiacou krabičkou
+        je prepojený pomocou konektora typu \textbf{GX12 (4-pin)}.
+        Dva piny konektora slúžia ako kontakt spínača a~zvyšné dva zabezpečujú napájanie
+        LED prstenca. Spínač slúži ako prvotný štartovací impulz pre chod scény.
         Na pine \textbf{GPIO\,32} je zapojený \textbf{externý pull-up rezistor}.
-    \item \textbf{Riadenie LED prstenca cez MOSFET:} Aby bola GPIO periféria mikrokontroléra 
-        chránená pred prúdovým preťažením, LED prstenec je riadený cez kompaktný 
-        MOSFET PWM modul s~tranzistorom F5305S (viď kapitola~\ref{dc-motory}). 
+    \item \textbf{Riadenie LED prstenca cez MOSFET:} Aby bola GPIO periféria mikrokontroléra
+        chránená pred prúdovým preťažením, LED prstenec je riadený cez kompaktný
+        MOSFET PWM modul s~tranzistorom F5305S (kapitola~\ref{dc-motory}).
         Toto riešenie zároveň umožňuje plynulé PWM stmievanie pre vytváranie rôznych signalizačných režimov.
 \end{itemize}
 
@@ -159,9 +159,9 @@ pracovným priestorom.
 Súčasťou návrhu bol aj \textbf{dekoratívny piest}
 pripevnený na sústave kolies a~\textbf{hodinový
 mechanizmus} s~priemerom 1{,}3\,m vrátane
-planetového prevodu s prevodom 12:1. Jeden motor
+planetového prevodu s~prevodom 12:1. Jeden motor
 bol umiestnený pod kolesom, ktoré je prepojené s~ojnicou piestu,
-zatiaľ čo druhý motor bol pripojený na minutovú ručičku,
+zatiaľ čo druhý motor bol pripojený k~minútovej ručičke,
 konkrétne na \uv{slnko} planetového prevodu.
 Podrobná konštrukčná dokumentácia (výkresy a~modely) presahuje
 rámec tejto práce a~nie je jej predmetom. Celkový vizuál inštalácie je zobrazený na Obr.~\ref{fig:chronos_celok},
