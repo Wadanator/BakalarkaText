@@ -120,7 +120,10 @@ JSON konfigurácie opísanej v~nasledujúcej podsekcii.
 \label{SWJSON}
 
 Návrh externej JSON konfigurácie uvedený v~kapitole~\ref{KomunikacnaVrstva}
-je implementovaný ako scénické súbory ukladané po miestnostiach.
+je implementovaný ako množina samostatných súborov scén, ktoré sa načítavajú
+podľa požadovaného priebehu expozície. V~rámci jednej miestnosti
+tak môže existovať viacero alternatívnych alebo testovacích scén,
+pričom každá z~nich opisuje vlastnú postupnosť stavov, akcií a~prechodov.
 Tento prístup oddeľuje obsahovú vrstvu scenára od implementácie enginu,
 takže zmena priebehu scény nevyžaduje úpravy zdrojového kódu backendu.
 
@@ -158,23 +161,50 @@ Tým sa eliminuje spúšťanie neplatných konfigurácií.
 
 Úlohu sieťového sprostredkovateľa správ zabezpečuje softvér
 \textbf{Mosquitto}, spustený ako systémová služba priamo
-na riadiacom počítači Raspberry~Pi. Broker počúva na dvoch
-portoch: port \textbf{1883} pre štandardnú MQTT komunikáciu
-(Python backend a~uzly ESP32) a~port \textbf{9001} pre
-pripojenia webového dashboardu cez protokol WebSocket.
+na Raspberry~Pi. Broker používa port \textbf{1883}, cez ktorý
+komunikuje Python backend s~uzlami ESP32.
 
 Komunikačná vrstva zabezpečuje výmenu správ medzi backendom
 a~uzlami ESP32. Po úspešnom pripojení backend odoberá stavové
-topiky zariadení, topiky spätnej väzby, scénické topiky miestnosti
-a~všeobecný odber miestnosti. V~prevádzke sa využívajú tieto skupiny topikov:
-\begin{itemize}
-    \item \texttt{roomX/scene} a~\texttt{roomX/start\_scene} pre štart scén,
-    \item \texttt{roomX/motor1}, \texttt{roomX/motor2} pre motorické príkazy,
-    \item \texttt{roomX/<device\_name>} a~\texttt{roomX/effects/\#} pre reléové akcie,
-    \item \texttt{roomX/STOP} pre globálne zastavenie výstupov,
-    \item \texttt{devices/<client\_id>/status} pre online/offline dostupnosť,
-    \item \texttt{<command\_topic>/feedback} pre potvrdenie vykonania príkazu.
-\end{itemize}
+topiky zariadení, topiky spätnej väzby a~miestnostné topiky určené
+pre scénické udalosti alebo príkazy aktuátorom. Základné skupiny správ
+sú rozdelené podľa účelu komunikácie (Tab.~\ref{tab:sw_mqtt_topics}).
+
+\begin{table}[htbp]
+    \centering
+    \caption{Skupiny MQTT správ používané v~komunikačnej vrstve}
+    \label{tab:sw_mqtt_topics}
+    \small
+    \begin{tabular}{|p{0.21\linewidth}|p{0.37\linewidth}|p{0.32\linewidth}|}
+        \hline
+        \textbf{Skupina správ} & \textbf{Topik} & \textbf{Smer a~účel} \\
+        \hline
+        Spustenie scény &
+        \texttt{roomX/scene}, \texttt{roomX/start\_scene} &
+        Vstup do backendu; spustenie predvolenej alebo pomenovanej scény. \\
+        \hline
+        Motorické príkazy &
+        \texttt{roomX/motor1}, \texttt{roomX/motor2} &
+        Backend odosiela príkazy motorickému uzlu. \\
+        \hline
+        Reléové a~efektové príkazy &
+        \texttt{roomX/<device\_name>}, \texttt{roomX/effects/<group>} &
+        Backend odosiela príkazy reléovému uzlu. \\
+        \hline
+        Globálne zastavenie &
+        \texttt{roomX/STOP} &
+        Backend odosiela príkaz na zastavenie výstupov v~miestnosti. \\
+        \hline
+        Stav uzlov &
+        \texttt{devices/<client\_id>/status} &
+        Uzol ESP32 publikuje svoju dostupnosť backendu. \\
+        \hline
+        Spätná väzba &
+        \texttt{<command\_topic>/feedback} &
+        Uzol ESP32 odpovedá backendu na prijatý príkaz. \\
+        \hline
+    \end{tabular}
+\end{table}
 
 Všetky riadiace príkazy sú odosielané s~úrovňou kvality \textbf{QoS~0},
 teda bez potvrdenia doručenia na úrovni protokolu, čo minimalizuje
