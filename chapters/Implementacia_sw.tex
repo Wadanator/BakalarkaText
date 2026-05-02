@@ -21,8 +21,9 @@ pričom kľúčovým princípom je \textbf{separácia zodpovedností}:
 backend neobsahuje hardvérovo špecifickú logiku GPIO výstupov
 a~firmvér uzlov neobsahuje scenárové vetvenie expozície.
 Pri zmenách je tak možné upravovať scenáre, webové rozhranie
-alebo firmvér uzla oddelene.
-Vzájomné väzby vrstiev a~tok informácií sú znázornené na Obr.~\ref{fig:sw_layers}.
+alebo firmvér uzla oddelene, pričom tok informácií medzi vstupmi,
+backendom, MQTT brokerom, uzlami ESP32 a~webovým dashboardom
+ostáva jednoznačne vymedzený (Obr.~\ref{fig:sw_layers}).
 
 \begin{figure}[p]
     \centering
@@ -99,7 +100,9 @@ Okrem lokálnych prechodov sú podporené aj \textbf{globálne podmienky}
 platné pre celú scénu bez ohľadu na aktuálny stav --- používajú sa
 najmä pre núdzové zastavenie a~celkové časové limity.
 V~spracovateľskom cykle majú globálne podmienky prednosť
-pred lokálnou logikou jednotlivých stavov.
+pred lokálnou logikou jednotlivých stavov, čím sa zabezpečuje,
+že núdzové alebo celoscénové pravidlá ovplyvnia ďalší krok
+ešte pred bežnými prechodmi stavu (Obr.~\ref{fig:sw_fsm_engine}).
 
 Keďže stavový automat spracúva všeobecné stavy, akcie
 a~podmienky prechodov, konkrétny priebeh expozície sa
@@ -109,7 +112,7 @@ JSON konfigurácie opísanej v~nasledujúcej podsekcii.
 \begin{figure}[p]
     \centering
     \includegraphics[width=0.95\linewidth,height=0.90\textheight,keepaspectratio]{obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick_flow_final.png}
-    \caption{Logické spracovanie stavového automatu}
+    \caption{Poradie spracovania stavového automatu v~jednom cykle}
     \label{fig:sw_fsm_engine}
 \end{figure}
 
@@ -122,16 +125,18 @@ Tento prístup oddeľuje obsahovú vrstvu scenára od implementácie enginu,
 takže zmena priebehu scény nevyžaduje úpravy zdrojového kódu backendu.
 
 Každá scéna obsahuje identifikátor, počiatočný stav
-a~slovník stavov. Štruktúra konfiguračného súboru vrátane
-štyroch sekcií každého stavu je znázornená na Obr.~\ref{fig:sw_json_structure}.
+a~slovník stavov, pričom každý stav sa ďalej skladá zo sekcií
+pre vstupné akcie, časovú os, výstupné akcie a~prechody
+(Obr.~\ref{fig:sw_json_structure}).
 
 Sekcia časovej osi umožňuje naplánovať
 udalosti relatívne voči času vstupu do stavu bez blokovania
 zvyšku systému --- v~implementácii sú tieto akcie realizované
 ako asynchrónne časovače plánované pri vstupe
 do stavu. Podporované akcie sú tri: \textbf{MQTT akcia}, \textbf{audio akcia}
-a~\textbf{video akcia} --- konkrétne príkazové formáty vrátane
-tópikov pre spustenie scény sú zhrnuté v~Obr.~\ref{fig:sw_json_structure}.
+a~\textbf{video akcia}; ich príkazové formáty spolu s~tópikmi
+na spustenie scény sú uvedené v~tom istom prehľade
+(Obr.~\ref{fig:sw_json_structure}).
 
 Pri zmene stavu sa plánovanie časovej osi resetuje, takže akcie
 z~predchádzajúceho stavu nemôžu zasiahnuť do nového stavu.
@@ -181,6 +186,9 @@ ktorý páruje odoslané príkazy s~odpoveďami zariadení.
 Pri nedoručení potvrdenia v~časovom limite je prípad
 evidovaný ako komunikačný problém (timeout) a~zaznamenaný
 na diagnostické účely.
+Mechanizmus spätnej väzby preto tvorí samostatnú vetvu
+komunikačného toku od odoslania príkazu až po potvrdenie
+alebo časový limit (Obr.~\ref{fig:sw_mqtt_flow}).
 
 Tracker je aktivovaný iba počas aktívneho behu scény a~pri jej
 ukončení sa explicitne vypína, aby mimo scénického cyklu
@@ -189,7 +197,7 @@ nevznikali falošné timeout udalosti.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\linewidth]{obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_runtime_final.png}
-    \caption{Sekvenčný tok MQTT správ počas vykonania akcie (vrátane timeout a STOP vetvy)}
+    \caption{Sekvenčný tok MQTT správ pri vykonaní akcie, potvrdení, časovom limite a~zastavení}
     \label{fig:sw_mqtt_flow}
 \end{figure}
 
@@ -238,19 +246,24 @@ Mediálna a~webová časť systému pozostáva z~troch samostatných podsystémo
         a~monitorovanie stavov zariadení a~logov. Server priebežne
         odosiela udalosti o~stave systému, takže operátor vidí
         zmeny bez periodického dotazovania zo strany klienta.
+        Funkčné členenie dashboardu vychádza z~oddelenia
+        serverových udalostí, požiadaviek klienta a~panelov
+        používateľského rozhrania (Obr.~\ref{fig:sw_dashboard});
+        výsledná hlavná stránka poskytuje operátorovi súhrnný
+        prevádzkový pohľad (Obr.~\ref{fig:sw_dashboard_screenshot}).
 \end{itemize}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\linewidth]{obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboard_functional_final.png}
-    \caption{Prehľad funkčných častí webového dashboardu (eventy, panely, akcie)}
+    \caption{Funkčné časti webového dashboardu a~tok udalostí}
     \label{fig:sw_dashboard}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\linewidth]{obr/SW/dashboard_screenshot.png}
-    \caption{Hlavná stránka}
+    \caption{Hlavná stránka webového dashboardu}
     \label{fig:sw_dashboard_screenshot}
 \end{figure}
 
@@ -315,11 +328,15 @@ zjednodušuje diagnostiku a~znižuje duplicitu aplikačného kódu.
         čím sa znižuje závislosť od momentálnej latencie siete.
 \end{itemize}
 
+Spoločné komunikačné jadro a~rozdielne vykonávacie vetvy
+jednotlivých uzlov vytvárajú jednotnú, ale rozšíriteľnú
+firmvérovú štruktúru (Obr.~\ref{fig:sw_esp_compare}).
+
 \begin{figure}[htbp]
     \centering
     \fbox{\parbox{0.88\linewidth}{\centering\textit{MIESTO PRE OBRÁZOK: Porovnávacia schéma uzlov ESP32\\[2pt]
     spoločné jadro + špecifické funkcie button / motor / relay}}}
-    \caption{Spoločná a~špecifická logika uzlov ESP32}
+    \caption{Spoločná infraštruktúra a~špecifická logika uzlov ESP32}
     \label{fig:sw_esp_compare}
 \end{figure}
 % Poznamka pre obrazok: Nechat spolocnu cast (Wi-Fi, MQTT, LWT, status, feedback, STOP)
