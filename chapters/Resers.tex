@@ -2,8 +2,8 @@
 \label{SucasnyStav}
 
 Táto kapitola analyzuje dostupné hardvérové
-a~softvérové platformy a ich vhodnosť pre realizáciu
-interaktívnych expozícií, a~zároveň sa venuje kľúčovým technickým
+a~softvérové platformy a~ich vhodnosť pre realizáciu
+interaktívnych expozícií a~zároveň sa venuje kľúčovým technickým
 otázkam -- komunikačným protokolom, prístupom k~riadiacej logike
 a~vhodným dátovým formátom.
 
@@ -27,8 +27,8 @@ inštitúciách bez vyhradeného IT oddelenia \cite{shehade2020}. Snaha
 o~minimalizáciu prevádzkových výpadkov a~zníženie závislosti od externých
 technikov tak prirodzene vytvorila tlak na zmenu návrhu riadiacich
 systémov. Do popredia sa dostáva požiadavka na modulárne architektúry,
-ktoré namiesto uzavretého jednoúčelového hardvéru umožňujú jednoduchšiu
-škálovateľnosť, ľahkú výmenu, vzdialenú diagnostiku a~rekonfiguráciu bez nutnosti
+ktoré namiesto uzavretého jednoúčelového hardvéru umožňujú jednoduchšie
+škálovanie, jednoduchú výmenu, vzdialenú diagnostiku a~rekonfiguráciu bez nutnosti
 fyzického zásahu na mieste \cite{bachi2024}.
 
 % ------------------------------------------------------------------
@@ -37,8 +37,8 @@ fyzického zásahu na mieste \cite{bachi2024}.
 
 Voľba sieťovej a~logickej architektúry riadiaceho systému
 ovplyvňuje nielen náklady na inštaláciu, ale aj robustnosť
-a~reakčnú dobu celého prostredia \cite{distributed_control_modeling}.
-V~praxi sa stretávame predovšetkým s~dvoma základnými prístupmi:
+a~čas odozvy celého prostredia \cite{distributed_control_modeling}.
+V~praxi sa používajú predovšetkým dva základné prístupy:
 
 \begin{itemize}
     \item \textbf{Centralizovaná topológia:} Jedna centrálna jednotka
@@ -47,18 +47,18 @@ V~praxi sa stretávame predovšetkým s~dvoma základnými prístupmi:
         každému prvku. Výhodou je jednoduchá správa na jednom mieste,
         avšak vzniká takzvaný jediný bod zlyhania (\textit{single
         point of failure}) a~v~historických budovách je táto
-        topológia problematická kvôli rozsiahlej kabeláži
+        topológia problematická z~dôvodu rozsiahlej kabeláže
         \cite{zonta2010wireless}.
     \item \textbf{Distribuovaná topológia (Master-Slave):}
         Inteligencia je rozložená do viacerých uzlov. Centrálna
         jednotka (master) komunikuje s~perifériami (slaves), ktoré
-        riešia svoju vlastnú časť logiky \cite{distributed_av_platform}.
+        spracúvajú vlastnú časť riadiacej logiky \cite{distributed_av_platform}.
         Každý periférny uzol disponuje vlastným mikrokontrolérom
         schopným spracovávať lokálne udalosti a~komunikovať
         s~centrálnou jednotkou len pri dôležitých stavových
         zmenách. Topológia tak umožňuje modulárne rozširovanie
-        systému a~redukuje potrebu ťahať kabeláž z~jedného
-        riadiaceho bodu. \cite{distributed_control_modeling}.
+        systému a~redukuje potrebu viesť kabeláž z~jedného
+        riadiaceho bodu \cite{distributed_control_modeling}.
 \end{itemize}
 
 \begin{figure}[H]
@@ -94,14 +94,14 @@ vhodných hardvérových a~softvérových prostriedkov. V~súčasnosti
 neexistuje jedno univerzálne riešenie -- realizátori si spravidla
 vyberajú medzi viacerými kategóriami, z~ktorých každá má svoje
 špecifiká, výhody a~obmedzenia. Výber konkrétnej platformy
-závisí od požiadaviek na determinizmus, schopnosť synchronizácie
+závisí od požiadaviek na determinizmus a~schopnosť synchronizácie
 multimédií a~v~neposlednom rade od dostupného rozpočtu.
 
 \subsection{Priemyselné riadiace systémy (PLC)}
 \label{plc-systemy}
 
 V~oblasti klasickej automatizácie sú dlhoročným štandardom
-Programovateľné logické automaty (PLC) od výrobcov ako
+programovateľné logické automaty (PLC) od výrobcov ako
 \textbf{Siemens, Beckhoff či Mitsubishi} \cite{iec61131, john2010plc}.
 Ich hlavnou výhodou je determinizmus, teda zaručená odozva systému
 na vstup v~presne definovanom čase \cite{iec61131, john2010plc}. Táto
@@ -109,7 +109,7 @@ vlastnosť je kritická pre bezpečnostné funkcie, ale pre bežné
 interaktívne inštalácie v~múzeách je často nadbytočná. PLC sú
 však primárne navrhnuté na prácu s~logickými signálmi a~narážajú
 na výrazné obmedzenia v~oblasti multimédií. Absencia natívnych
-HDMI portov a~neschopnosť priamo prehrávať video súbory vyžadujú
+HDMI portov a~neschopnosť priamo prehrávať videosúbory vyžadujú
 použitie externých mediálnych prehrávačov \cite{huntington2017}.
 Vysoká cena hardvéru navyše robí tieto systémy
 neprístupnými pre menšie kultúrne inštitúcie
@@ -130,8 +130,8 @@ Tieto systémy natívne integrujú protokoly zábavného priemyslu
 profesionálne produkčné prostredie \cite{huntington2017}. Pre
 inštalácie v~menších múzeách však táto špecializácia predstavuje
 skôr obmedzenie -- podpora týchto protokolov vyžaduje certifikovaný
-hardvér a~proprietárna povaha systému vytvára závislosť na
-dodávateľovi, čo znemožňuje flexibilné rozširovanie o~vlastné
+hardvér a~proprietárna povaha systému vytvára závislosť od
+dodávateľa, čo znemožňuje flexibilné rozširovanie o~vlastné
 hardvérové riešenia bez drahých certifikácií \cite{huntington2017}.
 
 \subsection{Otvorené systémy na báze IoT platforiem}
@@ -159,11 +159,11 @@ Architektúra je typicky rozdelená na dve funkčné úrovne \cite{rpi_esp32_sca
         spracúvať dáta lokálne \cite{distributed_control_modeling}.
 \end{itemize}
 
-Využitie platforiem, ako sú Raspberry Pi pre centrálnu logiku a~ESP32
+Využitie platforiem, ako sú Raspberry~Pi pre centrálnu logiku a~ESP32
 pre distribuované uzly, umožňuje budovanie systémov, ktoré kombinujú
-výpočtovú silu potrebnú pre multimédiá s~riadením
-hardvéru \cite{rpi_esp32_scada}. Tento prístup je nielen finančne efektívny, ale vďaka
-rozsiahlej komunite a~dostupnosti knižníc umožňuje rýchle
+výpočtovú silu potrebnú na multimédiá s~riadením
+hardvéru \cite{rpi_esp32_scada}. Tento prístup je finančne efektívny
+a~vďaka rozsiahlej komunite a~dostupnosti knižníc umožňuje rýchle
 prototypovanie a~iteratívny vývoj riadiacej logiky
 \cite{rpi_esp32_scada, interactive_small_museums}.
 
@@ -173,15 +173,15 @@ prototypovanie a~iteratívny vývoj riadiacej logiky
 
 V~prípade využitia otvorenej IoT architektúry, ktorá fyzicky
 oddeľuje centrálnu riadiacu jednotku od distribuovaných periférnych
-uzlov, vzniká potreba ich vzájomnej koordinácie. 
-V~takomto distribuovanom systéme je voľba komunikačného 
-protokolu rozhodujúcim faktorom pre celkovú plynulosť 
-interakcie \cite{rpi_esp32_scada}. Pri výbere vhodného 
-riešenia sa zvažujú parametre ako latencia, réžia 
-protokolu (\textit{overhead}) a~spoľahlivosť doručenia 
+uzlov, vzniká potreba ich vzájomnej koordinácie.
+V~takomto distribuovanom systéme je voľba komunikačného
+protokolu rozhodujúcim faktorom pre celkovú plynulosť
+interakcie \cite{rpi_esp32_scada}. Pri výbere vhodného
+riešenia sa zvažujú parametre ako latencia, réžia
+protokolu (\textit{overhead}) a~spoľahlivosť doručenia
 správ v~rámci lokálnej siete \cite{mqtt_http_latency}.
 
-\subsection{Prenosové médiá: drôtové vs. bezdrôtové}
+\subsection{Prenosové médiá: drôtové a~bezdrôtové}
 \label{prenosove-media}
 
 Pri inštaláciách v~múzeách je kritickým faktorom spôsob
@@ -193,7 +193,7 @@ problematické \cite{zonta2010wireless}. Bezdrôtové technológie
 (Wi-Fi, Bluetooth, Zigbee) eliminujú potrebu kabeláže
 a~výrazne zvyšujú flexibilitu systému \cite{rpi_esp32_scada}.
 Mikrokontroléry ESP32 majú vstavané Wi-Fi a~priamo sa pripájajú
-do lokálnej siete, čo umožňuje jednoducho premiestňovať
+k~lokálnej sieti, čo umožňuje jednoducho premiestňovať
 interaktívne prvky \cite{maier2017esp32}.
 
 \subsection{Aplikačné protokoly}
@@ -208,7 +208,7 @@ réžii pri prenose krátkych riadiacich príkazov
 jeho implementácia na jednoduchých mikrokontroléroch je však
 pamäťovo náročná \cite{mqtt_websocket_comparison}.
 \textbf{MQTT} (\textit{Message Queuing Telemetry Transport}),
-definovaný ako ISO štandard ISO/IEC~20922:2016, patrí medzi
+definovaný ako norma ISO/IEC~20922:2016, patrí medzi
 najpoužívanejšie protokoly pre distribuované IoT systémy
 \cite{mqtt_iso_standard, mqtt_m2m_survey}. Funguje na modeli
 \textit{Publish/Subscribe}, kde centrálny sprostredkovateľ
@@ -265,7 +265,7 @@ Samotný návrh distribuovanej architektúry a~komunikácie si
 v~praxi vyžaduje nasadenie adekvátnych hardvérových komponentov.
 Realizácia takéhoto riadiaceho systému sa typicky delí na dve špecifické
 úrovne: centrálnu jednotku určenú na orchestráciu systému a~multimediálne
-funkcie, a~distribuované koncové uzly obsluhujúce senzory a~aktuátory priamo v~priestore expozície.
+funkcie a~na distribuované koncové uzly obsluhujúce senzory a~aktuátory priamo v~priestore expozície.
 
 \subsection{Jednodoskové počítače (SBC)}
 \label{sbc-platformy}
@@ -280,7 +280,7 @@ a~priameho hardvérového výstupu obrazu a~zvuku
 \cite{rpi4_datasheet}. Práve táto vlastnosť predstavuje zásadnú
 výhodu oproti priemyselným PLC, ktoré si pre rovnaké funkcie
 vyžadujú externé mediálne prehrávače \cite{huntington2017}.
-Dostupnosť GPIO rozhrania navyše umožňuje pripojiť rôzne vstupy a~výstupy \cite{rpi4_datasheet}.
+Dostupnosť rozhrania GPIO navyše umožňuje pripojiť rôzne vstupy a~výstupy \cite{rpi4_datasheet}.
 
 \subsection{Mikrokontroléry pre koncové uzly}
 \label{mikrokontrolery}
@@ -293,21 +293,21 @@ sťažujú súčasnú obsluhu sieťovej komunikácie
 a~spracovania štruktúrovaných správ, čo môže viesť
 k~nestabilite systému pri vyššej sieťovej záťaži
 \cite{azad2025iot, maier2017esp32}. Nástup čipu \textbf{ESP32} od spoločnosti
-Espressif priniesol veľkú zmenu v~oblasti IoT periférií.
+Espressif priniesol výraznú zmenu v~oblasti IoT periférií.
 Integrácia Wi-Fi konektivity priamo v~čipe eliminuje potrebu
 externých sieťových modulov, čo zjednodušuje hardvérový
 návrh uzlov \cite{maier2017esp32}. Dvojjadrová architektúra
 je pre interaktívne expozície výhodou: jedno jadro
-môže byť vyhradené výhradne pre sieťovú komunikáciu (správa
-MQTT spojenia, Wi-Fi stack), zatiaľ čo druhé jadro v~reálnom
+môže byť vyhradené pre sieťovú komunikáciu (správa
+MQTT spojenia, zásobník Wi-Fi), zatiaľ čo druhé jadro v~reálnom
 čase obsluhuje kritické hardvérové úlohy, ako je PWM riadenie
 motorov alebo čítanie senzorov. Táto separácia eliminuje
 nežiaduci jitter pri spracovaní časovo kritických úloh,
 ktorý by inak vznikal pri súbežnej obsluhe sieťovej réžie
 \cite{maier2017esp32}. Na rozšírenie výstupnej kapacity
-sa využívajú I2C expandéry, ktoré cez
+sa využívajú expandéry I2C, ktoré cez
 dvojvodičovú zbernicu sprístupňujú dodatočné výstupy bez
-obsadenia všetkých GPIO pinov.
+obsadenia všetkých pinov GPIO.
 
 % ------------------------------------------------------------------
 \section{Výkonová elektronika pre fyzické efekty}
@@ -321,32 +321,32 @@ zariadenia pracujúce na sieťovom napätí 230\,V~AC.
 \subsection{Riadenie jednosmerných (DC) motorov}
 \label{dc-motory}
 
-Na obojsmerné riadenie DC motorov sa využívajú H-mostíky. 
-Staršie obvody na báze Darlingtonových tranzistorov (napr. 
-L293D alebo L298N) sú v~súčasnosti pre moderné aplikácie 
-nevhodné pre ich vysoký úbytok napätia (typicky nad 1,5~V), 
-čo spôsobuje tepelné straty a~vyžaduje prídavné chladenie 
-\cite{darlington_vs_mosfet}. Súčasným štandardom sú preto 
-MOSFET H-mostíky, ktoré vďaka minimálnemu odporu v~zopnutom 
-stave takmer úplne eliminujú nežiaduce zahrievanie. Pre 
-nízkoenergetické aplikácie sa využívajú kompaktné čipy 
-s~vstavanými ochranami (napr. DRV88xx), zatiaľ čo pre 
-zvládanie rozbehových špičiek v~rádoch desiatok ampérov 
-slúžia vysokoprúdové moduly a to napríklad typu BTS7960 \cite{mosfet_h_bridge}.
+Na obojsmerné riadenie DC motorov sa využívajú H-mostíky.
+Staršie obvody na báze Darlingtonových tranzistorov (napr.
+L293D alebo L298N) sú v~súčasnosti pre moderné aplikácie
+nevhodné z~dôvodu vysokého úbytku napätia (typicky nad 1,5~V),
+čo spôsobuje tepelné straty a~vyžaduje prídavné chladenie
+\cite{darlington_vs_mosfet}. Súčasným štandardom sú preto
+MOSFET H-mostíky, ktoré vďaka minimálnemu odporu v~zopnutom
+stave takmer úplne eliminujú nežiaduce zahrievanie. Pre
+nízkoenergetické aplikácie sa využívajú kompaktné čipy
+s~vstavanými ochranami (napr. DRV88xx), zatiaľ čo pre
+zvládanie rozbehových špičiek v~rádoch desiatok ampérov
+slúžia vysokoprúdové moduly, napríklad typu BTS7960 \cite{mosfet_h_bridge}.
 
-Pre jednosmerné spínanie a~PWM reguláciu záťaží, ktoré 
-presahujú prúdový limit GPIO pinov (jednotky miliampérov), 
-sa využíva samostatný MOSFET modul. Pri takomto zapojení 
-riadi GPIO pin výhradne hradlo (\textit{gate}) tranzistora. 
-Celý výkonový prúd tak tečie oddelene z~externého zdroja, 
-čím je mikrokontrolér bezpečne chránený pred preťažením 
+Na jednosmerné spínanie a~PWM reguláciu záťaží, ktoré
+presahujú prúdový limit pinov GPIO (jednotky miliampérov),
+sa využíva samostatný MOSFET modul. Pri takomto zapojení
+riadi pin GPIO výhradne hradlo (\textit{gate}) tranzistora.
+Celý výkonový prúd tak tečie oddelene z~externého zdroja,
+čím je mikrokontrolér bezpečne chránený pred preťažením
 \cite{darlington_vs_mosfet}.
 
 
 \subsection{Spínanie sieťových a~nízkonapäťových záťaží}
 \label{spinanie-sietoveho-napatia}
 
-Pre ovládanie svetelných efektov, dymostrojov alebo iných
+Na ovládanie svetelných efektov, dymostrojov alebo iných
 záťaží v~expozíciách je nevyhnutné oddeliť nízkonapäťovú
 riadiacu logiku od výkonových obvodov. Reálne inštalácie
 pritom kombinujú záťaže na rôznych napäťových hladinách --
@@ -387,13 +387,13 @@ na ďalší krok scenára, čo pri komplexnejšom scenári vedie
 k~blokovaniu celého systému \cite{computational_frameworks_art}.
 
 Pre interaktívne expozície, kde scenár musí reagovať na
-vstupy návštevníka (napr. stlačenie tlačidla, dohratý
-mediálny klip), je vhodnejší prístup založený na
+vstupy návštevníka (napr. stlačenie tlačidla alebo dohratie
+mediálneho klipu), je vhodnejší prístup založený na
 \textbf{konečnom stavovom automate}
 (\textit{Finite State Machine}, FSM). V~tomto modeli je
 správanie systému rozdelené do diskrétnych stavov; prechody
 medzi nimi sú podmienené konkrétnymi udalosťami
-(\textit{events}) -- uplynutím časovača, prijatím signálu 
+(\textit{events}) -- uplynutím časovača, prijatím signálu
 alebo dokončením prehrávania média
 \cite{distributed_control_modeling}. FSM umožňuje
 neblokujúce čakanie na viacero rôznych podmienok súčasne,
@@ -404,28 +404,28 @@ neblokujúce čakanie na viacero rôznych podmienok súčasne,
 \section{Dátové formáty pre konfiguráciu a~prenos}
 \label{datove-formaty}
 
-Pre štruktúrovanie prenášaných dát a~ukladanie konfigurácie
+Na štruktúrovanie prenášaných dát a~ukladanie konfigurácie
 je nutné zvoliť vhodný formát. V~kontexte IoT a~webových
 technológií sa najčastejšie porovnávajú textové formáty XML,
 YAML a~JSON \cite{iot_data_formats_review}.
 
 \textbf{XML} (\textit{eXtensible Markup Language}) je dlhoročným
 priemyselným štandardom pre výmenu dát. V~prostredí embedded
-systémov je však považované za zastarané kvôli extrémnej
-verbosite a~zložitosti parserov, ktoré neúmerne zaťažujú
+systémov je však považované za zastarané z~dôvodu nadmernej
+opisnosti a~zložitosti parserov, ktoré neúmerne zaťažujú
 pamäť mikrokontroléra \cite{iot_data_formats_review}.
 
 \textbf{YAML} (\textit{YAML Ain't Markup Language}) si získal
 obľubu v~oblasti DevOps vďaka podpore komentárov
 a~maximálnej čitateľnosti pre človeka \cite{yaml_vs_json}.
-Avšak YAML parsery pre C++ sú pamäťovo náročné a~často
+Parsery YAML pre C++ sú však pamäťovo náročné a~často
 náchylné na chyby pri spracovaní neštandardných dát, čo z~neho
-robí rizikovú voľbu pre real-time komunikáciu na
+robí rizikovú voľbu pre komunikáciu v~reálnom čase na
 mikrokontroléroch \cite{json_xml}.
 
 \textbf{JSON} (\textit{JavaScript Object Notation}) sa stal de facto
 štandardom pre IoT vďaka optimálnej rovnováhe medzi
-čitateľnosťou a~strojospracovateľnosťou
+čitateľnosťou a~strojovou spracovateľnosťou
 \cite{iot_data_formats_review}. Pre mikrokontroléry
 s~obmedzenou RAM existujú vysoko optimalizované parsery vo forme knižníc,
 ktoré minimalizujú fragmentáciu pamäte pri spracovaní
@@ -437,7 +437,7 @@ popisovať stavy, podmienky prechodov a~časové postupnosti
 akcií v~podobe textového súboru editovateľného bez
 rekompilácie softvéru \cite{iot_data_formats_review}.
 Tento prístup oddeľuje konfiguráciu od kódu aplikácie,
-čo znižuje závislosť na vývojároch pri bežných zmenách
+čo znižuje závislosť od vývojárov pri bežných zmenách
 logiky systému \cite{iot_data_formats_review}.
 
 % ------------------------------------------------------------------
@@ -448,11 +448,11 @@ Analýza dostupných technických riešení preukázala, že pre
 špecifické potreby modulárnej a~cenovo dostupnej múzejnej
 inštalácie nie sú optimálne ani priemyselné PLC (vysoká
 cena, absencia multimediálnych rozhraní), ani uzavreté
-komerčné show-control systémy (závislosť na dodávateľovi,
+komerčné show-control systémy (závislosť od dodávateľa,
 obmedzená rozšíriteľnosť, vyššia cena) \cite{iec61131, john2010plc, huntington2017}.
 Najvhodnejším prístupom je distribuovaný IoT systém
 postavený na otvorených platformách, ktorý poskytuje
-flexibilitu pre implementáciu nelineárnych naratívov pri
+flexibilitu pri implementácii nelineárnych naratívov pri
 zachovaní nízkych nákladov \cite{computational_frameworks_art,
 interactive_small_museums}.
 
@@ -460,8 +460,8 @@ Z~hľadiska jednotlivých technických vrstiev rešerš
 identifikovala nasledujúce závery. Protokol MQTT sa ukázal
 ako veľmi vhodný pre distribuované systémy
 s~požiadavkou na nízku latenciu \cite{mqtt_websocket_comparison}.
-Centrálna SBC jednotka pritom nesie zodpovednosť nielen za
-MQTT orchestráciu, ale aj za synchrónne prehrávanie
+Centrálna jednotka SBC pritom nesie zodpovednosť nielen za
+orchestráciu komunikácie MQTT, ale aj za synchrónne prehrávanie
 audiovizuálneho obsahu \cite{rpi4_datasheet}. Pre riadiacu
 logiku interaktívnych expozícií je vhodný model konečného
 stavového automatu (FSM), ktorý umožňuje neblokujúce

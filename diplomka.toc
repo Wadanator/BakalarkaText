@@ -9,7 +9,7 @@
 \contentsline {subsection}{\numberline {2.3.2}Profesionálne show-control systémy}{11}{subsection.2.3.2}%
 \contentsline {subsection}{\numberline {2.3.3}Otvorené systémy na báze IoT platforiem}{12}{subsection.2.3.3}%
 \contentsline {section}{\numberline {2.4}Komunikačné protokoly}{12}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Prenosové médiá: drôtové vs. bezdrôtové}{12}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.1}Prenosové médiá: drôtové a~bezdrôtové}{12}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}Aplikačné protokoly}{12}{subsection.2.4.2}%
 \contentsline {section}{\numberline {2.5}Hardvérové platformy pre IoT}{13}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}Jednodoskové počítače (SBC)}{13}{subsection.2.5.1}%
@@ -19,7 +19,7 @@
 \contentsline {subsection}{\numberline {2.6.2}Spínanie sieťových a~nízkonapäťových záťaží}{14}{subsection.2.6.2}%
 \contentsline {section}{\numberline {2.7}Prístupy k~riadiacej logike expozície}{15}{section.2.7}%
 \contentsline {section}{\numberline {2.8}Dátové formáty pre konfiguráciu a~prenos}{15}{section.2.8}%
-\contentsline {section}{\numberline {2.9}Zhrnutie rešerše}{15}{section.2.9}%
+\contentsline {section}{\numberline {2.9}Zhrnutie rešerše}{16}{section.2.9}%
 \contentsline {chapter}{\numberline {3}Návrh architektúry systému}{17}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Požiadavky na systém}{17}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Systémová topológia a~sieťová koncepcia}{17}{section.3.2}%
@@ -39,14 +39,14 @@
 \contentsline {subsection}{\numberline {5.2.1}Orchestrácia behu systému}{30}{subsection.5.2.1}%
 \contentsline {subsection}{\numberline {5.2.2}Watchdog a~odolnosť voči výpadkom}{30}{subsection.5.2.2}%
 \contentsline {subsection}{\numberline {5.2.3}Stavový automat ako jadro logiky}{30}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3}Konfigurácia scén v~JSON}{33}{section.5.3}%
-\contentsline {section}{\numberline {5.4}MQTT komunikačná vrstva}{35}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Sledovanie stavu aktuátorov}{35}{subsection.5.4.1}%
-\contentsline {section}{\numberline {5.5}Mediálna vrstva a~webové rozhranie}{37}{section.5.5}%
-\contentsline {section}{\numberline {5.6}Firmvér uzlov ESP32}{39}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}Spoločná infraštruktúra uzlov}{39}{subsection.5.6.1}%
-\contentsline {subsection}{\numberline {5.6.2}Špecifické funkcionality uzlov}{39}{subsection.5.6.2}%
-\contentsline {section}{\numberline {5.7}Zhrnutie kapitoly}{40}{section.5.7}%
+\contentsline {subsection}{\numberline {5.2.4}JSON konfigurácia ako vstup stavového automatu}{33}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}MQTT komunikačná vrstva}{35}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Sledovanie stavu aktuátorov}{35}{subsection.5.3.1}%
+\contentsline {section}{\numberline {5.4}Mediálna vrstva a~webové rozhranie}{37}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Firmvér uzlov ESP32}{39}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Spoločná infraštruktúra uzlov}{39}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Špecifické funkcionality uzlov}{39}{subsection.5.5.2}%
+\contentsline {section}{\numberline {5.6}Zhrnutie kapitoly}{40}{section.5.6}%
 \contentsline {chapter}{\numberline {6}Experimentálne overenie}{41}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Popis fyzického testovania a~testovacieho prostredia}{41}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Testované scenáre a výsledky}{41}{section.6.2}%

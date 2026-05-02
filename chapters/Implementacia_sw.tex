@@ -5,7 +5,7 @@ Softvérová vrstva systému je realizovaná ako distribuované riešenie,
 ktoré prepája centrálny backend na platforme Raspberry~Pi
 s~periférnymi uzlami ESP32. Nadväzuje na architektonický návrh
 uvedený v~kapitole~\ref{NavrhArchitektury} a~na hardvérovú realizáciu
-z~kapitoly~\ref{ImplementaciaHW}. Táto vrstva zodpovedná
+z~kapitoly~\ref{ImplementaciaHW}. Táto vrstva je zodpovedná
 za vykonávanie scén, koordináciu multimédií, odosielanie príkazov
 na fyzické zariadenia a~za spätné vyhodnocovanie ich stavu.
 
@@ -55,7 +55,7 @@ scény prebieha v~separátnom \textbf{daemon vlákne}, takže hlavná slučka
 nie je blokovaná počas behu scenára a~môže naďalej obsluhovať
 periférne udalosti a~kontrolovať zdravie systému.
 
-Pri ukončení systému sa vykoná \textbf{riadený cleanup}, ktorý zahŕňa
+Pri ukončení systému sa vykoná \textbf{riadené ukončenie služby}, ktoré zahŕňa
 zastavenie aktívnej scény, vypnutie výstupov a~zaznamenanie
 prevádzkových údajov. Tento postup minimalizuje riziko, že
 po ukončení služby ostane časť zariadení v~neželanom stave.
@@ -87,7 +87,7 @@ Podporované typy prechodov medzi stavmi sú:
 \begin{itemize}
     \item \textbf{Časový limit} --- prechod po uplynutí nastaveného času,
     \item \textbf{Koniec audia} --- prechod po dohratí zvukovej stopy,
-    \item \textbf{Koniec videa} --- prechod po dohratí videoklip,
+    \item \textbf{Koniec videa} --- prechod po dohratí videoklipu,
     \item \textbf{MQTT správa} --- prechod po prijatí správy od uzla (napr. stlačenie tlačidla),
     \item \textbf{Bezpodmienečný prechod} --- vykoná sa vždy pri vstupe do stavu.
 \end{itemize}
@@ -101,6 +101,11 @@ najmä pre núdzové zastavenie a~celkové časové limity.
 V~spracovateľskom cykle majú globálne podmienky prednosť
 pred lokálnou logikou jednotlivých stavov.
 
+Keďže stavový automat spracúva všeobecné stavy, akcie
+a~podmienky prechodov, konkrétny priebeh expozície sa
+do vykonávacej logiky vkladá prostredníctvom externej
+JSON konfigurácie opísanej v~nasledujúcej podsekcii.
+
 \begin{figure}[p]
     \centering
     \includegraphics[width=0.95\linewidth,height=0.90\textheight,keepaspectratio]{obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick_flow_final.png}
@@ -108,7 +113,7 @@ pred lokálnou logikou jednotlivých stavov.
     \label{fig:sw_fsm_engine}
 \end{figure}
 
-\section{Konfigurácia scén v~JSON}
+\subsection{JSON konfigurácia ako vstup stavového automatu}
 \label{SWJSON}
 
 Návrh externej JSON konfigurácie uvedený v~kapitole~\ref{KomunikacnaVrstva}
@@ -166,8 +171,9 @@ a~všeobecný odber miestnosti. V~prevádzke sa využívajú tieto skupiny topik
     \item \texttt{<command\_topic>/feedback} pre potvrdenie vykonania príkazu.
 \end{itemize}
 
-Všetky riadiace príkazy sú odosielané s~úrovňou kvality \textbf{QoS~0}
-(\textit{fire-and-forget}), čo minimalizuje réžiu a~latenciu komunikácie.
+Všetky riadiace príkazy sú odosielané s~úrovňou kvality \textbf{QoS~0},
+teda bez potvrdenia doručenia na úrovni protokolu, čo minimalizuje
+réžiu a~latenciu komunikácie.
 Záruky doručenia nie sú riešené na úrovni MQTT protokolu, ale vlastným
 mechanizmom spätnej väzby.
 Spoľahlivosť komunikácie je tak podporená \textbf{trackerom spätnej väzby},
@@ -196,7 +202,7 @@ ktorý pre každý príkazový topik udržiava dvojicu stavov:
 a~\textit{confirmed} (potvrdený stav po prijatí feedback správy
 \texttt{OK} od uzla). Tento prístup oddeľuje okamžitú spätnú
 väzbu pre používateľské rozhranie od skutočného hardvérového
-potvrdenia. Pri zastavení scény sa nad celým store volá
+potvrdenia. Pri zastavení scény sa nad celým registrom volá
 operácia núteného vypnutia, ktorá nastaví všetky
 sledované výstupy do bezpečného stavu nezávisle od prípadných
 oneskorených feedback správ. Zmeny stavu sú okamžite
@@ -205,7 +211,7 @@ propagované do webového dashboardu cez \textbf{WebSocket}.
 \section{Mediálna vrstva a~webové rozhranie}
 \label{SWMediaWeb}
 
-Sekcia pokrýva tri samostatné podsystémy:
+Mediálna a~webová časť systému pozostáva z~troch samostatných podsystémov:
 
 \begin{itemize}
     \item \textbf{Zvuková vrstva.}
@@ -229,9 +235,9 @@ Sekcia pokrýva tri samostatné podsystémy:
         backend ako \textbf{Flask} služba s~vrstvou
         \textbf{Flask-SocketIO}. Rozhranie zahŕňa spúšťanie
         a~zastavovanie scén, odosielanie príkazov, správu médií
-        a~monitorovanie stavov zariadení a~logov. Server pushuje
-        udalosti o~stave systému priebežne, takže operátor vidí
-        zmeny bez periodického pollingu.
+        a~monitorovanie stavov zariadení a~logov. Server priebežne
+        odosiela udalosti o~stave systému, takže operátor vidí
+        zmeny bez periodického dotazovania zo strany klienta.
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -292,7 +298,7 @@ zjednodušuje diagnostiku a~znižuje duplicitu aplikačného kódu.
 \begin{itemize}
     \item \textbf{Tlačidlový uzol.}
         Uzol vykonáva filtráciu stlačenia tlačidla
-        (debounce + cooldown) a~po úspešnom vyhodnotení
+        (odstránenie zákmitov a~cooldown interval) a~po úspešnom vyhodnotení
         publikuje správu \texttt{START} na scénický topic.
 
     \item \textbf{Motorický uzol.}
