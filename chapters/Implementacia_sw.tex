@@ -1,33 +1,32 @@
 ﻿\chapter{Implementácia softvérovej časti}
 \label{ImplementaciaSW}
 
-Softvérová vrstva systému je realizovaná ako distribuované riešenie,
-ktoré prepája centrálny backend na platforme Raspberry~Pi
-s~periférnymi uzlami ESP32. Nadväzuje na architektonický návrh
-uvedený v~kapitole~\ref{NavrhArchitektury} a~na hardvérovú realizáciu
-z~kapitoly~\ref{ImplementaciaHW}. Táto vrstva je zodpovedná
-za vykonávanie scén, koordináciu multimédií, odosielanie príkazov
-na fyzické zariadenia a~za spätné vyhodnocovanie ich stavu.
+Softvérová vrstva systému prepája centrálny backend na platforme
+Raspberry~Pi s~periférnymi uzlami ESP32 a~nadväzuje na architektonický
+návrh z~kapitoly~\ref{NavrhArchitektury} aj hardvérovú realizáciu
+z~kapitoly~\ref{ImplementaciaHW}. Zabezpečuje vykonávanie scén,
+koordináciu multimédií, odosielanie príkazov na fyzické zariadenia
+a~vyhodnocovanie ich spätnej väzby.
 
 \section{Softvérová architektúra systému}
 \label{SWAchitektura}
 
-Koncepčné dvojúrovňové rozdelenie systému je definované
-v~kapitole~\ref{NavrhArchitektury}. V~tejto časti sú opísané
-konkrétne backendové a~firmvérové komponenty pre beh scény.
+Koncepčné dvojúrovňové rozdelenie z~kapitoly~\ref{NavrhArchitektury}
+je v~tejto časti rozpracované do konkrétnych backendových
+a~firmvérových komponentov pre beh scény.
 
 Softvérová architektúra je navrhnutá ako trojica previazaných vrstiev,
 pričom kľúčovým princípom je \textbf{separácia zodpovedností}:
 backend neobsahuje hardvérovo špecifickú logiku GPIO výstupov
 a~firmvér uzlov neobsahuje scenárové vetvenie expozície.
-Pri zmenách je tak možné upravovať scenáre, webové rozhranie
-alebo firmvér uzla oddelene, pričom tok informácií medzi vstupmi,
+Vďaka tomu je možné upravovať scenáre, webové rozhranie
+alebo firmvér uzla oddelene, zatiaľ čo tok informácií medzi vstupmi,
 backendom, MQTT brokerom, uzlami ESP32 a~webovým dashboardom
-ostáva jednoznačne vymedzený (Obr.~\ref{fig:sw_layers}).
+ostáva vymedzený (Obr.~\ref{fig:sw_layers}).
 
-\begin{figure}[p]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\linewidth,height=0.90\textheight,keepaspectratio]{obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png}
+    \includegraphics[width=1.00\linewidth,height=0.90\textheight,keepaspectratio]{obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png}
     \caption{Softvérové vrstvy systému a~ich väzby}
     \label{fig:sw_layers}
 \end{figure}
@@ -39,6 +38,13 @@ Backendová časť je implementovaná v~jazyku \textbf{Python} a~nasadená
 ako systémová služba členená do piatich funkčných celkov pokrývajúcich
 celý životný cyklus behu scény (Obr.~\ref{fig:sw_backend_lifecycle}).
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth,height=0.72\textheight,keepaspectratio]{obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_final.png}
+    \caption{Životný cyklus backendovej služby}
+    \label{fig:sw_backend_lifecycle}
+\end{figure}
+
 \subsection{Orchestrácia behu systému}
 \label{SWOrchestracia}
 
@@ -47,35 +53,27 @@ Pri štarte backend načíta konfiguráciu z~inicializačného súboru
 miestnosti a~logovanie). Konfigurácia runtime je oddelená
 od obsahovej konfigurácie scén.
 
-Po načítaní konfigurácie backend inicializuje všetky runtime služby
-a~prepojí ich callback mechanizmami.
-Po inicializácii sa spustí hlavná slučka, v~ktorej sa
-periodicky vyhodnocuje stav MQTT spojenia, stav dostupnosti
-zariadení a~vstupy fyzického tlačidla. Samotné vykonávanie
+Po načítaní konfigurácie backend inicializuje runtime služby,
+prepojí ich callback mechanizmami a~spustí hlavnú slučku,
+v~ktorej sa periodicky vyhodnocuje stav MQTT spojenia,
+dostupnosť zariadení a~vstupy fyzického tlačidla. Samotné vykonávanie
 scény prebieha v~separátnom \textbf{daemon vlákne}, takže hlavná slučka
 nie je blokovaná počas behu scenára a~môže naďalej obsluhovať
 periférne udalosti a~kontrolovať zdravie systému.
 
-Pri ukončení systému sa vykoná \textbf{riadené ukončenie služby}, ktoré zahŕňa
-zastavenie aktívnej scény, vypnutie výstupov a~zaznamenanie
-prevádzkových údajov. Tento postup minimalizuje riziko, že
-po ukončení služby ostane časť zariadení v~neželanom stave.
-
-\begin{figure}[p]
-    \centering
-    \includegraphics[width=0.95\linewidth,height=0.90\textheight,keepaspectratio]{obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_final.png}
-    \caption{Životný cyklus backendovej služby}
-    \label{fig:sw_backend_lifecycle}
-\end{figure}
+Pri ukončení systému sa vykoná \textbf{riadené ukončenie služby}
+so zastavením aktívnej scény, vypnutím výstupov a~zaznamenaním
+prevádzkových údajov. Tým sa znižuje riziko, že po ukončení služby
+ostane časť zariadení v~neželanom stave.
 
 \subsection{Watchdog a~odolnosť voči výpadkom}
 \label{SWWatchdog}
 
-Okrem hlavnej služby beží samostatná \textbf{watchdog služba}, ktorá
-monitoruje zdravie backendového procesu a~v~prípade poruchy ho
-automaticky reštartuje. Pred každým reštartom overí, či práve
-prebieha scéna; ak áno, čaká na jej dokončenie --- čím sa
-minimalizuje riziko prerušenia scény.
+Okrem hlavnej služby beží samostatná \textbf{watchdog služba},
+ktorá monitoruje zdravie backendového procesu a~v~prípade poruchy
+ho automaticky reštartuje. Pred reštartom overí, či práve prebieha
+scéna; ak áno, čaká na jej dokončenie, aby sa znížilo riziko jej
+prerušenia.
 
 \subsection{Stavový automat ako jadro logiky}
 \label{SWFSM}
@@ -97,21 +95,20 @@ v~konfiguračnom súbore; pri splnení prvej podmienky sa okamžite
 vykoná príslušný prechod.
 
 Okrem lokálnych prechodov sú podporené aj \textbf{globálne podmienky}
-platné pre celú scénu bez ohľadu na aktuálny stav --- používajú sa
-najmä pre núdzové zastavenie a~celkové časové limity.
-V~spracovateľskom cykle majú globálne podmienky prednosť
-pred lokálnou logikou jednotlivých stavov, čím sa zabezpečuje,
+platné pre celú scénu bez ohľadu na aktuálny stav, najmä pre núdzové
+zastavenie a~celkové časové limity. V~spracovateľskom cykle majú
+globálne podmienky prednosť pred lokálnou logikou jednotlivých stavov,
+čím sa zabezpečuje,
 že núdzové alebo celoscénové pravidlá ovplyvnia ďalší krok
 ešte pred bežnými prechodmi stavu (Obr.~\ref{fig:sw_fsm_engine}).
 
-Keďže stavový automat spracúva všeobecné stavy, akcie
-a~podmienky prechodov, konkrétny priebeh expozície sa
-do vykonávacej logiky vkladá prostredníctvom externej
-JSON konfigurácie opísanej v~nasledujúcej podsekcii.
+Konkrétny priebeh expozície sa preto do vykonávacej logiky
+vkladá prostredníctvom externej JSON konfigurácie opísanej
+v~nasledujúcej podsekcii.
 
-\begin{figure}[p]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\linewidth,height=0.90\textheight,keepaspectratio]{obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick_flow_final.png}
+    \includegraphics[width=0.95\linewidth,height=0.80\textheight,keepaspectratio]{obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick_flow_final.png}
     \caption{Poradie spracovania stavového automatu v~jednom cykle}
     \label{fig:sw_fsm_engine}
 \end{figure}
@@ -120,23 +117,22 @@ JSON konfigurácie opísanej v~nasledujúcej podsekcii.
 \label{SWJSON}
 
 Návrh externej JSON konfigurácie uvedený v~kapitole~\ref{KomunikacnaVrstva}
-je implementovaný ako množina samostatných súborov scén, ktoré sa načítavajú
+je implementovaný ako množina samostatných súborov scén načítavaných
 podľa požadovaného priebehu expozície. V~rámci jednej miestnosti
 tak môže existovať viacero alternatívnych alebo testovacích scén,
-pričom každá z~nich opisuje vlastnú postupnosť stavov, akcií a~prechodov.
-Tento prístup oddeľuje obsahovú vrstvu scenára od implementácie enginu,
-takže zmena priebehu scény nevyžaduje úpravy zdrojového kódu backendu.
+pričom každá opisuje vlastnú postupnosť stavov, akcií a~prechodov.
+Oddelenie scenára od enginu umožňuje meniť priebeh scény bez úprav
+zdrojového kódu backendu.
 
 Každá scéna obsahuje identifikátor, počiatočný stav
 a~slovník stavov, pričom každý stav sa ďalej skladá zo sekcií
 pre vstupné akcie, časovú os, výstupné akcie a~prechody
 (Obr.~\ref{fig:sw_json_structure}).
 
-Sekcia časovej osi umožňuje naplánovať
-udalosti relatívne voči času vstupu do stavu bez blokovania
-zvyšku systému --- v~implementácii sú tieto akcie realizované
-ako asynchrónne časovače plánované pri vstupe
-do stavu. Podporované akcie sú tri: \textbf{MQTT akcia}, \textbf{audio akcia}
+Sekcia časovej osi umožňuje plánovať udalosti relatívne voči vstupu
+do stavu bez blokovania zvyšku systému; v~implementácii sú tieto akcie
+realizované ako asynchrónne časovače. Podporované akcie sú tri:
+\textbf{MQTT akcia}, \textbf{audio akcia}
 a~\textbf{video akcia}; ich príkazové formáty spolu s~tópikmi
 na spustenie scény sú uvedené v~tom istom prehľade
 (Obr.~\ref{fig:sw_json_structure}).
@@ -144,14 +140,13 @@ na spustenie scény sú uvedené v~tom istom prehľade
 Pri zmene stavu sa plánovanie časovej osi resetuje, takže akcie
 z~predchádzajúceho stavu nemôžu zasiahnuť do nového stavu.
 
-Pred spustením scény prebieha \textbf{schémová a~logická validácia}.
-Schémová validácia kontroluje povinné polia a~typy,
-logická validácia overuje existenciu cieľových stavov prechodov.
-Tým sa eliminuje spúšťanie neplatných konfigurácií.
+Pred spustením scény prebieha \textbf{schémová a~logická validácia},
+ktorá kontroluje povinné polia, typy a~existenciu cieľových stavov
+prechodov. Tým sa eliminuje spúšťanie neplatných konfigurácií.
 
-\begin{figure}[p]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\linewidth,height=0.88\textheight,keepaspectratio]{obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_structure_final_html.png}
+    \includegraphics[width=0.92\linewidth,height=0.80\textheight,keepaspectratio]{obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_structure_final_html.png}
     \caption{Štruktúra konfiguračnej scény}
     \label{fig:sw_json_structure}
 \end{figure}
@@ -206,19 +201,14 @@ sú rozdelené podľa účelu komunikácie (Tab.~\ref{tab:sw_mqtt_topics}).
     \end{tabular}
 \end{table}
 
-Všetky riadiace príkazy sú odosielané s~úrovňou kvality \textbf{QoS~0},
-teda bez potvrdenia doručenia na úrovni protokolu, čo minimalizuje
-réžiu a~latenciu komunikácie.
-Záruky doručenia nie sú riešené na úrovni MQTT protokolu, ale vlastným
-mechanizmom spätnej väzby.
-Spoľahlivosť komunikácie je tak podporená \textbf{trackerom spätnej väzby},
-ktorý páruje odoslané príkazy s~odpoveďami zariadení.
-Pri nedoručení potvrdenia v~časovom limite je prípad
-evidovaný ako komunikačný problém (timeout) a~zaznamenaný
-na diagnostické účely.
-Mechanizmus spätnej väzby preto tvorí samostatnú vetvu
-komunikačného toku od odoslania príkazu až po potvrdenie
-alebo časový limit (Obr.~\ref{fig:sw_mqtt_flow}).
+Riadiace príkazy sú pre nízku réžiu a~latenciu odosielané
+s~úrovňou kvality \textbf{QoS~0}, teda bez potvrdenia doručenia
+na úrovni protokolu. Spoľahlivosť je preto doplnená
+\textbf{trackerom spätnej väzby}, ktorý páruje odoslané príkazy
+s~odpoveďami zariadení a~pri nedoručení potvrdenia v~časovom limite
+zaznamená komunikačný problém na diagnostické účely. Mechanizmus
+spätnej väzby tak tvorí samostatnú vetvu toku od odoslania príkazu
+až po potvrdenie alebo časový limit (Obr.~\ref{fig:sw_mqtt_flow}).
 
 Tracker je aktivovaný iba počas aktívneho behu scény a~pri jej
 ukončení sa explicitne vypína, aby mimo scénického cyklu
@@ -234,16 +224,15 @@ nevznikali falošné timeout udalosti.
 \subsection{Sledovanie stavu aktuátorov}
 \label{SWActuatorStore}
 
-Súčasťou MQTT vrstvy je aj \textbf{register stavov aktuátorov},
-ktorý pre každý príkazový topik udržiava dvojicu stavov:
+Súčasťou MQTT vrstvy je \textbf{register stavov aktuátorov},
+ktorý pre každý príkazový topik udržiava dvojicu:
 \textit{desired} (požadovaný stav po odoslaní príkazu)
 a~\textit{confirmed} (potvrdený stav po prijatí správy spätnej väzby
-\texttt{OK} od uzla). Tento prístup oddeľuje okamžitú spätnú
-väzbu pre používateľské rozhranie od skutočného hardvérového
-potvrdenia. Pri zastavení scény sa nad celým registrom volá
-operácia núteného vypnutia, ktorá nastaví všetky
-sledované výstupy do bezpečného stavu nezávisle od prípadných
-oneskorených správ spätnej väzby. Zmeny stavu sú okamžite
+\texttt{OK} od uzla). Register oddeľuje okamžitú spätnú väzbu
+pre používateľské rozhranie od skutočného hardvérového potvrdenia.
+Pri zastavení scény sa nad registrom volá operácia núteného vypnutia,
+ktorá nastaví sledované výstupy do bezpečného stavu nezávisle
+od oneskorených správ spätnej väzby. Zmeny stavu sú okamžite
 propagované do webového dashboardu cez \textbf{WebSocket}.
 
 \section{Mediálna vrstva a~webové rozhranie}
@@ -255,7 +244,7 @@ Mediálna a~webová časť systému pozostáva z~troch samostatných podsystémo
     \item \textbf{Zvuková vrstva.}
         Kombinuje dva režimy prehrávania: zvukové efekty určené
         na okamžité prehrávanie sa pred štartom scény načítajú
-        do pamäte RAM (čím sa eliminuje latencia pri spustení),
+        do pamäte RAM na zníženie latencie,
         zatiaľ čo dlhšie hudobné stopy sú streamované priebežne
         z~disku. Prescan a~preloading prebehnú ešte pred štartom
         stavového automatu.
@@ -268,14 +257,14 @@ Mediálna a~webová časť systému pozostáva z~troch samostatných podsystémo
         a~odozva ovládacieho kanála.
 
     \item \textbf{Webové rozhranie.}
-        Poskytuje obsluhe prevádzkové funkcie bez potreby zásahu
-        do konzoly. Frontend je realizovaný ako \textbf{React} SPA,
-        backend ako \textbf{Flask} služba s~vrstvou
+        Poskytuje obsluhe prevádzkové funkcie bez zásahu
+        do konzoly. Frontend je realizovaný ako \textbf{React} SPA
+        a~backend ako \textbf{Flask} služba s~vrstvou
         \textbf{Flask-SocketIO}. Rozhranie zahŕňa spúšťanie
         a~zastavovanie scén, odosielanie príkazov, správu médií
-        a~monitorovanie stavov zariadení a~logov. Server priebežne
-        odosiela udalosti o~stave systému, takže operátor vidí
-        zmeny bez periodického dotazovania zo strany klienta.
+        a~monitorovanie zariadení a~logov. Server priebežne odosiela
+        stavové udalosti, takže operátor vidí zmeny bez periodického
+        dotazovania zo strany klienta.
         Funkčné členenie dashboardu vychádza z~oddelenia
         serverových udalostí, požiadaviek klienta a~panelov
         používateľského rozhrania (Obr.~\ref{fig:sw_dashboard});
@@ -285,7 +274,7 @@ Mediálna a~webová časť systému pozostáva z~troch samostatných podsystémo
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.95\linewidth]{obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboard_functional_final.png}
+    \includegraphics[width=0.92\linewidth]{obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboard_functional_final.png}
     \caption{Funkčné časti webového dashboardu a~tok udalostí}
     \label{fig:sw_dashboard}
 \end{figure}
@@ -302,7 +291,8 @@ Mediálna a~webová časť systému pozostáva z~troch samostatných podsystémo
 
 Periférna vykonávacia vrstva je implementovaná na uzloch ESP32,
 ktoré zdieľajú spoločnú komunikačnú infraštruktúru
-a~zároveň obsahujú uzlovo špecifické funkcionality.
+a~zároveň obsahujú uzlovo špecifické funkcionality
+(Tab.~\ref{tab:sw_esp_nodes}).
 
 \begin{table}[htbp]
     \centering
@@ -332,9 +322,6 @@ Všetky uzly využívajú jednotné mechanizmy:
     \item odber globálneho príkazu \texttt{roomX/STOP}.
 \end{itemize}
 
-Takto navrhnutý základ zjednocuje správanie uzlov,
-zjednodušuje diagnostiku a~znižuje duplicitu aplikačného kódu.
-
 \subsection{Špecifické funkcionality uzlov}
 \label{SWESPSpecific}
 
@@ -351,10 +338,9 @@ zjednodušuje diagnostiku a~znižuje duplicitu aplikačného kódu.
         zmenu rýchlosti a~zmenu smeru.
 
     \item \textbf{Reléový uzol.}
-        Uzol vykonáva spínanie zariadení podľa mapovania topikov
-        na výstupy, vrátane časovo obmedzených efektov
-        a~skupinových efektových režimov. Časovo citlivé
-        sekvencie sa vykonávajú lokálne na uzle,
+        Uzol spína zariadenia podľa mapovania topikov na výstupy,
+        vrátane časovo obmedzených a~skupinových efektov.
+        Časovo citlivé sekvencie sa vykonávajú lokálne na uzle,
         čím sa znižuje závislosť od momentálnej latencie siete.
 \end{itemize}
 
@@ -375,15 +361,10 @@ firmvérovú štruktúru (Obr.~\ref{fig:sw_esp_compare}).
 \section{Zhrnutie kapitoly}
 \label{SWZhrnutie}
 
-Softvérová implementácia prepája centrálnu orchestráciu
-na Raspberry~Pi s~lokálnym vykonávaním akcií na uzloch ESP32.
-Jadrom systému je \textbf{stavový automat} s~externou \textbf{JSON konfiguráciou}
-scén a~s~\textbf{MQTT komunikáciou} so spätnou väzbou.
-Produkčnú spoľahlivosť systému zabezpečuje \textbf{watchdog služba}
-so scénou podmienenou reštartovacou logikou.
-Takto navrhnuté riešenie umožňuje pružné úpravy scenára,
-stabilnú prevádzku a~praktickú obsluhu expozície
-v~reálnych podmienkach múzejného prostredia.
-
-Spoľahlivosť a~funkčnosť takto implementovaného reťazca HW/SW
-je následne overená experimentálne v~kapitole~\ref{ExperimentalneOverenie}.
+Softvérová implementácia prepája centrálnu orchestráciu na Raspberry~Pi
+s~lokálnym vykonávaním akcií na uzloch ESP32. Jadrom riešenia je
+\textbf{stavový automat} s~externou \textbf{JSON konfiguráciou} scén,
+\textbf{MQTT komunikáciou} so spätnou väzbou a~\textbf{watchdog službou}
+pre reštart backendu bez prerušenia aktívnej scény.
+Spoľahlivosť a~funkčnosť implementovaného hardvérovo-softvérového reťazca
+sú následne overené experimentálne v~kapitole~\ref{ExperimentalneOverenie}.

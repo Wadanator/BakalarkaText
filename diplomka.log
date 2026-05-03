@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  2 MAY 2026 20:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  3 MAY 2026 22:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -874,7 +874,7 @@ Package hyperref Info: Link coloring ON on input line 42.
 
 pdfTeX warning: pdflatex.exe (file ./pages/TitulniList_color.pdf): PDF inclusio
 n: found PDF version <1.7>, but at most version <1.5> allowed
-<pages/TitulniList_color.pdf, id=247, 597.51233pt x 845.0471pt>
+<pages/TitulniList_color.pdf, id=243, 597.51233pt x 845.0471pt>
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf>
 Package pdftex.def Info: pages/TitulniList_color.pdf  used on input line 46.
@@ -887,7 +887,7 @@ n: found PDF version <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./pages/TitulniList_color.pdf): PDF inclusio
 n: found PDF version <1.7>, but at most version <1.5> allowed
-<pages/TitulniList_color.pdf, id=249, page=1, 597.51233pt x 845.0471pt>
+<pages/TitulniList_color.pdf, id=245, page=1, 597.51233pt x 845.0471pt>
 File: pages/TitulniList_color.pdf Graphic file (type pdf)
 <use pages/TitulniList_color.pdf, page 1>
 Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
@@ -921,7 +921,7 @@ Package pdftex.def Info: pages/TitulniList_color.pdf , page1 used on input line
 pdfTeX warning: pdflatex.exe (file ./pages/zav_prace__b6f095a8f97b2441249eadcf3
 ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
  allowed
-<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=264, 597.51233pt x 8
+<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=260, 597.51233pt x 8
 45.0471pt>
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
@@ -939,7 +939,7 @@ ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
 pdfTeX warning: pdflatex.exe (file ./pages/zav_prace__b6f095a8f97b2441249eadcf3
 ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
  allowed
-<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=266, page=1, 597.512
+<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=262, page=1, 597.512
 33pt x 845.0471pt>
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
@@ -978,7 +978,7 @@ Package pdftex.def Info: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf
 pdfTeX warning: pdflatex.exe (file ./pages/zav_prace__b6f095a8f97b2441249eadcf3
 ace6c18.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5>
  allowed
-<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=287, page=2, 597.512
+<pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf, id=283, page=2, 597.512
 33pt x 845.0471pt>
 File: pages/zav_prace__b6f095a8f97b2441249eadcf3ace6c18.pdf Graphic file (type 
 pdf)
@@ -1073,12 +1073,12 @@ LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 4
 (C:\Users\Wajdy\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-<obr/Star_topology.png, id=397, 563.85657pt x 423.08063pt>
+<obr/Star_topology.png, id=392, 563.85657pt x 423.08063pt>
 File: obr/Star_topology.png Graphic file (type png)
 <use obr/Star_topology.png>
 Package pdftex.def Info: obr/Star_topology.png  used on input line 68.
 (pdftex.def)             Requested size: 207.58878pt x 155.7627pt.
-<obr/Pyramid_topology.png, id=399, 563.85657pt x 381.67593pt>
+<obr/Pyramid_topology.png, id=394, 563.85657pt x 381.67593pt>
 File: obr/Pyramid_topology.png Graphic file (type png)
 <use obr/Pyramid_topology.png>
 Package pdftex.def Info: obr/Pyramid_topology.png  used on input line 74.
@@ -1119,7 +1119,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 pdfTeX warning: pdflatex.exe (file ./obr/ARCH/system_topology.pdf): PDF inclusi
 on: found PDF version <1.7>, but at most version <1.5> allowed
-<obr/ARCH/system_topology.pdf, id=551, 442.53331pt x 233.9139pt>
+<obr/ARCH/system_topology.pdf, id=546, 442.53331pt x 233.9139pt>
 File: obr/ARCH/system_topology.pdf Graphic file (type pdf)
 <use obr/ARCH/system_topology.pdf>
 Package pdftex.def Info: obr/ARCH/system_topology.pdf  used on input line 71.
@@ -1128,7 +1128,7 @@ Package pdftex.def Info: obr/ARCH/system_topology.pdf  used on input line 71.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [18 <./obr/ARCH/system_topology.pdf>]
-<obr/ARCH/FSM_Architektura.png, id=578, 1251.92719pt x 408.77719pt>
+<obr/ARCH/FSM_Architektura.png, id=573, 1251.92719pt x 408.77719pt>
 File: obr/ARCH/FSM_Architektura.png Graphic file (type png)
 <use obr/ARCH/FSM_Architektura.png>
 Package pdftex.def Info: obr/ARCH/FSM_Architektura.png  used on input line 151.
@@ -1147,7 +1147,7 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 
 pdfTeX warning: pdflatex.exe (file ./obr/ARCH/Mqtt_Flow.pdf): PDF inclusion: fo
 und PDF version <1.7>, but at most version <1.5> allowed
-<obr/ARCH/Mqtt_Flow.pdf, id=588, 746.79pt x 566.115pt>
+<obr/ARCH/Mqtt_Flow.pdf, id=583, 746.79pt x 566.115pt>
 File: obr/ARCH/Mqtt_Flow.pdf Graphic file (type pdf)
 <use obr/ARCH/Mqtt_Flow.pdf>
 Package pdftex.def Info: obr/ARCH/Mqtt_Flow.pdf  used on input line 193.
@@ -1164,12 +1164,12 @@ Underfull \hbox (badness 1028) in paragraph at lines 11--18
 
 pdfTeX warning: pdflatex.exe (file ./obr/HW/RPI_HW.pdf): PDF inclusion: found P
 DF version <1.7>, but at most version <1.5> allowed
-<obr/HW/RPI_HW.pdf, id=617, 399.41219pt x 117.3183pt>
+<obr/HW/RPI_HW.pdf, id=612, 399.41219pt x 117.3183pt>
 File: obr/HW/RPI_HW.pdf Graphic file (type pdf)
 <use obr/HW/RPI_HW.pdf>
 Package pdftex.def Info: obr/HW/RPI_HW.pdf  used on input line 21.
 (pdftex.def)             Requested size: 432.48051pt x 127.03125pt.
-<obr/HW/main_box_photo.jpeg, id=620, 1541.76pt x 867.24pt>
+<obr/HW/main_box_photo.jpeg, id=615, 1541.76pt x 867.24pt>
 File: obr/HW/main_box_photo.jpeg Graphic file (type jpg)
 <use obr/HW/main_box_photo.jpeg>
 Package pdftex.def Info: obr/HW/main_box_photo.jpeg  used on input line 44.
@@ -1180,7 +1180,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [21
 
  <./obr/HW/RPI_HW.pdf>]
-<obr/HW/Motor_Schema.png, id=646, 1084.80281pt x 575.90157pt>
+<obr/HW/Motor_Schema.png, id=641, 1084.80281pt x 575.90157pt>
 File: obr/HW/Motor_Schema.png Graphic file (type png)
 <use obr/HW/Motor_Schema.png>
 Package pdftex.def Info: obr/HW/Motor_Schema.png  used on input line 72.
@@ -1189,7 +1189,7 @@ Package pdftex.def Info: obr/HW/Motor_Schema.png  used on input line 72.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [22 <./obr/HW/main_box_photo.jpeg>]
-<obr/HW/relay_schema.png, id=656, 810.02625pt x 583.42969pt>
+<obr/HW/relay_schema.png, id=651, 810.02625pt x 583.42969pt>
 File: obr/HW/relay_schema.png Graphic file (type png)
 <use obr/HW/relay_schema.png>
 Package pdftex.def Info: obr/HW/relay_schema.png  used on input line 102.
@@ -1198,12 +1198,12 @@ Package pdftex.def Info: obr/HW/relay_schema.png  used on input line 102.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [23 <./obr/HW/Motor_Schema.png>]
-<obr/HW/button_photo.jpg, id=666, 3982.88pt x 2240.37pt>
+<obr/HW/button_photo.jpg, id=661, 3982.88pt x 2240.37pt>
 File: obr/HW/button_photo.jpg Graphic file (type jpg)
 <use obr/HW/button_photo.jpg>
 Package pdftex.def Info: obr/HW/button_photo.jpg  used on input line 134.
 (pdftex.def)             Requested size: 218.51521pt x 122.89597pt.
-<obr/HW/Button_Schema.png, id=667, 968.11688pt x 665.48625pt>
+<obr/HW/Button_Schema.png, id=662, 968.11688pt x 665.48625pt>
 File: obr/HW/Button_Schema.png Graphic file (type png)
 <use obr/HW/Button_Schema.png>
 Package pdftex.def Info: obr/HW/Button_Schema.png  used on input line 140.
@@ -1245,110 +1245,118 @@ If that doesn't work, type  X <return>  to quit.
 on_Schema.png>] [26] [27]
 Kapitola 5.
 <obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png, id=6
-96, 1236.0579pt x 761.9667pt>
+91, 1236.0579pt x 761.9667pt>
 File: obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png 
 Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runt
-ime_loop_final.png  used on input line 30.
-(pdftex.def)             Requested size: 432.47586pt x 266.59932pt.
-[28
-
-] [29 <./obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.p
-ng>]
+ime_loop_final.png  used on input line 29.
+(pdftex.def)             Requested size: 455.24072pt x 280.6327pt.
 <obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_final
-.png, id=708, 799.5471pt x 844.5954pt>
+.png, id=693, 799.5471pt x 844.5954pt>
 File: obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_
 final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_f
 inal.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2
-_backend_lifecycle_final.png  used on input line 66.
+_backend_lifecycle_final.png  used on input line 43.
 (pdftex.def)             Requested size: 432.48102pt x 456.84798pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [28
+
+ <./obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [29 <./obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycl
+e_final.png>]
 <obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick_flow
-_final.png, id=710, 846.16125pt x 806.01125pt>
+_final.png, id=707, 634.5306pt x 612.1269pt>
 File: obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick
 _flow_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick_
 flow_final.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_
-5_3_fsm_engine_tick_flow_final.png  used on input line 114.
-(pdftex.def)             Requested size: 432.47906pt x 411.9581pt.
+5_3_fsm_engine_tick_flow_final.png  used on input line 111.
+(pdftex.def)             Requested size: 432.49173pt x 417.22151pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [30
-
-]
-[31 <./obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle
-_final.png>] [32 <./obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_f
-sm_engine_tick_flow_final.png>]
+ [30]
 <obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_structure
-_final_html.png, id=731, 1129.21875pt x 861.9703pt>
+_final_html.png, id=717, 1129.21875pt x 861.9703pt>
 File: obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_stru
 cture_final_html.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_struc
 ture_final_html.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_
-5_4_json_scene_structure_final_html.png  used on input line 154.
-(pdftex.def)             Requested size: 432.48476pt x 330.13002pt.
- [33] [34 <./obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_sce
-ne_structure_final_html.png>]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 178.
+5_4_json_scene_structure_final_html.png  used on input line 149.
+(pdftex.def)             Requested size: 418.821pt x 319.70003pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 191--191
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [31 <./obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_ti
+ck_flow_final.png>]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 173.
+
+Underfull \hbox (badness 10000) in paragraph at lines 186--186
 []|\T1/lmtt/m/n/10.95 roomX/<device_name>\T1/lmr/m/n/10.95 ,
  []
 
 
-Underfull \hbox (badness 2158) in paragraph at lines 196--197
+Underfull \hbox (badness 2158) in paragraph at lines 191--192
 []|\T1/lmr/m/n/10.95 Backend odo-siela prí-kaz na
  []
 
 
-Underfull \hbox (badness 2401) in paragraph at lines 204--205
+Underfull \hbox (badness 2401) in paragraph at lines 199--200
 []|\T1/lmr/m/n/10.95 Uzol ESP32 od-po-vedá bac-
  []
 
 <obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_runti
-me_final.png, id=744, 588.7596pt x 558.6471pt>
+me_final.png, id=726, 588.7596pt x 558.6471pt>
 File: obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_
 runtime_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_r
 untime_final.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram
-_5_5_mqtt_sequence_runtime_final.png  used on input line 229.
+_5_5_mqtt_sequence_runtime_final.png  used on input line 219.
 (pdftex.def)             Requested size: 432.48051pt x 410.36626pt.
-[35] [36 <./obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_seq
-uence_runtime_final.png>]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [32 <./obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_st
+ructure_final_html.png>] [33 <./obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/
+diagram_5_5_mqtt_sequence_runtime_final.png>]
 <obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboard_f
-unctional_final.png, id=761, 1505.625pt x 2428.07124pt>
+unctional_final.png, id=743, 1505.625pt x 2428.07124pt>
 File: obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashbo
 ard_functional_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboa
 rd_functional_final.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/dia
-gram_5_6_web_dashboard_functional_final.png  used on input line 288.
-(pdftex.def)             Requested size: 432.48051pt x 697.45375pt.
+gram_5_6_web_dashboard_functional_final.png  used on input line 277.
+(pdftex.def)             Requested size: 418.82375pt x 675.40941pt.
 
 
-LaTeX Warning: Float too large for page by 28.18752pt on input line 291.
+LaTeX Warning: Float too large for page by 6.14317pt on input line 280.
 
-<obr/SW/dashboard_screenshot.png, id=762, 1443.14156pt x 643.6547pt>
+<obr/SW/dashboard_screenshot.png, id=744, 1443.14156pt x 643.6547pt>
 File: obr/SW/dashboard_screenshot.png Graphic file (type png)
 <use obr/SW/dashboard_screenshot.png>
-Package pdftex.def Info: obr/SW/dashboard_screenshot.png  used on input line 29
-5.
+Package pdftex.def Info: obr/SW/dashboard_screenshot.png  used on input line 28
+4.
 (pdftex.def)             Requested size: 432.48051pt x 192.89165pt.
-[37] [38 <./obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_
+[34] [35 <./obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_
 dashboard_functional_final.png (PNG copy)>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [39 <./obr/SW/dashboard_screenshot.png>]) (chapters/Experimenty.tex [40]
+ [36 <./obr/SW/dashboard_screenshot.png>]) (chapters/Experimenty.tex [37]
 Kapitola 6.
 
-Underfull \hbox (badness 1931) in paragraph at lines 54--59
+Underfull \hbox (badness 1931) in paragraph at lines 55--60
 \T1/lmr/m/n/12 ru-£i-te©-nos´ do-siahla 100%. Naj-rých-lej-²ie od-po-ve-dali vý
 -stupy \T1/lmtt/m/n/12 room1/light/1
  []
@@ -1356,34 +1364,34 @@ Underfull \hbox (badness 1931) in paragraph at lines 54--59
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [41
+ [38
 
 {C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}
 ])
 (chapters/Zaver.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [42]
-[43]
+ [39]
+[40]
 Kapitola 7.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [44
+ [41
 
 ])
-[45] (diplomka.lof)
+[42] (diplomka.lof)
 \tf@lof=\write6
 \openout6 = `diplomka.lof'.
 
- [46
+ [43
 
 
 ] (diplomka.lot)
 \tf@lot=\write7
 \openout7 = `diplomka.lot'.
 
- [47
+ [44
 
 
 ] (chapters/SeznamZkratek.tex
@@ -1391,17 +1399,17 @@ Kapitola 8.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [48
+ [45
 
 
 ])
-[49] (chapters/Literatura.tex
+[46] (chapters/Literatura.tex
 Underfull \hbox (badness 1789) in paragraph at lines 22--28
 \T1/lmr/m/n/12 stupné z: [][]$\T1/lmtt/m/n/12 https : / / scholarsbank . uorego
 n . edu / server / api / core / bitstreams /
  []
 
-[50
+[47
 
 
 ]
@@ -1416,7 +1424,7 @@ Underfull \hbox (badness 1789) in paragraph at lines 160--165
 d / index . php / bt / article / download / 3223 /
  []
 
-[51]
+[48]
 Underfull \hbox (badness 3895) in paragraph at lines 187--190
 []\T1/lmr/m/n/12 Raspberry Pi 4 Mo-del B -- Da-tas-heet. \T1/lmr/m/it/12 Rasp-b
 erry Pi Ltd \T1/lmr/m/n/12 [on-line]. 2024
@@ -1518,7 +1526,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 255--261
 -[]to-[]Device _ Data _
  []
 
-[52]
+[49]
 Underfull \hbox (badness 10000) in paragraph at lines 267--274
 []\T1/lmr/m/n/12 CELERDATA. YAML, JSON and XML: A Prac-ti-cal Gu-ide
  []
@@ -1541,7 +1549,7 @@ Underfull \hbox (badness 3323) in paragraph at lines 275--279
  [on-
  []
 
-) [53] 
+) [50] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (diplomka.aux)
  ***********
@@ -1549,13 +1557,13 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `diplomka.out' has not changed.
-(rerunfilecheck)             Checksum: 10DB5AFF125DBA6A191C9706AA634455;13142.
+(rerunfilecheck)             Checksum: 229FB0DF8D1ECD9FAEC44BE5FD336FEE;12994.
  ) 
 Here is how much of TeX's memory you used:
- 20439 strings out of 467871
- 342166 string characters out of 5418377
- 874157 words of memory out of 5000000
- 48749 multiletter control sequences out of 15000+600000
+ 20434 strings out of 467871
+ 342121 string characters out of 5418377
+ 874521 words of memory out of 5000000
+ 48748 multiletter control sequences out of 15000+600000
  707983 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,17n,93p,438b,718s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1570,9 +1578,9 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (54 pages, 6919245 bytes).
+Output written on diplomka.pdf (51 pages, 7298466 bytes).
 PDF statistics:
- 1024 PDF objects out of 1200 (max. 8388607)
- 175 named destinations out of 1000 (max. 500000)
- 614 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1007 PDF objects out of 1200 (max. 8388607)
+ 171 named destinations out of 1000 (max. 500000)
+ 606 words of extra memory for PDF output out of 10000 (max. 10000000)
 

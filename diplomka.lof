@@ -18,14 +18,14 @@
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Inštalácia CHRONOS}}{26}{figure.caption.12}%
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Parný kotol s~integrovanou elektronikou}}{27}{figure.caption.13}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Softvérové vrstvy systému a~ich väzby}}{29}{figure.caption.14}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Životný cyklus backendovej služby}}{31}{figure.caption.15}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Poradie spracovania stavového automatu v~jednom cykle}}{32}{figure.caption.16}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Štruktúra konfiguračnej scény}}{34}{figure.caption.17}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Sekvenčný tok MQTT správ pri vykonaní akcie, potvrdení, časovom limite a~zastavení}}{36}{figure.caption.19}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Funkčné časti webového dashboardu a~tok udalostí}}{38}{figure.caption.20}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Hlavná stránka webového dashboardu}}{39}{figure.caption.21}%
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Spoločná infraštruktúra a~špecifická logika uzlov ESP32}}{40}{figure.caption.23}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Softvérové vrstvy systému a~ich väzby}}{28}{figure.caption.14}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Životný cyklus backendovej služby}}{29}{figure.caption.15}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Poradie spracovania stavového automatu v~jednom cykle}}{31}{figure.caption.16}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Štruktúra konfiguračnej scény}}{32}{figure.caption.17}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Sekvenčný tok MQTT správ pri vykonaní akcie, potvrdení, časovom limite a~zastavení}}{33}{figure.caption.19}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Funkčné časti webového dashboardu a~tok udalostí}}{35}{figure.caption.20}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Hlavná stránka webového dashboardu}}{36}{figure.caption.21}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Spoločná infraštruktúra a~špecifická logika uzlov ESP32}}{37}{figure.caption.23}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

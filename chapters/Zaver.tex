@@ -22,8 +22,7 @@ sa obnovil do plne funkčného stavu v~priemere za 38 sekúnd.
 Na hardvérovej úrovni sa rozhodnutie stavať na certifikovaných
 priemyselných moduloch namiesto vlastných dosiek osvedčilo.
 Počas testovania nevznikla žiadna porucha spôsobená hardvérovým
-zlyhaním a~výmena komponentu v~prípade poruchy nevyžaduje znalosti
-elektroniky -- len náhradu kus za kus.
+zlyhaním a~výmena komponentu.
 
 \section*{Obmedzenia}
 
@@ -38,7 +37,7 @@ uzlov by však stálo za to tento krok automatizovať.
 
 \section*{Výhľad do budúcna}
 
-Najväčší priestor na rozvoj vidím v~rozšírení stavového automatu
+Najväčší priestor na ďalší rozvoj predstavuje rozšírenie stavového automatu
 o~perzistentné dáta v~rámci scény. Aktuálna implementácia
 neuchováva stav medzi prechodmi; pridanie jednoduchého kľúč-hodnota
 slovníka by otvorilo celú triedu nových scenárov -- napríklad
@@ -60,10 +59,10 @@ príslušných topikov, nie zmenu kódu enginu.
 Tretím smerom je využitie hardvérových rozhraní, ktoré reléový
 uzol síce poskytuje, no v~tejto inštalácii neboli potrebné.
 Konkrétne ide o~natívnu podporu \textit{Power over Ethernet}
-(PoE) a~zbernicu RS485. V~budúcich nasadeniach, kde nie je
+(PoE) a~zbernicu RS-485. V~budúcich nasadeniach, kde nie je
 k~dispozícii spoľahlivá Wi-Fi sieť, by PoE umožnilo drôtové
 ethernetové napájanie a~komunikáciu v~jednom kábli --
 čím by sa priamo eliminovalo obmedzenie identifikované
-v~tejto práci. Zbernica RS485 by zas otvorila možnosť
+v~tejto práci. Zbernica RS-485 by zas otvorila možnosť
 integrácie priemyselných senzorov a~aktuátorov s~rozhraním
 kompatibilným s~protokolom Modbus.
