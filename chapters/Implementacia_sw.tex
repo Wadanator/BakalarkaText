@@ -289,10 +289,10 @@ Mediálna a~webová časť systému pozostáva z~troch samostatných podsystémo
 \section{Firmvér uzlov ESP32}
 \label{SWESP32}
 
-Periférna vykonávacia vrstva je implementovaná na uzloch ESP32,
-ktoré zdieľajú spoločnú komunikačnú infraštruktúru
-a~zároveň obsahujú uzlovo špecifické funkcionality
-(Tab.~\ref{tab:sw_esp_nodes}).
+Periférna vykonávacia vrstva bola rozdelená na tri firmvérové
+varianty pre uzly ESP32. Ich úlohy sa líšia podľa pripojeného
+hardvéru, zatiaľ čo sieťová a~servisná časť firmvéru zostáva
+vo všetkých prípadoch spoločná (Tab.~\ref{tab:sw_esp_nodes}).
 
 \begin{table}[htbp]
     \centering
@@ -311,52 +311,35 @@ a~zároveň obsahujú uzlovo špecifické funkcionality
     \end{tabular}
 \end{table}
 
-\subsection{Spoločná infraštruktúra uzlov}
-\label{SWESPCommon}
+Firmvér všetkých troch uzlov je implementovaný v~jazyku \textbf{C++}
+na báze platformy \textbf{Arduino}.
 
-Všetky uzly využívajú jednotné mechanizmy:
-\begin{itemize}
-    \item \textbf{Wi-Fi a~MQTT pripojenie} s~automatickým obnovovaním spojenia,
-    \item publikovanie stavu \texttt{online/offline} cez retained + LWT,
-    \item \textbf{spätná väzba} na príkazové topiky,
-    \item odber globálneho príkazu \texttt{roomX/STOP}.
-\end{itemize}
-
-\subsection{Špecifické funkcionality uzlov}
-\label{SWESPSpecific}
-
-\begin{itemize}
-    \item \textbf{Tlačidlový uzol.}
-        Uzol vykonáva filtráciu stlačenia tlačidla
-        (odstránenie zákmitov a~cooldown interval) a~po úspešnom vyhodnotení
-        publikuje správu \texttt{START} na scénický topik.
-
-    \item \textbf{Motorický uzol.}
-        Uzol riadi dva DC pohony pomocou PWM, vrátane
-        riadenia smeru a~bezpečnej zmeny smeru s~plynulým dobehom.
-        Sú podporované príkazy na zapnutie, vypnutie,
-        zmenu rýchlosti a~zmenu smeru.
-
-    \item \textbf{Reléový uzol.}
-        Uzol spína zariadenia podľa mapovania topikov na výstupy,
-        vrátane časovo obmedzených a~skupinových efektov.
-        Časovo citlivé sekvencie sa vykonávajú lokálne na uzle,
-        čím sa znižuje závislosť od momentálnej latencie siete.
-\end{itemize}
-
-Spoločné komunikačné jadro a~rozdielne vykonávacie vetvy
-jednotlivých uzlov vytvárajú jednotnú, ale rozšíriteľnú
-firmvérovú štruktúru (Obr.~\ref{fig:sw_esp_compare}).
+Spoločná časť firmvéru zabezpečuje pripojenie k~Wi-Fi a~MQTT,
+automatické obnovenie spojenia, retained stav dostupnosti
+s~nakonfigurovanou LWT správou pre prípad výpadku, watchdog
+a~bezdrôtovú aktualizáciu firmvéru. Na tejto vrstve sú postavené
+tri vykonávacie vetvy s~odlišnou úlohou. Tlačidlový uzol po filtrácii
+a~dočasnom blokovaní vstupu iba publikuje spúšťaciu správu scény
+a~príkazové topiky neodoberá; motorický uzol spracúva príkazy
+pre dva DC pohony vrátane plynulej zmeny smeru a~rýchlosti;
+reléový uzol spína výstupy podľa mapovania topik~--~kanál
+alebo spúšťa efektové skupiny s~voliteľným automatickým vypnutím.
+Bezpečnostné vypnutie pri strate MQTT spojenia, príkaze zastavenia
+a~timeoutu nečinnosti je implementované na motorickom a~reléovom
+uzle, ktoré zároveň odosielajú spätnú väzbu o~vykonaní príkazu.
+Rozdelenie spoločných a~špecifických častí firmvéru je zhrnuté
+na Obr.~\ref{fig:sw_esp_compare}.
 
 \begin{figure}[htbp]
     \centering
-    \fbox{\parbox{0.88\linewidth}{\centering\textit{MIESTO PRE OBRÁZOK: Porovnávacia schéma uzlov ESP32\\[2pt]
-    spoločné jadro + špecifické funkcie button / motor / relay}}}
+    \IfFileExists{obr/SW_DIAGRAM_SPECS/5_7_esp32_common_vs_specific/diagram_5_7_esp32_common_vs_specific_final.png}{%
+        \includegraphics[width=0.95\linewidth]{obr/SW_DIAGRAM_SPECS/5_7_esp32_common_vs_specific/diagram_5_7_esp32_common_vs_specific_final.png}%
+    }{%
+        \fbox{\parbox{0.88\linewidth}{\centering\textit{MIESTO PRE OBRÁZOK: Spoločná servisná vrstva a~špecifická logika uzlov ESP32}}}%
+    }
     \caption{Spoločná infraštruktúra a~špecifická logika uzlov ESP32}
     \label{fig:sw_esp_compare}
 \end{figure}
-% Poznamka pre obrazok: Nechat spolocnu cast (Wi-Fi, MQTT, LWT, status, feedback, STOP)
-% a samostatne vetvy pre button (START), motor (PWM+smer), relay (topic->vystup+casovane efekty).
 
 \section{Zhrnutie kapitoly}
 \label{SWZhrnutie}

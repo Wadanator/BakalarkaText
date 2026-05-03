@@ -44,19 +44,17 @@
 \contentsline {subsection}{\numberline {5.3.1}Sledovanie stavu aktuátorov}{34}{subsection.5.3.1}%
 \contentsline {section}{\numberline {5.4}Mediálna vrstva a~webové rozhranie}{34}{section.5.4}%
 \contentsline {section}{\numberline {5.5}Firmvér uzlov ESP32}{36}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Spoločná infraštruktúra uzlov}{36}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2}Špecifické funkcionality uzlov}{36}{subsection.5.5.2}%
-\contentsline {section}{\numberline {5.6}Zhrnutie kapitoly}{37}{section.5.6}%
-\contentsline {chapter}{\numberline {6}Experimentálne overenie}{38}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Popis fyzického testovania a~testovacieho prostredia}{38}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Testované scenáre a výsledky}{38}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Laboratórny test logiky}{38}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Výpadok napájania Raspberry Pi}{38}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Meranie latencie}{38}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Presnosť prepínania}{39}{subsection.6.2.4}%
-\contentsline {subsection}{\numberline {6.2.5}Zhodnotenie}{39}{subsection.6.2.5}%
-\contentsline {chapter}{\numberline {7}Záver}{41}{chapter.7}%
-\contentsline {chapter}{Zoznam obrázkov}{43}{chapter*.25}%
-\contentsline {chapter}{Zoznam tabuliek}{44}{chapter*.26}%
-\contentsline {chapter}{\numberline {8}Zoznam použitých skratiek a symbolov}{45}{chapter.8}%
-\contentsline {chapter}{Použitá literatúra}{47}{chapter*.27}%
+\contentsline {section}{\numberline {5.6}Zhrnutie kapitoly}{38}{section.5.6}%
+\contentsline {chapter}{\numberline {6}Experimentálne overenie}{39}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Popis fyzického testovania a~testovacieho prostredia}{39}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Testované scenáre a výsledky}{39}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Laboratórny test logiky}{39}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Výpadok napájania Raspberry Pi}{39}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Meranie latencie}{39}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Presnosť prepínania}{40}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.2.5}Zhodnotenie}{40}{subsection.6.2.5}%
+\contentsline {chapter}{\numberline {7}Záver}{42}{chapter.7}%
+\contentsline {chapter}{Zoznam obrázkov}{44}{chapter*.25}%
+\contentsline {chapter}{Zoznam tabuliek}{45}{chapter*.26}%
+\contentsline {chapter}{\numberline {8}Zoznam použitých skratiek a symbolov}{46}{chapter.8}%
+\contentsline {chapter}{Použitá literatúra}{48}{chapter*.27}%
