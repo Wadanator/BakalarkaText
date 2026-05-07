@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  7 MAY 2026 17:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  7 MAY 2026 17:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1393,12 +1393,6 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ])
 [47] (chapters/Literatura.tex
-Underfull \hbox (badness 2913) in paragraph at lines 6--13
-[]\T1/lmr/m/n/12 STILLWELL, B. Put-ting the ``Play'' Back into Disp-lay: In-te-
-rac-tive Exhi-
- []
-
-
 Underfull \hbox (badness 2478) in paragraph at lines 6--13
 \T1/lmr/m/n/12 bits in Small Mu-se-ums. On-line. Eugene: Uni-ver-sity of Ore-go
 n, 2017. Do-
@@ -1561,7 +1555,7 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (52 pages, 9096733 bytes).
+Output written on diplomka.pdf (52 pages, 9096738 bytes).
 PDF statistics:
  995 PDF objects out of 1000 (max. 8388607)
  169 named destinations out of 1000 (max. 500000)

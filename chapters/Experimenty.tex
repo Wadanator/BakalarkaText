@@ -42,7 +42,7 @@ po výpadku napájania a~na laboratórnom teste na stole.
 \begin{itemize}
     \item \textbf{Priebeh:} Raspberry Pi bolo počas behu systému odpojené od napájacieho kábla,
         po chvíli znovu pripojené a~následne sa čakalo, kým sa všetky uzly nespárujú späť do stavu ready.
-    \item \textbf{Výsledok:} Systém sa po reštarte obnovil do funkčného v priemere za 38 sekúnd.
+    \item \textbf{Výsledok:} Systém sa po reštarte obnovil do funkčného stavu v~priemere za 38 sekúnd.
         Po opätovnom zapnutí bolo možné scénu znovu spustiť bez zásahu do konfigurácie.
         Počas týchto testov sa neobjavil stav, že by sa systém po reštarte nespustil správne.
 \end{itemize}
@@ -92,7 +92,7 @@ Pre nižšiu latenciu by bolo vhodné použiť káblové sieťové pripojenie uz
     \item \textbf{Priebeh:} Na tej istej testovacej scéne sa sledoval interval medzi prepnutiami stavového automatu.
     \item \textbf{Výsledok:} Nameraný priemer bol 255{,}8\,ms pri cieli 250\,ms -- odchýlka 2,3\,\%,
         ktorá je pre reálnu prevádzku zanedbateľná. Kumulatívny drift oproti ideálnemu času dosiahol
-        za celú sekveniu 1\,317\,ms pri 232 prechodoch; vzniká spracovaním prechodov, kde sa malé oneskorenia
+        za celú sekvenciu 1\,317\,ms pri 232 prechodoch; vzniká spracovaním prechodov, kde sa malé oneskorenia
         sčítavajú. Dôležité je, že drift má lineárny a~predvídateľný charakter -- nie je náhodný ani
         rastúci. Keďže v~skutočných scénach sú stavy niekoľkonásobne dlhšie a~počet prechodov výrazne
         nižší, praktický vplyv na synchronizáciu efektov je minimálny.

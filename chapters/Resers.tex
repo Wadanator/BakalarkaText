@@ -23,13 +23,13 @@ Rastúca technologická komplexnosť však so sebou priniesla aj nové
 prevádzkové výzvy. Ako upozorňuje literatúra, pokročilé
 interaktívne inštalácie si vyžadujú neustálu údržbu a~aktualizáciu,
 čo naráža na finančné a~personálne limity najmä v~menších kultúrnych
-inštitúciách bez vyhradeného informačno-technologického oddelenia \cite{shehade2020}. Snaha
-o~minimalizáciu prevádzkových výpadkov a~zníženie závislosti od externých
-technikov tak prirodzene vytvorila tlak na zmenu návrhu riadiacich
-systémov. Do popredia sa dostáva požiadavka na modulárne architektúry,
-ktoré namiesto uzavretého jednoúčelového hardvéru umožňujú jednoduchšie
-škálovanie, jednoduchú výmenu, vzdialenú diagnostiku a~rekonfiguráciu bez nutnosti
-fyzického zásahu na mieste \cite{bachi2024}.
+inštitúciách bez vyhradeného informačno-technologického oddelenia \cite{shehade2020}.
+Digitálne riešenia v~múzeách preto neprinášajú iba nové možnosti,
+ale aj potrebu dlhodobej údržby, obnovovania zastaraných častí
+a~priebežnej správy celého riešenia \cite{bachi2024}. Pri návrhu
+riadiacej infraštruktúry je preto výhodné uvažovať o~modulárnej
+architektúre, v~ktorej sa jednotlivé časti dajú jednoduchšie rozširovať,
+vymieňať, kontrolovať na diaľku a~podľa potreby upravovať.
 
 % ------------------------------------------------------------------
 \section{Architektúry riadiacich systémov}
@@ -120,11 +120,11 @@ neprístupnými pre menšie kultúrne inštitúcie
 
 Špecializované systémy ako \textbf{Medialon} a~\textbf{Alcorn
 McBride} sú navrhnuté priamo pre potreby tematických parkov
-a~múzeí \cite{medialon_sumble, alcornmcbride}. Na rozdiel od
+a~múzeí \cite{medialon_7thsense, alcornmcbride, alcornmcbride_history}. Na rozdiel od
 priemyselných PLC ich architektúra nie je postavená na cyklickom
 vykonávaní kódu, ale na princípe časovej osi (\textit{timeline}),
 ktorá umožňuje operátorovi definovať a~synchronizovať
-udalosti v~čase \cite{alcornmcbride_history, huntington2017}.
+udalosti v~čase \cite{medialon_7thsense, huntington2017}.
 Tieto systémy natívne integrujú protokoly zábavného priemyslu
 (SMPTE Timecode, DMX512, OSC), ktoré sú optimalizované pre
 profesionálne produkčné prostredie \cite{huntington2017}. Pre
@@ -201,12 +201,13 @@ interaktívne prvky \cite{maier2017esp32}.
 
 Tradičný protokol \textbf{HTTP} sa pre interaktívne IoT systémy
 javí ako nevhodný: model request/response vyžaduje neustále
-dopytovanie servera, čo vedie k~vysokej latencii a~zbytočnej
-réžii pri prenose krátkych riadiacich príkazov
-\cite{yokotani2016mqtt}.
+dopytovanie servera a~pri každej správe prenáša aj dodatočné
+hlavičky, čo môže zhoršovať odozvu pri prenose krátkych
+riadiacich príkazov
+\cite{yokotani2016mqtt, mqtt_http_latency}.
 \textbf{WebSocket} síce umožňuje trvalé obojsmerné spojenie,
-jeho implementácia na jednoduchých mikrokontroléroch je však
-pamäťovo náročná \cite{mqtt_websocket_comparison}.
+v~porovnávanom lokálnom meraní však dosiahol vyššiu latenciu
+a~väčší rozptyl odozvy než MQTT \cite{mqtt_websocket_comparison}.
 \textbf{MQTT} (\textit{Message Queuing Telemetry Transport}),
 definovaný ako norma ISO/IEC~20922:2016, patrí medzi
 najpoužívanejšie protokoly pre distribuované IoT systémy
@@ -253,9 +254,11 @@ Testament} (LWT), ktorý umožňuje brokerovi automaticky informovať
 ostatné časti systému, ak dôjde k~neočakávanému odpojeniu
 zariadenia \cite{mqtt_lwt_review}. Tento mechanizmus je
 v~kombinácii so zostatkovými (\textit{retained}) správami
-kľúčový pre budovanie samoopravných systémov, ktoré dokážu
-po výpadku napájania okamžite obnoviť svoj stav
-\cite{mqtt_lwt_review, mqtt_m2m_survey}.
+užitočný najmä preto, že ostatné časti systému môžu rýchlo
+zistiť výpadok zariadenia a~pracovať s~posledným známym stavom.
+Pri distribuovanom riadení tak znižuje riziko, že systém po
+reštarte alebo dočasnom výpadku pracuje s~neaktuálnymi
+informáciami \cite{mqtt_lwt_review, mqtt_m2m_survey}.
 
 % ------------------------------------------------------------------
 \section{Hardvérové platformy pre IoT}
@@ -286,25 +289,25 @@ Dostupnosť rozhrania GPIO navyše umožňuje pripojiť rôzne vstupy a~výstupy
 \label{mikrokontrolery}
 
 Historicky populárna platforma \textbf{Arduino Uno}
-(8-bitový čip ATmega328P) sa v~kontexte moderného IoT
-stáva limitujúcou \cite{azad2025iot, maier2017esp32}.
-Jej výrazne obmedzené pamäťové a~výpočtové prostriedky
-sťažujú súčasnú obsluhu sieťovej komunikácie
-a~spracovania štruktúrovaných správ, čo môže viesť
-k~nestabilite systému pri vyššej sieťovej záťaži
-\cite{azad2025iot, maier2017esp32}. Nástup čipu \textbf{ESP32} od spoločnosti
+(8-bitový čip ATmega328P) sa v~kontexte moderného IoT môže
+stať obmedzujúcou najmä vtedy, keď má uzol súčasne obsluhovať
+sieťovú komunikáciu a~spracúvať štruktúrované správy
+\cite{maier2017esp32}. Pri zariadeniach na okraji IoT sietí
+sa všeobecne uvádza, že malá pamäť a~výpočtový výkon sťažujú
+spracovanie dát a~spoluprácu medzi rôznymi časťami systému
+\cite{azad2025iot}. Nástup čipu \textbf{ESP32} od spoločnosti
 Espressif priniesol výraznú zmenu v~oblasti IoT periférií.
 Integrácia Wi-Fi konektivity priamo v~čipe eliminuje potrebu
 externých sieťových modulov, čo zjednodušuje hardvérový
 návrh uzlov \cite{maier2017esp32}. Dvojjadrová architektúra
-je pre interaktívne expozície výhodou: jedno jadro
-môže byť vyhradené pre sieťovú komunikáciu (správa
-MQTT spojenia, zásobník Wi-Fi), zatiaľ čo druhé jadro v~reálnom
-čase obsluhuje kritické hardvérové úlohy, ako je PWM riadenie
-motorov alebo čítanie senzorov. Táto separácia eliminuje
-nežiaduci jitter pri spracovaní časovo kritických úloh,
-ktorý by inak vznikal pri súbežnej obsluhe sieťovej réžie
-\cite{maier2017esp32}. Na rozšírenie výstupnej kapacity
+je pre interaktívne expozície výhodou, pretože dáva väčší
+priestor na oddelenie sieťovej komunikácie od časovo citlivých
+hardvérových úloh. V~praxi tak môže jedna časť výpočtu
+obsluhovať komunikáciu cez Wi-Fi a~MQTT, zatiaľ čo druhá sa môže
+venovať napríklad PWM riadeniu motorov alebo čítaniu senzorov.
+Takéto rozdelenie úloh pomáha znížiť riziko oneskorení pri
+súbežnej prevádzke siete a~hardvéru \cite{maier2017esp32}.
+Na rozšírenie výstupnej kapacity
 sa využívajú expandéry I2C, ktoré cez
 dvojvodičovú zbernicu sprístupňujú dodatočné výstupy bez
 obsadenia všetkých pinov GPIO.
@@ -322,24 +325,27 @@ zariadenia pracujúce na sieťovom napätí 230\,V~AC.
 \label{dc-motory}
 
 Na obojsmerné riadenie DC motorov sa využívajú H-mostíky.
-Staršie obvody na báze Darlingtonových tranzistorov (napr.
-L293D alebo L298N) sú v~súčasnosti pre moderné aplikácie
-nevhodné z~dôvodu vysokého úbytku napätia (typicky nad 1,5~V),
-čo spôsobuje tepelné straty a~vyžaduje prídavné chladenie
-\cite{darlington_vs_mosfet}. Súčasným štandardom sú preto
-MOSFET H-mostíky, ktoré vďaka minimálnemu odporu v~zopnutom
-stave takmer úplne eliminujú nežiaduce zahrievanie. Pre
-nízkoenergetické aplikácie sa využívajú kompaktné čipy
-s~vstavanými ochranami (napr. DRV88xx), zatiaľ čo pre
-zvládanie rozbehových špičiek v~rádoch desiatok ampérov
-slúžia vysokoprúdové moduly, napríklad typu BTS7960 \cite{mosfet_h_bridge}.
+Staršie obvody na báze Darlingtonových tranzistorov, medzi
+ktoré patria aj riešenia používané v~obvodoch typu L293D alebo
+L298N, majú v~porovnaní s~MOSFET riešeniami spravidla väčší
+úbytok napätia. Časť energie sa preto mení na teplo, čo znižuje
+účinnosť a~pri väčšom prúde zvyšuje tepelné namáhanie obvodu
+\cite{darlington_vs_mosfet}. V~moderných zapojeniach sa preto
+často uprednostňujú MOSFET H-mostíky, ktoré vďaka nízkemu
+odporu v~zopnutom stave znižujú straty a~nežiaduce zahrievanie.
+Pre jednoduchšie a~menej výkonovo náročné aplikácie sa často
+využívajú integrované motorové budiče, ktoré zjednodušujú
+návrh zapojenia. Pri vyššom požadovanom výkone sa naopak
+uprednostňuje riešenie s~MOSFET H-mostíkom, pretože jeho
+napäťové a~prúdové možnosti závisia od zvolených výkonových
+tranzistorov \cite{mosfet_h_bridge}.
 
 Na jednosmerné spínanie a~PWM reguláciu záťaží, ktoré
 presahujú prúdový limit pinov GPIO (jednotky miliampérov),
 sa využíva samostatný MOSFET modul. Pri takomto zapojení
-riadi pin GPIO výhradne hradlo (\textit{gate}) tranzistora.
-Celý výkonový prúd tak tečie oddelene z~externého zdroja,
-čím je mikrokontrolér bezpečne chránený pred preťažením
+riadi pin GPIO iba hradlo (\textit{gate}) tranzistora, nie
+samotný výkonový prúd záťaže. Ten tečie oddelene z~externého
+zdroja, čím sa znižuje riziko preťaženia mikrokontroléra
 \cite{darlington_vs_mosfet}.
 
 
@@ -357,34 +363,40 @@ relé} (SSR -- \textit{Solid State Relay})
 a~\textbf{elektromechanické relé} \cite{ssr_guide}.
 
 SSR nevyužívajú pohyblivé kontakty, čím eliminujú mechanické
-opotrebovanie a~akustický hluk. Ich nevýhodou je však
-obmedzená univerzálnosť -- rôzne typy SSR (napr.
-\textit{zero-cross} alebo \textit{random turn-on}) sú
-optimalizované pre špecifické typy záťaží a~nie všetky
-typy podporujú súčasne AC aj DC obvody
-\cite{zero_cross_ssr, ssr_zero_cross_transformers}.
-Elektromechanické relé naopak poskytujú galvanickú
-izoláciu a~sú schopné spínať záťaže rôzneho charakteru
-bez obmedzenia, za cenu pohyblivých kontaktov
-s~obmedzenou životnosťou pri vyššej frekvencii spínania.
+opotrebovanie, kontaktové iskrenie a~akustický hluk. Zároveň
+však treba rozlišovať, či je relé určené na AC alebo DC záťaž,
+pretože nie každý typ SSR je použiteľný pre oba druhy napájania
+\cite{ssr_guide}. Pri AC záťažiach je dôležitý aj spôsob
+spínania. Relé typu \textit{zero-cross} sú vhodné najmä pre
+odporové záťaže, zatiaľ čo pri indukčných alebo kapacitných
+záťažiach môže byť vhodnejšie okamžité spínanie
+(\textit{random turn-on}) \cite{zero_cross_ssr}. Pri
+transformátoroch a~iných výrazne indukčných záťažiach môže
+nevhodné zero-cross spínanie vyvolať vysoké nábehové prúdy,
+ktoré skracujú životnosť SSR a~zvyšujú elektrické namáhanie
+obvodu \cite{ssr_zero_cross_transformers}. Elektromechanické
+relé zostávajú jednoduchou a~univerzálnou alternatívou, majú
+však pohyblivé kontakty, ktoré sa pri častom spínaní postupne
+opotrebúvajú \cite{ssr_guide}.
 
 % ------------------------------------------------------------------
 \section{Prístupy k~riadiacej logike expozície}
 \label{riadiaca-logika}
 
 Softvérová vrstva riadiaceho systému určuje, akým spôsobom
-sa definuje a~vykonáva scenár expozície. V~praxi sa
-využívajú predovšetkým dva základné prístupy, ktoré sa líšia
-schopnosťou reagovať na externé udalosti. Najjednoduchším
-riešením je \textbf{lineárny (sekvenčný) prístup}: scenár
-je pevná séria akcií vykonávaných v~pevnom poradí a~čase,
-bez možnosti vetvenia. Takéto systémy sú jednoduché na
-implementáciu a~postačujú pre pasívne inštalácie, kde sa
-obsah prehráva v~slučke bez závislosti od vstupu návštevníka
-\cite{computational_frameworks_art}. Ich zásadným obmedzením
-je neschopnosť reagovať na externé podnety počas čakania
-na ďalší krok scenára, čo pri komplexnejšom scenári vedie
-k~blokovaniu celého systému \cite{computational_frameworks_art}.
+sa definuje a~vykonáva scenár expozície. Pri interaktívnych
+multimediálnych inštaláciách sa ako časté problémy uvádzajú
+nízka pružnosť architektúry, oneskorené spracovanie dát
+a~náročná synchronizácia viacerých vstupov a~výstupov
+\cite{computational_frameworks_art}. Najjednoduchším riešením
+je \textbf{lineárny (sekvenčný) prístup}: scenár je pevná séria
+akcií vykonávaných v~pevnom poradí a~čase, bez možnosti
+vetvenia. Takýto prístup postačuje pre pasívne inštalácie,
+kde sa obsah prehráva v~slučke bez závislosti od vstupu
+návštevníka. Pri interaktívnej expozícii však vzniká potreba
+reagovať na viacero udalostí súčasne, napríklad na vstup
+návštevníka, časovač alebo dokončenie multimediálneho obsahu
+\cite{computational_frameworks_art, distributed_control_modeling}.
 
 Pre interaktívne expozície, kde scenár musí reagovať na
 vstupy návštevníka (napr. stlačenie tlačidla alebo dohratie
@@ -398,7 +410,7 @@ alebo dokončením prehrávania média
 \cite{distributed_control_modeling}. FSM umožňuje
 neblokujúce čakanie na viacero rôznych podmienok súčasne,
 čo je nevyhnutné pre dynamické vetvenie scenára
-\cite{computational_frameworks_art}.
+\cite{distributed_control_modeling}.
 
 % ------------------------------------------------------------------
 \section{Dátové formáty pre konfiguráciu a~prenos}
@@ -411,9 +423,9 @@ YAML a~JSON \cite{iot_data_formats_review}.
 
 \textbf{XML} (\textit{eXtensible Markup Language}) je dlhoročným
 priemyselným štandardom pre výmenu dát. V~prostredí embedded
-systémov je však považované za zastarané z~dôvodu nadmernej
-opisnosti a~zložitosti parserov, ktoré neúmerne zaťažujú
-pamäť mikrokontroléra \cite{iot_data_formats_review}.
+systémov je však menej vhodné z~dôvodu nadmernej opisnosti
+a~zložitejšieho spracovania, ktoré môže zvyšovať pamäťové
+a~výpočtové nároky mikrokontroléra \cite{iot_data_formats_review}.
 
 \textbf{YAML} (\textit{YAML Ain't Markup Language}) si získal
 obľubu v~oblasti DevOps vďaka podpore komentárov
@@ -428,7 +440,7 @@ mikrokontroléroch \cite{json_xml}.
 čitateľnosťou a~strojovou spracovateľnosťou
 \cite{iot_data_formats_review}. Pre mikrokontroléry
 s~obmedzenou RAM existujú vysoko optimalizované parsery vo forme knižníc,
-ktoré minimalizujú fragmentáciu pamäte pri spracovaní
+ktoré umožňujú znižovať spotrebu pamäte pri spracovaní
 JSON správ \cite{arduinojson_reduce_memory}. Okrem prenosu
 dát v~IoT komunikácii nachádza JSON uplatnenie aj ako
 \textbf{konfiguračný jazyk pre definíciu riadiacej logiky}.
@@ -452,9 +464,11 @@ komerčné show-control systémy (závislosť od dodávateľa,
 obmedzená rozšíriteľnosť, vyššia cena) \cite{iec61131, john2010plc, huntington2017}.
 Najvhodnejším prístupom je distribuovaný IoT systém
 postavený na otvorených platformách, ktorý poskytuje
-flexibilitu pri implementácii nelineárnych naratívov pri
-zachovaní nízkych nákladov \cite{computational_frameworks_art,
-interactive_small_museums}.
+flexibilitu pri implementácii interaktívnych multimediálnych
+scenárov \cite{computational_frameworks_art}. Pri vhodne
+zvolených otvorených platformách môže zároveň znížiť náklady,
+čo je dôležité najmä pre menšie kultúrne inštitúcie
+\cite{interactive_small_museums}.
 
 Z~hľadiska jednotlivých technických vrstiev rešerš
 identifikovala nasledujúce závery. Protokol MQTT sa ukázal

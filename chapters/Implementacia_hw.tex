@@ -62,8 +62,9 @@ Hardvérová implementácia uzla pozostáva z~nasledujúcich komponentov (Obr.~\
         signál s~frekvenciou 20\,kHz, čo umožňuje plynulé ovládanie rýchlosti motorov.
         Frekvencia je zvolená nad počuteľným pásmom.
     \item \textbf{2x Výkonový budič BTS7960B:} Polovodičový H-mostík slúži na
-        riadenie výkonu motorov (kapitola~\ref{dc-motory}). Tento obvod je dimenzovaný na vysoké prúdové špičky
-        bezpečne odoláva záťaži pri rozbehoch (do 43\,A) \cite{bts7960b_datasheet}.
+        riadenie výkonu motorov (kapitola~\ref{dc-motory}). Tento obvod je vhodný
+        pre motorové záťaže s~krátkodobými rozbehovými prúdmi, pričom datasheet
+        uvádza typickú prúdovú limitáciu 43\,A \cite{bts7960b_datasheet}.
         H-mostík teda umožňuje ovládať širokú škálu jednosmerných motorov.
 \end{itemize}
 
