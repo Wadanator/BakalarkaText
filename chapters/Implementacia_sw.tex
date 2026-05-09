@@ -16,7 +16,7 @@ je v~tejto časti rozpracované do konkrétnych backendových
 a~firmvérových komponentov pre beh scény.
 
 Softvérová architektúra je navrhnutá ako trojica previazaných vrstiev,
-pričom kľúčovým princípom je \textbf{separácia zodpovedností}:
+pričom hlavným princípom je \textbf{separácia zodpovedností}:
 backend neobsahuje hardvérovo špecifickú logiku GPIO výstupov
 a~firmvér uzlov neobsahuje scenárové vetvenie expozície.
 Vďaka tomu je možné upravovať scenáre, webové rozhranie
@@ -292,43 +292,41 @@ Mediálna a~webová časť systému pozostáva z~troch samostatných podsystémo
 Periférna vykonávacia vrstva bola rozdelená na tri firmvérové
 varianty pre uzly ESP32. Ich úlohy sa líšia podľa pripojeného
 hardvéru, zatiaľ čo sieťová a~servisná časť firmvéru zostáva
-vo všetkých prípadoch spoločná (Tab.~\ref{tab:sw_esp_nodes}).
+vo všetkých prípadoch spoločná.
 
-\begin{table}[htbp]
-    \centering
-    \caption{Prehľad uzlov ESP32 a~ich úloh}
-    \label{tab:sw_esp_nodes}
-    \begin{tabular}{|l|p{0.28\linewidth}|p{0.43\linewidth}|}
-        \hline
-        \textbf{Uzol} & \textbf{Hlavná úloha} & \textbf{Typický výstup} \\
-        \hline
-        Tlačidlový & Detekcia vstupu od používateľa & Odoslanie spúšťacej správy MQTT \\
-        \hline
-        Motorický & Ovládanie pohybu exponátu & PWM, smer, rýchlosť \\
-        \hline
-        Reléový & Spínanie svetiel a~efektov & relé, časované akcie \\
-        \hline
-    \end{tabular}
-\end{table}
+Firmvér všetkých troch uzlov je napísaný v~jazyku \textbf{C++}
+a~bol vytvorený v~prostredí Arduino IDE s~využitím Arduino frameworku
+pre mikrokontroléry ESP32.
 
-Firmvér všetkých troch uzlov je implementovaný v~jazyku \textbf{C++}
-na báze platformy \textbf{Arduino}.
+Spoločná časť firmvéru tvorí servisnú vrstvu, ktorá zabezpečuje
+pripojenie k~Wi-Fi a~MQTT, automatické obnovenie spojenia,
+periodické stavové hlásenie dostupnosti, LWT správu pre prípad
+výpadku, watchdog a~bezdrôtovú aktualizáciu firmvéru. Táto vrstva
+zjednocuje správanie uzlov a~špecifická logika sa potom obmedzuje
+na lokálnu vstupnú alebo výstupnú úlohu daného zariadenia
+(Obr.~\ref{fig:sw_esp_compare}).
 
-Spoločná časť firmvéru zabezpečuje pripojenie k~Wi-Fi a~MQTT,
-automatické obnovenie spojenia, retained stav dostupnosti
-s~nakonfigurovanou LWT správou pre prípad výpadku, watchdog
-a~bezdrôtovú aktualizáciu firmvéru. Na tejto vrstve sú postavené
-tri vykonávacie vetvy s~odlišnou úlohou. Tlačidlový uzol po filtrácii
-a~dočasnom blokovaní vstupu iba publikuje spúšťaciu správu scény
-a~príkazové topiky neodoberá; motorický uzol spracúva príkazy
-pre dva DC pohony vrátane plynulej zmeny smeru a~rýchlosti;
-reléový uzol spína výstupy podľa mapovania topik~--~kanál
-alebo spúšťa efektové skupiny s~voliteľným automatickým vypnutím.
+\textbf{Tlačidlový uzol} spracúva fyzické stlačenie tlačidla. Vstup
+je filtrovaný debouncingom a~dočasným blokovaním opakovaného stlačenia,
+aby sa pri jednom fyzickom podnete neposielala rovnaká spúšťacia
+správa viackrát za sebou v~krátkom čase. Po potvrdenom stlačení
+uzol publikuje spúšťaciu správu scény a~príkazové topiky neodoberá.
+Zároveň je pri tlačidle použitý PWM výstup pre LED prstenec, ktorý
+slúži na lokálnu stavovú signalizáciu a~potvrdenie stlačenia.
+
+\textbf{Motorický uzol} spracúva príkazy pre dva DC pohony. Firmvér
+riadi smer a~rýchlosť pohybu pomocou PWM a~pri zmene smeru zabezpečuje
+plynulé zastavenie a~rozbeh motora, aby nevznikali nárazové zmeny
+v~mechanike.
+
+\textbf{Reléový uzol} spína výstupy podľa mapovania topik~--~kanál
+a~podporuje aj efektové skupiny s~voliteľným automatickým vypnutím.
+Uzol tak dokáže lokálne vykonať jednoduché časované akcie bez toho,
+aby musel každý krok samostatne riadiť backend.
+
 Bezpečnostné vypnutie pri strate MQTT spojenia, príkaze zastavenia
 a~timeoutu nečinnosti je implementované na motorickom a~reléovom
 uzle, ktoré zároveň odosielajú spätnú väzbu o~vykonaní príkazu.
-Rozdelenie spoločných a~špecifických častí firmvéru je zhrnuté
-na Obr.~\ref{fig:sw_esp_compare}.
 
 \begin{figure}[htbp]
     \centering

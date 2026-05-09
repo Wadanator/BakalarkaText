@@ -25,7 +25,7 @@
 \contentsline {figure}{\numberline {5.5}{\ignorespaces Sekvenčný tok MQTT správ pri vykonaní akcie, potvrdení, časovom limite a~zastavení}}{33}{figure.caption.19}%
 \contentsline {figure}{\numberline {5.6}{\ignorespaces Funkčné časti webového dashboardu a~tok udalostí}}{35}{figure.caption.20}%
 \contentsline {figure}{\numberline {5.7}{\ignorespaces Hlavná stránka webového dashboardu}}{36}{figure.caption.21}%
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Spoločná infraštruktúra a~špecifická logika uzlov ESP32}}{37}{figure.caption.23}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Spoločná infraštruktúra a~špecifická logika uzlov ESP32}}{37}{figure.caption.22}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

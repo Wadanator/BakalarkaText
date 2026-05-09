@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  7 MAY 2026 17:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.7)  9 MAY 2026 02:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1119,7 +1119,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 pdfTeX warning: pdflatex.exe (file ./obr/ARCH/system_topology.pdf): PDF inclusi
 on: found PDF version <1.7>, but at most version <1.5> allowed
-<obr/ARCH/system_topology.pdf, id=534, 442.53331pt x 233.9139pt>
+<obr/ARCH/system_topology.pdf, id=537, 442.53331pt x 233.9139pt>
 File: obr/ARCH/system_topology.pdf Graphic file (type pdf)
 <use obr/ARCH/system_topology.pdf>
 Package pdftex.def Info: obr/ARCH/system_topology.pdf  used on input line 71.
@@ -1128,7 +1128,7 @@ Package pdftex.def Info: obr/ARCH/system_topology.pdf  used on input line 71.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [18 <./obr/ARCH/system_topology.pdf>]
-<obr/ARCH/FSM_Architektura.png, id=561, 1251.92719pt x 408.77719pt>
+<obr/ARCH/FSM_Architektura.png, id=564, 1251.92719pt x 408.77719pt>
 File: obr/ARCH/FSM_Architektura.png Graphic file (type png)
 <use obr/ARCH/FSM_Architektura.png>
 Package pdftex.def Info: obr/ARCH/FSM_Architektura.png  used on input line 151.
@@ -1147,7 +1147,7 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 
 pdfTeX warning: pdflatex.exe (file ./obr/ARCH/Mqtt_Flow.pdf): PDF inclusion: fo
 und PDF version <1.7>, but at most version <1.5> allowed
-<obr/ARCH/Mqtt_Flow.pdf, id=571, 746.79pt x 566.115pt>
+<obr/ARCH/Mqtt_Flow.pdf, id=574, 746.79pt x 566.115pt>
 File: obr/ARCH/Mqtt_Flow.pdf Graphic file (type pdf)
 <use obr/ARCH/Mqtt_Flow.pdf>
 Package pdftex.def Info: obr/ARCH/Mqtt_Flow.pdf  used on input line 193.
@@ -1164,12 +1164,12 @@ Underfull \hbox (badness 1028) in paragraph at lines 11--18
 
 pdfTeX warning: pdflatex.exe (file ./obr/HW/RPI_HW.pdf): PDF inclusion: found P
 DF version <1.7>, but at most version <1.5> allowed
-<obr/HW/RPI_HW.pdf, id=600, 399.41219pt x 117.3183pt>
+<obr/HW/RPI_HW.pdf, id=603, 399.41219pt x 117.3183pt>
 File: obr/HW/RPI_HW.pdf Graphic file (type pdf)
 <use obr/HW/RPI_HW.pdf>
 Package pdftex.def Info: obr/HW/RPI_HW.pdf  used on input line 21.
 (pdftex.def)             Requested size: 432.48051pt x 127.03125pt.
-<obr/HW/main_box_photo.jpeg, id=603, 1541.76pt x 867.24pt>
+<obr/HW/main_box_photo.jpeg, id=606, 1541.76pt x 867.24pt>
 File: obr/HW/main_box_photo.jpeg Graphic file (type jpg)
 <use obr/HW/main_box_photo.jpeg>
 Package pdftex.def Info: obr/HW/main_box_photo.jpeg  used on input line 44.
@@ -1180,44 +1180,44 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [21
 
  <./obr/HW/RPI_HW.pdf>]
-<obr/HW/Motor_Schema.png, id=629, 1084.80281pt x 575.90157pt>
+<obr/HW/Motor_Schema.png, id=632, 1084.80281pt x 575.90157pt>
 File: obr/HW/Motor_Schema.png Graphic file (type png)
 <use obr/HW/Motor_Schema.png>
-Package pdftex.def Info: obr/HW/Motor_Schema.png  used on input line 72.
+Package pdftex.def Info: obr/HW/Motor_Schema.png  used on input line 73.
 (pdftex.def)             Requested size: 409.71692pt x 217.50916pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [22 <./obr/HW/main_box_photo.jpeg>]
-<obr/HW/relay_schema.png, id=639, 810.02625pt x 583.42969pt>
+<obr/HW/relay_schema.png, id=642, 810.02625pt x 583.42969pt>
 File: obr/HW/relay_schema.png Graphic file (type png)
 <use obr/HW/relay_schema.png>
-Package pdftex.def Info: obr/HW/relay_schema.png  used on input line 102.
+Package pdftex.def Info: obr/HW/relay_schema.png  used on input line 103.
 (pdftex.def)             Requested size: 409.71692pt x 295.10594pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [23 <./obr/HW/Motor_Schema.png>]
-<obr/HW/button_photo.jpg, id=649, 3982.88pt x 2240.37pt>
+<obr/HW/button_photo.jpg, id=652, 3982.88pt x 2240.37pt>
 File: obr/HW/button_photo.jpg Graphic file (type jpg)
 <use obr/HW/button_photo.jpg>
-Package pdftex.def Info: obr/HW/button_photo.jpg  used on input line 134.
+Package pdftex.def Info: obr/HW/button_photo.jpg  used on input line 135.
 (pdftex.def)             Requested size: 218.51521pt x 122.89597pt.
-<obr/HW/Button_Schema.png, id=650, 968.11688pt x 665.48625pt>
+<obr/HW/Button_Schema.png, id=653, 968.11688pt x 665.48625pt>
 File: obr/HW/Button_Schema.png Graphic file (type png)
 <use obr/HW/Button_Schema.png>
-Package pdftex.def Info: obr/HW/Button_Schema.png  used on input line 140.
+Package pdftex.def Info: obr/HW/Button_Schema.png  used on input line 141.
 (pdftex.def)             Requested size: 218.51521pt x 150.2052pt.
  [24 <./obr/HW/relay_schema.png>]
-<obr/HW/chronos_celok.jpeg, id=660, 1541.76pt x 2055.68pt>
+<obr/HW/chronos_celok.jpeg, id=663, 1541.76pt x 2055.68pt>
 File: obr/HW/chronos_celok.jpeg Graphic file (type jpg)
 <use obr/HW/chronos_celok.jpeg>
-Package pdftex.def Info: obr/HW/chronos_celok.jpeg  used on input line 172.
+Package pdftex.def Info: obr/HW/chronos_celok.jpeg  used on input line 173.
 (pdftex.def)             Requested size: 409.71692pt x 546.2896pt.
-<obr/HW/kotol_exponat.jpeg, id=661, 1541.76pt x 2055.68pt>
+<obr/HW/kotol_exponat.jpeg, id=664, 1541.76pt x 2055.68pt>
 File: obr/HW/kotol_exponat.jpeg Graphic file (type jpg)
 <use obr/HW/kotol_exponat.jpeg>
-Package pdftex.def Info: obr/HW/kotol_exponat.jpeg  used on input line 178.
+Package pdftex.def Info: obr/HW/kotol_exponat.jpeg  used on input line 179.
 (pdftex.def)             Requested size: 364.19667pt x 485.59424pt.
 )
 (chapters/Implementacia_sw.tex [25 <./obr/HW/button_photo.jpg> <./obr/HW/Button
@@ -1225,7 +1225,7 @@ _Schema.png>] [26 <./obr/HW/chronos_celok.jpeg>] [27 <./obr/HW/kotol_exponat.jp
 eg>]
 Kapitola 5.
 <obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png, id=6
-81, 1236.0579pt x 761.9667pt>
+84, 1236.0579pt x 761.9667pt>
 File: obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png 
 Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runtime_loop_final.png>
@@ -1233,7 +1233,7 @@ Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_1_runtime_loop/diagram_5_1_runt
 ime_loop_final.png  used on input line 29.
 (pdftex.def)             Requested size: 455.24072pt x 280.6327pt.
 <obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_final
-.png, id=683, 799.5471pt x 844.5954pt>
+.png, id=686, 799.5471pt x 844.5954pt>
 File: obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_
 final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycle_f
@@ -1252,7 +1252,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [29 <./obr/SW_DIAGRAM_SPECS/5_2_backend_lifecycle/diagram_5_2_backend_lifecycl
 e_final.png>]
 <obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick_flow
-_final.png, id=697, 634.5306pt x 612.1269pt>
+_final.png, id=700, 634.5306pt x 612.1269pt>
 File: obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick
 _flow_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_3_fsm_engine_tick_flow/diagram_5_3_fsm_engine_tick_
@@ -1265,7 +1265,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [30]
 <obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_structure
-_final_html.png, id=707, 1129.21875pt x 861.9703pt>
+_final_html.png, id=710, 1129.21875pt x 861.9703pt>
 File: obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_stru
 cture_final_html.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_4_json_scene_structure/diagram_5_4_json_scene_struc
@@ -1296,7 +1296,7 @@ Underfull \hbox (badness 2401) in paragraph at lines 199--200
  []
 
 <obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_runti
-me_final.png, id=716, 588.7596pt x 558.6471pt>
+me_final.png, id=719, 588.7596pt x 558.6471pt>
 File: obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_
 runtime_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/diagram_5_5_mqtt_sequence_r
@@ -1311,19 +1311,19 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 ructure_final_html.png>] [33 <./obr/SW_DIAGRAM_SPECS/5_5_mqtt_sequence_runtime/
 diagram_5_5_mqtt_sequence_runtime_final.png>]
 <obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboard_f
-unctional_final.png, id=733, 1505.625pt x 2428.07124pt>
+unctional_final.png, id=736, 1505.625pt x 2509.375pt>
 File: obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashbo
 ard_functional_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_dashboa
 rd_functional_final.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/dia
 gram_5_6_web_dashboard_functional_final.png  used on input line 277.
-(pdftex.def)             Requested size: 418.82375pt x 675.40941pt.
+(pdftex.def)             Requested size: 418.82375pt x 698.02544pt.
 
 
-LaTeX Warning: Float too large for page by 6.14317pt on input line 280.
+LaTeX Warning: Float too large for page by 28.7592pt on input line 280.
 
-<obr/SW/dashboard_screenshot.png, id=734, 1443.14156pt x 643.6547pt>
+<obr/SW/dashboard_screenshot.png, id=737, 1443.14156pt x 643.6547pt>
 File: obr/SW/dashboard_screenshot.png Graphic file (type png)
 <use obr/SW/dashboard_screenshot.png>
 Package pdftex.def Info: obr/SW/dashboard_screenshot.png  used on input line 28
@@ -1332,19 +1332,25 @@ Package pdftex.def Info: obr/SW/dashboard_screenshot.png  used on input line 28
 [34] [35 <./obr/SW_DIAGRAM_SPECS/5_6_dashboard_functional_view/diagram_5_6_web_
 dashboard_functional_final.png (PNG copy)>]
 <obr/SW_DIAGRAM_SPECS/5_7_esp32_common_vs_specific/diagram_5_7_esp32_common_vs_
-specific_final.png, id=747, 611.4042pt x 513.3579pt>
+specific_final.png, id=749, 611.4042pt x 513.3579pt>
 File: obr/SW_DIAGRAM_SPECS/5_7_esp32_common_vs_specific/diagram_5_7_esp32_commo
 n_vs_specific_final.png Graphic file (type png)
 <use obr/SW_DIAGRAM_SPECS/5_7_esp32_common_vs_specific/diagram_5_7_esp32_common
 _vs_specific_final.png>
 Package pdftex.def Info: obr/SW_DIAGRAM_SPECS/5_7_esp32_common_vs_specific/diag
-ram_5_7_esp32_common_vs_specific_final.png  used on input line 339.
+ram_5_7_esp32_common_vs_specific_final.png  used on input line 333.
 (pdftex.def)             Requested size: 432.48051pt x 363.13934pt.
  [36 <./obr/SW/dashboard_screenshot.png>] [37 <./obr/SW_DIAGRAM_SPECS/5_7_esp32
 _common_vs_specific/diagram_5_7_esp32_common_vs_specific_final.png>]) (chapters
 /Experimenty.tex [38]
 Kapitola 6.
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [39
+
+{C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}
+]
 Underfull \hbox (badness 1931) in paragraph at lines 55--60
 \T1/lmr/m/n/12 ru-£i-te©-nos´ do-siahla 100%. Naj-rých-lej-²ie od-po-ve-dali vý
 -stupy \T1/lmtt/m/n/12 room1/light/1
@@ -1353,15 +1359,8 @@ Underfull \hbox (badness 1931) in paragraph at lines 55--60
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [39
-
-{C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}
-])
-(chapters/Zaver.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [40]
-[41]
+ [40])
+(chapters/Zaver.tex [41]
 Kapitola 7.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1407,121 +1406,144 @@ n . edu / server / api / core / bitstreams /
 [48
 
 
-] [49]
-Underfull \hbox (badness 10000) in paragraph at lines 196--201
-\T1/lmr/m/n/12 z: [][]$\T1/lmtt/m/n/12 https : / / datasheets . raspberrypi . c
-om / rpi4 / raspberry-[]pi-[]4-[]datasheet .
+]
+Underfull \hbox (badness 10000) in paragraph at lines 91--97
+[]\T1/lmr/m/n/12 7THSENSE. Fle-xible Show Con-trol Sys-tems for AV Ins-tal-la-t
+i-ons: Me-
  []
 
 
-Underfull \hbox (badness 2762) in paragraph at lines 210--215
+Underfull \hbox (badness 10000) in paragraph at lines 91--97
+\T1/lmr/m/n/12 dia-lon by 7th-Sense. On-line. 2026. Do-stupné z: [][]$\T1/lmtt/
+m/n/12 https : / / 7thsense . one /
+ []
+
+[49]
+Underfull \hbox (badness 4181) in paragraph at lines 196--201
+[]\T1/lmr/m/n/12 RASPBERRY PI (TRA-DING) LTD. \T1/lmr/m/it/12 Rasp-berry Pi 4 M
+o-del B -- Da-tas-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--217
+[]\T1/lmr/m/n/12 CADENCE PCB SO-LU-TI-ONS. Dar-ling-ton Trans-is-tor vs. MOS-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--217
+\T1/lmr/m/n/12 FET: Se-lec-tion Gu-ide-li-nes. \T1/lmr/m/it/12 Ca-dence PCB De-
+sign & Ana-ly-sis\T1/lmr/m/n/12 . On-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--217
+\T1/lmr/m/n/12 line. 2023. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / resour
+ces . pcb . cadence . com / blog /
+ []
+
+
+Underfull \hbox (badness 2762) in paragraph at lines 211--217
 \T1/lmtt/m/n/12 2023-[]pdarlington-[]transistor-[]vs-[]mosfet-[]selection-[]gui
 delines$[][]\T1/lmr/m/n/12 . [cit. 2026-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 216--221
-[]\T1/lmr/m/n/12 MOSFET H-Bridge vs De-di-ca-ted Mo-tor Dri-ver So-lu-ti-ons. \
-T1/lmr/m/it/12 ALLPCB\T1/lmr/m/n/12 .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 216--221
-\T1/lmr/m/n/12 On-line. 2024. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / www
+Underfull \hbox (badness 10000) in paragraph at lines 218--224
+\T1/lmr/m/n/12 On-line. 2025. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / www
  . allpcb . com / allelectrohub /
  []
 
 
-Underfull \hbox (badness 5954) in paragraph at lines 228--233
+Underfull \hbox (badness 5954) in paragraph at lines 231--236
 []\T1/lmr/m/n/12 CELDUC RE-LAIS. Zero-Cross or Ran-dom Re-lay: What are the Dif
 -fe-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 228--233
-\T1/lmr/m/n/12 ren-ces? On-line. 2024. Do-stupné z: [][]$\T1/lmtt/m/n/12 https 
+Underfull \hbox (badness 10000) in paragraph at lines 231--236
+\T1/lmr/m/n/12 ren-ces? On-line. 2026. Do-stupné z: [][]$\T1/lmtt/m/n/12 https 
 : / / www . celduc-[]relais . com / en /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 234--239
-[]\T1/lmr/m/n/12 TE CON-NEC-TI-VITY. Be-ware of Zero-Crossover Swit-ching of Tr
-ans-
+Underfull \hbox (badness 10000) in paragraph at lines 237--243
+[]\T1/lmr/m/n/12 TE CON-NEC-TI-VITY. White Pa-per: Be-ware of Zero-Crossover Sw
+it-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 234--239
-\T1/lmr/m/n/12 for-mers. On-line. 2024. Do-stupné z: [][]$\T1/lmtt/m/n/12 https
- : / / www . te . com / en / products /
+Underfull \hbox (badness 2351) in paragraph at lines 237--243
+\T1/lmr/m/n/12 ching of Trans-for-mers. On-line. 2020. Do-stupné z: [][]$\T1/lm
+tt/m/n/12 https : / / www . te . com / en /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 234--239
-\T1/lmtt/m/n/12 relays-[]and-[]contactors / electromechanical-[]relays / inters
-ection /
+Underfull \hbox (badness 10000) in paragraph at lines 237--243
+\T1/lmtt/m/n/12 products / relays-[]and-[]contactors / electromechanical-[]rela
+ys / intersection /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 249--257
-\T1/lmr/m/n/12 z: [][]$\T1/lmtt/m/n/12 https : / / www . researchgate . net / p
-ublication / 349022302 _ A _ Literature _
+Underfull \hbox (badness 10000) in paragraph at lines 254--263
+\T1/lmtt/m/n/12 Literature _ Review _ on _ Device-[]to-[]Device _ Data _ Exchan
+ge _ Formats _ for _ IoT _
+ []
+
+[50]
+Underfull \hbox (badness 10000) in paragraph at lines 264--270
+[]\T1/lmr/m/n/12 NAYANAJITH, Di-lan Sa-chintha. YAML vs. JSON: De-fi-ni-ti-ons,
+ Pros
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 249--257
-\T1/lmtt/m/n/12 Review _ on _ Device-[]to-[]Device _ Data _ Exchange _ Formats 
-_ for _ IoT _ Applications$[][]\T1/lmr/m/n/12 .
+Underfull \hbox (badness 10000) in paragraph at lines 264--270
+\T1/lmr/m/n/12 & Cons. \T1/lmr/m/it/12 Bu-ilt In\T1/lmr/m/n/12 . On-line. 2023.
+ Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / builtin . com /
  []
 
 
-Underfull \hbox (badness 2671) in paragraph at lines 258--263
-\T1/lmr/m/n/12 z: [][]$\T1/lmtt/m/n/12 https : / / builtin . com / software-[]e
-ngineering-[]perspectives / yaml-[]vs-[]json$[][]\T1/lmr/m/n/12 .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 264--271
+Underfull \hbox (badness 10000) in paragraph at lines 271--278
 []\T1/lmr/m/n/12 CELERDATA. YAML, JSON and XML: A Prac-ti-cal Gu-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--271
+Underfull \hbox (badness 10000) in paragraph at lines 271--278
 \T1/lmr/m/n/12 ide to Cho-osing the Right For-mat. \T1/lmr/m/it/12 Ce-ler-Data 
 Blog\T1/lmr/m/n/12 . On-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--271
-\T1/lmr/m/n/12 line. 2024. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / celerd
+Underfull \hbox (badness 10000) in paragraph at lines 271--278
+\T1/lmr/m/n/12 line. 2025. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / celerd
 ata . com / glossary /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--271
+Underfull \hbox (badness 10000) in paragraph at lines 271--278
 \T1/lmtt/m/n/12 yaml-[]json-[]and-[]xml-[]a-[]practical-[]guide-[]to-[]choosing
 -[]the-[]right-[]format$[][]\T1/lmr/m/n/12 .
  []
 
-[50]
-Underfull \hbox (badness 5231) in paragraph at lines 279--284
+
+Underfull \hbox (badness 5231) in paragraph at lines 286--291
 []\T1/lmr/m/n/12 INFINEON TECH-NO-LO-GIES AG. \T1/lmr/m/it/12 BTS 7960 -- High 
 Cur-rent PN Half
  []
 
 
-Underfull \hbox (badness 1577) in paragraph at lines 279--284
+Underfull \hbox (badness 1577) in paragraph at lines 286--291
 \T1/lmr/m/it/12 Bridge No-va-lit-hIC: Data Sheet\T1/lmr/m/n/12 . On-line. Rev. 
 1.1. Ne-ubi-berg: In-fi-neon Tech-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 279--284
+Underfull \hbox (badness 10000) in paragraph at lines 286--291
 \T1/lmr/m/n/12 no-lo-gies, 2004. Do-stupné z: [][]$\T1/lmtt/m/n/12 https : / / 
 www . infineon . com / dgdl / BTS7960 _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 279--284
+Underfull \hbox (badness 10000) in paragraph at lines 286--291
 \T1/lmtt/m/n/12 Datasheet . pdf ? folderId = db3a304412b407950112b408e8c90004 &
  fileId =
  []
@@ -1534,13 +1556,13 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `diplomka.out' has not changed.
-(rerunfilecheck)             Checksum: 19790D43A99990FF3C8E4CDD5F5DF85F;12545.
+(rerunfilecheck)             Checksum: 70D861ED3C2C9A451344AA5440D4FAEF;12545.
  ) 
 Here is how much of TeX's memory you used:
- 20413 strings out of 467871
- 342135 string characters out of 5418377
- 874348 words of memory out of 5000000
- 48729 multiletter control sequences out of 15000+600000
+ 20411 strings out of 467871
+ 342105 string characters out of 5418377
+ 873285 words of memory out of 5000000
+ 48728 multiletter control sequences out of 15000+600000
  707983 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,17n,93p,438b,718s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1555,9 +1577,9 @@ b><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb
 ><C:/Users/Wajdy/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on diplomka.pdf (52 pages, 9096738 bytes).
+Output written on diplomka.pdf (52 pages, 9097874 bytes).
 PDF statistics:
- 995 PDF objects out of 1000 (max. 8388607)
- 169 named destinations out of 1000 (max. 500000)
+ 1000 PDF objects out of 1000 (max. 8388607)
+ 168 named destinations out of 1000 (max. 500000)
  605 words of extra memory for PDF output out of 10000 (max. 10000000)
 
