@@ -44,7 +44,8 @@
       "WebFetch(domain:scholarsbank.uoregon.edu)",
       "Bash(grep -h \"\\\\\\\\\\\\\\\\cite{\" C:\\\\Users\\\\Wajdy\\\\Documents\\\\Kodovanie\\\\BakalarkaText\\\\chapters\\\\*.tex)",
       "Bash(grep -rh \"\\\\\\\\\\\\\\\\cite{\" \"C:/Users/Wajdy/Documents/Kodovanie/BakalarkaText/chapters/\")",
-      "Bash(grep *)"
+      "Bash(grep *)",
+      "WebFetch(domain:publicatio.bibl.u-szeged.hu)"
     ]
   }
 }

@@ -11,50 +11,50 @@
 \contentsline {section}{\numberline {2.4}Komunikačné protokoly}{12}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}Prenosové médiá: drôtové a~bezdrôtové}{12}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}Aplikačné protokoly}{12}{subsection.2.4.2}%
-\contentsline {section}{\numberline {2.5}Hardvérové platformy pre IoT}{13}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Jednodoskové počítače (SBC)}{13}{subsection.2.5.1}%
+\contentsline {section}{\numberline {2.5}Hardvérové platformy pre IoT}{14}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Jednodoskové počítače (SBC)}{14}{subsection.2.5.1}%
 \contentsline {subsection}{\numberline {2.5.2}Mikrokontroléry pre koncové uzly}{14}{subsection.2.5.2}%
 \contentsline {section}{\numberline {2.6}Výkonová elektronika pre fyzické efekty}{14}{section.2.6}%
 \contentsline {subsection}{\numberline {2.6.1}Riadenie jednosmerných (DC) motorov}{14}{subsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.6.2}Spínanie sieťových a~nízkonapäťových záťaží}{14}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.2}Spínanie sieťových a~nízkonapäťových záťaží}{15}{subsection.2.6.2}%
 \contentsline {section}{\numberline {2.7}Prístupy k~riadiacej logike expozície}{15}{section.2.7}%
-\contentsline {section}{\numberline {2.8}Dátové formáty pre konfiguráciu a~prenos}{15}{section.2.8}%
+\contentsline {section}{\numberline {2.8}Dátové formáty pre konfiguráciu a~prenos}{16}{section.2.8}%
 \contentsline {section}{\numberline {2.9}Zhrnutie rešerše}{16}{section.2.9}%
-\contentsline {chapter}{\numberline {3}Návrh architektúry systému}{17}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Požiadavky na systém}{17}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Systémová topológia a~sieťová koncepcia}{17}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Výber a~rozdelenie hardvérových uzlov}{18}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Softvérové jadro systému -- konečný stavový automat}{19}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Komunikačná vrstva -- MQTT a~formát scén}{19}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Implementácia hardvérovej časti}{21}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Centrálna jednotka --- Raspberry Pi}{21}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Distribuované uzly --- ESP32}{21}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Motorický uzol --- riadenie DC motorov}{22}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Reléový uzol --- spínanie záťaží}{23}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Vstupný tlačidlový uzol}{24}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Mechanická konštrukcia exponátov}{25}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Implementácia softvérovej časti}{28}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Softvérová architektúra systému}{28}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Backend Raspberry~Pi}{29}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Orchestrácia behu systému}{29}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Watchdog a~odolnosť voči výpadkom}{30}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Stavový automat ako jadro logiky}{30}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}JSON konfigurácia ako vstup stavového automatu}{31}{subsection.5.2.4}%
-\contentsline {section}{\numberline {5.3}MQTT komunikačná vrstva}{32}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Sledovanie stavu aktuátorov}{34}{subsection.5.3.1}%
-\contentsline {section}{\numberline {5.4}Mediálna vrstva a~webové rozhranie}{34}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Firmvér uzlov ESP32}{36}{section.5.5}%
-\contentsline {section}{\numberline {5.6}Zhrnutie kapitoly}{38}{section.5.6}%
-\contentsline {chapter}{\numberline {6}Experimentálne overenie}{39}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Popis fyzického testovania a~testovacieho prostredia}{39}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Testované scenáre a výsledky}{39}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Laboratórny test logiky}{39}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Výpadok napájania Raspberry Pi}{39}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Meranie latencie}{40}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Presnosť prepínania}{40}{subsection.6.2.4}%
-\contentsline {subsection}{\numberline {6.2.5}Zhodnotenie}{40}{subsection.6.2.5}%
-\contentsline {chapter}{\numberline {7}Záver}{42}{chapter.7}%
-\contentsline {chapter}{Zoznam obrázkov}{44}{chapter*.24}%
-\contentsline {chapter}{Zoznam tabuliek}{45}{chapter*.25}%
-\contentsline {chapter}{\numberline {8}Zoznam použitých skratiek a symbolov}{46}{chapter.8}%
-\contentsline {chapter}{Použitá literatúra}{48}{chapter*.26}%
+\contentsline {chapter}{\numberline {3}Návrh architektúry systému}{18}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Požiadavky na systém}{18}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Systémová topológia a~sieťová koncepcia}{18}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Výber a~rozdelenie hardvérových uzlov}{19}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Softvérové jadro systému -- konečný stavový automat}{20}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Komunikačná vrstva -- MQTT a~formát scén}{20}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Implementácia hardvérovej časti}{22}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Centrálna jednotka --- Raspberry Pi}{22}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Distribuované uzly --- ESP32}{22}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Motorický uzol --- riadenie DC motorov}{23}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Reléový uzol --- spínanie záťaží}{24}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Vstupný tlačidlový uzol}{25}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Mechanická konštrukcia exponátov}{26}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Implementácia softvérovej časti}{29}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Softvérová architektúra systému}{29}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Backend Raspberry~Pi}{30}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Orchestrácia behu systému}{30}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Watchdog a~odolnosť voči výpadkom}{31}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Stavový automat ako jadro logiky}{31}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}JSON konfigurácia ako vstup stavového automatu}{32}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}MQTT komunikačná vrstva}{33}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Sledovanie stavu aktuátorov}{35}{subsection.5.3.1}%
+\contentsline {section}{\numberline {5.4}Mediálna vrstva a~webové rozhranie}{35}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Firmvér uzlov ESP32}{37}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Zhrnutie kapitoly}{39}{section.5.6}%
+\contentsline {chapter}{\numberline {6}Experimentálne overenie}{40}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Popis fyzického testovania a~testovacieho prostredia}{40}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Testované scenáre a výsledky}{40}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Laboratórny test logiky}{40}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Výpadok napájania Raspberry Pi}{40}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Meranie latencie}{41}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Presnosť prepínania}{41}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.2.5}Zhodnotenie}{41}{subsection.6.2.5}%
+\contentsline {chapter}{\numberline {7}Záver}{43}{chapter.7}%
+\contentsline {chapter}{Zoznam obrázkov}{45}{chapter*.26}%
+\contentsline {chapter}{Zoznam tabuliek}{46}{chapter*.27}%
+\contentsline {chapter}{\numberline {8}Zoznam použitých skratiek a symbolov}{47}{chapter.8}%
+\contentsline {chapter}{Použitá literatúra}{49}{chapter*.28}%

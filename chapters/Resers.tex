@@ -217,6 +217,13 @@ najpoužívanejšie protokoly pre distribuované IoT systémy
 hierarchických tém (topics) \cite{mqtt_m2m_survey}. Prenos
 správ prebieha nad trvalým TCP/IP spojením.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\linewidth]{obr/RESERS/MQTT_FLOW_scada.png}
+\caption{Architektúra MQTT v~IoT systéme \cite{rpi_esp32_scada}.}
+\label{fig:mqtt-architektura}
+\end{figure}
+
 Experimentálne štúdie potvrdzujú, že MQTT v~lokálnom sieťovom
 prostredí výrazne prekonáva alternatívne protokoly z~hľadiska
 latencie a~stability \cite{mqtt_websocket_comparison}. Priemerná
@@ -411,6 +418,13 @@ alebo dokončením prehrávania média
 neblokujúce čakanie na viacero rôznych podmienok súčasne,
 čo je nevyhnutné pre dynamické vetvenie scenára
 \cite{distributed_control_modeling}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.65\linewidth]{obr/RESERS/processes-12-00005-g004.png}
+\caption{Konečný stavový automat s~prechodmi medzi stavmi \cite{distributed_control_modeling}.}
+\label{fig:fsm-priklad}
+\end{figure}
 
 % ------------------------------------------------------------------
 \section{Dátové formáty pre konfiguráciu a~prenos}
