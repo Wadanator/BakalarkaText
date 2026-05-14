@@ -24,6 +24,15 @@ Všetky nahradiť opisom funkcie (napr. namiesto "`force_all_off()`" napísať *
 
 ---
 
+## 12. Využitie generatívnej AI — doplniť do BP (VUT norma)
+
+To čo je v `\acknowledgements` nestačí — je to správny obsah, ale nesprávne miesto.
+
+- [ ] **Pridať sekciu do tela práce** — krátky odstavec s nadpisom `\section*{Využitie generatívnej umelej inteligencie}`, umiestniť za `\abstract{...}` alebo pred `\input{chapters/Uvod.tex}`. Návrh textu je pripravený (Claude, GitHub Copilot, jan.–máj 2026, účel, overenie).
+- [ ] **Pridať Prílohu A** — tabuľka evidencie (nástroj, obdobie, účel, overenie), umiestniť za `\input{chapters/Literatura.tex}`. Návrh LaTeX kódu je pripravený.
+
+---
+
 ## 10. Drobnosti
 
 - [ ] **"Vite" bez vysvetlenia**: `Implementacia_sw.tex` — *"Frontend je realizovaný ako React SPA (Vite)"* — Vite je build nástroj, nie framework; pri prvom použití doplniť jednoslušnú charakteristiku v zátvorke.

@@ -4,8 +4,8 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Centralizovaná topológia}}{11}{figure.caption.2}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Distribuovaná topológia}}{11}{figure.caption.2}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Príklad architektúry MQTT: ESP32 ako MQTT klient publikuje dáta na broker (Raspberry~Pi), Dashboard sa prihlasuje na odber správ. Prevzaté z~\cite {rpi_esp32_scada}.}}{13}{figure.caption.3}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Príklad konečného stavového automatu s~tromi stavmi ($q_1$, $q_2$, $q_3$) a~prechodmi podmienými vstupnými udalosťami $\sigma _1$, $\sigma _2$. Prevzaté z~\cite {distributed_control_modeling}.}}{16}{figure.caption.5}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Architektúra MQTT v~IoT systéme \cite {rpi_esp32_scada}.}}{13}{figure.caption.3}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Konečný stavový automat s~prechodmi medzi stavmi \cite {distributed_control_modeling}.}}{16}{figure.caption.5}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Fyzická topológia riadiaceho systému}}{19}{figure.caption.6}%
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Diagram konečného stavového automatu}}{20}{figure.caption.7}%
@@ -28,6 +28,8 @@
 \contentsline {figure}{\numberline {5.6}{\ignorespaces Funkčné časti webového dashboardu a~tok udalostí}}{36}{figure.caption.22}%
 \contentsline {figure}{\numberline {5.7}{\ignorespaces Hlavná stránka webového dashboardu}}{37}{figure.caption.23}%
 \contentsline {figure}{\numberline {5.8}{\ignorespaces Spoločná infraštruktúra a~špecifická logika uzlov ESP32}}{38}{figure.caption.24}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

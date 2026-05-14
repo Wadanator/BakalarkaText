@@ -1,0 +1,35 @@
+\chapter*{Zoznam príloh}
+\addcontentsline{toc}{chapter}{Zoznam príloh}
+
+\begin{description}[leftmargin=3cm, labelwidth=3cm, labelsep=1em, font=\bfseries]
+
+    \item[Príloha A] Zdrojový kód systému
+
+    \item[Príloha B] Fotodokumentácia inštalácie
+
+\end{description}
+
+% ============================================================================
+
+\appendix
+
+\chapter{Zdrojový kód systému}
+\label{priloha:zdrojovy-kod}
+
+Zdrojový kód je priložený na elektronickom médiu v~adresári
+\texttt{Zdrojovy\_kod/museum-system/} s~nasledovnou štruktúrou:
+
+\begin{description}[leftmargin=4cm, labelwidth=4cm, labelsep=1em]
+    \item[\texttt{esp32/}] Firmvér pre ESP32 uzly (tlačidlový uzol,
+        motorový regulátor, relé regulátor) --- Arduino/C++
+    \item[\texttt{frontend/}] Webový dashboard pre operátorov múzea --- React, Vite
+    \item[\texttt{raspberry\_pi/}] Backend riadiaceho systému MuseumController --- Python~3
+\end{description}
+
+% ============================================================================
+
+\chapter{Fotodokumentácia inštalácie}
+\label{priloha:foto}
+
+Fotodokumentácia reálnej inštalácie je priložená na elektronickom médiu
+v~adresári \texttt{Obrazky/}.
