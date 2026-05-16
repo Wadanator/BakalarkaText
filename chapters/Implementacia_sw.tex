@@ -71,16 +71,21 @@ ostane časť zariadení v~neželanom stave.
 
 Okrem hlavnej služby beží samostatná \textbf{watchdog služba},
 ktorá monitoruje zdravie backendového procesu a~v~prípade poruchy
-ho automaticky reštartuje. Pred reštartom overí, či práve prebieha
-scéna; ak áno, čaká na jej dokončenie, aby sa znížilo riziko jej
-prerušenia.
+ho automaticky reštartuje. Pred reštartom kontroluje prevádzkový príznak
+aktuálneho behu scény zapisovaný hlavnou službou do stavového súboru.
+Ak je scéna aktívna, watchdog čaká na jej dokončenie v~periodických
+intervaloch a~po prekročení pevného časového limitu pokračuje
+reštartom, aby sa zabránilo nekonečnému čakaniu pri zlyhaní hlavného
+procesu.
 
 \subsection{Stavový automat ako jadro logiky}
 \label{SWFSM}
 
-Model konečného stavového automatu je v~runtime implementovaný
-ako spolupráca štyroch komponentov zodpovedných za udržiavanie stavu,
-spracovanie prechodov, vykonávanie akcií a~načítavanie scény.
+Spracovanie scény je v~implementácii rozdelené na načítanie
+a~validáciu konfiguračného súboru, evidenciu aktuálneho stavu,
+vyhodnocovanie podmienok prechodov a~vykonávanie akcií. Poradie týchto
+krokov v~jednom cykle behu scény je zhrnuté na
+Obr.~\ref{fig:sw_fsm_engine}.
 
 Podporované typy prechodov medzi stavmi sú:
 \begin{itemize}
@@ -96,7 +101,7 @@ vykoná príslušný prechod.
 
 Okrem lokálnych prechodov sú podporené aj \textbf{globálne podmienky}
 platné pre celú scénu bez ohľadu na aktuálny stav, najmä pre núdzové
-zastavenie a~celkové časové limity. V~spracovateľskom cykle majú
+zastavenie a~celkové časové limity. V~cykle behu scény majú
 globálne podmienky prednosť pred lokálnou logikou jednotlivých stavov,
 čím sa zabezpečuje,
 že núdzové alebo celoscénové pravidlá ovplyvnia ďalší krok

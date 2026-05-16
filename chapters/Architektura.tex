@@ -55,16 +55,17 @@ no vzájomne sa dopĺňajúcich hľadísk: z~\textbf{logického (výpočtového)
 a~z~\textbf{fyzického (sieťového)}.
 
 Z~logického hľadiska ide o~\textbf{distribuovanú architektúru}
-(kapitola~\ref{architektury-systemov}). Riadiaca logika nie je sústredená výhradne v~jednom centrálnom procesore,
-ale je rozdelená medzi viacero častí systému a~presunutá bližšie k~výkonovým prvkom.
-Koncové periférie postavené na mikrokontroléroch preto neslúžia len ako pasívne spínače, ale ako aktívne prvky,
-ktoré lokálne spracúvajú prijaté príkazy a~samostatne vykonávajú im pridelené fyzické akcie.
+(kapitola~\ref{architektury-systemov}). Hlavné scenárové rozhodovanie,
+vetvenie stavového automatu a~koordinácia multimédií zostávajú
+v~centrálnom uzle. Periférne uzly ESP32 sú umiestnené pri konkrétnych
+zariadeniach a~zabezpečujú ich lokálnu obsluhu, napríklad spracovanie
+vstupu, riadenie motora alebo spínanie relé.
 
 Z~fyzického a~sieťového hľadiska systém zároveň dodržiava
-\textbf{hviezdicovú topológiu (\textit{Star topology})}. Hoci sú distribuované
-uzly plne inteligentné, nekomunikujú vzájomne medzi sebou (netvoria
-\textit{mesh} sieť). Akýkoľvek dátový tok na sieti prebieha striktne obojsmerne
-len cez centrálny uzol.
+\textbf{hviezdicovú topológiu (\textit{Star topology})}. Hoci periférne
+uzly vykonávajú vlastné lokálne úlohy, nekomunikujú vzájomne medzi
+sebou (netvoria \textit{mesh} sieť). Akýkoľvek dátový tok na sieti
+prebieha striktne obojsmerne len cez centrálny uzol.
 
 \begin{figure}[H]
 \centering
@@ -87,14 +88,14 @@ príkazov z~centrály zvolené bezdrôtové Wi-Fi pripojenie.
 
 Dvojúrovňová architektúra bola fyzicky realizovaná nasledujúcim hardvérom:
 \begin{itemize}
-    \item \textbf{Centrálny uzol (\uv{Mozog}):} Hlavnú riadiacu jednotku
+    \item \textbf{Centrálny uzol:} Hlavnú riadiacu jednotku
         systému tvorí jednodoskový počítač \textbf{Raspberry Pi}. Ako bolo
         analyzované v~kapitole~\ref{sbc-platformy}, táto platforma poskytuje
         dostatočný výpočtový výkon pre súčasnú prevádzku riadiacej logiky
         aj prehrávanie multimediálneho obsahu, pričom natívne hardvérové
         rozhrania umožňujú priame prepojenie s~displejom a~reproduktormi
         bez externých adaptérov.
-    \item \textbf{Distribuované uzly (\uv{Svaly a~zmysly}):} Na vykonávanie
+    \item \textbf{Vykonávacie a~vstupné uzly:} Na vykonávanie
         fyzických úkonov slúži modulárna sieť bezdrôtových mikrokontrolérov
         \textbf{ESP32}, ktoré sú umiestnené a~napájané priamo pri
         interaktívnych objektoch. Tieto uzly sa podľa svojho zamerania

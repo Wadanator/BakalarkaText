@@ -24,9 +24,12 @@ Na napájanie Raspberry Pi bol použitý USB-C adaptér --- 5,0\,V / 3,0\,A.
 
 \section{Distribuované uzly --- ESP32}\label{DistribuovaneUzly}
 
-Riadiaca logika expozície bola decentralizovaná do niekoľkých
+Vykonávacia vrstva expozície bola rozdelená do niekoľkých
 samostatných uzlov postavených na mikrokontroléroch
-rodiny ESP32 (kapitola~\ref{mikrokontrolery}). Všetky uzly komunikujú s~Raspberry Pi cez Wi-Fi.
+rodiny ESP32 (kapitola~\ref{mikrokontrolery}). Scenárové rozhodovanie
+zostáva v~centrálnom Raspberry~Pi, zatiaľ čo uzly lokálne zabezpečujú
+obsluhu vstupov, generovanie PWM signálov, spínanie relé a~jednoduché
+ochranné reakcie. Všetky uzly komunikujú s~Raspberry Pi cez Wi-Fi.
 Motorický aj tlačidlový uzol bežia na ESP32 DevKit V1.
 
 Hlavná riadiaca elektronika (uzly pre ovládanie motorov a~spínanie relé)
@@ -149,7 +152,8 @@ Fyzickú interakciu s~návštevníkmi zabezpečuje samostatný vstupný uzol
 
 Fyzický exponát inštalácie CHRONOS bol navrhnutý
 v~prostredí \textbf{Fusion 360}. Celková sústava
-obsahuje \textbf{25 dekoratívnych ozubených kolies rôznych veľkostí} z~preglejky
+obsahuje mechanické a~vizuálne prvky vrátane
+\textbf{25 ozubených kolies rôznych veľkostí} z~preglejky
 s~jednotným modulom $m = 8$. Pre každé koleso bol
 vytvorený samostatný 3D model; pri menších kolesách
 bol G-kód generovaný a~kolesá boli vyfrézované
@@ -164,8 +168,9 @@ planetového prevodu s~prevodom 12:1. Jeden motor
 bol umiestnený pod kolesom, ktoré je prepojené s~ojnicou piestu,
 zatiaľ čo druhý motor bol pripojený k~minútovej ručičke,
 konkrétne na \uv{slnko} planetového prevodu.
-Podrobná konštrukčná dokumentácia (výkresy a~modely) presahuje
-rámec tejto práce a~nie je jej predmetom. Celkový vizuál inštalácie je zobrazený na Obr.~\ref{fig:chronos_celok},
+Podrobná konštrukčná dokumentácia vlastného fyzického exponátu
+(výkresy a~modely) presahuje rámec tejto práce a~nie je jej predmetom.
+Celkový vizuál inštalácie je zobrazený na Obr.~\ref{fig:chronos_celok},
 zatiaľ čo konštrukčné riešenie parného kotla s~integrovanou elektronikou ilustruje Obr.~\ref{fig:kotol_exponat}.
 
 \begin{figure}[htbp]

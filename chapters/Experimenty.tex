@@ -41,8 +41,8 @@ po výpadku napájania a~na laboratórnom teste na stole.
 \subsection{Výpadok napájania Raspberry Pi}
 \begin{itemize}
     \item \textbf{Priebeh:} Raspberry Pi bolo počas behu systému odpojené od napájacieho kábla,
-        po chvíli znovu pripojené a~následne sa čakalo, kým sa všetky uzly nespárujú späť do stavu ready.
-    \item \textbf{Výsledok:} Systém sa po reštarte obnovil do funkčného stavu v~priemere za 38 sekúnd.
+        po chvíli znovu pripojené a~následne sa čakalo, kým sa všetky uzly nespárujú späť do stavu \uv{pripravený}.
+    \item \textbf{Výsledok:} Systém sa po reštarte obnovil do funkčného stavu približne za 38 sekúnd.
         Po opätovnom zapnutí bolo možné scénu znovu spustiť bez zásahu do konfigurácie.
         Počas týchto testov sa neobjavil stav, že by sa systém po reštarte nespustil správne.
 \end{itemize}
@@ -50,12 +50,13 @@ po výpadku napájania a~na laboratórnom teste na stole.
 \subsection{Meranie latencie}
 \begin{itemize}
     \item \textbf{Priebeh:} Bola použitá testovacia scéna, ktorá len periodicky prepínala všetky relé
-        s~intervalom 250\,ms. Za 58{,}3 sekundy systém odoslal 1\,824 príkazov a~rovnaký počet feedbackov
+        s~intervalom 250\,ms. Za 58{,}3 sekundy systém odoslal 1\,824 príkazov a~rovnaký počet správ spätnej väzby
         sa úspešne vrátil späť do Raspberry Pi.
     \item \textbf{Výsledok:} Priemerná latencia feedbacku bola 111{,}7\,ms, maximum 219\,ms a~doručiteľnosť
         dosiahla 100\,\%. Najrýchlejšie odpovedali výstupy \texttt{room1/light/1} a~\texttt{room1/light/2}
-        (priemer okolo 82\,ms), niektoré reléové výstupy dosahovali priemer okolo 123\,ms -- príčina tejto
-        odlišnosti nebola ďalej skúmaná. Pre múzejnú prevádzku, kde sú efekty
+        (priemer okolo 82\,ms), zatiaľ čo niektoré reléové výstupy dosahovali priemer okolo 123\,ms.
+        Rozdiel medzi jednotlivými výstupmi zostal v~rámci desiatok milisekúnd a~pri danom teste
+        neovplyvnil správne vykonanie príkazov. Pre múzejnú prevádzku, kde sú efekty
         dlhé niekoľko sekúnd, je táto variabilita zanedbateľná a~neovplyvní zážitok návštevníka.
 \end{itemize}
 
@@ -83,9 +84,12 @@ po výpadku napájania a~na laboratórnom teste na stole.
 
 Nameraná hodnota je vyššia ako jednosmerná latencia 11{,}04\,ms uvádzaná
 v~literatúre~\cite{mqtt_websocket_comparison} -- rozdiel je spôsobený tým,
-že meranie pokrýva round-trip (Raspberry Pi → ESP32 → Raspberry Pi) cez
-bezdrôtovú sieť Wi-Fi, ktorá vnáša variabilné oneskorenie.
-Pre nižšiu latenciu by bolo vhodné použiť káblové sieťové pripojenie uzlov.
+že meranie v~tejto práci nepokrýva iba jednosmerný sieťový prenos.
+Zahŕňa celý aplikačný cyklus: publikovanie príkazu z~backendu,
+smerovanie cez broker, bezdrôtový prenos k~ESP32, spracovanie prijatej
+správy na uzle, vyhodnotenie jej obsahu, zápis výstupu na reléovom module,
+odoslanie spätnej väzby a~jej spárovanie v~backendovom mechanizme
+sledovania spätnej väzby.
 
 \subsection{Presnosť prepínania}
 \begin{itemize}
@@ -94,7 +98,8 @@ Pre nižšiu latenciu by bolo vhodné použiť káblové sieťové pripojenie uz
         ktorá je pre reálnu prevádzku zanedbateľná. Kumulatívny drift oproti ideálnemu času dosiahol
         za celú sekvenciu 1\,317\,ms pri 232 prechodoch; vzniká spracovaním prechodov, kde sa malé oneskorenia
         sčítavajú. Dôležité je, že drift má lineárny a~predvídateľný charakter -- nie je náhodný ani
-        rastúci. Keďže v~skutočných scénach sú stavy niekoľkonásobne dlhšie a~počet prechodov výrazne
+        rastúci. Pri prepočte ide približne o~5{,}7\,ms na jeden prechod, čo zodpovedá
+        konzistentnému posunu spôsobenému opakovaným spracovaním cyklu. Keďže v~skutočných scénach sú stavy niekoľkonásobne dlhšie a~počet prechodov výrazne
         nižší, praktický vplyv na synchronizáciu efektov je minimálny.
 \end{itemize}
 
