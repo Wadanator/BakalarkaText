@@ -3,15 +3,60 @@
 
 \begin{description}[leftmargin=3cm, labelwidth=3cm, labelsep=1em, font=\bfseries]
 
-    \item[Príloha A] Zdrojový kód systému
+    \item[Príloha A] Evidencia využitia generatívnej umelej inteligencie
 
-    \item[Príloha B] Fotodokumentácia inštalácie
+    \item[Príloha B] Zdrojový kód systému
+
+    \item[Príloha C] Fotodokumentácia inštalácie
 
 \end{description}
 
 % ============================================================================
 
 \appendix
+
+\chapter{Evidencia využitia generatívnej umelej inteligencie}
+\label{priloha:ai-evidencia}
+
+Pri spracovaní práce boli využité nástroje generatívnej umelej inteligencie
+ako podporné pomôcky. Úplná história použitých promptov nebola systematicky
+archivovaná, preto je evidencia spracovaná spätne podľa účelu použitia.
+Použité vstupy sa týkali najmä jazykového preformulovania vlastných
+podkladov bez dopĺňania nových odborných faktov, zhodnotenia
+zrozumiteľnosti kapitol, orientačnej práce s~citáciami a~zdrojmi,
+návrhu niektorých implementačných postupov a~pomoci pri debugovaní.
+
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabular}{|p{2.7cm}|p{2.0cm}|p{5.0cm}|p{3.9cm}|}
+        \hline
+        \textbf{Nástroj} & \textbf{Obdobie} & \textbf{Účel a~spôsob použitia} & \textbf{Overenie výstupov} \\
+        \hline
+        ChatGPT (OpenAI) & január--máj 2026 &
+        Práca s~textom, jazyková a~štylistická úprava vlastných podkladov,
+        lepšia formulácia myšlienok, zhodnotenie zrozumiteľnosti kapitol
+        a~orientačná práca s~citáciami. &
+        Kontrola, či upravené formulácie nemenia pôvodnú myšlienku,
+        porovnanie s~citovanými zdrojmi a~finálna úprava textu. \\
+        \hline
+        Claude (Anthropic) & 2025--2026 &
+        Podpora pri práci so zdrojovým kódom, písaní testov, hľadaní chýb,
+        dopĺňaní komentárov a~formulovaní textov logovacích správ. &
+        Ručná kontrola upraveného kódu, jeho začlenenie do existujúcej
+        štruktúry projektu a~následné testovanie funkčnosti. \\
+        \hline
+    \end{tabular}
+    \caption{Evidencia použitia nástrojov generatívnej umelej inteligencie}
+    \label{tab:ai-evidencia}
+\end{table}
+
+Nástroje generatívnej umelej inteligencie neboli použité ako samostatný
+zdroj odborných tvrdení. Výber, interpretácia a~použitie odborných zdrojov,
+návrh systému, hardvérová realizácia, integrácia, testovanie a~finálna
+podoba práce vychádzali z~vlastnej realizácie systému.
+
+% ============================================================================
 
 \chapter{Zdrojový kód systému}
 \label{priloha:zdrojovy-kod}

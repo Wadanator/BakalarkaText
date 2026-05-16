@@ -28,8 +28,8 @@ Všetky nahradiť opisom funkcie (napr. namiesto "`force_all_off()`" napísať *
 
 To čo je v `\acknowledgements` nestačí — je to správny obsah, ale nesprávne miesto.
 
-- [ ] **Pridať sekciu do tela práce** — krátky odstavec s nadpisom `\section*{Využitie generatívnej umelej inteligencie}`, umiestniť za `\abstract{...}` alebo pred `\input{chapters/Uvod.tex}`. Návrh textu je pripravený (Claude, GitHub Copilot, jan.–máj 2026, účel, overenie).
-- [ ] **Pridať Prílohu A** — tabuľka evidencie (nástroj, obdobie, účel, overenie), umiestniť za `\input{chapters/Literatura.tex}`. Návrh LaTeX kódu je pripravený.
+- [x] **Pridať sekciu do tela práce** — doplnené do úvodu ako `\section*{Využitie generatívnej umelej inteligencie}`.
+- [x] **Pridať Prílohu A** — doplnená tabuľka evidencie (nástroj, obdobie, účel, overenie).
 
 ---
 
